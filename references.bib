@@ -1,0 +1,691 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TEMPLATES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% An article from a journal or magazine.
+%
+%article{
+    %  % Required fields:
+        %  author  = {},
+        %  title   = {},
+        %  journal = {},
+        %  year    = {},
+        %  % Optional fields:
+            %  volume  = {},
+        %  number  = {},
+        %  pages   = {},
+        %  month   = {},
+        %  note    = {}
+    %}
+    %
+    %%%%% A book with an explicit publisher.
+    %
+    %book{
+        %  % Required fields:
+            %  author    = {}, % or editor
+            %  editor    = {},
+            %  title     = {},
+            %  publisher = {},
+            %  year      = {},
+            %  % Optional fields:
+                %  volume    = {},
+            %  number    = {},
+            %  series    = {},
+            %  address   = {},
+            %  edition   = {},
+            %  month     = {},
+            %  note      = {}
+        %}
+        %
+        %%%%% A work that is printed and bound, but without a named publisher or sponsoring institution.
+        %
+        %booklet{
+            %  % Required field:
+                %  title        = {},
+                %  % Optional fields:
+                    %  author       = {},
+                %  howpublished = {},
+                %  address      = {},
+                %  month        = {},
+                %  year         = {},
+                %  note         = {}
+            %}
+            %
+            %%%%% The same as INPROCEEDINGS}, included for Scribe compatibility.
+            %
+            %conference{
+                %}
+                %
+                %%%%% A part of a book, which may be a chapter (or section or whatever) and/or a range of pages.
+                %
+                %inbook{
+                    %  % Required fields:
+                        %  author    = {}, % or editor
+                        %  editor    = {},
+                        %  title     = {},
+                        %  chapter   = {}, % and/or pages
+                            %  pages     = {},
+                        %  publisher = {},
+                        %  year      = {},
+                        %  % Optional fields:
+                            %  volume    = {}, % or number
+                            %  number    = {},
+                        %  series    = {},
+                        %  type      = {},
+                        %  address   = {},
+                        %  edition   = {},
+                        %  month     = {},
+                        %  note      = {}
+                    %}
+                    %
+                    %%%%% A part of a book having its own title.
+                    %
+                    %incollection{
+                        %  % Required fields:
+                            %  author    = {},
+                            %  title     = {},
+                            %  booktitle = {},
+                            %  publisher = {},
+                            %  year      = {},
+                            %  % Optional fields:
+                                %  editor    = {},
+                            %  volume    = {}, % or number
+                                %  number    = {},
+                            %  series    = {},
+                            %  type      = {},
+                            %  chapter   = {},
+                            %  pages     = {},
+                            %  address   = {},
+                            %  edition   = {},
+                            %  month     = {},
+                            %  note      = {}
+                        %}
+                        %
+                        %%%%% An article in a conference proceedings.
+                        %
+                        %inproceedings{
+                            %  % Required fields:
+                                %  author       = {},
+                                %  title        = {},
+                                %  booktitle    = {},
+                                %  year         = {},
+                                %  % Optional fields:
+                                    %  editor       = {},
+                                %  volume       = {}, % or number
+                                    %  number       = {},
+                                %  series       = {},
+                                %  pages        = {},
+                                %  address      = {},
+                                %  month        = {},
+                                %  organization = {},
+                                %  publisher    = {},
+                                %  note         = {}
+                            %}
+                            %
+                            %%%%% Technical documentation.
+                            %
+                            %manual{
+                                %  % Required field:
+                                    %  title        = {},
+                                    %  % Optional fields:
+                                        %  author       = {},
+                                    %  organization = {},
+                                    %  address      = {},
+                                    %  edition      = {},
+                                    %  month        = {},
+                                    %  year         = {},
+                                    %  note         = {}
+                                %}
+                                %
+                                %%%%% A Master's thesis.
+                                %
+                                %mastersthesis{
+                                    %  % Required fields:
+                                        %  author  = {},
+                                        %  title   = {},
+                                        %  school  = {},
+                                        %  year    = {},
+                                        %  % Optional fields:
+                                            %  type    = {},
+                                        %  address = {},
+                                        %  month   = {},
+                                        %  note    = {}
+                                    %}
+                                    %
+                                    %%%%% Use this type when nothing else fits.
+                                    %
+                                    %misc{
+                                        %  % Required fields: none.
+                                            %  % Optional fields:
+                                            %  author       = {},
+                                            %  title        = {},
+                                            %  howpublished = {},
+                                            %  month        = {},
+                                            %  year         = {},
+                                            %  note         = {}
+                                        %}
+                                        %
+                                        %%%%% A PhD thesis.
+                                        %
+                                        %phdthesis{
+                                            %  % Required fields:
+                                                %  author  = {},
+                                                %  title   = {},
+                                                %  school  = {},
+                                                %  year    = {},
+                                                %  % Optional fields:
+                                                    %  type    = {},
+                                                %  address = {},
+                                                %  month   = {},
+                                                %  note    = {}
+                                            %}
+                                            %
+                                            %%%%% The proceedings of a conference.
+                                            %
+                                            %proceedings{
+                                                %  % Required fields:
+                                                    %  title        = {},
+                                                    %  year         = {},
+                                                    %  % Optional fields:
+                                                        %  editor       = {},
+                                                    %  volume       = {}, % or number
+                                                        %  number       = {},
+                                                    %  series       = {},
+                                                    %  address      = {},
+                                                    %  month        = {},
+                                                    %  organization = {},
+                                                    %  publisher    = {},
+                                                    %  note         = {},
+                                                    %}
+                                                    %
+                                                    %%%%% A report published by a school or other institution, usually numbered within a series.
+                                                    %
+                                                    %techreport{
+                                                        %  % Required fields:
+                                                            %  author      = {},
+                                                            %  title       = {},
+                                                            %  institution = {},
+                                                            %  year        = {},
+                                                            %  % Optional fields:
+                                                                %  type        = {},
+                                                            %  number      = {},
+                                                            %  address     = {},
+                                                            %  month       = {},
+                                                            %  note        = {}
+                                                        %}
+                                                        %
+                                                        %%%%% A document having an author and title, but not formally published.
+                                                        %
+                                                        %unpublished{
+                                                            %  % Required fields:
+                                                                %  author = {},
+                                                                %  title  = {},
+                                                                %  note   = {},
+                                                                %  % Optional fields:
+                                                                    %  month  = {},
+                                                                %  year   = {}
+                                                            %}
+
+                                                            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                            % References
+                                                            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+                                                            @article{Castro2002,
+                                                                author = {Castro, Miguel and Druschel, Peter and Ganesh, Ayalvadi and Rowstron, Antony and Wallach, Dan S},
+                                                                doi = {10.1145/1060289.1060317},
+                                                                isbn = {9781450301114},
+                                                                issn = {01635980},
+                                                                journal = {Proceedings of the 5th symposium on Operating systems design and implementation OSDI 02},
+                                                                number = {December},
+                                                                title = {{Secure routing for structured peer-to-peer overlay networks}},
+                                                                volume = {36},
+                                                                year = {2002}
+                                                            }
+
+@article{Douceur2002,
+    archivePrefix = {arXiv},
+    arxivId = {http://dx.doi.org/10.1007/3-540-45748-8{\_}24},
+    author = {Douceur, Jr},
+    doi = {10.1007/3-540-45748-8{\_}24},
+    eprint = {/dx.doi.org/10.1007/3-540-45748-8{\_}24},
+    isbn = {978-3-540-44179-3, 978-3-540-45748-0},
+    issn = {00278424},
+    journal = {Peer-to-peer Systems},
+    pages = {251--260},
+    title = {{The Sybil attack}},
+    year = {2002}
+}
+
+@article{Urdaneta2011,
+    author = {Urdaneta, Guido and Pierre, Guillaume and Steen, Maarten Van},
+    doi = {10.1145/1883612.1883615},
+    issn = {03600300},
+    journal = {ACM Computing Surveys},
+    number = {2},
+    pages = {1--49},
+    title = {{A survey of DHT security techniques}},
+    volume = {43},
+    year = {2011}
+}
+
+@article{Baumgart2007,
+    author = {Baumgart, Ingmar and Mies, Sebastian},
+    doi = {10.1109/ICPADS.2007.4447808},
+    isbn = {9781424418909},
+    issn = {15219097},
+    journal = {Proceedings of the International Conference on Parallel and Distributed Systems - ICPADS},
+    title = {{S/Kademlia: A practicable approach towards secure key-based routing}},
+    volume = {2},
+    year = {2007}
+}
+
+@article{Borisov2006,
+    author = {Borisov, N.},
+    doi = {10.1109/P2P.2006.10},
+    isbn = {0-7695-2679-9},
+    journal = {Sixth IEEE International Conference on Peer-to-Peer Computing (P2P'06)},
+    pages = {171--176},
+    title = {{Computational Puzzles as Sybil Defenses}},
+    year = {2006}
+}
+
+@article{Li2012,
+    archivePrefix = {arXiv},
+    arxivId = {arXiv:1201.2657v2},
+    author = {Li, Frank and Mittal, Prateek and Caesar, Matthew and Borisov, Nikita},
+    doi = {10.1145/2382536.2382548},
+    eprint = {arXiv:1201.2657v2},
+    isbn = {9781450316620},
+    issn = {15437221},
+    journal = {Proceedings of the ACM Conference on Computer and Communications Security},
+    keywords = {Computational puzzles,Computational work,Computer crime,Control,Network security,Social networking (online)},
+    pages = {67--78},
+    title = {{SybilControl: Practical sybil defense with computational puzzles}},
+    year = {2012}
+}
+
+@article{Fromknecht2014,
+    author = {Fromknecht, Conner and Velicanu, Dragos},
+    pages = {1--16},
+    title = {{A Decentralized Public Key Infrastructure with Identity Retention}},
+    year = {2014}
+}
+
+@article{Nakamoto2008,
+    abstract = {A purely peer-to-peer version of electronic cash would allow online payments to be sent directly from one party to another without going through a financial institution. Digital signatures provide part of the solution, but the main benefits are lost if a trusted third party is still required to prevent double-spending. We propose a solution to the double-spending problem using a peer-to-peer network. The network timestamps transactions by hashing them into an ongoing chain of hash-based proof-of-work, forming a record that cannot be changed without redoing the proof-of-work. The longest chain not only serves as proof of the sequence of events witnessed, but proof that it came from the largest pool of CPU power. As long as a majority of CPU power is controlled by nodes that are not cooperating to attack the network, they'll generate the longest chain and outpace attackers. The network itself requires minimal structure. Messages are broadcast on a best effort basis, and nodes can leave and rejoin the network at will, accepting the longest proof-of-work chain as proof of what happened while they were gone.},
+    archivePrefix = {arXiv},
+    arxivId = {43543534534v343453},
+    author = {Nakamoto, Satoshi},
+    doi = {10.1007/s10838-008-9062-0},
+    eprint = {43543534534v343453},
+    isbn = {978-972-757-716-3},
+    issn = {09254560},
+    journal = {Consulted},
+    pages = {1--9},
+    pmid = {14533183},
+    title = {{Bitcoin: A Peer-to-Peer Electronic Cash System}},
+    year = {2008}
+}
+
+@book{Antonopoulos2014,
+    author = {Antonopoulos, Andreas M.},
+    title = {Mastering Bitcoin: Unlocking Digital Crypto-Currencies},
+    year = {2014},
+    isbn = {1449374042, 9781449374044},
+    edition = {1st},
+    publisher = {O'Reilly Media, Inc.},
+}
+
+@inproceedings{Jakobsson1999,
+    author = {Jakobsson, Markus and Juels, Ari},
+    title = {Proofs of Work and Bread Pudding Protocols},
+    booktitle = {Proceedings of the IFIP TC6/TC11 Joint Working Conference on Secure Information Networks: Communications and Multimedia Security},
+    series = {CMS '99},
+    year = {1999},
+    isbn = {0-7923-8600-0},
+    pages = {258--272},
+    numpages = {15},
+    acmid = {757199},
+    publisher = {Kluwer, B.V.},
+    address = {Deventer, The Netherlands, The Netherlands},
+}
+
+@article{Rivest1978,
+    abstract = {An encryption method is presented with the novel property that publicly revealing an encryption key does not thereby reveal the corresponding decryption key. This has two important consequences: (1) Couriers or other secure means are not needed to transmit keys, since a message can be enciphered using an encryption key publicly revealed by the intented recipient. Only he can decipher the message, since only he knows the corresponding decryption key. (2) A message can be “signed” using a privately held decryption key. Anyone can verify this signature using the corresponding publicly revealed encryption key. Signatures cannot be forged, and a signer cannot later deny the validity of his signature. This has obvious applications in “electronic mail” and “electronic funds transfer” systems. A message is encrypted by representing it as a number M, raising M to a publicly specified power e, and then taking the remainder when the result is divided by the publicly specified product, n, of two large secret primer numbers p and q. Decryption is similar; only a different, secret, power d is used, where e * d ≡ 1(mod (p - 1) * (q - 1)). The security of the system rests in part on the difficulty of factoring the published divisor, n.},
+    author = {Rivest, R. L. and Shamir, a. and Adleman, L.},
+    doi = {10.1145/359340.359342},
+    file = {:Users/nunofmn1/Documents/IST/thesis/papers/Rsapaper.pdf:pdf},
+    isbn = {0001-0782},
+    issn = {00010782},
+    journal = {Communications of the ACM},
+    keywords = {and phrases,authentication,cryptography,digital signatures,electronic funds transfer,electronic mail,factorization,key cryptosystems,message-,passing,prime number,privacy,public-,security},
+    number = {2},
+    pages = {120--126},
+    pmid = {9855407},
+    title = {{A method for obtaining digital signatures and public-key cryptosystems}},
+    volume = {21},
+    year = {1978}
+}
+
+@article{Diffie1976,
+    abstract = {Two kinds of contemporary developments in cryptography are examined. Widening applications of teleprocessing have given rise to a need for new types of cryptographic systems, which minimize the need for secure key distribution channels and supply the equivalent of a written signature. This paper suggests ways to solve these currently open problems. It also discusses how the theories of communication and computation are beginning to provide the tools to solve cryptographic problems of long standing.},
+    author = {Diffie, W. and Hellman, M.},
+    doi = {10.1109/TIT.1976.1055638},
+    file = {:Users/nunofmn1/Documents/IST/thesis/papers/24.pdf:pdf},
+    isbn = {0018-9448 VO - 22},
+    issn = {0018-9448},
+    journal = {IEEE Transactions on Information Theory},
+    number = {6},
+    pages = {644--654},
+    pmid = {22007722},
+    title = {{New directions in cryptography}},
+    url = {http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=1055638},
+    volume = {22},
+    year = {1976}
+}
+
+@book{choudhury2002public,
+    author = {Choudhury, Suranjan},
+    title = {Public key infrastructure : implementation and design},
+    publisher = {M \& T Books},
+    year = {2002},
+    address = {New York, NY},
+    isbn = {978-0-7645-4879-6}
+}
+
+@book{Buchmann2013,
+    abstract = {Predicting the binding mode of flexible polypeptides to proteins is an important task that falls outside the domain of applicability of most small molecule and protein−protein docking tools. Here, we test the small molecule flexible ligand docking program Glide on a set of 20 non-$\alpha$-helical peptides and systematically improve pose prediction accuracy by enhancing Glide sampling for flexible polypeptides. In addition, scoring of the poses was improved by post-processing with physics-based implicit solvent MM- GBSA calculations. Using the best RMSD among the top 10 scoring poses as a metric, the success rate (RMSD ≤ 2.0 {\AA} for the interface backbone atoms) increased from 21{\%} with default Glide SP settings to 58{\%} with the enhanced peptide sampling and scoring protocol in the case of redocking to the native protein structure. This approaches the accuracy of the recently developed Rosetta FlexPepDock method (63{\%} success for these 19 peptides) while being over 100 times faster. Cross-docking was performed for a subset of cases where an unbound receptor structure was available, and in that case, 40{\%} of peptides were docked successfully. We analyze the results and find that the optimized polypeptide protocol is most accurate for extended peptides of limited size and number of formal charges, defining a domain of applicability for this approach.},
+    address = {Berlin, Heidelberg},
+    archivePrefix = {arXiv},
+    arxivId = {arXiv:1011.1669v3},
+    author = {Buchmann, Johannes A. and Karatsiolis, Evangelos and Wiesmaier, Alexander},
+    doi = {10.1007/978-3-642-40657-7},
+    eprint = {arXiv:1011.1669v3},
+    file = {:Users/nunofmn1/Documents/IST/thesis/papers/[Johannes{\_}A.{\_}Buchmann,{\_}Evangelos{\_}Karatsiolis,{\_}Alex(BookZZ.org).pdf:pdf},
+    isbn = {978-3-642-40656-0},
+    issn = {1098-6596},
+    keywords = {icle},
+    pages = {160},
+    pmid = {25246403},
+    publisher = {Springer Berlin Heidelberg},
+    title = {Introduction to Public Key Infrastructures},
+    url = {http://link.springer.com/10.1007/978-3-642-40657-7},
+    volume = {53},
+    year = {2013}
+}
+
+@misc{rfc5280,
+    author="D. Cooper and S. Santesson and S. Farrell and S. Boeyen and R. Housley and W. Polk",
+    title="{Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile}",
+    series="Request for Comments",
+    number="5280",
+    howpublished="RFC 5280 (Proposed Standard)",
+    publisher="IETF",
+    organization="Internet Engineering Task Force",
+    year=2008,
+    month=may,
+    note="Updated by RFC 6818",
+    url="http://www.ietf.org/rfc/rfc5280.txt"
+}
+
+@TECHREPORT {itut38895,
+    author="INTERNATIONAL TELECOMMUNICATION UNION -- ITU",
+    title="Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks",
+    institution="International Telecommunication Union",
+    year="2012",
+    type="Series X: Data Networks, Open System Communications and Security Directory",
+    number="E 38895",
+    month="oct",
+    note="ITU-T Recommendation X.509",
+    url="http://www.itu.int/rec/T-REC-X.509-201210-I"
+}
+
+@misc{rfc6960,
+    author="S. Santesson and M. Myers and R. Ankney and A. Malpani and S. Galperin and C. Adams",
+    title="{X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP}",
+    series="Request for Comments",
+    number="6960",
+    howpublished="RFC 6960 (Proposed Standard)",
+    publisher="IETF",
+    organization="Internet Engineering Task Force",
+    year=2013,
+    month=jun,
+    url="http://www.ietf.org/rfc/rfc6960.txt",
+}
+
+@misc{rfc4880,
+    author="J. Callas and L. Donnerhacke and H. Finney and D. Shaw and R. Thayer",
+    title="{OpenPGP Message Format}",
+    series="Request for Comments",
+    number="4880",
+    howpublished="RFC 4880 (Proposed Standard)",
+    publisher="IETF",
+    organization="Internet Engineering Task Force",
+    year=2007,
+    month=nov,
+    note="Updated by RFC 551",
+    url="http://www.ietf.org/rfc/rfc4880.txt",
+}
+
+@article{Caronni2000,
+    abstract = {Most currently deployed public key infrastructures (PKIs) are$\backslash$nhierarchically oriented and rely on a centralized design. Hierarchical$\backslash$nPKIs may be appropriate solutions for many usage-scenarios, but there$\backslash$nexists the viable alternative of the `Web of Trust'. In a web of trust,$\backslash$neach user of the system can choose for himself whom he elects to trust,$\backslash$nand whom not. After contrasting the properties of web-of-trust based$\backslash$nPKIs to those of hierarchical PKIs, an introduction to webs of trust and$\backslash$nto quantitative trust calculations is given. The paper concludes with$\backslash$nthe presentation of an efficient, sub-exponential algorithm that allows$\backslash$nheuristic computations of trust paths in a web of trust},
+    author = {Caronni, G.},
+    doi = {10.1109/ENABL.2000.883720},
+    isbn = {0-7695-0798-0},
+    issn = {1080-1383},
+    journal = {Proceedings IEEE 9th International Workshops on Enabling Technologies: Infrastructure for Collaborative Enterprises (WET ICE 2000)},
+    keywords = {heuristic trust calculation,pki,web of trust},
+    pages = {153--158},
+    title = {{Walking the Web of trust}},
+    year = {2000}
+}
+
+@article{Ulrich2011,
+    abstract = {We present results of a thorough analysis of the OpenPGP Web of Trust. We conducted our analysis on a recent data set with a focus on determining properties like usefulness and robustness. To this end, we analyzed graph topology, identified the strongly connected com- ponents and derived properties like verifiability of keys, signature chain lengths and redundant signature paths for nodes. Contrary to earlier works, our analysis revealed the Web of Trust to be only similar to a scale-free network, with different properties regarding the hub structure and its influence on overall connectivity. We also analyzed the commu- nity structure of theWeb of Trust and mapped it to social relationships. Finally, we present statistics which cryptographic algorithms are in use and give recommendations.},
+    author = {Ulrich, Alexander and Holz, Ralph and Hauck, Peter and Carle, Georg},
+    doi = {10.1007/978-3-642-23822-2{\_}27},
+    isbn = {9783642238215},
+    issn = {03029743},
+    journal = {Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)},
+    keywords = {Community Structure,GnuPG,OpenPGP,PGP,Web of Trust},
+    pages = {489--507},
+    title = {{Investigating the OpenPGP web of trust}},
+    volume = {6879 LNCS},
+    year = {2011}
+}
+@article{Wang2005,
+    abstract = {Most of structured P2P overlays exploit distributed Hash table (DHT) to achieve an administration-free, fault tolerant overlay network and guarantee to deliver a message to the destination within O(log N) hops. While elegant from a theoretical perspective, those systems face difficulties under an open environment. Not only frequently joining and leaving of nodes generate enormous maintenance overhead, but also various behaviors and resources of peers compromise overlay performance and security. Instead of building P2P overlay from the theoretical view, this paper builds the overlay network from the perspective of the physical network. By combining different network topology-aware techniques, a distinctive overlay network that closely matches the Internet topology is constructed. The P2P system based on this structure is not only highly efficient for routing, but also keeps maintenance overhead very low even under highly dynamic environment. Moreover, the system provides a new aspect to solve many security issues},
+    author = {Wang, Honghao Wang Honghao and Zhu, Yingwu Zhu Yingwu and Hu, Yiming Hu Yiming},
+    doi = {10.1109/LCN.2005.27},
+    isbn = {0-7695-2421-4},
+    issn = {0742-1303},
+    journal = {The IEEE Conference on Local Computer Networks 30th Anniversary (LCN'05)l},
+    title = {{An efficient and secure peer-to-peer overlay network}},
+    year = {2005}
+}
+
+@article{Bazzi2005,
+    abstract = {We study ways to restrict or prevent the damage that can be caused$\backslash$nin a peer-to-peer network by corrupt entities creating multiple pseudonyms.$\backslash$nWe show that it is possible to remotely issue certificates that can$\backslash$nbe used to test the distinctness of identities. To our knowledge,$\backslash$nthis is the first work that shows that remote anonymous certification$\backslash$nof identity is possible under adversarial conditions. Our certification$\backslash$nprotocols are based on geometric techniques that establish location$\backslash$ninformation in a fault-tolerant and distributed fashion. They do$\backslash$nnot rely on a centralized certifying authority or infrastructure$\backslash$nthat has direct knowledge of entities in the system, and work in$\backslash$nEuclidean or spherical geometry of arbitrary dimension. Our protocols$\backslash$ntolerate corrupt entities, including corrupt certifiers as well as$\backslash$ncollusion by certification applicants and certifiers. We consider$\backslash$nboth broadcast and point-to-point message passing models.},
+    author = {Bazzi, Rida a. and Konjevod, Goran},
+    doi = {10.1145/1073814.1073873},
+    isbn = {1595939942},
+    issn = {0178-2770},
+    journal = {Proceedings of the twenty-fourth annual ACM SIGACT-SIGOPS symposium on Principles of distributed computing - PODC '05},
+    keywords = {distance geometry,fault-tolerance,identity verification,overlay networks,peer-to-peer systems,security,supported in part by,sybil attack,the nsf grant ccr-0209138},
+    pages = {312},
+    title = {{On the establishment of distinct identities in overlay networks}},
+    url = {http://portal.acm.org/citation.cfm?doid=1073814.1073873},
+    year = {2005}
+}
+
+@article{Yu2008,
+    abstract = {Peer-to-peer and other decentralized, distributed systems are known to be particularly vulnerable to sybil attacks. In a sybil attack, a malicious user obtains multiple fake identities and pretends to be multiple, distinct nodes in the system. By controlling a large fraction of the nodes in the system, the malicious user is able to ldquoout voterdquo the honest users in collaborative tasks such as Byzantine failure defenses. This paper presents SybilGuard, a novel protocol for limiting the corruptive influences of sybil attacks. Our protocol is based on the ldquosocial networkrdquo among user identities, where an edge between two identities indicates a human-established trust relationship. Malicious users can create many identities but few trust relationships. Thus, there is a disproportionately small ldquocutrdquo in the graph between the sybil nodes and the honest nodes. SybilGuard exploits this property to bound the number of identities a malicious user can create. We show the effectiveness of SybilGuard both analytically and experimentally.},
+    author = {Yu, Haifeng and Kaminsky, Michael and Gibbons, Philip B. and Flaxman, Abraham D.},
+    doi = {10.1109/TNET.2008.923723},
+    isbn = {1595933085},
+    issn = {10636692},
+    journal = {IEEE/ACM Transactions on Networking},
+    keywords = {Social networks,Sybil attack,Sybil identity,SybilGuard},
+    number = {3},
+    pages = {576--589},
+    title = {{SybilGuard: Defending against sybil attacks via social networks}},
+    volume = {16},
+    year = {2008}
+}
+
+@article{Yu2010,
+    abstract = {Open-access distributed systems such as peer-to-peer systems are particularly vulnerable to <i>sybil attacks</i>, where a malicious user creates multiple fake identities (called <i>sybil nodes</i>). Without a trusted central authority that can tie identities to real human beings, defending against sybil attacks is quite challenging. Among the small number of decentralized approaches, our recent SybilGuard protocol leverages a key insight on social networks to bound the number of sybil nodes accepted. Despite its promising direction, SybilGuard can allow a large number of sybil nodes to be accepted. Furthermore, SybilGuard assumes that social networks are fast-mixing, which has never been confirmed in the real world. This paper presents the novel SybilLimit protocol that leverages the same insight as SybilGuard, but offers dramatically improved and near-optimal guarantees. The number of sybil nodes accepted is reduced by a factor of <i>{\&}amp;{\#}x0398;({\&}amp;{\#}x221A;n</i>), or around 200 times in our experiments for a million-node system. We further prove that SybilLimit's guarantee is at most a <i>logn</i> factor away from optimal when considering approaches based on fast-mixing social networks. Finally, based on three large-scale real-world social networks, we provide the first evidence that real-world social networks are indeed fast-mixing. This validates the fundamental assumption behind SybilLimit's and SybilGuard's approach.},
+    author = {Yu, Haifeng and Gibbons, Phillip B. and Kaminsky, Michael and Xiao, Feng},
+    doi = {10.1109/TNET.2009.2034047},
+    isbn = {9780769531687},
+    issn = {10636692},
+    journal = {IEEE/ACM Transactions on Networking},
+    keywords = {Social networks,Sybil attack,Sybil identities,SybilGuard,SybilLimit},
+    number = {Figure 1},
+    pages = {885--898},
+    title = {{SybilLimit: A near-optimal social network defense against sybil attacks}},
+    volume = {18},
+    year = {2010}
+}
+
+@article{Margolin2008,
+    abstract = {We propose an economic approach to Sybil attack detection. In our$\backslash$nInformant protocol, a detective offers a reward for Sybils to reveal$\backslash$nthemselves. The detective accepts from one identity a security deposit$\backslash$nand the name of target peer; the deposit and a reward are given to$\backslash$nthe target. We prove the optimal strategy for the informant is to$\backslash$nplay the game if and only if she is Sybil with a low opportunity$\backslash$ncost, and the target will cooperate if and only if she is identical$\backslash$nto the informant. Informant uses a Dutch auction to find the minimum$\backslash$npossible reward that will reveal a Sybil attacker. Because our approach$\backslash$nis economic, it is not limited to a specific application and does$\backslash$nnot rely on a physical device or token.},
+    author = {Margolin, N Boris and Levine, Brian N},
+    isbn = {978-3-540-77365-8},
+    journal = {Financial Cryptography and Data Security},
+    pages = {192--207},
+    title = {{Informant: Detecting Sybils Using Incentives}},
+    volume = {4886/2008},
+    year = {2008}
+}
+
+@article{Singh2006,
+    abstract = {Overlay networks are widely used to deploy functionality at edge nodes without changing network routers. Each node in an overlay network maintains connections with a number of peers, forming a graph upon which a distributed application or service is implemented. In an "Eclipse" attack, a set of malicious, colluding overlay nodes arranges for a correct node to peer only with members of the coalition. If successful, the attacker can mediate most or all communication to and from the victim. Furthermore, by supplying biased neighbor information during normal overlay maintenance, a modest number of malicious nodes can eclipse a large number of correct victim nodes. This paper studies the impact of Eclipse attacks on structured overlays and shows the limitations of known defenses. We then present the design, implementation, and evaluation of a new defense, in which nodes anonymously audit each other's connectivity. The key observation is that a node that mounts an Eclipse attack must have a higher than average node degree. We show that enforcing a node degree limit by auditing is an effective defense against Eclipse attacks. Furthermore, unlike most existing defenses, our defense leaves flexibility in the selection of neighboring nodes, thus permitting important overlay optimizations like proximity neighbor selection (PNS).},
+    author = {Singh, Atui and Ngan, Tsuen Wan and Druschel, Peter and Wallach, Dan S.},
+    doi = {10.1109/INFOCOM.2006.231},
+    isbn = {1424402212},
+    issn = {0743166X},
+    journal = {Proceedings - IEEE INFOCOM},
+    keywords = {Eclipse Attacks on Overlay Networks: Threats and Defenses},
+    number = {c},
+    title = {{Eclipse attacks on overlay networks: Threats and defenses}},
+    volume = {00},
+    year = {2006}
+}
+
+@article{Wang2012,
+    abstract = {Distributed hash tables (DHT) are a key building block for modern P2P content-distribution system, for example in implementing the distributed tracker of BitTorrent Mainline DHT. DHTs, due to their fully distributed nature, are known to be vulnerable to certain kinds of attacks and different kinds of defenses have been proposed against these attacks. In this paper, we consider two kinds of attacks on a DHT, one already known attack and one new kind of an attack, and show how they can be targeted against Mainline DHT. We complement them by an extensive measurement study using honeypots which shows that both attacks have been going on for a long time in the network and are still happening. We present numbers showing that the number of sybils in the Mainline DHT network is increasing and is currently around 300,000. We analyze the potential threats from these attacks and propose simple countermeasures against them. [ABSTRACT FROM PUBLISHER]},
+    author = {Wang, Liang and Kangasharju, Jussi},
+    doi = {10.1109/GLOCOM.2012.6503215},
+    file = {:Users/nunofmn1/Documents/IST/thesis/papers/security.pdf:pdf},
+    isbn = {9781467309219},
+    issn = {9781467309202},
+    journal = {GLOBECOM - IEEE Global Telecommunications Conference},
+    pages = {826--832},
+    title = {{Real-world sybil attacks in BitTorrent mainline DHT}},
+    year = {2012}
+}
+
+@article{Schneier2000,
+    author = {Ellison, Carl and Schneier, Bruce},
+    journal = {Computer Security Journal},
+    keywords = {security},
+    number = {1},
+    title = {{Ten Risks of PKI: What You're Not Being Told About Public Key Infrastructure}},
+    url = {http://www.schneier.com/paper-pki.pdf},
+    volume = {16},
+    year = {2000}
+}
+
+@TECHREPORT {Entrust2000,
+    author      = "Entrust",
+    title       = "Trusted Public-Key Infrastructures",
+    institution = "Entrust - Secure Digital Entities \& Information",
+    url = {https://www.entrust.com/wp-content/uploads/2013/05/pki.pdf},
+    year        = "2000",
+    month       = "aug"
+}
+
+@inproceedings{40673,
+    title = {Distributed Electronic Rights in JavaScript},
+    author  = {Mark S. Miller and Tom Van Cutsem and Bill Tulloh},
+    year  = 2013,
+    booktitle = {ESOP'13 22nd European Symposium on Programming}
+}
+
+@article{GuptaA11,
+    author    = {Ankur Gupta and
+        Lalit K. Awasthi},
+    title     = {Peer-to-Peer Networks and Computation: Current Trends and Future Perspectives},
+    journal   = {Computing and Informatics},
+    volume    = {30},
+    number    = {3},
+    pages     = {559--594},
+    year      = {2011},
+    url       = {http://www.cai.sk/ojs/index.php/cai/article/view/184},
+}
+
+@article{Lua2005,
+    author = {Lua, Eng Keong and Crowcroft, Jon and Pias, Marcelo and Sharma, Ravi and Lim, Steven},
+    doi = {10.1109/COMST.2005.1610546},
+    isbn = {1553-877X},
+    issn = {1553877X},
+    journal = {IEEE Communications Surveys and Tutorials},
+    number = {2},
+    pages = {72--93},
+    pmid = {21997713},
+    title = {{A survey and comparison of peer-to-peer overlay network schemes}},
+    volume = {7},
+    year = {2005}
+}
+
+@misc{gnutella,
+    author = {Gnutella, R. F. C.},
+    title = {{The Gnutella Protocol Specification v0.4}},
+    year = {2004}
+}
+
+@article{Stoica2001,
+    author = {Stoica, Ion and Morris, Robert and Karger, David and Kaashoek, M. Frans and Balakrishnan, Hari},
+    doi = {10.1145/383059.383071},
+    isbn = {1581134118},
+    issn = {01464833},
+    journal = {Conference on Applications, technologies, architectures, and protocols for computer communications (SIGCOMM '01)},
+    pages = {149--160},
+    title = {{Chord: A Scalable Peer-to-Peer Lookup Service for Internet Applications}},
+    year = {2001}
+}
+
+@article{Rowstron2001,
+    author = {Rowstron, Antony and Druschel, Peter},
+    doi = {10.1007/3-540-45518-3},
+    isbn = {978-3-540-42800-8},
+    issn = {03029743},
+    journal = {Middleware 2001},
+    number = {November 2001},
+    pages = {329--350},
+    title = {{Pastry: Scalable, Decentralized Object Location, and Routing for Large-Scale Peer-to-Peer Systems}},
+    volume = {2218},
+    year = {2001}
+}
+
+@inproceedings{Maymounkov2002,
+    author = {Maymounkov, Petar and Mazi\`{e}res, David},
+    title = {Kademlia: A Peer-to-Peer Information System Based on the XOR Metric},
+    booktitle = {Revised Papers from the First International Workshop on Peer-to-Peer Systems},
+    series = {IPTPS '01},
+    year = {2002},
+    isbn = {3-540-44179-4},
+    pages = {53--65},
+    numpages = {13},
+    publisher = {Springer-Verlag},
+    address = {London, UK, UK}
+}
+
+@INPROCEEDINGS {protofly,
+    author    = "Paulo Chainho, Kay  Haensge, Steffen Druesedow and Michael Maruschke",
+    title     = "Signalling-On-the-fly: SigOfly",
+    booktitle = "18th International Conference on Intelligence in Next Generation Networks, {ICIN} 2015, Paris, France, February 17-19, 2015",
+    year      = "2015",
+    pages     = "1--8"
+}

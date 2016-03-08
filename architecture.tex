@@ -1,0 +1,92 @@
+\chapter{Architecture}
+\label{chapter:architecture}
+The proposed architecture will consist of two independent, inter-connected systems:
+
+\begin{itemize}
+	\item \textbf{Distributed Hash Table} based on Kademlia;
+	\item \textbf{Decentralized Public Key Infrastructure} (DPKI) built on top of the blockchain.
+\end{itemize}
+
+In Figure~\ref{fig:architecture-overview} an high-level overview of the architecture is shown. In Section~\ref{ssec:dht} and~\ref{ssec:blockchain} an in-depth description of each individual component is given.
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{Figures/architecture-overview.png}
+    \caption{Overview of solution architecture.}
+    \label{fig:architecture-overview}
+\end{figure}
+
+In the scope of the current reTHINK project architecture, these components will be only run in Internet Service Providers (ISP) nodes, therefore it is possible to assume some level of trust with the nodes, but the proposed architecture tries to maximize the security to a level, where it could be possible to allow anyone to participate in the network with some minor adjustments.
+
+\section{Distributed Hash Table} \label{ssec:dht}
+The DHT design and implementation will be performed by another reTHINK project member, so there will only be a focus in the security and reliability of the DHT.
+
+The DHT that will be deployed will be based on the Kademlia protocol, more specifically the TomP2P\footnote{http://tomp2p.net/} implementation. This implementation already ensures data republishing and replication.
+
+Each node in the DHT will have a public-key pair that is needed to ensure a secure routing message exchange between nodes in the overlay network.  When a node is routing a message through the overlay network, it will encrypt the message content using the destination node public key.
+This encryption occurs in every overlay network hop performed along the path.
+It will also add its digital signature of the data contents in order to verify data integrity and validity, and a nonce to prevent against replay attacks.
+
+Each new user in the \textit{Registry} system will also need to generate a key pair and send his current SP the public key. The SP will ensure that a user certificate with the user public key is created in the blockchain.
+Users when storing the data in the DHT will also store the digital signature of the data, created with their private key.
+
+When a user runtime needs to obtain a specific user data, it will also contact the SP, in order to obtain the user certificate and verify the data signature. A secure communication between the SP and user runtime is assumed.
+
+\section{Decentralized Public Key Infrastructure} \label{ssec:blockchain}
+
+Encrypting the outgoing routing messages and ensure data integrity requires having the destination node and user public key.
+
+In order to obtain these public keys securely, in a totally decentralized manner without needing a CA, we are going to build a Decentralized Public Key Infrastructure (DPKI) using a private Ethereum blockchain.
+
+The DPKI will have the following functionalities:
+\begin{itemize}
+	\item Register and store certificates associating a user's or node's identifier and its corresponding public key;
+	\item Revoke compromised certificates by storing a CRL;
+	\item Allow the users to query the certificates list and obtain the CRL.
+\end{itemize}
+
+These functionalities could be described in two smart contracts that will be deployed to the Ethereum blockchain: \textit{CRL contract} and \textit{Certificates contract}.
+In Appendix A and B an initial pseudo-code draft of this contracts is shown.
+
+\section{Overlay network processes}
+
+\subsection{Node bootstrap and registration}
+During the node bootstrap process, the node will have to create an account in the private Ethereum blockchain i.e an external owned account, obtaining a private key.
+The Ethereum account will be controlled by this private key, which the node will use to call the methods of the contracts that implement the DPKI.
+
+After the Ethereum account creation the node will need to generate the public-key pair necessary for node communication.
+The generated public key will be associated with the node Ethereum account address by calling the \textit{newCertificate} function in the \textit{CertificateList} contract, that will create a certificate and store it in the \textit{contract account} internal storage.
+Finally the node will enter the DHT network using a node identifier equal to its Ethereum account address.
+
+Since the DHT is based on Kademlia, having a 160-bit address space, and Ethereum accounts have also a 160-bit address space, this direct mapping between the two components identifiers is possible.
+
+\subsection{Node message routing}
+Every time a node needs to send a message to another node, it will first fetch the destination node certificate from the blockchain by calling the \textit{getNodeCertificate} function in the \textit{CertificateList} contract with the node identifier.
+After fetching the key, the node will digitally sign the data with its own private key, add a nounce, encrypt them in conjunction with message data and send it to the destination node.
+
+When receiving a message, a node will fetch the sender certificate from the blockchain, decipher the encrypted message data with its own private key and verify the digital signature of the data, using the sender public key.
+If a node is unable to find the certificate associated with the node that is contacting, it will discard the node from its routing table.
+
+Always fetching the certificates from the blockchain could incur in a increased delay in message routing.
+Therefore the nodes will cache the fetched certificates, and regularly (every 5 minutes for example) fetch the CRL from the blockchain, to ensure the freshness of the public keys.
+
+\subsection{Users certificates management}
+The SP nodes will also need to manage the users certificates, allowing them to register and revoke public keys.
+
+When receiving a new user public key, the SP node will execute the function \textit{newUserCertificate} in the contract, which will create an user certificate in the blockchain, where the issuer is the contacted SP node.
+
+If a user need to revoke the public key, it will send an revocation request to the SP node, which will execute the \textit{revokeUserCertificate} function in the contract.
+
+\subsection{Eclipse and Sybil attacks defense}
+The mitigation of possible Sybil and Eclipse attacks leverage the Ethereum cryptocurrency.
+
+The execution of the certificate creation process in the blockchain will require the payment of a value in ether, defined by the contract creator, which will be saved in the \textit{contract account} balance.
+If an attacker tries to launch a Sybil attack, he will need to pay an enormous amount of ether, making the attack infeasible.
+Since the execution of any contract in Ethereum requires the payment of ether, to avoid retaining the funds, the contract could auto-trigger an event that will equally distribute the funds to the nodes in the network.
+
+This solution will also help mitigate possible Eclipse attacks, since preventing Sybil attacks is a constraint to launch Eclipse attacks.
+Coupled with the Kademlia k-bucket replacement policy, where new nodes are only added if a bucket is not full and parallel routing, an efficient defense against Eclipse attacks is achieved.
+
+\subsection{Data replication}
+When a DHT node receives a request to store user data, is necessary to ensure data replication, in order to achieve data availability.
+The implemented DHT will use TomP2P direct replication method. In this method a node constantly republishes its own content to other nodes, and its responsible for its content.
+In case of node failure, the content may timeout and be removed, but since the DHT node run in a SP, a fast restart of the DHT node is assumed.
