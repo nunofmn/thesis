@@ -59,12 +59,29 @@ Finally the node will enter the DHT network using a node identifier equal to its
 
 Since the DHT is based on Kademlia, having a 160-bit address space, and Ethereum accounts have also a 160-bit address space, this direct mapping between the two components identifiers is possible.
 
+This process is summarized in Figure~\ref{fig:new-node}.
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{Figures/new-node.png}
+    \caption{New node entry in the DHT.}
+    \label{fig:new-node}
+\end{figure}
+
 \subsection{Node message routing}
-Every time a node needs to send a message to another node, it will first fetch the destination node certificate from the blockchain by calling the \textit{getNodeCertificate} function in the \textit{CertificateList} contract with the node identifier.
+Every time a node needs to send a message to another node, it will first fetch the destination node certificate from the blockchain by its node identifier.
+
 After fetching the key, the node will digitally sign the data with its own private key, add a nounce, encrypt them in conjunction with message data and send it to the destination node.
 
 When receiving a message, a node will fetch the sender certificate from the blockchain, decipher the encrypted message data with its own private key and verify the digital signature of the data, using the sender public key.
 If a node is unable to find the certificate associated with the node that is contacting, it will discard the node from its routing table.
+
+In Figure~\ref{} the message routing functionality is diagrammed.
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{Figures/message-routing.png}
+    \caption{Message routing between nodes.}
+    \label{fig:message-routing}
+\end{figure}
 
 Always fetching the certificates from the blockchain could incur in a increased delay in message routing.
 Therefore the nodes will cache the fetched certificates, and regularly (every 5 minutes for example) fetch the CRL from the blockchain, to ensure the freshness of the public keys.
@@ -72,9 +89,9 @@ Therefore the nodes will cache the fetched certificates, and regularly (every 5 
 \subsection{Users certificates management}
 The SP nodes will also need to manage the users certificates, allowing them to register and revoke public keys.
 
-When receiving a new user public key, the SP node will execute the function \textit{newUserCertificate} in the contract, which will create an user certificate in the blockchain, where the issuer is the contacted SP node.
+When receiving a new user public key, the SP node will create an user certificate in the blockchain, where the issuer is the contacted SP node.
 
-If a user need to revoke the public key, it will send an revocation request to the SP node, which will execute the \textit{revokeUserCertificate} function in the contract.
+If a user need to revoke the public key, it will send an revocation request to the SP node, which will revoke the certificate stored in the blockchain.
 
 \subsection{Eclipse and Sybil attacks defense}
 The mitigation of possible Sybil and Eclipse attacks leverage the Ethereum cryptocurrency.
@@ -90,3 +107,5 @@ Coupled with the Kademlia k-bucket replacement policy, where new nodes are only 
 When a DHT node receives a request to store user data, is necessary to ensure data replication, in order to achieve data availability.
 The implemented DHT will use TomP2P direct replication method. In this method a node constantly republishes its own content to other nodes, and its responsible for its content.
 In case of node failure, the content may timeout and be removed, but since the DHT node run in a SP, a fast restart of the DHT node is assumed.
+
+\section{Comparison with other technologies}
