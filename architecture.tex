@@ -108,4 +108,9 @@ When a DHT node receives a request to store user data, is necessary to ensure da
 The implemented DHT will use TomP2P direct replication method. In this method a node constantly republishes its own content to other nodes, and its responsible for its content.
 In case of node failure, the content may timeout and be removed, but since the DHT node run in a SP, a fast restart of the DHT node is assumed.
 
-\section{Comparison with other technologies}
+\section{Comparison with a CA}
+Using a blockchain to build a PKI, is possible to minimize the trust, relatively to a centralized solution, like a CA.
+% time ordered?
+Due to the nature of the blockchain as an immutable transactional database, is possible to guarantee the validity of each transaction, through inspection of the past ones.
+This immutability property also allows to perform audits to the blockchain, in order to verify the integrity of the data stored.
+The biggest disadvantage of the blockchain is the computational resources needed to guarantee its proper operation and security.
