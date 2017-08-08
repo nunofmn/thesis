@@ -2,21 +2,21 @@
 \label{chapter:introduction}
 Nowadays with the current Internet infrastructure and the provided services built on top of it, the old telecommunications operators based services, like voice telephony, are losing importance.
 
-Over-the-top (OTT) players, like Google and Skype, are dominating the communications market with a "no additional cost" and closed ecosystem solutions.
+\ac{OTT} players, like Google and Skype, are dominating the communications market with a no additional cost and closed ecosystem solutions.
 New users will choose to use the services, that are used by the majority of their social environment.
 
-OTT services, by working in the closed ecosystem don't need to work in interoperability between services and communications standards, allowing them to be more competitive, agile and lead communication and multimedia innovation.
+\ac{OTT} services, by working in the closed ecosystem don't need to work in interoperability between services and communications standards, allowing them to be more competitive, agile and lead communication and multimedia innovation.
 This could be problematic since it causes vendor lock-in and limits the portability of user identity and data, hinders innovation and block new entrants.
 
 On the other hand, we have the worldwide Telco ecosystem that provide an highly reliable service and strong trustful identity.
 Since is necessary to achieve worldwide service interoperability, the services provided rely on well-defined standards. These standards need to be agreed upon and defined, increasing the time to market of potential new services.
 Telcos are also geographically restricted, so the deployment of new worldwide services could not be possible without roaming agreements in-place, which severely restricts Telcos in driving innovation.
 
-The reTHINK~\footnote{https://rethink-project.eu/} project goal is to design a new peer-to-peer network infrastructure for communications based on Web technologies, that allow dynamic trusted relationships between distributed apps and a portable identity model, leveraging the advantages of the federated Telco and OTT model.
+The reTHINK~\footnote{https://rethink-project.eu/} project goal is to design a new peer-to-peer network infrastructure for communications based on Web technologies, that allow dynamic trusted relationships between distributed apps and a portable identity model, leveraging the advantages of the federated Telco and \ac{OTT} model.
 
-This dynamic trusted relationship is created by using \textit{Hyperlinked Entities} (Hyperties), a web microservice paradigm, that enable the execution of trustful services in a web environment on user devices or network servers.
+This dynamic trusted relationship is created by using \ac{Hyperties}, a web microservice paradigm, that enable the execution of trustful services in a web environment on user devices or network servers.
 In order to achieve interoperability, the communication between hyperties is based on the \textit{Protocol-On-The-Fly}~\cite{protofly} concept, that allows using standard network protocols through a common API enabling communication between different hyperties from different service providers.
-The hyperty concept allows to extend the communications beyond normal telephony and messaging, where even services using \textit{Machine-to-Machine} (M2M) and \textit{Internet of Things} (IoT) systems could be built.
+The hyperty concept allows to extend the communications beyond normal telephony and messaging, where even services using \ac{M2M} and \ac{IoT} systems could be built.
 
 
 \section{Background}
@@ -35,10 +35,10 @@ The Registry service must have the following requirements:
 The Registry service is sub-divided in three components: \textit{Global Registry}, \textit{Domain Registry} and \textit{Local Registry}.
 
 \subsection{Global Registry}
-The Global Registry is a key-value store based on the DHT technology, that stores user identifiers in hyperty services, index by Global User Identifier (GUID).
+The Global Registry is a key-value store based on the \ac{DHT} technology, that stores user identifiers in hyperty services, index by a \ac{GUID}.
 
 \subsection{Domain Registry}
-The Domain Registry are run by Service Providers (SP) and allows users to lookup users hyperty instances using user hyperty service identifier.
+The Domain Registry are run by \ac{SP} and allows users to lookup users hyperty instances using user hyperty service identifier.
 It uses a client-server model, which allows to handle a high data update rate.
 
 \subsection{Local Registry}
@@ -46,26 +46,26 @@ Component in the device runtime that manages hyperty instances running in the ru
 
 \section{Proposed Solution}
 \label{section:proposed}
-The major goal of this thesis is to ensure the security of the Distributed Hash Table necessary to build the Global Registry system.
+The major goal of this thesis is to ensure the security of the \ac{DHT} necessary to build the Global Registry system.
 
 In order to achieve this, a set of problems need to be solved:
 \begin{itemize}
-	\item \textbf{Mitigate common DHT attacks} - Several different type of attacks targetting the DHT exist. A in-depth analysis of each one of them and existing solutions is necessary;
-	\item \textbf{Ensure routing messages integrity} - it is necessary to secure the routing scheme of the DHT by using public-key cryptography;
-	\item \textbf{Users and DHT nodes public key distribution} - Since routing messages should be encrypted, it will be necessary that nodes be able to distribute each other keys;
-	\item \textbf{Deal with key compromise} - allow nodes compromised public keys to be revoked;
-	\item \textbf{Maintain system decentralized} - solve all the aforementioned problems, maintaining a decentralized architecture.
+  \item \textbf{Mitigate common \ac{DHT} attacks}- Several different type of attacks targetting the \ac{DHT} exist. A in-depth analysis of each one of them and existing solutions is necessary;
+	\item \textbf{Ensure routing messages integrity}- it is necessary to secure the routing scheme of the \ac{DHT} by using public-key cryptography;
+  \item \textbf{Users and \ac{DHT} nodes public key distribution}- Since routing messages should be encrypted, it will be necessary that nodes be able to distribute each other keys;
+	\item \textbf{Deal with key compromise}- allow nodes compromised public keys to be revoked;
+	\item \textbf{Maintain system decentralized}- solve all the aforementioned problems, maintaining a decentralized architecture.
 \end{itemize}
 
-The solution to these problems will consist in building the DHT in conjunction with a simple Decentralized Public Key infrastructure (DPKI), using blockchain technology.
-The blockchain will ensure the DPKI is totally decentralized and achieve data integrity and prevent tampering of its contents. In order to prevent some of the most common DHT attacks, the blockchain cryptocurrency will be used so it is possible to guarantee that an attacker will incur in high costs to launch attacks against the DHT.
+The solution to these problems will consist in building the \ac{DHT} in conjunction with a simple \ac{DPKI}, using blockchain technology.
+The blockchain will ensure the \ac{DPKI} is totally decentralized and achieve data integrity and prevent tampering of its contents. In order to prevent some of the most common \ac{DHT} attacks, the blockchain cryptocurrency will be used so it is possible to guarantee that an attacker will incur in high costs to launch attacks against the DHT.
 
 \section{Thesis Contribution}
 \label{section:contribution}
 The following list present the expected contributions of this thesis:
 \begin{itemize}
-	\item \textbf{DHT Security} - Design a DHT prototype with improved resiliency against common attacks;
-	\item \textbf{Public Key Infrastructure} - Design a simple PKI prototype that will run in a decentralized system and run together with a DHT;
+	\item \textbf{\ac{DHT} Security} - Design a \ac{DHT} prototype with improved resiliency against common attacks;
+	\item \textbf{\ac{PKI}} - Design a simple \ac{PKI} prototype that will run in a decentralized system and run together with a \ac{DHT};
 	\item \textbf{Blockchain based applications} - Show that is feasible to build common distributed applications in a decentralized manner leveraging blockchain technology;
 	\item \textbf{System performance and evaluation} - assess the performance cost of the proposed system.
 \end{itemize}
@@ -74,12 +74,12 @@ The following list present the expected contributions of this thesis:
 This document describes the research and work developed and it is organized as follows:
 
 \begin{itemize}
-\item \textbf{Chapter \ref{chapter:introduction}} presents the motivation, background and proposed solution.
-\item \textbf{Chapter \ref{chapter:relatedwork}} describes the state of the art of the technologies used in the solution architecture.
-\item \textbf{Chapter \ref{chapter:architecture}} describes the system requirements and the architecture of the solution.
-\item \textbf{Chapter \ref{chapter:implementation}} describes the implementation of the solution and the technologies chosen.
-\item \textbf{Chapter \ref{chapter:evaluation}} describes the evaluation tests performed and the corresponding results.
-\item \textbf{Chapter \ref{chapter:conclusion}} summarizes the work developed and future work.
+\item \textbf{Chapter\ref{chapter:introduction}} presents the motivation, background and proposed solution.
+\item \textbf{Chapter\ref{chapter:relatedwork}} describes the state of the art of the technologies used in the solution architecture.
+\item \textbf{Chapter\ref{chapter:architecture}} describes the system requirements and the architecture of the solution.
+\item \textbf{Chapter\ref{chapter:implementation}} describes the implementation of the solution and the technologies chosen.
+\item \textbf{Chapter\ref{chapter:evaluation}} describes the evaluation tests performed and the corresponding results.
+\item \textbf{Chapter\ref{chapter:conclusion}} summarizes the work developed and future work.
 \end{itemize}
 
 \cleardoublepage

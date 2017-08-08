@@ -41,17 +41,18 @@
 \BOOKMARK [2][-]{subsection.3.3.3}{3.3.3 Users certificates management}{section.3.3}% 41
 \BOOKMARK [2][-]{subsection.3.3.4}{3.3.4 Eclipse and Sybil attacks defense}{section.3.3}% 42
 \BOOKMARK [2][-]{subsection.3.3.5}{3.3.5 Data replication}{section.3.3}% 43
-\BOOKMARK [0][-]{chapter.4}{4 Implementation}{}% 44
-\BOOKMARK [1][-]{section.4.1}{4.1 Implementation Options}{chapter.4}% 45
-\BOOKMARK [1][-]{section.4.2}{4.2 Architecture}{chapter.4}% 46
-\BOOKMARK [0][-]{chapter.5}{5 Evaluation}{}% 47
-\BOOKMARK [1][-]{section.5.1}{5.1 Tests Objectives}{chapter.5}% 48
-\BOOKMARK [1][-]{section.5.2}{5.2 Tests Scenarios}{chapter.5}% 49
-\BOOKMARK [1][-]{section.5.3}{5.3 Test Results}{chapter.5}% 50
-\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 51
-\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 52
-\BOOKMARK [1][-]{section.6.2}{6.2 Achievements}{chapter.6}% 53
-\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 54
-\BOOKMARK [0][-]{appendix.A}{A Vector calculus}{}% 55
-\BOOKMARK [1][-]{section.A.1}{A.1 Vector identities}{appendix.A}% 56
-\BOOKMARK [0][-]{appendix*.17}{Bibliography}{}% 57
+\BOOKMARK [1][-]{section.3.4}{3.4 Comparison with a CA}{chapter.3}% 44
+\BOOKMARK [0][-]{chapter.4}{4 Implementation}{}% 45
+\BOOKMARK [1][-]{section.4.1}{4.1 Implementation Options}{chapter.4}% 46
+\BOOKMARK [1][-]{section.4.2}{4.2 Architecture}{chapter.4}% 47
+\BOOKMARK [0][-]{chapter.5}{5 Evaluation}{}% 48
+\BOOKMARK [1][-]{section.5.1}{5.1 Tests Objectives}{chapter.5}% 49
+\BOOKMARK [1][-]{section.5.2}{5.2 Tests Scenarios}{chapter.5}% 50
+\BOOKMARK [1][-]{section.5.3}{5.3 Test Results}{chapter.5}% 51
+\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 52
+\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 53
+\BOOKMARK [1][-]{section.6.2}{6.2 Achievements}{chapter.6}% 54
+\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 55
+\BOOKMARK [0][-]{appendix.A}{A Vector calculus}{}% 56
+\BOOKMARK [1][-]{section.A.1}{A.1 Vector identities}{appendix.A}% 57
+\BOOKMARK [0][-]{appendix*.26}{Bibliography}{}% 58
