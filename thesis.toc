@@ -40,10 +40,13 @@
 \contentsline {chapter}{\numberline {3}Architecture}{23}{chapter.3}
 \contentsline {section}{\numberline {3.1}Distributed Hash Table}{23}{section.3.1}
 \contentsline {section}{\numberline {3.2}Decentralized Public Key Infrastructure}{24}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}IDChain Smart Contract}{25}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}IDChain API}{25}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}IDChain Application}{25}{subsection.3.2.3}
 \contentsline {section}{\numberline {3.3}Overlay network processes}{25}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Node bootstrap and registration}{25}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Node message routing}{26}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Users certificates management}{26}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.2}Node message routing}{25}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Users certificates management}{25}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Eclipse and Sybil attacks defense}{27}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}Data replication}{27}{subsection.3.3.5}
 \contentsline {section}{\numberline {3.4}Comparison with a CA}{27}{section.3.4}

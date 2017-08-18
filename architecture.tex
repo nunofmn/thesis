@@ -10,7 +10,7 @@ The proposed architecture will consist of two independent, inter-connected syste
 In Figure~\ref{fig:architecture-overview} an high-level overview of the architecture is shown. In Section~\ref{ssec:dht} and~\ref{ssec:blockchain} an in-depth description of each individual component is given.
 
 \begin{figure}
-    \includegraphics[width=\linewidth]{Figures/architecture-overview.png}
+  \includegraphics[width=\linewidth]{Figures/architecture-overview.pdf}
     \caption{Overview of solution architecture.}
     \label{fig:architecture-overview}
 \end{figure}
@@ -20,16 +20,22 @@ In the scope of the current reTHINK project architecture, these components will 
 \section{Distributed Hash Table} \label{ssec:dht}
 The DHT design and implementation will be performed by another reTHINK project member, so there will only be a focus in the security and reliability of the DHT.
 
-The DHT that will be deployed will be based on the Kademlia protocol, more specifically the TomP2P\footnote{http://tomp2p.net/} implementation. This implementation already ensures data republishing and replication.
+The DHT that will be deployed will be based on a Kademlia protocol implementation.
+This implementation should already ensure data republishing and replication.
 
-Each node in the DHT will have a public-key pair that is needed to ensure a secure routing message exchange between nodes in the overlay network.  When a node is routing a message through the overlay network, it will encrypt the message content using the destination node public key.
-This encryption occurs in every overlay network hop performed along the path.
-It will also add its digital signature of the data contents in order to verify data integrity and validity, and a nonce to prevent against replay attacks.
+Each node in the DHT will have a self-signed certificate that is needed to ensure a secure routing message exchange between nodes in the overlay network.
+When a node is routing a message through the overlay network, the peer connectivity is done using TLS connections with mutual authentication, so that the two peer certificates can be exchanged and verified.
+In order, to verify the authenticity of the certificate the peer identifier of the message sender should be equal to the peer identifier in the sender certificate.
+But this verification is not sufficient to verify guarantee the validity of the certificate, since a peer this way can impersonate several identities.
+So is necessary to implement a mechanism similar to certificate pinning. Therefore the peer should also check if there is a correspondence between the certificate fingerprint and the peer identifier registered in the blockchain.
 
-Each new user in the \textit{Registry} system will also need to generate a key pair and send his current SP the public key. The SP will ensure that a user certificate with the user public key is created in the blockchain.
-Users when storing the data in the DHT will also store the digital signature of the data, created with their private key.
+%It will also add its digital signature of the data contents in order to verify data integrity and validity, and a nonce to prevent against replay attacks.
 
-When a user runtime needs to obtain a specific user data, it will also contact the SP, in order to obtain the user certificate and verify the data signature. A secure communication between the SP and user runtime is assumed.
+%CHECK THIS
+%Each new user in the \textit{Registry} system will also need to generate a key pair and send his current SP the public key. The SP will ensure that a user certificate with the user public key is created in the blockchain.
+%Users when storing the data in the DHT will also store the digital signature of the data, created with their private key.
+
+%When a user runtime needs to obtain a specific user data, it will also contact the SP, in order to obtain the user certificate and verify the data signature. A secure communication between the SP and user runtime is assumed.
 
 \section{Decentralized Public Key Infrastructure} \label{ssec:blockchain}
 
@@ -44,8 +50,11 @@ The DPKI will have the following functionalities:
 	\item Allow the users to query the certificates list and obtain the CRL.
 \end{itemize}
 
-These functionalities could be described in two smart contracts that will be deployed to the Ethereum blockchain: \textit{CRL contract} and \textit{Certificates contract}.
-In Appendix A and B an initial pseudo-code draft of this contracts is shown.
+\subsection{IDChain Smart Contract}
+
+\subsection{IDChain API}
+
+\subsection{IDChain Application}
 
 \section{Overlay network processes}
 
