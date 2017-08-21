@@ -39,16 +39,27 @@ So is necessary to implement a mechanism similar to certificate pinning. Therefo
 
 \section{Decentralized Public Key Infrastructure} \label{ssec:blockchain}
 
-Encrypting the outgoing routing messages and ensure data integrity requires having the destination node and user public key.
+Estabilishing \ac{TLS} connections between nodes requires trusting the exchanged peers certificates during the \ac{TLS} connection handshake.
+In a traditional setup the underlying \ac{PKI} and \acp{CA} guarantee that the certificates are trustworthy, since the \acp{CA} sign the certificates.
+If the peer trusts the \ac{CA} that signed off the certificate and have access to the \ac{CA} certificate, it's able to verify the other peers certificates.
 
-In order to obtain these public keys securely, in a totally decentralized manner without needing a CA, we are going to build a Decentralized Public Key Infrastructure (DPKI) using a private Ethereum blockchain.
+But if we want to minimize trust and build a fully decentralized model, trusting in a centralized entity like a \ac{CA} defeats that purpose.
+Another mechanisms exist that try to decentralize this trust model, for instance, web of trust models, in systems like \ac{PGP}, where users sign assertions for each other keys or certificates.
+
+Still, most of the times \ac{PGP} users still rely in a centralized mechanism, key servers, for distributing certificates or keys.
+
+In order to obtain these certificates securely and verify their authenticity, in a totally decentralized manner without needing a CA, we are going to build a Decentralized Public Key Infrastructure (DPKI) using smart contracts in a blockchain.
 
 The DPKI will have the following functionalities:
 \begin{itemize}
-	\item Register and store certificates associating a user's or node's identifier and its corresponding public key;
-	\item Revoke compromised certificates by storing a CRL;
-	\item Allow the users to query the certificates list and obtain the CRL.
+	\item Register and store certificates associating a node identifier with its certificate fingerprint;
+	\item Revoke compromised certificates;
+	\item Allow users to query the blockchain, in order to retrieve the associations between node identifiers and certificate fingerprint.
 \end{itemize}
+
+Since we want to build this DPKI mechanism on top of TLS, complementing it, we will use some mechanisms that are used in \textit{Certificate Pinning}\footnote{https://www.owasp.org/index.php/Certificate\_and\_Public\_Key\_Pinning}.
+
+In the following sub-sections a more detailed overview of each piece of the architecture will be given.
 
 \subsection{IDChain Smart Contract}
 
