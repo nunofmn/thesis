@@ -107,6 +107,20 @@ A good starting point is encoding a hard limit on the number of identifiers or c
 
 We can also opt by a soft limit or resource-based approach, for example, by imposing the payment of a value for each certificate association created, leveraging the cryptocurrency inherently associated with the blockchain system.
 
+\subsubsection{Smart Contract Logic}
+The main starting point the smart contract is the \text{Certificate} structure and fields.
+In Figure~\ref{certificate-structure}, is depicted the necessary fields in this structure.
+Note that is not necessary to save the full certificate metadata in the blockchain: the certificates are already exchanged in the TLS handshake between the nodes.
+Could be possible to save all the certificate metadata or even the full encoded certificate for searchability and navigability proposes, but blockchains are not appropriated to save big quantities of information.
+Not only blockchains have a maximum ammount of data that can be encoded in a block and transaction, also in the case of a blockchain as Ethereum the cost of storing full certificates in the blockchain would be very high.
+Still, if this functionality was necessary and we wanted to maintain a better approach would be store the full certificate in a \ac{p2p} filesystem like \ac{IPFS}, and store in the \textit{Certificate} structure the address hash of the certificate.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{Figures/certificate-structure.pdf}
+  \caption{Smart contract \textit{Certificate} structure fields.}
+  \label{fig:certificate-structure}
+\end{figure}
+
 \subsection{IDChain API}
 
 \subsection{IDChain Application}
