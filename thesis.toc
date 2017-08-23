@@ -2,9 +2,9 @@
 \contentsline {chapter}{Acknowledgments}{iii}{chapter*.1}
 \contentsline {chapter}{Abstract}{v}{chapter*.2}
 \contentsline {chapter}{Resumo}{vii}{chapter*.3}
-\contentsline {chapter}{List of Figures}{xi}{chapter*.6}
-\contentsline {chapter}{List of Tables}{xiii}{chapter*.7}
-\contentsline {chapter}{Acronyms}{xv}{section*.8}
+\contentsline {chapter}{List of Figures}{xiii}{chapter*.6}
+\contentsline {chapter}{List of Tables}{xv}{chapter*.7}
+\contentsline {chapter}{Acronyms}{xvii}{section*.8}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Background}{2}{section.1.1}
 \contentsline {subsection}{\numberline {1.1.1}Global Registry}{2}{subsection.1.1.1}
@@ -38,29 +38,33 @@
 \contentsline {subsection}{\numberline {2.4.6}Ethereum}{20}{subsection.2.4.6}
 \contentsline {subsubsection}{Contract code}{21}{section*.29}
 \contentsline {chapter}{\numberline {3}Architecture}{23}{chapter.3}
-\contentsline {section}{\numberline {3.1}Distributed Hash Table}{23}{section.3.1}
-\contentsline {section}{\numberline {3.2}Decentralized Public Key Infrastructure}{24}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}IDChain Smart Contract}{25}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}IDChain API}{25}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}IDChain Application}{25}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Overlay network processes}{25}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Node bootstrap and registration}{25}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Node message routing}{25}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Users certificates management}{27}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Eclipse and Sybil attacks defense}{27}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Data replication}{27}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}Comparison with a CA}{27}{section.3.4}
-\contentsline {chapter}{\numberline {4}Implementation}{29}{chapter.4}
-\contentsline {section}{\numberline {4.1}Implementation Options}{29}{section.4.1}
-\contentsline {section}{\numberline {4.2}Architecture}{29}{section.4.2}
-\contentsline {chapter}{\numberline {5}Evaluation}{31}{chapter.5}
-\contentsline {section}{\numberline {5.1}Tests Objectives}{31}{section.5.1}
-\contentsline {section}{\numberline {5.2}Tests Scenarios}{31}{section.5.2}
-\contentsline {section}{\numberline {5.3}Test Results}{31}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusions}{32}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary}{32}{section.6.1}
-\contentsline {section}{\numberline {6.2}Achievements}{32}{section.6.2}
-\contentsline {section}{\numberline {6.3}Future Work}{32}{section.6.3}
-\contentsline {chapter}{\numberline {A}Vector calculus}{33}{appendix.A}
-\contentsline {section}{\numberline {A.1}Vector identities}{33}{section.A.1}
-\contentsline {chapter}{Bibliography}{37}{appendix*.32}
+\contentsline {section}{\numberline {3.1}Requirements}{23}{section.3.1}
+\contentsline {section}{\numberline {3.2}Overview}{23}{section.3.2}
+\contentsline {section}{\numberline {3.3}Distributed Hash Table}{24}{section.3.3}
+\contentsline {section}{\numberline {3.4}Decentralized Public Key Infrastructure}{25}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}IDChain Smart Contract}{25}{subsection.3.4.1}
+\contentsline {subsubsection}{Trusted Certification}{25}{section*.33}
+\contentsline {subsubsection}{Smart Contracts and Autonomy}{26}{section*.34}
+\contentsline {subsection}{\numberline {3.4.2}IDChain API}{26}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}IDChain Application}{26}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}Overlay network processes}{26}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{26}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Node message routing}{27}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Users certificates management}{27}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}Eclipse and Sybil attacks defense}{28}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}Data replication}{29}{subsection.3.5.5}
+\contentsline {section}{\numberline {3.6}Comparison with a CA}{29}{section.3.6}
+\contentsline {chapter}{\numberline {4}Implementation}{30}{chapter.4}
+\contentsline {section}{\numberline {4.1}Implementation Options}{30}{section.4.1}
+\contentsline {section}{\numberline {4.2}Architecture}{30}{section.4.2}
+\contentsline {chapter}{\numberline {5}Evaluation}{32}{chapter.5}
+\contentsline {section}{\numberline {5.1}Tests Objectives}{32}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tests Scenarios}{32}{section.5.2}
+\contentsline {section}{\numberline {5.3}Test Results}{32}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusions}{33}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{33}{section.6.1}
+\contentsline {section}{\numberline {6.2}Achievements}{33}{section.6.2}
+\contentsline {section}{\numberline {6.3}Future Work}{33}{section.6.3}
+\contentsline {chapter}{\numberline {A}Vector calculus}{35}{appendix.A}
+\contentsline {section}{\numberline {A.1}Vector identities}{35}{section.A.1}
+\contentsline {chapter}{Bibliography}{39}{appendix*.35}

@@ -1,5 +1,15 @@
 \chapter{Architecture}
 \label{chapter:architecture}
+
+This chapter describes the overall architecture of IDChain and outlines its main functional components.
+The main design goal is to allow to build a fully decentralized DHT-based system that is secure and can be closed to participation in a federated model, while minimizing trust in the intervenients.
+The main design goal is to allow to build a fully decentralized DHT-based system that is secure and can be closed to participation in a federated model, while minimizing trust in the intervenients.
+We introduce the main requirements in Section~\ref{architecture:requirements} and give a system architecture overview in Section~\ref{architecture:overview}.
+The remaining sections describe the in more detail the architecture of the solution and discuss the main design choices.
+
+\section{Requirements}\label{architecture:requirements}
+
+\section{Overview}\label{architecture:overview}
 The proposed architecture will consist of two independent, inter-connected systems:
 
 \begin{itemize}
@@ -7,7 +17,18 @@ The proposed architecture will consist of two independent, inter-connected syste
 	\item \textbf{Decentralized Public Key Infrastructure} (DPKI) built on top of the blockchain.
 \end{itemize}
 
-In Figure~\ref{fig:architecture-overview} an high-level overview of the architecture is shown. In Section~\ref{ssec:dht} and~\ref{ssec:blockchain} an in-depth description of each individual component is given.
+
+In Figure~\ref{fig:architecture-overview} an high-level overview of the architecture is shown.
+In Section~\ref{ssec:dht} and~\ref{ssec:blockchain} an in-depth description of each individual component is given.
+
+As can be seen in Figure~\ref{fig: archtecture-overview} the two main components are the \ac{DHT} and the \ac{DPKI}.
+
+The DPKI can be subdivided in three main components:
+\begin{itemize}
+	\item \textbf{Blockchain};
+	\item \textbf{IDChain API};
+	\item \textbf{IDChain Application};
+\end{itemize}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{Figures/architecture-overview.pdf}
@@ -15,19 +36,25 @@ In Figure~\ref{fig:architecture-overview} an high-level overview of the architec
     \label{fig:architecture-overview}
 \end{figure}
 
-In the scope of the current reTHINK project architecture, these components will be only run in Internet Service Providers (ISP) nodes, therefore it is possible to assume some level of trust with the nodes, but the proposed architecture tries to maximize the security to a level, where it could be possible to allow anyone to participate in the network with some minor adjustments.
+In the scope of the current reTHINK project architecture, these components will be only used in a federated model, i.e the nodes in the \ac{DHT} will all belong to the Service Providers (SP).
+Therefore it is possible to assume some level of trust with the nodes, which opens the possibility to use a more traditional approach for managing the certificates, for exxample, a Certificate Authority.
+But, in a federated model we might want to minimize trust in other organizations or SP, in order to discourage fradulent activity or over-control of the system by one or several organizations.
+\acp{CA} have also the problem of adding an extra burden in organizations, since is not a totally automated system and still need some human intervention, mainly when accepting and signing \acp{CSR}.
+
+%but the proposed architecture tries to maximize the security to a level, where it could be possible to allow anyone to participate in the network with some minor adjustments.
 
 \section{Distributed Hash Table} \label{ssec:dht}
-The DHT design and implementation will be performed by another reTHINK project member, so there will only be a focus in the security and reliability of the DHT.
+%The DHT design and implementation will be performed by another reTHINK project member, so there will only be a focus in the security and reliability of the DHT.
 
 The DHT that will be deployed will be based on a Kademlia protocol implementation.
 This implementation should already ensure data republishing and replication.
 
 Each node in the DHT will have a self-signed certificate that is needed to ensure a secure routing message exchange between nodes in the overlay network.
 When a node is routing a message through the overlay network, the peer connectivity is done using TLS connections with mutual authentication, so that the two peer certificates can be exchanged and verified.
-In order, to verify the authenticity of the certificate the peer identifier of the message sender should be equal to the peer identifier in the sender certificate.
-But this verification is not sufficient to verify guarantee the validity of the certificate, since a peer this way can impersonate several identities.
-So is necessary to implement a mechanism similar to certificate pinning. Therefore the peer should also check if there is a correspondence between the certificate fingerprint and the peer identifier registered in the blockchain.
+In order to verify the authenticity of the certificate, the peer identifier of the message sender should be equal to the peer identifier in the sender certificate.
+But this verification is not sufficient to guarantee the validity of the certificate, since a peer this way can impersonate several identities.
+So is necessary to implement a mechanism similar to certificate pinning.
+Therefore the peer should also check if there is a correspondence between the certificate fingerprint and the peer identifier registered in the blockchain.
 
 %It will also add its digital signature of the data contents in order to verify data integrity and validity, and a nonce to prevent against replay attacks.
 
@@ -59,9 +86,26 @@ The DPKI will have the following functionalities:
 
 Since we want to build this DPKI mechanism on top of TLS, complementing it, we will use some mechanisms that are used in \textit{Certificate Pinning}\footnote{https://www.owasp.org/index.php/Certificate\_and\_Public\_Key\_Pinning}.
 
-In the following sub-sections a more detailed overview of each piece of the architecture will be given.
+In the following sub-sections a more detailed overview of each piece of the \ac{DPKI} architecture will be given.
 
 \subsection{IDChain Smart Contract}
+
+The logic and set of rules that compose the \ac{DPKI} are stored in a blockchain smart contract.
+The smart contract that we gonna to create has the main objective of associate an peer identifier to a valid certificate, in a way that any system can easily query for and verify that association.
+
+\subsubsection{Trusted Certification}
+Creating this association is a sufficient condition to guarantee the validity and authenticity of a peer certificate, but we also need to be able to restrict and control the participation in the \ac{DHT}, in order to be able to create a mechanism of defense against Sybil attacks.
+The starting point are the conclusions drawn by Douceur\cite{Douceur2002} that trusted certification is the only approach that has the potential to eliminate Sybil attacks, however this certification relies on a centralized entity.
+
+\subsubsection{Smart Contracts and Autonomy}
+Although, with the advent of the blockchain technologies and smart contracts, is possible to build entities and organizations like the DAO~\cite{ralphc.merkle2016}, entities that are truly transparent, that can't be stopped or interrupted, and more importantly can't be corrupted or tampered.
+The rules and code that dictate the behavior of this entities, could be defined by a smart contract deployed in a blockchain.
+
+This way, leveraging this technologies, is possible to build a system that decentralizes the trusted certification mechanism.
+
+A good starting point is encoding a hard limit on the number of identifiers or certificates, that an entity can associate with their own blockchain address.
+
+We can also opt by a soft limit or resource-based approach, for example, by imposing the payment of a value for each certificate association created, leveraging the cryptocurrency inherently associated with the blockchain system.
 
 \subsection{IDChain API}
 
