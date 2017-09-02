@@ -108,17 +108,53 @@ A good starting point is encoding a hard limit on the number of identifiers or c
 We can also opt by a soft limit or resource-based approach, for example, by imposing the payment of a value for each certificate association created, leveraging the cryptocurrency inherently associated with the blockchain system.
 
 \subsubsection{Smart Contract Logic}
-The main starting point the smart contract is the \text{Certificate} structure and fields.
+The main starting point the smart contract is the \textit{Certificate} structure and fields.
 In Figure~\ref{certificate-structure}, is depicted the necessary fields in this structure.
 Note that is not necessary to save the full certificate metadata in the blockchain: the certificates are already exchanged in the TLS handshake between the nodes.
-Could be possible to save all the certificate metadata or even the full encoded certificate for searchability and navigability proposes, but blockchains are not appropriated to save big quantities of information.
-Not only blockchains have a maximum ammount of data that can be encoded in a block and transaction, also in the case of a blockchain as Ethereum the cost of storing full certificates in the blockchain would be very high.
-Still, if this functionality was necessary and we wanted to maintain a better approach would be store the full certificate in a \ac{p2p} filesystem like \ac{IPFS}, and store in the \textit{Certificate} structure the address hash of the certificate.
+Could be possible to save all the certificate metadata or even the full encoded certificate for searchability and navigability proposes, but blockchains are not appropriated to save large quantities of information.
+Not only blockchains have a maximum ammount of data that can be encoded in a block and transaction, also in the case of a blockchain as Ethereum, the cost of storing full certificates in the blockchain would be very high.
+Still, if this functionality was necessary and we wanted to maintain a decentralized system, a better approach would be store the full certificate in a \ac{p2p} filesystem like \ac{IPFS}, and store in the \textit{Certificate} structure the address hash of the certificate.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{Figures/certificate-structure.pdf}
   \caption{Smart contract \textit{Certificate} structure fields.}
   \label{fig:certificate-structure}
+\end{figure}
+
+Since we are trying to build this \ac{DPKI} under a federated model, is still necessary to define the trust mechanism in this system.
+So we are building the trust mechanism relying on a web of trust model built on top of the blockchain.
+
+As is shown in Figure~\ref{web-of-trust-architecture}, a newly created entity to be accepted should be vouched by a minimum number of entities.
+One peculiar aspect of this architecture, consequence of the federated model, is that each entity in the system is able to create several node certificates.
+This can undermine smaller entities participating in the system, and could even allow one single entity to control the whole \ac{DHT}, by generating unlimited node certificates.
+% reformular esta frase %
+A combination of an hard limit, for example, a maximum number of certificates each entity can have, and a soft limit, i.e defining a cost, using the underlying cryptocurrency, for each certificate, could provider a equal and fair system for all the entities involved.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{Figures/web-trust-architecture.pdf}
+  \caption{Web of trust mechanism.}
+  \label{fig:web-of-trust-architecture}
+\end{figure}
+
+Defining the web of trust mechanism in the smart contract requires the creation of an \textit{Entity} structure.
+In Figure~\ref{entity-structure} are defined the necessary fields.
+Is important to note that the entities addresses that an entity vouched for (\textit{signed} field) and the entities addresses that vouched for our own entity (\textit{signers} field) are stored in this entity, because will be necessary to constantly calculate the state of each entity.
+If we considered a graph representation (usual in the web of trust model), this fields encode the inbound arrows and outbound arrows of each entity.
+
+Another important aspect to take into account when building this smart contract is the bootstrapping process.
+In order to the web of trust mechanism to work is necessary to define the initial entities which are trusted.
+Since we are in an federated model, the entities that will deploy the smart contract could prearrange the entities that will be trusted from the beginning.
+Another possible solution, which we will use, is to give a trust status to the first \textit{n} entities that will register in the smart contract.
+The entities that are given this "initial trust" will have a \textit{true} value in the ´\textit{bootstraper} field.
+
+% TODO: Describe the main functions of the smart contract
+
+\subsubsection{Web of trust scenarios}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{Figures/entity-structure.pdf}
+  \caption{Smart contract \textit{Entity} structure fields.}
+  \label{fig:entity-structure}
 \end{figure}
 
 \subsection{IDChain API}
