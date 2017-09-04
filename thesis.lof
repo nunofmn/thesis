@@ -8,9 +8,12 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Simple data storage contract in Solidity language.}}{21}{figure.2.5}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Overview of solution architecture.}}{24}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Smart contract \textit {Certificate} structure fields.}}{27}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces New node entry in the DHT.}}{28}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Message routing between nodes.}}{29}{figure.3.4}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Smart contract \textit {Certificate} structure fields.}}{26}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Web of trust mechanism.}}{27}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Smart contract \textit {Entity} structure fields.}}{28}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Smart contract \textit {Entity} structure fields.}}{29}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces New node entry in the DHT.}}{30}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Message routing between nodes.}}{31}{figure.3.7}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
