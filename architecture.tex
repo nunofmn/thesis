@@ -160,15 +160,22 @@ The minimum functionalities or functions that the smart contract should provider
 \begin{itemize}
   \item \textbf{Register a new entity} - this function should init a new entity associated with the blockchain account that called the function;
   \item \textbf{Create a new certificate} - generate a new certificate with the given fields in the blockchain, creating also the respective associations with the entity generating it;
-  \item \textbf{Revoke the certificate} - ;
-  \item \textbf{Vouch for entity} - ;
-  \item \textbf{Unvouch for entity} - ;
-  \item \textbf{Check entity validity} - ;
+  \item \textbf{Revoke the certificate} - allow the entity that generated the certificate to revoke it;
+  \item \textbf{Vouch for entity} - should add signer address to the \textit{signers} structure in the target entity, and add the target entity address to the \textit{signed} structure in the signer entity;
+  \item \textbf{Unvouch for entity} - should remove the source entity address from the \textit{signers} structure in the target entity, and remove the target entity address from the \textit{signed} structure in the signer entity;
+  \item \textbf{Check entity validity} - after vouching or unvouching an entity, is necessary to check the target entity and its dependants. If any of the entities along the chain of trust doesn't have the minimum required vouches, it should be considered invalid;
 \end{itemize}
 
-% TODO: Describe the main functions of the smart contract
+% TODO: talk about challenges of the ethereum platform development
 
 \subsubsection{Web of trust scenarios}
+
+\begin{figure}
+  \centering
+  \subfigure[Scenario A]{\label{fig:a}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-1.pdf}}
+  \subfigure[Scenario B]{\label{fig:b}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-2.pdf}}
+  \caption{In Scenario A bootstraper entities \textit{A, B and C} vouch for entity \textit{D}, which vouches for entity \textit{E} in conjuction with entities \textit{A} and \textit{C}. In Scenario B, entity \textit{C} unvouches entity \textit{D} which is considered invalid and therefore also entity \textit{E} is considered invalid.}
+\end{figure}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{Figures/entity-structure.pdf}

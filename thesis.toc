@@ -51,10 +51,10 @@
 \contentsline {subsection}{\numberline {3.4.3}IDChain Application}{28}{subsection.3.4.3}
 \contentsline {section}{\numberline {3.5}Overlay network processes}{28}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{28}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Node message routing}{28}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Users certificates management}{30}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.2}Node message routing}{30}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Users certificates management}{31}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}Eclipse and Sybil attacks defense}{31}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}Data replication}{31}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.5.5}Data replication}{32}{subsection.3.5.5}
 \contentsline {section}{\numberline {3.6}Comparison with a CA}{32}{section.3.6}
 \contentsline {chapter}{\numberline {4}Implementation}{33}{chapter.4}
 \contentsline {section}{\numberline {4.1}Implementation Options}{33}{section.4.1}
