@@ -178,7 +178,22 @@ The minimum functionalities or functions that the smart contract should provider
 \end{figure}
 
 
-\subsection{IDChain API}
+\subsection{IDChain \ac{API}}
+
+In order to provide a better and universal interface to interact with the IDChain smart contract and the blockchain, we will build a RESTful \ac{API} to facilitate access to the functionalities.
+This \ac{API} will run on the \ac{CSP} network, and can be deployed in two ways: a single API instance for all the nodes controled by the \ac{CSP}, or a multiple API instances, one for each node, running in the same server.
+This \ac{API} will have the classic components usually associated with a RESTful service: every endpoint returns JSON documents and is possible to address every stored resource (certificates, entities, transactions, etc) in the system.
+An advantage of building this \ac{API} to access the IDChain functionalities, is that allows to build applications and services that easily interact with it through \ac{HTTP} while being language-agnostic, easing the access to the system.
+An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in the next subsection.
+% TODO: REFERENCE SUB-CHAPTERS
+
+\begin{figure}
+  \centering
+  \subfigure[Scenario A]{\label{fig:a}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-1.pdf}}
+  \subfigure[Scenario B]{\label{fig:b}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-2.pdf}}
+  \caption{In Scenario A bootstraper entities \textit{A, B and C} vouch for entity \textit{D}, which vouches for entity \textit{E} in conjunction with entities \textit{A} and \textit{C}. In Scenario B, entity \textit{C} unvouches entity \textit{D} which is considered invalid and therefore also entity \textit{E} is considered invalid.}
+\end{figure}
+
 
 {\renewcommand{\arraystretch}{2}%
 \begin{table}[]
