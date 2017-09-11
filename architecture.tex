@@ -174,10 +174,49 @@ The minimum functionalities or functions that the smart contract should provider
   \centering
   \subfigure[Scenario A]{\label{fig:a}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-1.pdf}}
   \subfigure[Scenario B]{\label{fig:b}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-2.pdf}}
-  \caption{In Scenario A bootstraper entities \textit{A, B and C} vouch for entity \textit{D}, which vouches for entity \textit{E} in conjuction with entities \textit{A} and \textit{C}. In Scenario B, entity \textit{C} unvouches entity \textit{D} which is considered invalid and therefore also entity \textit{E} is considered invalid.}
+  \caption{In Scenario A bootstraper entities \textit{A, B and C} vouch for entity \textit{D}, which vouches for entity \textit{E} in conjunction with entities \textit{A} and \textit{C}. In Scenario B, entity \textit{C} unvouches entity \textit{D} which is considered invalid and therefore also entity \textit{E} is considered invalid.}
 \end{figure}
 
+
 \subsection{IDChain API}
+
+{\renewcommand{\arraystretch}{2}%
+\begin{table}[]
+  \centering
+  \begin{tabular}{|l|l|lll}
+    \cline{1-2}
+    \textbf{Endpoint}               & \textbf{Functionality} &  &  &  \\ \cline{1-2}
+    GET /certificates               & List all certificates.                      &  &  &  \\  \cline{1-2}
+
+    GET /certificate/\{id\}         & Get the certificate with the specified \textit{id}.                      &  &  &  \\ \cline{1-2}
+
+    POST /certificate               & Create a new certificate-peer association.                      &  &  &  \\ \cline{1-2}
+
+    GET /entities                   & List all the registered entities.                      &  &  &  \\ \cline{1-2}
+
+    GET /entity/\{id\}              & Fetch the entity with the specified \textit{id}.                      &  &  &  \\ \cline{1-2}
+
+    GET /entity/\{id\}/certificates & Fetch all the certificates created by the entity with the specified \textit{id}.                      &  &  &  \\ \cline{1-2}
+
+    GET /entity/\{id\}/transactions & Fetch all the transactions associated with the entity with the specified \textit{id}.                      &  &  &  \\ \cline{1-2}
+
+    GET /entity/\{id\}/signatures   & List the entities that the entity with the specified \textit{id} vouched.                      &  &  &  \\ \cline{1-2}
+
+    GET /entity/\{id\}/signed\_by   & List the entities that vouched for the entity with the specified \textit{id}.                      &  &  &  \\ \cline{1-2}
+
+    GET /peer/\{id\}                & Fetch the certificate entry associated with the specified peer \textit{id}.                       &  &  &  \\ \cline{1-2}
+
+    GET /signatures/\{target\}      & Vouch for the \textit{target} entity.                      &  &  &  \\ \cline{1-2}
+
+    DELETE /signatures/\{target\}   & Unvouch the \textit{target} entity.                      &  &  &  \\ \cline{1-2}
+
+    GET /transaction/\{id\}         & Fetch the transaction with the \textit{id}.                      &  &  &  \\ \cline{1-2}
+
+    GET /accounts                   & Fetch the accounts configured in the current blockchain client.                        &  &  & \\ \cline{1-2}
+  \end{tabular}%
+  \caption{IDChain API specification}
+\label{idchain-api-spec}
+\end{table}
 
 \subsection{IDChain Application}
 

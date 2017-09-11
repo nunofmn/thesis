@@ -46,14 +46,14 @@
 \contentsline {subsubsection}{Trusted Certification}{25}{section*.33}
 \contentsline {subsubsection}{Smart Contracts and Autonomy}{26}{section*.34}
 \contentsline {subsubsection}{Smart Contract Logic}{26}{section*.35}
-\contentsline {subsubsection}{Web of trust scenarios}{29}{section*.38}
-\contentsline {subsection}{\numberline {3.4.2}IDChain API}{29}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}IDChain Application}{29}{subsection.3.4.3}
-\contentsline {section}{\numberline {3.5}Overlay network processes}{29}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{29}{subsection.3.5.1}
+\contentsline {subsubsection}{Web of trust scenarios}{30}{section*.38}
+\contentsline {subsection}{\numberline {3.4.2}IDChain API}{30}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}IDChain Application}{30}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}Overlay network processes}{30}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{30}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}Node message routing}{30}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}Users certificates management}{30}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}Eclipse and Sybil attacks defense}{31}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.4}Eclipse and Sybil attacks defense}{32}{subsection.3.5.4}
 \contentsline {subsection}{\numberline {3.5.5}Data replication}{32}{subsection.3.5.5}
 \contentsline {section}{\numberline {3.6}Comparison with a CA}{32}{section.3.6}
 \contentsline {chapter}{\numberline {4}Implementation}{33}{chapter.4}
