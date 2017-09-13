@@ -14,8 +14,11 @@
 \contentsline {figure}{\numberline {3.5}{\ignorespaces In Scenario A bootstraper entities \textit {A, B and C} vouch for entity \textit {D}, which vouches for entity \textit {E} in conjunction with entities \textit {A} and \textit {C}. In Scenario B, entity \textit {C} unvouches entity \textit {D} which is considered invalid and therefore also entity \textit {E} is considered invalid.}}{29}{figure.3.5}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Scenario A}}}{29}{figure.3.5}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Scenario B}}}{29}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces New node entry in the DHT.}}{31}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Message routing between nodes.}}{31}{figure.3.7}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces }}{30}{figure.3.6}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {API Multi-deploy}}}{30}{figure.3.6}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {API Single-deploy}}}{30}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces New node entry in the DHT.}}{31}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Message routing between nodes.}}{32}{figure.3.8}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

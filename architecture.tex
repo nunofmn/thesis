@@ -181,19 +181,26 @@ The minimum functionalities or functions that the smart contract should provider
 \subsection{IDChain \ac{API}}
 
 In order to provide a better and universal interface to interact with the IDChain smart contract and the blockchain, we will build a RESTful \ac{API} to facilitate access to the functionalities.
-This \ac{API} will run on the \ac{CSP} network, and can be deployed in two ways: a single API instance for all the nodes controled by the \ac{CSP}, or a multiple API instances, one for each node, running in the same server.
+This \ac{API} will run on the \ac{CSP} network, and can be deployed in two ways: a single API instance for all the nodes controled by the \ac{CSP} as shown in Figure~\ref{fig:multi-deploy}, or a multiple API instances, one for each node, running in the same server, shown in Figure~\ref{fig:single-deploy}.
 This \ac{API} will have the classic components usually associated with a RESTful service: every endpoint returns JSON documents and is possible to address every stored resource (certificates, entities, transactions, etc) in the system.
 An advantage of building this \ac{API} to access the IDChain functionalities, is that allows to build applications and services that easily interact with it through \ac{HTTP} while being language-agnostic, easing the access to the system.
-An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in the next subsection.
-% TODO: REFERENCE SUB-CHAPTERS
+An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in greater detail in Subsection~\ref{subsection:idchain-app}.
+
+The IDChain API will be backed up by a relational database (using \ac{SQL}) where all the transactions related with the system will be stored.
+The reasoning behind this mainly due to performance: storing all this information in a local \ac{SQL} database will remove the necessity of constantly querying the blockchain.
+Also using a relational database allows to structure all the transactions and data associated with the system, which enables more powerful queries in a simpler way.
+For example, obtaining all the certificates associated with an entity, or get the blockchain transaction where a specific revocation was made.
+This kind of associations and structure is harder to obtain when using the blockchain client directly, since the client only deals with transactions at a lower level, without attaching a meaning at a smart contract basis to each transaction.
+In order to store the data in the database, we will use the blockchain \textit{events}.
+Is possible to trigger events in smart contracts that, when are executed in a transaction context, will notify the blockchain client, i.e. when a client attaches a valid block to the blockchain the client will be notified of this event.
+This allow to mirror the transaction information related with our smart contract to the relational database.
 
 \begin{figure}
   \centering
-  \subfigure[Scenario A]{\label{fig:a}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-1.pdf}}
-  \subfigure[Scenario B]{\label{fig:b}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-2.pdf}}
-  \caption{In Scenario A bootstraper entities \textit{A, B and C} vouch for entity \textit{D}, which vouches for entity \textit{E} in conjunction with entities \textit{A} and \textit{C}. In Scenario B, entity \textit{C} unvouches entity \textit{D} which is considered invalid and therefore also entity \textit{E} is considered invalid.}
+  \subfigure[API Multi-deploy]{\label{fig:multi-deploy}\includegraphics[width=0.4\linewidth]{Figures/architecture-multi-api.pdf}}
+  \subfigure[API Single-deploy]{\label{fig:single-deploy}\includegraphics[width=0.4\linewidth,trim = 0cm -4cm 0cm 0cm]{Figures/architecture-single-api.pdf}}
+  \caption{}
 \end{figure}
-
 
 {\renewcommand{\arraystretch}{2}%
 \begin{table}[]
@@ -234,6 +241,7 @@ An example of such an application that uses the IDChain API is the IDChain Manag
 \end{table}
 
 \subsection{IDChain Application}
+\label{subsection:idchain-app}
 
 \section{Overlay network processes}
 

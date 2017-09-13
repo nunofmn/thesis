@@ -2,9 +2,9 @@
 \contentsline {chapter}{Acknowledgments}{iii}{chapter*.1}
 \contentsline {chapter}{Abstract}{v}{chapter*.2}
 \contentsline {chapter}{Resumo}{vii}{chapter*.3}
-\contentsline {chapter}{List of Figures}{xiii}{chapter*.6}
-\contentsline {chapter}{List of Tables}{xv}{chapter*.7}
-\contentsline {chapter}{Acronyms}{xvii}{section*.8}
+\contentsline {chapter}{List of Figures}{xiii}{chapter*.7}
+\contentsline {chapter}{List of Tables}{xv}{chapter*.8}
+\contentsline {chapter}{Acronyms}{xvii}{section*.9}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Background}{2}{section.1.1}
 \contentsline {subsection}{\numberline {1.1.1}Global Registry}{2}{subsection.1.1.1}
@@ -22,9 +22,9 @@
 \contentsline {subsection}{\numberline {2.2.1}Routing Attacks}{7}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Storage and Retrieval Attacks}{7}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Sybil Attack}{8}{subsection.2.2.3}
-\contentsline {subsubsection}{Centralized certification}{8}{section*.19}
-\contentsline {subsubsection}{Network characteristics}{8}{section*.21}
-\contentsline {subsubsection}{Computational puzzles}{9}{section*.23}
+\contentsline {subsubsection}{Centralized certification}{8}{section*.20}
+\contentsline {subsubsection}{Network characteristics}{8}{section*.22}
+\contentsline {subsubsection}{Computational puzzles}{9}{section*.24}
 \contentsline {subsection}{\numberline {2.2.4}Eclipse Attack}{10}{subsection.2.2.4}
 \contentsline {section}{\numberline {2.3}Public Key Infrastructure}{11}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Certificate Authorities}{13}{subsection.2.3.1}
@@ -36,37 +36,37 @@
 \contentsline {subsection}{\numberline {2.4.4}Blockchain applications}{19}{subsection.2.4.4}
 \contentsline {subsection}{\numberline {2.4.5}Smart Contracts}{20}{subsection.2.4.5}
 \contentsline {subsection}{\numberline {2.4.6}Ethereum}{20}{subsection.2.4.6}
-\contentsline {subsubsection}{Contract code}{21}{section*.29}
+\contentsline {subsubsection}{Contract code}{21}{section*.30}
 \contentsline {chapter}{\numberline {3}Architecture}{23}{chapter.3}
 \contentsline {section}{\numberline {3.1}Requirements}{23}{section.3.1}
 \contentsline {section}{\numberline {3.2}Overview}{23}{section.3.2}
 \contentsline {section}{\numberline {3.3}Distributed Hash Table}{24}{section.3.3}
 \contentsline {section}{\numberline {3.4}Decentralized Public Key Infrastructure}{25}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}IDChain Smart Contract}{25}{subsection.3.4.1}
-\contentsline {subsubsection}{Trusted Certification}{25}{section*.33}
-\contentsline {subsubsection}{Smart Contracts and Autonomy}{26}{section*.34}
-\contentsline {subsubsection}{Smart Contract Logic}{26}{section*.35}
-\contentsline {subsubsection}{Web of trust scenarios}{30}{section*.38}
-\contentsline {subsection}{\numberline {3.4.2}IDChain API}{30}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}IDChain Application}{30}{subsection.3.4.3}
-\contentsline {section}{\numberline {3.5}Overlay network processes}{30}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{30}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Node message routing}{30}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Users certificates management}{30}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}Eclipse and Sybil attacks defense}{32}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}Data replication}{32}{subsection.3.5.5}
-\contentsline {section}{\numberline {3.6}Comparison with a CA}{32}{section.3.6}
-\contentsline {chapter}{\numberline {4}Implementation}{33}{chapter.4}
-\contentsline {section}{\numberline {4.1}Implementation Options}{33}{section.4.1}
-\contentsline {section}{\numberline {4.2}Architecture}{33}{section.4.2}
-\contentsline {chapter}{\numberline {5}Evaluation}{35}{chapter.5}
-\contentsline {section}{\numberline {5.1}Tests Objectives}{35}{section.5.1}
-\contentsline {section}{\numberline {5.2}Tests Scenarios}{35}{section.5.2}
-\contentsline {section}{\numberline {5.3}Test Results}{35}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusions}{36}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary}{36}{section.6.1}
-\contentsline {section}{\numberline {6.2}Achievements}{36}{section.6.2}
-\contentsline {section}{\numberline {6.3}Future Work}{36}{section.6.3}
-\contentsline {chapter}{\numberline {A}Vector calculus}{37}{appendix.A}
-\contentsline {section}{\numberline {A.1}Vector identities}{37}{section.A.1}
-\contentsline {chapter}{Bibliography}{41}{appendix*.39}
+\contentsline {subsubsection}{Trusted Certification}{25}{section*.34}
+\contentsline {subsubsection}{Smart Contracts and Autonomy}{26}{section*.35}
+\contentsline {subsubsection}{Smart Contract Logic}{26}{section*.36}
+\contentsline {subsubsection}{Web of trust scenarios}{28}{section*.39}
+\contentsline {subsection}{\numberline {3.4.2}IDChain \ac {API}}{28}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}IDChain Application}{31}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}Overlay network processes}{31}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{31}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Node message routing}{32}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Users certificates management}{32}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}Eclipse and Sybil attacks defense}{33}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}Data replication}{33}{subsection.3.5.5}
+\contentsline {section}{\numberline {3.6}Comparison with a CA}{33}{section.3.6}
+\contentsline {chapter}{\numberline {4}Implementation}{34}{chapter.4}
+\contentsline {section}{\numberline {4.1}Implementation Options}{34}{section.4.1}
+\contentsline {section}{\numberline {4.2}Architecture}{34}{section.4.2}
+\contentsline {chapter}{\numberline {5}Evaluation}{36}{chapter.5}
+\contentsline {section}{\numberline {5.1}Tests Objectives}{36}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tests Scenarios}{36}{section.5.2}
+\contentsline {section}{\numberline {5.3}Test Results}{36}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusions}{37}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{37}{section.6.1}
+\contentsline {section}{\numberline {6.2}Achievements}{37}{section.6.2}
+\contentsline {section}{\numberline {6.3}Future Work}{37}{section.6.3}
+\contentsline {chapter}{\numberline {A}Vector calculus}{39}{appendix.A}
+\contentsline {section}{\numberline {A.1}Vector identities}{39}{section.A.1}
+\contentsline {chapter}{Bibliography}{43}{appendix*.43}
