@@ -47,26 +47,26 @@
 \contentsline {subsubsection}{Smart Contracts and Autonomy}{26}{section*.35}
 \contentsline {subsubsection}{Smart Contract Logic}{26}{section*.36}
 \contentsline {subsubsection}{Web of trust scenarios}{28}{section*.39}
-\contentsline {subsection}{\numberline {3.4.2}IDChain \ac {API}}{28}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}IDChain Application}{31}{subsection.3.4.3}
-\contentsline {section}{\numberline {3.5}Overlay network processes}{31}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{31}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.4.2}IDChain \ac {API}}{29}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}IDChain Application}{30}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}Overlay network processes}{30}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{30}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}Node message routing}{32}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Users certificates management}{32}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.3}Users certificates management}{33}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}Eclipse and Sybil attacks defense}{33}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}Data replication}{33}{subsection.3.5.5}
-\contentsline {section}{\numberline {3.6}Comparison with a CA}{33}{section.3.6}
-\contentsline {chapter}{\numberline {4}Implementation}{34}{chapter.4}
-\contentsline {section}{\numberline {4.1}Implementation Options}{34}{section.4.1}
-\contentsline {section}{\numberline {4.2}Architecture}{34}{section.4.2}
-\contentsline {chapter}{\numberline {5}Evaluation}{36}{chapter.5}
-\contentsline {section}{\numberline {5.1}Tests Objectives}{36}{section.5.1}
-\contentsline {section}{\numberline {5.2}Tests Scenarios}{36}{section.5.2}
-\contentsline {section}{\numberline {5.3}Test Results}{36}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusions}{37}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary}{37}{section.6.1}
-\contentsline {section}{\numberline {6.2}Achievements}{37}{section.6.2}
-\contentsline {section}{\numberline {6.3}Future Work}{37}{section.6.3}
+\contentsline {subsection}{\numberline {3.5.5}Data replication}{34}{subsection.3.5.5}
+\contentsline {section}{\numberline {3.6}Comparison with a CA}{34}{section.3.6}
+\contentsline {chapter}{\numberline {4}Implementation}{35}{chapter.4}
+\contentsline {section}{\numberline {4.1}Implementation Options}{35}{section.4.1}
+\contentsline {section}{\numberline {4.2}Architecture}{35}{section.4.2}
+\contentsline {chapter}{\numberline {5}Evaluation}{37}{chapter.5}
+\contentsline {section}{\numberline {5.1}Tests Objectives}{37}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tests Scenarios}{37}{section.5.2}
+\contentsline {section}{\numberline {5.3}Test Results}{37}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusions}{38}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{38}{section.6.1}
+\contentsline {section}{\numberline {6.2}Achievements}{38}{section.6.2}
+\contentsline {section}{\numberline {6.3}Future Work}{38}{section.6.3}
 \contentsline {chapter}{\numberline {A}Vector calculus}{39}{appendix.A}
 \contentsline {section}{\numberline {A.1}Vector identities}{39}{section.A.1}
-\contentsline {chapter}{Bibliography}{43}{appendix*.43}
+\contentsline {chapter}{Bibliography}{43}{appendix*.42}

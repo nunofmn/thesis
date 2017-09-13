@@ -170,30 +170,28 @@ The minimum functionalities or functions that the smart contract should provider
 
 \subsubsection{Web of trust scenarios}
 
+In some aspects the web of trust mechanism that we are going to implement is different from the more well-known web of trust systems.
+One of these aspects, as shown in Figure~\ref{fig:wot-scenario-a}, is that a single entity could create several node certificates.
+As said before, this is aligned with the fact that, as we are working in a federated model, we may want that each \ac{SP} can have multiple nodes, in order to the \ac{DHT} to be scalable.
+The valid state of each certificate is determined by its entity state, if a entity has the minimum number of vouches required by the system, then the certificate created by the entity are considered valid.
+This is depicted in Figure~\ref{fig:wot-scenario-a}, where \textit{Entity D} has two certificates: \textit{Node 2 Certificate} and \textit{Node 3 Certificate}.
+These certificates are considered valid because the entity that created them, \textit{Entity D}, has the minimum number of vouches required, and therefore is considered a valid entity.
+
+If one entity loses one vouch and its number of vouches drops below the minimum threshold, then is necessary to verify every descendant of the entity, and invalidate any entity that this way does not have the minimum number of vouches.
+This could be verified in Figure~\ref{fig:wot-scenario-b}, \textit{Entity C} unvouches \textit{Entity D} which is rendered invalid (considering a minimum of three vouches), and when verifying its descendants \textit{Entity E} also doesn't have the minimum number of vouches required, and therefore is rendered invalid also.
+Is worth mentioning that the certificates of \textit{Entity D} and \textit{Entity E}, as mentioned before, are also considered invalid.
+
 \begin{figure}
   \centering
-  \subfigure[Scenario A]{\label{fig:a}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-1.pdf}}
-  \subfigure[Scenario B]{\label{fig:b}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-2.pdf}}
+  \subfigure[Scenario A]{\label{fig:wot-scenario-a}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-1.pdf}}
+  \subfigure[Scenario B]{\label{fig:wot-scenario-b}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-2.pdf}}
   \caption{In Scenario A bootstraper entities \textit{A, B and C} vouch for entity \textit{D}, which vouches for entity \textit{E} in conjunction with entities \textit{A} and \textit{C}. In Scenario B, entity \textit{C} unvouches entity \textit{D} which is considered invalid and therefore also entity \textit{E} is considered invalid.}
 \end{figure}
-
 
 \subsection{IDChain \ac{API}}
 
 In order to provide a better and universal interface to interact with the IDChain smart contract and the blockchain, we will build a RESTful \ac{API} to facilitate access to the functionalities.
-This \ac{API} will run on the \ac{CSP} network, and can be deployed in two ways: a single API instance for all the nodes controled by the \ac{CSP} as shown in Figure~\ref{fig:multi-deploy}, or a multiple API instances, one for each node, running in the same server, shown in Figure~\ref{fig:single-deploy}.
-This \ac{API} will have the classic components usually associated with a RESTful service: every endpoint returns JSON documents and is possible to address every stored resource (certificates, entities, transactions, etc) in the system.
-An advantage of building this \ac{API} to access the IDChain functionalities, is that allows to build applications and services that easily interact with it through \ac{HTTP} while being language-agnostic, easing the access to the system.
-An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in greater detail in Subsection~\ref{subsection:idchain-app}.
-
-The IDChain API will be backed up by a relational database (using \ac{SQL}) where all the transactions related with the system will be stored.
-The reasoning behind this mainly due to performance: storing all this information in a local \ac{SQL} database will remove the necessity of constantly querying the blockchain.
-Also using a relational database allows to structure all the transactions and data associated with the system, which enables more powerful queries in a simpler way.
-For example, obtaining all the certificates associated with an entity, or get the blockchain transaction where a specific revocation was made.
-This kind of associations and structure is harder to obtain when using the blockchain client directly, since the client only deals with transactions at a lower level, without attaching a meaning at a smart contract basis to each transaction.
-In order to store the data in the database, we will use the blockchain \textit{events}.
-Is possible to trigger events in smart contracts that, when are executed in a transaction context, will notify the blockchain client, i.e. when a client attaches a valid block to the blockchain the client will be notified of this event.
-This allow to mirror the transaction information related with our smart contract to the relational database.
+This \ac{API} will run on the \ac{SP} network, and can be deployed in two ways: a single API instance for all the nodes controled by the \ac{SP} as shown in Figure~\ref{fig:multi-deploy}, or a multiple API instances, one for each node, running in the same server, shown in Figure~\ref{fig:single-deploy}.
 
 \begin{figure}
   \centering
@@ -201,6 +199,11 @@ This allow to mirror the transaction information related with our smart contract
   \subfigure[API Single-deploy]{\label{fig:single-deploy}\includegraphics[width=0.4\linewidth,trim = 0cm -4cm 0cm 0cm]{Figures/architecture-single-api.pdf}}
   \caption{}
 \end{figure}
+
+The \ac{API} will have the classic components usually associated with a RESTful service: every endpoint returns JSON documents and is possible to address every stored resource (certificates, entities, transactions, etc) in the system.
+The endpoints that will be available are presented in Table~\ref{table:idchain-api-spec}
+An advantage of building this \ac{API} to access the IDChain functionalities, is that allows to build applications and services that easily interact with it through \ac{HTTP} while being language-agnostic, easing the access to the system.
+An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in greater detail in Subsection~\ref{subsection:idchain-app}.
 
 {\renewcommand{\arraystretch}{2}%
 \begin{table}[]
@@ -237,8 +240,19 @@ This allow to mirror the transaction information related with our smart contract
     GET /accounts                   & Fetch the accounts configured in the current blockchain client.                        &  &  & \\ \cline{1-2}
   \end{tabular}%
   \caption{IDChain API specification}
-\label{idchain-api-spec}
+\label{table:idchain-api-spec}
 \end{table}
+
+The IDChain API will be backed up by a relational database (using \ac{SQL}) where all the transactions related with the system will be stored.
+The reasoning behind this mainly due to performance: storing all this information in a local \ac{SQL} database will remove the necessity of constantly querying the blockchain.
+Also using a relational database allows to structure all the transactions and data associated with the system, which enables more powerful queries in a simpler way.
+For example, obtaining all the certificates associated with an entity, or get the blockchain transaction where a specific revocation was made.
+This kind of associations and structure is harder to obtain when using the blockchain client directly, since the client only deals with transactions at a lower level, without attaching a meaning at a smart contract basis to each transaction.
+In order to store the data in the database, we will use the blockchain \textit{events}.
+Is possible to trigger events in smart contracts that, when are executed in a transaction context, will notify the blockchain client, i.e. when a client attaches a valid block to the blockchain the client will be notified of this event.
+This allow to mirror the transaction information related with our smart contract to the relational database.
+
+
 
 \subsection{IDChain Application}
 \label{subsection:idchain-app}
