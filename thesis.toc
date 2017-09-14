@@ -48,9 +48,9 @@
 \contentsline {subsubsection}{Smart Contract Logic}{26}{section*.36}
 \contentsline {subsubsection}{Web of trust scenarios}{28}{section*.39}
 \contentsline {subsection}{\numberline {3.4.2}IDChain \ac {API}}{29}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}IDChain Application}{30}{subsection.3.4.3}
-\contentsline {section}{\numberline {3.5}Overlay network processes}{30}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{30}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.4.3}IDChain Management Application}{30}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}Overlay network processes}{31}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Node bootstrap and registration}{31}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}Node message routing}{32}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}Users certificates management}{33}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}Eclipse and Sybil attacks defense}{33}{subsection.3.5.4}
@@ -69,4 +69,4 @@
 \contentsline {section}{\numberline {6.3}Future Work}{38}{section.6.3}
 \contentsline {chapter}{\numberline {A}Vector calculus}{39}{appendix.A}
 \contentsline {section}{\numberline {A.1}Vector identities}{39}{section.A.1}
-\contentsline {chapter}{Bibliography}{43}{appendix*.42}
+\contentsline {chapter}{Bibliography}{43}{appendix*.43}

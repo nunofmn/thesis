@@ -206,7 +206,7 @@ An advantage of building this \ac{API} to access the IDChain functionalities, is
 An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in greater detail in Subsection~\ref{subsection:idchain-app}.
 
 {\renewcommand{\arraystretch}{2}%
-\begin{table}[]
+\begin{table}[h]
   \centering
   \begin{tabular}{|l|l|lll}
     \cline{1-2}
@@ -254,8 +254,15 @@ This allow to mirror the transaction information related with our smart contract
 
 
 
-\subsection{IDChain Application}
+\subsection{IDChain Management Application}
 \label{subsection:idchain-app}
+
+We will also build an application that allow to do all the operations related with the IDChain system.
+Will be an web application, that will interact directly with the IDChain API.
+The main functionalities will revolve around entity and certificate management: view entities vouches, create new node certificates, view the transactions related with each entity, etc.
+The main inspiration for this system are the web-based \textit{blockchain explorers}\footnote{https://blockexplorer.com/} that exist for blockchains like Ethereum and Bitcoin.
+The web application will be built using an \ac{SPA} architecture, leveraging browser Javascript frameworks.
+This will enabled us to recreate a desktop application fell, keeping the web application convenience and ease of access.
 
 \section{Overlay network processes}
 
