@@ -271,13 +271,6 @@ Then should create the node's X509 self-signed certificate, and register the cer
 
 Finally the node will enter the DHT network using a node identifier equal to the one described in the registered certificate.
 
-Will be necessary to add an extra-step to the TLS handshake, to verify the validity of the exchanged certificates.
-As depicted in Figure~\ref{} is necessary to verify the following:
-
-\begin{itemize}
-  \item The fingerprint of the exchanged certificate is equal to the fingerprint registered in the blockchain;
-  \item The node identifier registered in the certificate is equal to the node identifier.
-\end{itemize}
 
 %This process is summarized in Figure~\ref{fig:new-node}.
 
@@ -290,20 +283,20 @@ As depicted in Figure~\ref{} is necessary to verify the following:
 \subsection{Node message routing}
 Every time a node needs to send a message to another node, it will perform the TLS connection handshake.
 The node will receive the destination node certificate, and will send his own certificate to the destination node, since we will use TLS mutual authentication.
-Each node will fetch the certificate information from the blockchain through the IDChain API by the destination node identifier, by issuing a \textit{GET} request to the \textit{\peer\{id}} endpoint.
-The nodes then verify the following:
+Each node will fetch the certificate information from the blockchain through the IDChain API by the destination node identifier, by issuing a \textit{GET} request to the \textit{/peer/\{id\}} endpoint.
+
+Will be necessary to add an extra-step to the TLS handshake, to verify the validity of the exchanged certificates.
+As depicted in Figure~\ref{fig:tls-handshake-plus} is necessary to verify the following:
 
 \begin{itemize}
-	\item Certificate fingerprint obtained from the blockchain match the fingerprint of the received certificate;
-	\item Node identifier associated with the certificate in the blockchain, match the peer identifier of the source or target node in the certificate.
+  \item The fingerprint of the exchanged certificate is equal to the fingerprint registered in the blockchain;
+  \item The node identifier registered in the certificate is equal to the node identifier.
 \end{itemize}
 
-In Figure~\ref{} the message routing functionality is diagrammed.
-
 \begin{figure}
-    \includegraphics[width=\linewidth]{Figures/message-routing.png}
-    \caption{Message routing between nodes.}
-    \label{fig:message-routing}
+  \includegraphics[width=\linewidth]{Figures/tls-handshake-plus.pdf}
+  \caption{Additional steps added in TLS handshake verification.}
+\label{fig:tls-handshake-plus}
 \end{figure}
 
 %Always fetching the certificates from the blockchain could incur in a increased delay in message routing.
