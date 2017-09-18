@@ -252,8 +252,6 @@ In order to store the data in the database, we will use the blockchain \textit{e
 Is possible to trigger events in smart contracts that, when are executed in a transaction context, will notify the blockchain client, i.e. when a client attaches a valid block to the blockchain the client will be notified of this event.
 This allow to mirror the transaction information related with our smart contract to the relational database.
 
-
-
 \subsection{IDChain Management Application}
 \label{subsection:idchain-app}
 
@@ -267,30 +265,38 @@ This will enabled us to recreate a desktop application fell, keeping the web app
 \section{Overlay network processes}
 
 \subsection{Node bootstrap and registration}
-During the node bootstrap process, the node will have to create an account in the private Ethereum blockchain i.e an external owned account, obtaining a private key.
-The Ethereum account will be controlled by this private key, which the node will use to call the methods of the contracts that implement the DPKI.
+In order to participate in the DHT, first the \ac{SP} which wants to deploy the node must create a blockchain account/wallet, and then initialize his entity (one for each account) in the IDChain system.
+The entity then should be validated by the other entities vouches.
+Then should create the node's X509 self-signed certificate, and register the certificate fingerprint in the blockchain through the IDChain smart contract.
 
-After the Ethereum account creation the node will need to generate the public-key pair necessary for node communication.
-The generated public key will be associated with the node Ethereum account address by calling the \textit{newCertificate} function in the \textit{CertificateList} contract, that will create a certificate and store it in the \textit{contract account} internal storage.
-Finally the node will enter the DHT network using a node identifier equal to its Ethereum account address.
+Finally the node will enter the DHT network using a node identifier equal to the one described in the registered certificate.
 
-Since the DHT is based on Kademlia, having a 160-bit address space, and Ethereum accounts have also a 160-bit address space, this direct mapping between the two components identifiers is possible.
+Will be necessary to add an extra-step to the TLS handshake, to verify the validity of the exchanged certificates.
+As depicted in Figure~\ref{} is necessary to verify the following:
 
-This process is summarized in Figure~\ref{fig:new-node}.
+\begin{itemize}
+  \item The fingerprint of the exchanged certificate is equal to the fingerprint registered in the blockchain;
+  \item The node identifier registered in the certificate is equal to the node identifier.
+\end{itemize}
 
-\begin{figure}
-    \includegraphics[width=\linewidth]{Figures/new-node.png}
-    \caption{New node entry in the DHT.}
-    \label{fig:new-node}
-\end{figure}
+%This process is summarized in Figure~\ref{fig:new-node}.
+
+%\begin{figure}
+    %\includegraphics[width=\linewidth]{Figures/new-node.png}
+    %\caption{New node entry in the DHT.}
+    %\label{fig:new-node}
+%\end{figure}
 
 \subsection{Node message routing}
-Every time a node needs to send a message to another node, it will first fetch the destination node certificate from the blockchain by its node identifier.
+Every time a node needs to send a message to another node, it will perform the TLS connection handshake.
+The node will receive the destination node certificate, and will send his own certificate to the destination node, since we will use TLS mutual authentication.
+Each node will fetch the certificate information from the blockchain through the IDChain API by the destination node identifier, by issuing a \textit{GET} request to the \textit{\peer\{id}} endpoint.
+The nodes then verify the following:
 
-After fetching the key, the node will digitally sign the data with its own private key, add a nounce, encrypt them in conjunction with message data and send it to the destination node.
-
-When receiving a message, a node will fetch the sender certificate from the blockchain, decipher the encrypted message data with its own private key and verify the digital signature of the data, using the sender public key.
-If a node is unable to find the certificate associated with the node that is contacting, it will discard the node from its routing table.
+\begin{itemize}
+	\item Certificate fingerprint obtained from the blockchain match the fingerprint of the received certificate;
+	\item Node identifier associated with the certificate in the blockchain, match the peer identifier of the source or target node in the certificate.
+\end{itemize}
 
 In Figure~\ref{} the message routing functionality is diagrammed.
 
@@ -300,23 +306,14 @@ In Figure~\ref{} the message routing functionality is diagrammed.
     \label{fig:message-routing}
 \end{figure}
 
-Always fetching the certificates from the blockchain could incur in a increased delay in message routing.
-Therefore the nodes will cache the fetched certificates, and regularly (every 5 minutes for example) fetch the CRL from the blockchain, to ensure the freshness of the public keys.
-
-\subsection{Users certificates management}
-The SP nodes will also need to manage the users certificates, allowing them to register and revoke public keys.
-
-When receiving a new user public key, the SP node will create an user certificate in the blockchain, where the issuer is the contacted SP node.
-
-If a user need to revoke the public key, it will send an revocation request to the SP node, which will revoke the certificate stored in the blockchain.
+%Always fetching the certificates from the blockchain could incur in a increased delay in message routing.
+%Therefore the nodes will cache the fetched certificates, and regularly (every 5 minutes for example) fetch the CRL from the blockchain, to ensure the freshness of the public keys.
 
 \subsection{Eclipse and Sybil attacks defense}
-The mitigation of possible Sybil and Eclipse attacks leverage the Ethereum cryptocurrency.
+The mitigation of possible Sybil and Eclipse attacks leverage the blockchain cryptocurrency.
 
 The execution of the certificate creation process in the blockchain will require the payment of a value in ether, defined by the contract creator, which will be saved in the \textit{contract account} balance.
 If an attacker tries to launch a Sybil attack, he will need to pay an enormous amount of ether, making the attack infeasible.
-Since the execution of any contract in Ethereum requires the payment of ether, to avoid retaining the funds, the contract could auto-trigger an event that will equally distribute the funds to the nodes in the network.
-
 This solution will also help mitigate possible Eclipse attacks, since preventing Sybil attacks is a constraint to launch Eclipse attacks.
 Coupled with the Kademlia k-bucket replacement policy, where new nodes are only added if a bucket is not full and parallel routing, an efficient defense against Eclipse attacks is achieved.
 
