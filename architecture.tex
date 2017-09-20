@@ -9,6 +9,28 @@ The remaining sections describe the in more detail the architecture of the solut
 
 \section{Requirements}\label{architecture:requirements}
 
+This thesis addresses the problem of building DHT-based systems in a secure fashion, mainly considering the problem of close participation in the DHT and mitigate Sybil attacks.
+This problem will be tackled by proposing two different solutions, a centralized and a decentralized mechanism, which will allow to control nodes access to the DHT system.
+Our overall goal is to provide a better decentralized solution and minimize trust between the intervenients.
+This thesis is especially focused in building the mechanism to be used in the Global Registry component of the reThink architecture, but we want to be able to abstract enough the system, in order to be possible to use the DHT independently to enable developers to build other systems.
+Therefore, the IDChain system should provide the follow functional requisites:
+
+\begin{itemize}
+  \item Close the DHT participation, allowing only authorized nodes to join the system (federated or private system);
+  \item Maintain a decentralized system that doesn't rely on a central entity or server;
+  \item Deal with key compromised, by allowing to revoke nodes certificates.
+\end{itemize}
+
+Moreover, our system must fulfill the following non-functional requirements:
+
+\begin{itemize}
+  \item \textit{Scalability}: The system must work well given a large number of nodes and scale easily;
+  \item \textit{No single point of failure}: the DHT system should work under a variable churn rate, i.e any node can be shutdown or disconnected from the network, and the system remains operational;
+  \item \textit{Portability}: the security mechanism used should be portable and language-agnostic, in order to be possible to integrate the IDChain in other DHT-based systems;
+  \item \textit{Developers usability}: the DHT system should have a simple API (get/put functions) that enables different applications to be build on top;
+  \item \textit{Easy deployment and management}: the system should be fairly easy to deploy and manage. An easy to use \ac{UI} should be provided to management all the aspects of the system.
+\end{itemize}
+
 \section{Overview}\label{architecture:overview}
 The proposed architecture will consist of two independent, inter-connected systems:
 
@@ -33,7 +55,7 @@ The DPKI can be subdivided in three main components:
 \begin{figure}
   \includegraphics[width=\linewidth]{Figures/architecture-overview.pdf}
     \caption{Overview of solution architecture.}
-    \label{fig:architecture-overview}
+\label{fig:architecture-overview}
 \end{figure}
 
 In the scope of the current reTHINK project architecture, these components will be only used in a federated model, i.e the nodes in the \ac{DHT} will all belong to the Service Providers (SP).
@@ -43,7 +65,7 @@ But, in a federated model we might want to minimize trust in other organizations
 
 %but the proposed architecture tries to maximize the security to a level, where it could be possible to allow anyone to participate in the network with some minor adjustments.
 
-\section{Distributed Hash Table} \label{ssec:dht}
+\section{Distributed Hash Table}\label{ssec:dht}
 %The DHT design and implementation will be performed by another reTHINK project member, so there will only be a focus in the security and reliability of the DHT.
 
 The DHT that will be deployed will be based on a Kademlia protocol implementation.
