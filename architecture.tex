@@ -49,19 +49,68 @@ In Section~\ref{architecture:idchain-overview} a detailed overview of the IDChai
 
 \subsection{Vanilla DHT}\label{architecture:vanilla-overview}
 
+The vanilla implementation DHT represents the simpler architectural model of the presented solutions.
+The architecture of this solution is presented in Figure~\ref{fig:architecture-vanilla-overview}.
+
 \begin{figure}
-  \includegraphics[width=\linewidth]{Figures/architecture-overview-none.pdf}
+  \centering
+  \includegraphics[scale=0.5]{Figures/architecture-overview-none.pdf}
   \caption{Overview of vanilla DHT architecture.}
 \label{fig:architecture-vanilla-overview}
 \end{figure}
 
+The DHT nodes will implement a simple \ac{API} with a \textit{put} and \textit{get} functionality to write and read values, respectively, from the \ac{DHT}.
+
+This \ac{API} is used by developers that wish to build applications on top the DHT system.
+The DHT node can be used and deploy as part of applications, since it will be required as library by the application code, which then call directly the DHT put/get functions.
+The \ac{DHT} nodes will communicate through a insecure channel using TCP or UDP, which are the most common protocols used public facing DHT systems, for example, UDP is used by the Mainline DHT of BitTorrent.
+
+The node bootstrap process is done by knowing at least one of the nodes already in the DHT, and by connecting to it.
+This architecture lays down the basis for the other solutions architectures, which will have the same DHT client with the put/get API but will use secure communication protocol between the DHT nodes.
+
 \subsection{DHT with \ac{CA} mechanism}\label{architecture:ca-overview}
 
+The previous solution does not provide any kind of secure communication between nodes, opening way to a multitude of different kind of attacks, like \ac{MITM} attacks.
+Also doesn't provide any mechanism to close the participation in the \ac{DHT} (assuming the DHT nodes are Internet facing servers).
+
+The classic approach to provide a secure communication channel between nodes, is by using the \ac{TLS} protocol coupled with a X509 PKI infrastructure, which is summarized in Figure~\ref{fig:architecture-ca-overview}.
+
+This strategy is a good fit for a federated model since, usually, there is a consensus between the enterprises (in the Global Registry case, a \acl{SP}) participating in the system, and therefore is possible to establish a \ac{CA} which will issue the certificates of all the \ac{SP} nodes.
+
+% TODO: source for two-tier architecture: https://technet.microsoft.com/en-us/library/dn786436(v=ws.11).aspx
+
+This solution could be even more robust if we create a two-tier architecture, as shown in Figure~\ref{fig:ca-hierarchy}.
+
 \begin{figure}
-  \includegraphics[width=\linewidth]{Figures/architecture-overview-ca.pdf}
+  \centering
+  \includegraphics[scale=0.5]{Figures/architecture-overview-ca.pdf}
+  \caption{Two-tier \acl{CA} hierarchy}
+\label{fig:ca-hierachy}
+\end{figure} 
+
+In this hierarchy there is a offline Root CA which issuesfor each \ac{SP} a intermediate CA certificate.
+This intermediate CAs are maintained online (for \ac{CRL} access) and issue certificates for each DHT node controlled by the respective \ac{SP} node.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{Figures/architecture-overview-ca.pdf}
   \caption{Overview of DHT with CA architecture.}
 \label{fig:architecture-ca-overview}
 \end{figure}
+
+In each node certificate, should be registered the node identifier, IP address and/or domain.
+
+Since we will be using TLS mutual-authentication is necessary that the issued certificates could be used as server certificates, as well as client certificates.
+
+The node bootstrap process is the same as the vanilla solution, but when establishing the TLS connection between the nodes, is necessary to verify during the TLS handshake that the certificates are signed by one of the valid intermediate CA's, and check if the contacting node identifier is equal to the one registered in the received certificate.
+If any of these two validations fail, the connection is closed.
+This verification is done both ways: the connection server checks if the client certificate is valid according to these specifications, and the connection client verifies if the server certificate is also valid.
+
+This verifications are done every time that a TLS connection is established, i.e when a message is sent between nodes.
+This could incur in a performance decrease, since every time a message is send this verifications are done when establishing the TLS connections.
+A possible solution to mitigate this performance decrease, is use TLS Session Resumption coupled with a cache of every know node identifiers that already were verified, which expire periodically.
+
+% TODO: source https://tools.ietf.org/html/rfc5077
 
 \section{DHT with IDChain mechanism}\label{architecture:idchain-overview}
 
@@ -92,7 +141,7 @@ The DPKI can be subdivided in three main components:
 \end{figure}
 
 In the scope of the current reTHINK project architecture, these components will be only used in a federated model, i.e the nodes in the \ac{DHT} will all belong to the Service Providers (SP).
-Therefore it is possible to assume some level of trust with the nodes, which opens the possibility to use a more traditional approach for managing the certificates, for exxample, a Certificate Authority.
+Therefore it is possible to assume some level of trust with the nodes, which opens the possibility to use a more traditional approach for managing the certificates, for example, a Certificate Authority.
 But, in a federated model we might want to minimize trust in other organizations or SP, in order to discourage fradulent activity or over-control of the system by one or several organizations.
 \acp{CA} have also the problem of adding an extra burden in organizations, since is not a totally automated system and still need some human intervention, mainly when accepting and signing \acp{CSR}.
 
@@ -187,7 +236,8 @@ This can undermine smaller entities participating in the system, and could even 
 A combination of an hard limit, for example, a maximum number of certificates each entity can have, and a soft limit, i.e defining a cost, using the underlying cryptocurrency, for each certificate, could provider a equal and fair system for all the entities involved.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{Figures/web-trust-main.pdf}
+  \centering
+  \includegraphics[scale=0.5]{Figures/web-trust-main.pdf}
   \caption{Web of trust mechanism.}
 \label{fig:web-of-trust-architecture}
 \end{figure}

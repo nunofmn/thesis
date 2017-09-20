@@ -8,18 +8,19 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Simple data storage contract in Solidity language.}}{21}{figure.2.5}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Overview of vanilla DHT architecture.}}{25}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Overview of DHT with CA architecture.}}{26}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Overview of solution architecture.}}{27}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Smart contract \textit {Certificate} structure fields.}}{29}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Web of trust mechanism.}}{30}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Smart contract \textit {Entity} structure fields.}}{31}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces In Scenario A bootstraper entities \textit {A, B and C} vouch for entity \textit {D}, which vouches for entity \textit {E} in conjunction with entities \textit {A} and \textit {C}. In Scenario B, entity \textit {C} unvouches entity \textit {D} which is considered invalid and therefore also entity \textit {E} is considered invalid.}}{32}{figure.3.7}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Scenario A}}}{32}{figure.3.7}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Scenario B}}}{32}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces }}{33}{figure.3.8}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {API Multi-deploy}}}{33}{figure.3.8}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {API Single-deploy}}}{33}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Additional steps added in TLS handshake verification.}}{35}{figure.3.9}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Two-tier \acl {CA} hierarchy}}{26}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Overview of DHT with CA architecture.}}{26}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Overview of solution architecture.}}{27}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Smart contract \textit {Certificate} structure fields.}}{30}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Web of trust mechanism.}}{31}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Smart contract \textit {Entity} structure fields.}}{31}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces In Scenario A bootstraper entities \textit {A, B and C} vouch for entity \textit {D}, which vouches for entity \textit {E} in conjunction with entities \textit {A} and \textit {C}. In Scenario B, entity \textit {C} unvouches entity \textit {D} which is considered invalid and therefore also entity \textit {E} is considered invalid.}}{33}{figure.3.8}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Scenario A}}}{33}{figure.3.8}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Scenario B}}}{33}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces }}{33}{figure.3.9}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {API Multi-deploy}}}{33}{figure.3.9}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {API Single-deploy}}}{33}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Additional steps added in TLS handshake verification.}}{36}{figure.3.10}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

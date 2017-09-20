@@ -41,22 +41,22 @@
 \contentsline {section}{\numberline {3.1}Requirements}{23}{section.3.1}
 \contentsline {section}{\numberline {3.2}Overview}{24}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Vanilla DHT}{24}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}DHT with \ac {CA} mechanism}{24}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}DHT with IDChain mechanism}{24}{section.3.3}
-\contentsline {section}{\numberline {3.4}Distributed Hash Table}{27}{section.3.4}
-\contentsline {section}{\numberline {3.5}Decentralized Public Key Infrastructure}{27}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}IDChain Smart Contract}{28}{subsection.3.5.1}
-\contentsline {subsubsection}{Trusted Certification}{28}{section*.35}
-\contentsline {subsubsection}{Smart Contracts and Autonomy}{28}{section*.36}
-\contentsline {subsubsection}{Smart Contract Logic}{29}{section*.37}
-\contentsline {subsubsection}{Web of trust scenarios}{31}{section*.40}
-\contentsline {subsection}{\numberline {3.5.2}IDChain \ac {API}}{32}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}IDChain Management Application}{33}{subsection.3.5.3}
-\contentsline {section}{\numberline {3.6}Overlay network processes}{34}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Node bootstrap and registration}{34}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.2.2}DHT with \ac {CA} mechanism}{25}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}DHT with IDChain mechanism}{27}{section.3.3}
+\contentsline {section}{\numberline {3.4}Distributed Hash Table}{28}{section.3.4}
+\contentsline {section}{\numberline {3.5}Decentralized Public Key Infrastructure}{28}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}IDChain Smart Contract}{29}{subsection.3.5.1}
+\contentsline {subsubsection}{Trusted Certification}{29}{section*.36}
+\contentsline {subsubsection}{Smart Contracts and Autonomy}{29}{section*.37}
+\contentsline {subsubsection}{Smart Contract Logic}{30}{section*.38}
+\contentsline {subsubsection}{Web of trust scenarios}{32}{section*.41}
+\contentsline {subsection}{\numberline {3.5.2}IDChain \ac {API}}{33}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}IDChain Management Application}{35}{subsection.3.5.3}
+\contentsline {section}{\numberline {3.6}Overlay network processes}{35}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Node bootstrap and registration}{35}{subsection.3.6.1}
 \contentsline {subsection}{\numberline {3.6.2}Node message routing}{35}{subsection.3.6.2}
 \contentsline {subsection}{\numberline {3.6.3}Eclipse and Sybil attacks defense}{35}{subsection.3.6.3}
-\contentsline {subsection}{\numberline {3.6.4}Data replication}{35}{subsection.3.6.4}
+\contentsline {subsection}{\numberline {3.6.4}Data replication}{36}{subsection.3.6.4}
 \contentsline {section}{\numberline {3.7}Comparison with a CA}{36}{section.3.7}
 \contentsline {chapter}{\numberline {4}Implementation}{37}{chapter.4}
 \contentsline {section}{\numberline {4.1}Implementation Options}{37}{section.4.1}
@@ -71,4 +71,4 @@
 \contentsline {section}{\numberline {6.3}Future Work}{40}{section.6.3}
 \contentsline {chapter}{\numberline {A}Vector calculus}{41}{appendix.A}
 \contentsline {section}{\numberline {A.1}Vector identities}{41}{section.A.1}
-\contentsline {chapter}{Bibliography}{45}{appendix*.44}
+\contentsline {chapter}{Bibliography}{45}{appendix*.45}
