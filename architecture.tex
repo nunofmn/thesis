@@ -32,6 +32,39 @@ Moreover, our system must fulfill the following non-functional requirements:
 \end{itemize}
 
 \section{Overview}\label{architecture:overview}
+
+Our proposal will consist of three different architectures:
+
+\begin{itemize}
+  \item Vanilla \ac{DHT} - a \ac{DHT} system without any kind of peer connection security;
+  \item DHT with \ac{CA} mechanism - a \ac{DHT} system where the peer connectivity is done through TLS, using a usual X509 \ac{PKI} with \ac{CA} infrastructure;
+  \item DHT with IDChain mechanism - a \ac{DHT} system which also uses TLS for peer connectivity, but uses certificates managed with help of a blockchain smart contract.
+\end{itemize}
+
+This three different architectures will be built not only to provide a classic approach to peer connectivity security (in case of \ac{CA} mechanism), but also for evaluation purposes, mainly in terms of write/read performance of the \ac{DHT}.
+But nevertheless, the main focus of this thesis is building and IDChain mechanism, which is the most innovative of all the presented architectures.
+
+In Section~\ref{architecture:vanilla-overview} and Section~\ref{architecture:ca-overview} an overview of the vanilla and \ac{CA} mechanism is given, respectively.
+In Section~\ref{architecture:idchain-overview} a detailed overview of the IDChain architecture is given, including a in-depth description of each sub-component that compose the architecture.
+
+\subsection{Vanilla DHT}\label{architecture:vanilla-overview}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{Figures/architecture-overview-none.pdf}
+  \caption{Overview of vanilla DHT architecture.}
+\label{fig:architecture-vanilla-overview}
+\end{figure}
+
+\subsection{DHT with \ac{CA} mechanism}\label{architecture:ca-overview}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{Figures/architecture-overview-ca.pdf}
+  \caption{Overview of DHT with CA architecture.}
+\label{fig:architecture-ca-overview}
+\end{figure}
+
+\section{DHT with IDChain mechanism}\label{architecture:idchain-overview}
+
 The proposed architecture will consist of two independent, inter-connected systems:
 
 \begin{itemize}
