@@ -75,6 +75,13 @@ Also doesn't provide any mechanism to close the participation in the \ac{DHT} (a
 
 The classic approach to provide a secure communication channel between nodes, is by using the \ac{TLS} protocol coupled with a X509 PKI infrastructure, which is summarized in Figure~\ref{fig:architecture-ca-overview}.
 
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{Figures/architecture-overview-ca.pdf}
+  \caption{Overview of DHT with CA architecture.}
+\label{fig:architecture-ca-overview}
+\end{figure}
+
 This strategy is a good fit for a federated model since, usually, there is a consensus between the enterprises (in the Global Registry case, a \acl{SP}) participating in the system, and therefore is possible to establish a \ac{CA} which will issue the certificates of all the \ac{SP} nodes.
 
 % TODO: source for two-tier architecture: https://technet.microsoft.com/en-us/library/dn786436(v=ws.11).aspx
@@ -83,20 +90,13 @@ This solution could be even more robust if we create a two-tier architecture, as
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.5]{Figures/architecture-overview-ca.pdf}
+  \includegraphics[scale=0.7]{Figures/architecture-ca-hierarchy.pdf}
   \caption{Two-tier \acl{CA} hierarchy}
-\label{fig:ca-hierachy}
-\end{figure} 
+\label{fig:ca-hierarchy}
+\end{figure}
 
 In this hierarchy there is a offline Root CA which issuesfor each \ac{SP} a intermediate CA certificate.
 This intermediate CAs are maintained online (for \ac{CRL} access) and issue certificates for each DHT node controlled by the respective \ac{SP} node.
-
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.5]{Figures/architecture-overview-ca.pdf}
-  \caption{Overview of DHT with CA architecture.}
-\label{fig:architecture-ca-overview}
-\end{figure}
 
 In each node certificate, should be registered the node identifier, IP address and/or domain.
 

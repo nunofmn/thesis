@@ -8,8 +8,8 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Simple data storage contract in Solidity language.}}{21}{figure.2.5}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Overview of vanilla DHT architecture.}}{25}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Two-tier \acl {CA} hierarchy}}{26}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Overview of DHT with CA architecture.}}{26}{figure.3.3}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Overview of DHT with CA architecture.}}{26}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Two-tier \acl {CA} hierarchy}}{26}{figure.3.3}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Overview of solution architecture.}}{27}{figure.3.4}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Smart contract \textit {Certificate} structure fields.}}{30}{figure.3.5}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Web of trust mechanism.}}{31}{figure.3.6}
