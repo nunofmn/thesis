@@ -59,16 +59,27 @@
 \contentsline {subsection}{\numberline {3.6.4}Data replication}{36}{subsection.3.6.4}
 \contentsline {section}{\numberline {3.7}Comparison with a CA}{36}{section.3.7}
 \contentsline {chapter}{\numberline {4}Implementation}{37}{chapter.4}
-\contentsline {section}{\numberline {4.1}Implementation Options}{37}{section.4.1}
-\contentsline {section}{\numberline {4.2}Architecture}{37}{section.4.2}
-\contentsline {chapter}{\numberline {5}Evaluation}{39}{chapter.5}
-\contentsline {section}{\numberline {5.1}Tests Objectives}{39}{section.5.1}
-\contentsline {section}{\numberline {5.2}Tests Scenarios}{39}{section.5.2}
-\contentsline {section}{\numberline {5.3}Test Results}{39}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusions}{40}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary}{40}{section.6.1}
-\contentsline {section}{\numberline {6.2}Achievements}{40}{section.6.2}
-\contentsline {section}{\numberline {6.3}Future Work}{40}{section.6.3}
-\contentsline {chapter}{\numberline {A}Vector calculus}{41}{appendix.A}
-\contentsline {section}{\numberline {A.1}Vector identities}{41}{section.A.1}
-\contentsline {chapter}{Bibliography}{45}{appendix*.45}
+\contentsline {section}{\numberline {4.1}Adopted Technologies}{37}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}DHT}{37}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Blockchain}{38}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}API}{39}{subsection.4.1.3}
+\contentsline {subsubsection}{Application Server}{39}{section*.49}
+\contentsline {subsubsection}{Database}{39}{section*.50}
+\contentsline {subsection}{\numberline {4.1.4}Management Application}{39}{subsection.4.1.4}
+\contentsline {section}{\numberline {4.2}Vanilla system}{39}{section.4.2}
+\contentsline {section}{\numberline {4.3}CA-based system}{39}{section.4.3}
+\contentsline {section}{\numberline {4.4}IDChain system}{39}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Smart contract}{39}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}API}{39}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Application}{39}{subsection.4.4.3}
+\contentsline {chapter}{\numberline {5}Evaluation}{40}{chapter.5}
+\contentsline {section}{\numberline {5.1}Tests Objectives}{40}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tests Scenarios}{40}{section.5.2}
+\contentsline {section}{\numberline {5.3}Test Results}{40}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusions}{41}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{41}{section.6.1}
+\contentsline {section}{\numberline {6.2}Achievements}{41}{section.6.2}
+\contentsline {section}{\numberline {6.3}Future Work}{41}{section.6.3}
+\contentsline {chapter}{\numberline {A}Vector calculus}{43}{appendix.A}
+\contentsline {section}{\numberline {A.1}Vector identities}{43}{section.A.1}
+\contentsline {chapter}{Bibliography}{47}{appendix*.51}
