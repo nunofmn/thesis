@@ -29,9 +29,9 @@ Is possible to switch between the three different mechanisms by declaring in the
 \subsection{Blockchain}
 
 The blockchain that we used is Ethereum.
-The are a number of other blockchains currently available that enable developers to build applications on top of it using smart contracts, like Hyperledger Fabric\cite{cachin2016architecture} or R3 Corda\cite{mikehearn2016}, but these implementations have more specific use-cases, enterprise and finances respectively.
+There are a number of other blockchains currently available that enable developers to build applications on top of it using smart contracts, like Hyperledger Fabric\cite{cachin2016architecture} or R3 Corda\cite{mikehearn2016}, but these implementations have more specific use-cases, enterprise and finances respectively.
 
-A quick analysis between these three platforms show significant architectural differences, in such a way that we can even consider an higher-level classification for these  three platforms, since not all of them show the main characteristics of a blockchain (taking in consideration the Bitcoin reference paper).
+A quick analysis between these three platforms show significant architectural differences, in such a way that we can even consider an higher-level classification for these three platforms, since not all of them show the main characteristics of a blockchain (taking in consideration the Bitcoin reference paper).
 A broader definition that encapsulates this three platforms is \ac{DLT}.
 
 The Hyperledger Fabric platform has a modular approach to blockchains. It's a private blockchain system  and is permissioned, i.e doesn't allow unknown entities to participate in the system.
@@ -56,18 +56,44 @@ Our choice was Ethereum due to a number of reasons:
 \end{itemize}
 
 Even thought the Ethereum network is currently the system with the better developer ecosystem, there are still several shortcomings when developing against it.
-In Section~\ref{implementation:idchain} we detail some of the difficulties and shortcomings of the Ethereum smart contracts.
+In Section~\ref{implementation:idchain} we detail some of the difficulties and shortcomings of the Ethereum smart contracts we encountered during development.
 
-\subsection{API}
+\subsection{IDChain API}
 
 \subsubsection{Application Server}
 
+The IDChain API is build using the Node.js Javascript runtime using some frameworks and libraries:
+
+\begin{itemize}
+  \item \textit{Hapi}\footnote{https://hapijs.com/} - web framework for building web applications, RESTful APIs and services;
+  \item \textit{web3.js}\footnote{https://github.com/ethereum/web3.js/} - the Ethereum compatible Javascript API;
+  \item \textit{Sequelize}\footnote{https://sequelizejs.com} - a \ac{ORM} for Node.js which support several SQL dialects.
+\end{itemize}
+
+The decision of using Node.js to develop the HTTP API is mainly related with the web3.js library.
+At the time of development was the most mature library to interface with the Ethereum client.
+The Ruby, Java and .Net implementations were still in early stages of development.
+
+% verificar isto
+The Hapi framework was chosen because allows to build APIs encapsulating APIs endpoints around a plugin system. For example, is possible to create a plugin that encapsulates all the endpoints that are related with the certificates domain.
+This allow to compose the API using tiny modules that contain the business logic of each domain in the application, which later could be easily decoupled and deploy separately.
+Also Hapi has already a couple of modules built-in for dealing with input and response validation, error handling, session caching, logging, etc.
+
+We decided to use an \ac{ORM} to interact with the database due to the following reasons:
+
+\begin{itemize}
+  \item Allows easier implementation of the entities in the API;
+  \item Leads to a huge reduction in code, since eliminates the need for repetitive SQL queries;
+  \item Easier navigation of entities relationships;
+  \item Transaction management and isolation;
+  \item Independent of the SQL database or dialect used,  allowing to use any SQL database or dialect.
+\end{itemize}
+
+We decide to use the Sequelize ORM, since is the most mature and fully-fledge SQL ORM for Node.js.
+
 \subsubsection{Database}
 
-
 \subsection{Management Application}
-
-
 
 \section{Vanilla system}
 
