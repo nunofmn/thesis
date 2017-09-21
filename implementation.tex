@@ -55,6 +55,7 @@ Our choice was Ethereum due to a number of reasons:
 	\item Developer ecosystem - right now, Ethereum has the biggest developer community, with a increasing number of development tools to aid the development and deploy process of smart contracts.
 \end{itemize}
 
+
 Even thought the Ethereum network is currently the system with the better developer ecosystem, there are still several shortcomings when developing against it.
 In Section~\ref{implementation:idchain} we detail some of the difficulties and shortcomings of the Ethereum smart contracts we encountered during development.
 
@@ -62,7 +63,7 @@ In Section~\ref{implementation:idchain} we detail some of the difficulties and s
 
 \subsubsection{Application Server}
 
-The IDChain API is build using the Node.js Javascript runtime using some frameworks and libraries:
+The IDChain API was built using the Node.js Javascript runtimes, and the following frameworks and libraries:
 
 \begin{itemize}
   \item \textit{Hapi}\footnote{https://hapijs.com/} - web framework for building web applications, RESTful APIs and services;
@@ -86,17 +87,24 @@ We decided to use an \ac{ORM} to interact with the database due to the following
   \item Leads to a huge reduction in code, since eliminates the need for repetitive SQL queries;
   \item Easier navigation of entities relationships;
   \item Transaction management and isolation;
-  \item Independent of the SQL database or dialect used,  allowing to use any SQL database or dialect.
+  \item Independent of the SQL database or dialect used, allowing to use any SQL database or dialect.
 \end{itemize}
 
-We decide to use the Sequelize ORM, since is the most mature and fully-fledge SQL ORM for Node.js.
+We decided to use the Sequelize ORM, since is the most mature and fully-fledge SQL ORM for Node.js.
 
 \subsubsection{Database}
 
+The database we decide used with the IDChain API was \textit{PostgreSQL}\footnote{https://www.postgresql.org/}.
+The decision to use SQL comes from the necessity of predefining a schema and normalize the processed data from the blockchain.
+This allowed us to easily establish relationships between the entities in the system (transactions, certificates, etc), which in turn allow us to query the system in a more efficient and structured way.
+
 \subsection{Management Application}
+The IDChain Management application was built as a web \ac{SPA}.
+We used a common frontend stack to build this application: \textit{React}\footnote{https://facebook.github.io/react/} for building the user interface and \textit{Redux}\footnote{https://http://redux.js.org/} for application state management.
+By building the application using a SPA architecture, we are able to provide end-users a much-improved experience, mainly in navigation through the app, since no full page requests are required.
+The \ac{SPA} architecture also enables to take advantage of already existing IDChain API, by directly accessing to obtain the data and control all the aspects of the system.
 
 \section{Vanilla system}
-
 
 \section{CA-based system}
 
