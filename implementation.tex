@@ -1,41 +1,42 @@
 \chapter{Implementation}
 \label{chapter:implementation}
 
-\section{Implementation Options}
-Neste secção devem apresentar as opções de implementação que tinham ao vosso
-dispor, avaliá-las e justificar a escolha que realizaram. Isto pode englobar:
-\begin{itemize}
-    \item Simuladores
-    \item Linguagens e ambientes de programação
-    \item Sistemas operativos
-    \item Hardware
-\end{itemize}
-Fica sempre bem na avaliação colocar uma tabela com as características
-pretendidas e as que são satisfeitas pelas várias opções (tipo catálogo com as
-características dos automóveis). A escolha deve surgir naturalmente, com base na
-opção que tem mais cruzes\ldots
+This chapter addresses the main decisions adopted regarding the implementation of the IDChain, vanilla an CA-based systems. Therefore, the following sections cover the technologies that were used in the development process and the implementation details of each component.
 
-\section{Architecture}
-Nesta secção devem explicar como implementaram a vossa solução, apresentando
-as simplificações que efectuaram, face ao modelo inicialmente previsto. As
-simplificações devem ser devidamente justificadas. Se for possível, devem indicar
-que estas não põem em causa as contribuições da tese.
-Podem ainda descrever os principais problemas que tiveram e a forma como os
-abordaram e resolveram.
+\section{Adopted Technologies}
 
-Se estiverem a usar um simulador devem:
+In this section we will present the chosen technologies to implement the proposed work, for each component of the architecture.
 
-\begin{itemize}
-    \item explicar o funcionamento do simulador
-    \item explicar as alterações e modelos que desenvolveram no simulador e que permitem validar a vossa ideia
-\end{itemize}
+\subsection{DHT}
 
-Se estiveram a desenvolver SW, sem simulador devem:
-\begin{itemize}
-    \item explicar os módulos, interfaces, estruturas de dados, etc\ldots
-\end{itemize}
+In a first instance, the chosen library to implement the DHT node was \textit{TomP2P}\footnote{http://tomp2p.net/} a implementation of Kademlia in Java.
+The use of TomP2P was already decided before-hand, since the Global Registry component in the reThink project, was already partially implemented using it.
+This restricted the implementation options from the get-go, since it wasn't possible to compare different \ac{DHT} implementations and check which one could be more easily extended.
 
-Sempre que possível, ilustrem a arquitectura com figuras que demonstrem a
-evolução face à arquitectura da secção anterior. Isto é, usem as figuras anteriores
-e façam as modificações necessárias à obtenção da arquitectura do protótipo.
-\ldots
+We tried to modify the TomP2P source code, and implement TLS connection supports.
+This endeavor didn't succeeded, mainly since the TomP2P code is tightly coupled to TCP and UDP connections.
+Since TomP2P uses \textit{Netty}\footnote{https://netty.io/}, a Java NIO client-server \ac{NIO} framework, we tried to to change Netty instance calls to TLS, a try which revealed infeasible.
+
+Therefore we decided to implement the mechanisms using another DHT system.
+Several DHT implementations exist in different languages, but was necessary to pin down an implementation that had a modular architecture and could be easily extended.
+
+The implementation that revealed to be the most modular was the one of \textit{Kad}\footnote{https://kadtools.github.io}library, for \textit{Node.js}\footnote{https://nodejs.org/} and based on Kademlia.
+This implementation allows to easily extend the base DHT with custom transports, middleware, storage layers and message processors, which enabled us to build a custom transport with TLS mutual-authentication and custom verification rules.
+
+The same DHT client was used for the three different mechanisms: vanilla, CA-based and IDChain.
+Is possible to switch between the three different mechanisms by declaring in the configuration file which one we want to use.
+
+\subsection{Blockchain}
+
+
+\subsection{API}
+
+\subsubsection{Application Server}
+
+\subsubsection{Database}
+
+
+\subsection{Management Application}
+
+
+
