@@ -1,0 +1,14 @@
+{
+  security: {
+    mechanism: 'none'
+  },
+  nodeID: '3b78a1ece2016370bc5e4cf56bf5ecb39120e549',
+  hostname: 'idchain2.com',
+  port: 8080,
+  seed: {
+    nodeID: '0c1ddbaf332a6b247855dbbbf8d243b3f6f3036f',
+    hostname: 'idchain1.com',
+    port: 8080
+  },
+  storage: 'data/node.db'
+}

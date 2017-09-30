@@ -43,7 +43,7 @@
 \contentsline {subsection}{\numberline {3.2.1}Vanilla DHT}{24}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}DHT with \ac {CA} mechanism}{25}{subsection.3.2.2}
 \contentsline {section}{\numberline {3.3}DHT with IDChain mechanism}{27}{section.3.3}
-\contentsline {section}{\numberline {3.4}Distributed Hash Table}{28}{section.3.4}
+\contentsline {section}{\numberline {3.4}Distributed Hash Table}{27}{section.3.4}
 \contentsline {section}{\numberline {3.5}Decentralized Public Key Infrastructure}{28}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}IDChain Smart Contract}{29}{subsection.3.5.1}
 \contentsline {subsubsection}{Trusted Certification}{29}{section*.36}
@@ -67,19 +67,19 @@
 \contentsline {subsubsection}{Database}{39}{section*.51}
 \contentsline {subsection}{\numberline {4.1.4}Management Application}{40}{subsection.4.1.4}
 \contentsline {section}{\numberline {4.2}Vanilla system}{40}{section.4.2}
-\contentsline {section}{\numberline {4.3}CA-based system}{40}{section.4.3}
-\contentsline {section}{\numberline {4.4}IDChain system}{40}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Smart contract}{40}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}API}{40}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Application}{40}{subsection.4.4.3}
-\contentsline {chapter}{\numberline {5}Evaluation}{41}{chapter.5}
-\contentsline {section}{\numberline {5.1}Tests Objectives}{41}{section.5.1}
-\contentsline {section}{\numberline {5.2}Tests Scenarios}{41}{section.5.2}
-\contentsline {section}{\numberline {5.3}Test Results}{41}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusions}{42}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary}{42}{section.6.1}
-\contentsline {section}{\numberline {6.2}Achievements}{42}{section.6.2}
-\contentsline {section}{\numberline {6.3}Future Work}{42}{section.6.3}
-\contentsline {chapter}{\numberline {A}Vector calculus}{43}{appendix.A}
-\contentsline {section}{\numberline {A.1}Vector identities}{43}{section.A.1}
-\contentsline {chapter}{Bibliography}{47}{appendix*.52}
+\contentsline {section}{\numberline {4.3}CA-based system}{41}{section.4.3}
+\contentsline {section}{\numberline {4.4}IDChain system}{41}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Smart contract}{41}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}API}{41}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Application}{41}{subsection.4.4.3}
+\contentsline {chapter}{\numberline {5}Evaluation}{42}{chapter.5}
+\contentsline {section}{\numberline {5.1}Tests Objectives}{42}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tests Scenarios}{42}{section.5.2}
+\contentsline {section}{\numberline {5.3}Test Results}{42}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusions}{43}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{43}{section.6.1}
+\contentsline {section}{\numberline {6.2}Achievements}{43}{section.6.2}
+\contentsline {section}{\numberline {6.3}Future Work}{43}{section.6.3}
+\contentsline {chapter}{\numberline {A}Vector calculus}{45}{appendix.A}
+\contentsline {section}{\numberline {A.1}Vector identities}{45}{section.A.1}
+\contentsline {chapter}{Bibliography}{49}{appendix*.54}

@@ -106,7 +106,42 @@ The \ac{SPA} architecture also enables to take advantage of already existing IDC
 
 \section{Vanilla system}
 
+The vanilla \ac{DHT} we present in this section, is the barebone \ac{client} for the other implementations in the next sections.
+
+As mentioned before, the \ac{DHT} which we implemented is based on the Kad DHT library.
+Kad provides a very thin basis for building DHT-based applications with sane defaults, providing also at the same time an extreme level of extensability and customization.
+
+The nodes communication is done through JSON-RPC using the \ac{HTTP} protocol.
+
+In order to launch every DHT client is necessary to provide a configuration file.
+
+\lstinputlisting[label=lst:config, caption=Example DHT client configuration file., captionpos=b]{Examples/config-example.json}
+
+A configuration file example is shown in Listing~\ref{lst:config}.
+The fields \textit{nodeID}, \textit{hostname} and \textit{port} correspond to the node contact information in the DHT, and more specifically, in the case of the \textit{nodeID} field, the node identifier in the DHT network.
+The \textit{storage} field is the folder where the DHT client will save the node data (key, values and routing table information). This points to a directory, because the Kad library by default uses LevelDB~\footnote{http://leveldb.org/} - an on-disk key-value store - for persistence.
+In order to enter the DHT network is necessary to have another node contact information, which is defined in the \textit{seed} field.
+We also defined the \textit{security} field, as an extension to the default configuration process of the Kad library.
+This field contain all the options and information to deploy the chosen security mechanism.
+In the case of the vanilla DHT, the sub-field \textit{mechanism} should be set to 'none'.
+The other possible values are 'ca' and 'blockchain', for the CA-based mechanism and IDChain mechanism, respectively.
+
+The \ac{API} our DHT client is the following:
+
+\begin{itemize}
+  \item \textit{start()} - start the DHT node, by connecting to a node in DHT network, which is specified in the seed field of the configuration file;
+  \item \textit{stop()} - stop the DHT node;
+  \item \textit{get(key)} - obtain the value associated with the specified key;
+  \item \textit{put(key, value)} - store the specified value with the specified key;
+\end{itemize}
+
+Since we are building this DHT system using Node.js, in order to facilitate the access to our DHT client and easily build applications on top of it, is possible to obtain and require our DHT client as a \ac{NPM} module.
+
 \section{CA-based system}
+
+% TODO: new config info
+% TODO: how certificate are created and structure
+% TODO: TLS mechanism server/client side
 
 
 \section{IDChain system}\label{implementation:idchain}
