@@ -139,10 +139,46 @@ Since we are building this DHT system using Node.js, in order to facilitate the 
 
 \section{CA-based system}
 
-% TODO: new config info
-% TODO: how certificate are created and structure
-% TODO: TLS mechanism server/client side
+The next solution that we implemented uses the HTTPS protocol, for node communication.
+This enables us to provide privacy, since the data transmitted is encrypted, authentication to the communicating nodes and ensures integrity of the transmitted messages.
+In the typical HTTPS/TLS setup, as in web browsers, only the identity of the server is proved using X.509 certificates.
+Nevertheless, is also possible to provide client-to-server authentication, by requiring that the client provide a valid certificate.
 
+In our implementation, is necessary to provide mutual authentication, because we need to verify if the client trying join and perform operations in the DHT network is in fact authorized to do so.
+Is also necessary to verify the server identity, because we want to be sure that we are bootstraping or exchanging messages with a node belonging to the DHT network.
+
+We implemented a custom transport adapter on the Kad library, based on the HTTPS transport already built-in in Kad.
+This transport is based on the HTTPS module provided by Node.js base libraries, more precisely the \textit{https.Server} and \textit{https.Agent} classes.
+
+When configuring \textit{https.Server} instance we enable by default two options: \textit{requestCert}, which will make the server request a certificate from clients that connect and attempt to verify that certificate, and, \textit{rejectUnauthorized} which will reject any connection which is not authorized when verified against the certification path.
+The \textit{https.Agent} instance also requires that we enabled the \textit{rejectUnauthorized} option, in order to verify the server certificate against the certification path.
+
+Is also necessary to pass \textit{https.Server} and \textit{https.Agent} instances the node certificate, node private key and CA certificate bundle (which include the intermediary and root CAs certificates).
+As can we see in Listing~\ref{lst:config-ca}, the \textit{security} field of the DHT client configuration file should contain the fields \textit{nodeCert}, \textit{nodeKey} and \textit{cacert}, which contains the paths to load the node certificate, node private key and the certificate bundle.
+All this files should be in \ac{PEM}~\cite{rfc1421} format.
+The loaded certificate should also contain the X509v3 Extension \textit{X509v3 Extended Key Usage} with the values \textit{Server authentication} and \textit{Client authentication}.
+
+\lstinputlisting[label=lst:config-ca, caption=Example of security field in configuration file, captionpos=b]{Examples/config-example-ca.json}
+
+As it is, this solution already allows to assert that the only authorized nodes can connect to the DHT network.
+But we also want to verify that the nodes are not impersonating a different identity, that the one that are allowed to use.
+Therefore, is necessary to encode the node's identifier in the certificate and perform the validation during the TLS handshake.
+We decided to encode this information in the X509v3 Extension \textit{X509v3 Subject Alternative Name} as a DNS entry.
+For sake of completeness, we also encoded in this extension the node host name and IP address.
+
+In our custom transport in necessary to add this mechanism when performing a request to a node and when receiving a request from another node.
+
+In the client side, we add a listener to the request socket object for the \textit{secureConnection} event.
+This event is emitted after the TLS handshaking process for a new connection was successfully completed.
+Our listener function checks if the node identifier encoded as a DNS entry in the Subject Alternative Name extension in the certificate is equal to message sender identifier, and if the certificate was authorized when performing the certification path verification.
+
+% TODO: add pseudo code for mechanism
+
+In the server side, we simply access the certificate when handling a new request, through the received request object and do the same verification as in the client side.
+
+Is important to notice, that this verification takes place right after the TLS handshake process.
+In Chapter~\ref{chapter:architecture}, our initial approach was to perform this verification mechanism during the handshake process, but the Node.js implementation does not provide the mechanisms to modify the handshake process.
+Even thought, the benefits of performing this verification, even if after the handshake process, surpasses not doing it.
 
 \section{IDChain system}\label{implementation:idchain}
 
