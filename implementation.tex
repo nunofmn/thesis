@@ -184,6 +184,31 @@ Even thought, the benefits of performing this verification, even if after the ha
 
 \subsection{Smart contract}
 
+\begin{algorithm}
+  \caption{New Certificate function pseudo-code.}
+\label{alg:new-certificate}
+  \begin{algorithmic}[1]
+    \Function{newCertificate}{$fingerprint$, $ipAddress$, $peerID$}
+      \State $certificates[peerID].fingerprint \gets fingerprint$
+      \State $certificates[peerID].date \gets block.timestamp$
+      \State $certificates[peerID].id \gets counterId$
+      \State $certificates[peerID].ipAddress \gets ipAddress$
+      \State $certificates[peerID].peerID \gets peerID$
+      \State $certificates[peerID].revoked \gets false$
+      \State $certificates[peerID].signer \gets msg.sender$
+      \State 
+      \State $\textbf{ insert } certificates[peerID] \textbf{ into } entities[msg.sender].certificates$
+      \State 
+      \State $\textbf{ trigger event } CreateCertificate(msg.sender, counterId, block.timestamp,\allowbreak ipAddress, peerID, fingerprint, false)$
+      \State 
+      \State $counterId \gets counterId + 1$
+      \State 
+      \State 
+      \Return $certificates[peerID].id$
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+
 \subsection{API}
 
 \subsection{Application}
