@@ -185,6 +185,32 @@ Even thought, the benefits of performing this verification, even if after the ha
 \subsection{Smart contract}
 
 \begin{algorithm}
+  \caption{Create new entity function pseudo-code.}
+  \label{alg:create-entity}
+  \begin{algorithmic}[1]
+    \Function{initEntity}{$name$}
+      \If{$!entities(msg.sender).created$}
+        \State $entities[msg.sender].name \gets name$
+        \State $entities[msg.sender].created \gets true$
+        \State
+        \If{$!entities(msg.sender).created$}
+          \State $entities[msg.sender].bootstraper \gets  true$
+          \State $entities[msg.sender].valid \gets true$
+          \State $bootstrapersCount \gets bootstrapersCounts + 1$
+        \Else
+          \State $entities[msg.sender].bootstraper \gets  false$
+          \State $entities[msg.sender].valid \gets false$
+        \EndIf
+          \State
+          \State $\textbf{ trigger event } EntityInit(msg.sender, block.timestamp,\allowbreak name, entities[msg.sender].bootstraper, entities[msg.sender].valid)$
+      \Else
+        \State $\textbf{throw}$
+      \EndIf
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
   \caption{New Certificate function pseudo-code.}
 \label{alg:new-certificate}
   \begin{algorithmic}[1]
@@ -200,11 +226,27 @@ Even thought, the benefits of performing this verification, even if after the ha
       \State $\textbf{ insert } certificates[peerID] \textbf{ into } entities[msg.sender].certificates$
       \State 
       \State $\textbf{ trigger event } CreateCertificate(msg.sender, counterId, block.timestamp,\allowbreak ipAddress, peerID, fingerprint, false)$
-      \State 
+      \State
       \State $counterId \gets counterId + 1$
       \State 
       \State 
       \Return $certificates[peerID].id$
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+  \caption{Revoke certificate function pseudo-code.}
+  \label{alg:revoke-certificate}
+  \begin{algorithmic}[1]
+    \Function{revokeCertificate}{$peerID$}
+      \If{$certificates[peerID].signer == msg.sender \textbf{ and } !certificates[peerID].revoked$}
+        \State $certificates[peerID].revoked \gets true$
+        \State $\textbf{ insert } certificates[peerID].id \textbf{ into } revocations$
+        \State $\textbf{ trigger event } RevokeCertificate(msg.sender, block.timestamp, peerID)$
+      \Else
+        \State $throw$
+      \EndIf
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
