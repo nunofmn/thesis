@@ -251,6 +251,34 @@ Even thought, the benefits of performing this verification, even if after the ha
   \end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}
+  \caption{Sign entity function pseudo-code.}
+  \label{alg:revoke-certificate}
+  \begin{algorithmic}[1]
+    \Function{signEntity}{$entity$}
+      \State $\textbf{ insert } msg.sender \textbf{ into } entities[entity].signers$
+      \State $\textbf{ insert } entity \textbf{ into } entities[msg.sender].signed$
+      \State $\textbf{ trigger event } SignEntity(msg.sender, entity, block.timestamp)$
+      \State \Call{checkValidity}{$true$, $entity$}
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+  \caption{Unsign entity function pseudo-code.}
+  \label{alg:revoke-certificate}
+  \begin{algorithmic}[1]
+    \Function{unsignEntity}{$entity$}
+    \For{$i < entities[entity].signers.length$}
+        \If{entities[entity].signers[i] == msg.sender}
+        \State $\textbf{ delete position } \textit{ i }\textbf{ from } entities[entity].signers$
+          \State $break$
+        \EndIf
+      \EndFor
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+
 \subsection{API}
 
 \subsection{Application}
