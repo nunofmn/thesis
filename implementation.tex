@@ -253,7 +253,7 @@ Even thought, the benefits of performing this verification, even if after the ha
 
 \begin{algorithm}
   \caption{Sign entity function pseudo-code.}
-  \label{alg:revoke-certificate}
+  \label{alg:sign-entity}
   \begin{algorithmic}[1]
     \Function{signEntity}{$entity$}
       \State $\textbf{ insert } msg.sender \textbf{ into } entities[entity].signers$
@@ -266,18 +266,52 @@ Even thought, the benefits of performing this verification, even if after the ha
 
 \begin{algorithm}
   \caption{Unsign entity function pseudo-code.}
-  \label{alg:revoke-certificate}
+  \label{alg:unsign-entity}
   \begin{algorithmic}[1]
     \Function{unsignEntity}{$entity$}
-    \For{$i < entities[entity].signers.length$}
-        \If{entities[entity].signers[i] == msg.sender}
-        \State $\textbf{ delete position } \textit{ i }\textbf{ from } entities[entity].signers$
+      \For{$i < entities[entity].signers.length$}
+        \If{$entities[entity].signers[i] == msg.sender$}
+          \State $\textbf{ delete position } \textit{ i } \textbf{ from } entities[entity].signers$
           \State $break$
         \EndIf
       \EndFor
+      \State
+      \For{$j < entities[msg.sender].signed.length$}
+        \If{$entities[msg.sender].signed[j] == msg.sender$}
+          \State $\textbf{ delete position } \textit{ j }\textbf{ from } entities[msg.sender].signed$
+          \State $break$
+        \EndIf
+      \EndFor
+      \State
+      \State $\textbf{ trigger event } UnsignEntity(msg.sender, entity, block.timestamp)$
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
+
+\begin{algorithm}
+  \caption{Check entity validity function pseudo-code.}
+  \label{alg:check-entity-validity}
+  \begin{algorithmic}[1]
+    \Function{checkValidity}{$previousEntityState$, $entity$}
+    \If{$entities[entity].signers.length <= MINIMUM \textbf{ and } !previousEntityState \textbf{ and } !entities[entity].boostraper $}
+      \State $entities[entity].valid = false$
+      \For{$i < entities[entity].signed.length$}
+        \State \Call{checkValidity}{$false$, $entities[entity].signed[i]$}
+      \EndFor
+      \State $\textbf{ trigger event } EntityStatusChange(entity, block.timestamp, false)$
+    \EndIf
+    \State
+    \If{$entities[entity].signers.length >= MINIMUM-1 \textbf{ and } previousEntityState \textbf{ and } !entities[entity].valid$}
+      \State $entities[entity].valid = true$
+      \For{$j < entities[entity].signed.length$}
+        \State \Call{checkValidity}{$true$, $entity$}
+      \EndFor
+      \State $\textbf{ trigger event } EntityStatusChange(entity, block.timestamp, false)$
+    \EndIf
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+
 
 \subsection{API}
 
