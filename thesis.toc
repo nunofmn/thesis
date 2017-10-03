@@ -68,18 +68,19 @@
 \contentsline {subsection}{\numberline {4.1.4}Management Application}{40}{subsection.4.1.4}
 \contentsline {section}{\numberline {4.2}Vanilla system}{40}{section.4.2}
 \contentsline {section}{\numberline {4.3}CA-based system}{41}{section.4.3}
-\contentsline {section}{\numberline {4.4}IDChain system}{45}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Smart contract}{45}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}API}{45}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Application}{45}{subsection.4.4.3}
-\contentsline {chapter}{\numberline {5}Evaluation}{46}{chapter.5}
-\contentsline {section}{\numberline {5.1}Tests Objectives}{46}{section.5.1}
-\contentsline {section}{\numberline {5.2}Tests Scenarios}{46}{section.5.2}
-\contentsline {section}{\numberline {5.3}Test Results}{46}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusions}{47}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary}{47}{section.6.1}
-\contentsline {section}{\numberline {6.2}Achievements}{47}{section.6.2}
-\contentsline {section}{\numberline {6.3}Future Work}{47}{section.6.3}
+\contentsline {section}{\numberline {4.4}IDChain system}{43}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}DHT mechanism}{43}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Smart contract}{44}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}API}{44}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.4}Application}{44}{subsection.4.4.4}
+\contentsline {chapter}{\numberline {5}Evaluation}{47}{chapter.5}
+\contentsline {section}{\numberline {5.1}Tests Objectives}{47}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tests Scenarios}{47}{section.5.2}
+\contentsline {section}{\numberline {5.3}Test Results}{47}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusions}{48}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{48}{section.6.1}
+\contentsline {section}{\numberline {6.2}Achievements}{48}{section.6.2}
+\contentsline {section}{\numberline {6.3}Future Work}{48}{section.6.3}
 \contentsline {chapter}{\numberline {A}Vector calculus}{49}{appendix.A}
 \contentsline {section}{\numberline {A.1}Vector identities}{49}{section.A.1}
 \contentsline {chapter}{Bibliography}{53}{appendix*.55}

@@ -128,8 +128,7 @@ The other possible values are 'ca' and 'blockchain', for the CA-based mechanism 
 
 The \ac{API} our DHT client is the following:
 
-\begin{itemize}
-  \item \textit{start()} - start the DHT node, by connecting to a node in DHT network, which is specified in the seed field of the configuration file;
+\begin{itemize} \item \textit{start()} - start the DHT node, by connecting to a node in DHT network, which is specified in the seed field of the configuration file;
   \item \textit{stop()} - stop the DHT node;
   \item \textit{get(key)} - obtain the value associated with the specified key;
   \item \textit{put(key, value)} - store the specified value with the specified key;
@@ -182,7 +181,49 @@ Even thought, the benefits of performing this verification, even if after the ha
 
 \section{IDChain system}\label{implementation:idchain}
 
-\subsection{Smart contract}
+In this section we will divide the explanation of each component that compose this solution through different sub-sections.
+In Subsection~\ref{subsection:dht-mechanism} we explain how we modified the nodes communication process, in order to be possible to integrate our mechanism in the DHT.
+In Subsection~\ref{subsection:smart-contract} we present the algorithms we used to create our smart contract and build the web of trust and nodes certification system.
+In Subsections~\ref{subsection:api} and~\ref{subsection:mapp} we discuss how we implemented the RESTful API to access the IDChain system, and present the web app we implemented to easily manage the system, respectively.
+
+\subsection{DHT mechanism}\label{subsection:dht-mechanism}
+
+The implementation of the IDChain mechanism in the DHT, is very similar to the CA-based implementation.
+Is necessary to provide mutual authentication in each node communication.
+As in the previous solution we also implemented a custom transport adapter, based on the HTTPS module provided by Node.js base libraries.
+
+In this solution we are using self-signed certificates for each node, as isn't a CA backing up the assertions about each node certificate.
+Therefore to verify if the self-signed certificate is indeed valid, is necessary that a valid entity registers the certificate fingerprint in the blockchain, under a node identifier.
+
+Our custom transport adapter is this case will be significantly different of the one of the previous solution.
+We will also be using HTTPS/TLS mutual-authentication, but in this case the verifications will be different.
+
+First of all, when configuring the \textit{https.Server} and \textit{https.Agent} instances, we enabled the \textit{requestCert} option in \textit{https.Server} (so the client certificate is requested), and set to \textit{false} the \textit{rejectUnauthorized} option in both instances.
+The \textit{rejectUnauthorized} is set to \textit{false} because in this case we don't have a certification path (bundle of CAs) to verify the nodes certificates against.
+So this allows the self-signed certificates to be accepted in a first phase.
+We encountered one problem when trying to disable the \textit{rejectUnauthorized} option in \textit{https.Server} instance.
+Even thought we set its value to \textit{false}, the \textit{https.Server} instance was always rejecting the client certificate and closing the connection.
+Therefore, to overcome this problem, and verify the client certificate, was necessary to implement an additional mechanism, which will detail later.
+
+In the client side, we use a similar strategy as the CA-based mechanism: we add a listener to the request socket object for the \textit{secureConnection} event that will perform our verifications.
+In this case, is necessary to first request the node certificate fingerprint from the IDChain API \textit{/peer/id} endpoint, then verify if fingerprint of the received certificate is equal to certificate fingerprint registered in the blockchain, and check if the peer identifier of the message sender is equal to the node identifier encoded in the certificate.
+
+In the server side, as we said before was necessary to add other mechanism to verify the client.
+Any request done by the connection client must have the following additional information encoded in the header:
+
+\begin{itemize}
+  \item Client certificate - encoded in base64;
+  \item Timestamp/challenge - in Unix Timestamp format;
+  \item Timestamp/challenge signature - a client digital signature of the timestamp;
+\end{itemize}
+
+In the server side, when handling a new request, we fetch the client certificate from header, and verify the timestamp signature contained in the header was performed by the same client.
+Then we also do the same verification as in the client side, and fetch the certificate from the IDChain API, and verify the certificate fingerprint against the one stored in the blockchain, and check if the message sender node identifier is equal to the node identifier stored in the client certificate.
+
+The nodes certificate we use in this mechanism, even thought are self-signed, encode the same information we need as the previous CA-based mechanism.
+We encode the node identifier, IP address and host name in as entries in the X509v3 Subject Alternative Name extension.
+
+\subsection{Smart contract}\label{subsection:smart-contract}
 
 \begin{algorithm}
   \caption{Create new entity function pseudo-code.}
@@ -312,7 +353,8 @@ Even thought, the benefits of performing this verification, even if after the ha
   \end{algorithmic}
 \end{algorithm}
 
+\subsection{API}\label{subsection:api}
 
-\subsection{API}
 
-\subsection{Application}
+\subsection{Application}\label{subsection:mapp}
+

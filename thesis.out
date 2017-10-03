@@ -58,17 +58,18 @@
 \BOOKMARK [1][-]{section.4.2}{4.2 Vanilla system}{chapter.4}% 58
 \BOOKMARK [1][-]{section.4.3}{4.3 CA-based system}{chapter.4}% 59
 \BOOKMARK [1][-]{section.4.4}{4.4 IDChain system}{chapter.4}% 60
-\BOOKMARK [2][-]{subsection.4.4.1}{4.4.1 Smart contract}{section.4.4}% 61
-\BOOKMARK [2][-]{subsection.4.4.2}{4.4.2 API}{section.4.4}% 62
-\BOOKMARK [2][-]{subsection.4.4.3}{4.4.3 Application}{section.4.4}% 63
-\BOOKMARK [0][-]{chapter.5}{5 Evaluation}{}% 64
-\BOOKMARK [1][-]{section.5.1}{5.1 Tests Objectives}{chapter.5}% 65
-\BOOKMARK [1][-]{section.5.2}{5.2 Tests Scenarios}{chapter.5}% 66
-\BOOKMARK [1][-]{section.5.3}{5.3 Test Results}{chapter.5}% 67
-\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 68
-\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 69
-\BOOKMARK [1][-]{section.6.2}{6.2 Achievements}{chapter.6}% 70
-\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 71
-\BOOKMARK [0][-]{appendix.A}{A Vector calculus}{}% 72
-\BOOKMARK [1][-]{section.A.1}{A.1 Vector identities}{appendix.A}% 73
-\BOOKMARK [0][-]{appendix*.55}{Bibliography}{}% 74
+\BOOKMARK [2][-]{subsection.4.4.1}{4.4.1 DHT mechanism}{section.4.4}% 61
+\BOOKMARK [2][-]{subsection.4.4.2}{4.4.2 Smart contract}{section.4.4}% 62
+\BOOKMARK [2][-]{subsection.4.4.3}{4.4.3 API}{section.4.4}% 63
+\BOOKMARK [2][-]{subsection.4.4.4}{4.4.4 Application}{section.4.4}% 64
+\BOOKMARK [0][-]{chapter.5}{5 Evaluation}{}% 65
+\BOOKMARK [1][-]{section.5.1}{5.1 Tests Objectives}{chapter.5}% 66
+\BOOKMARK [1][-]{section.5.2}{5.2 Tests Scenarios}{chapter.5}% 67
+\BOOKMARK [1][-]{section.5.3}{5.3 Test Results}{chapter.5}% 68
+\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 69
+\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 70
+\BOOKMARK [1][-]{section.6.2}{6.2 Achievements}{chapter.6}% 71
+\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 72
+\BOOKMARK [0][-]{appendix.A}{A Vector calculus}{}% 73
+\BOOKMARK [1][-]{section.A.1}{A.1 Vector identities}{appendix.A}% 74
+\BOOKMARK [0][-]{appendix*.55}{Bibliography}{}% 75
