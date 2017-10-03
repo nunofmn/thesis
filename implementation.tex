@@ -197,6 +197,9 @@ Therefore to verify if the self-signed certificate is indeed valid, is necessary
 
 Our custom transport adapter is this case will be significantly different of the one of the previous solution.
 We will also be using HTTPS/TLS mutual-authentication, but in this case the verifications will be different.
+The configuration file, as can be seen in Listing~\ref{lst:config-bc}, comparing with the one in CA-based mechanism, has the \textit{mechanism} field set to \textit{blockchain}, and the field \textit{cacert} removed.
+
+\lstinputlisting[label=lst:config-bc, caption=Example of security field in configuration file in blockchain mechanism, captionpos=b]{Examples/config-example-bc.json}
 
 First of all, when configuring the \textit{https.Server} and \textit{https.Agent} instances, we enabled the \textit{requestCert} option in \textit{https.Server} (so the client certificate is requested), and set to \textit{false} the \textit{rejectUnauthorized} option in both instances.
 The \textit{rejectUnauthorized} is set to \textit{false} because in this case we don't have a certification path (bundle of CAs) to verify the nodes certificates against.
@@ -218,12 +221,35 @@ Any request done by the connection client must have the following additional inf
 \end{itemize}
 
 In the server side, when handling a new request, we fetch the client certificate from header, and verify the timestamp signature contained in the header was performed by the same client.
-Then we also do the same verification as in the client side, and fetch the certificate from the IDChain API, and verify the certificate fingerprint against the one stored in the blockchain, and check if the message sender node identifier is equal to the node identifier stored in the client certificate.
+Then we also do the same verification as in the client side, fetch the certificate from the IDChain API, verify the certificate fingerprint against the one stored in the blockchain, andfinally check if the message sender node identifier is equal to the node identifier stored in the client certificate.
 
 The nodes certificate we use in this mechanism, even thought are self-signed, encode the same information we need as the previous CA-based mechanism.
-We encode the node identifier, IP address and host name in as entries in the X509v3 Subject Alternative Name extension.
+We encode the node identifier, IP address and host name as entries in the X509v3 Subject Alternative Name extension.
 
 \subsection{Smart contract}\label{subsection:smart-contract}
+
+In this Subsection we detail the implementation of the functions that composer our smart contract.
+We opted to use the language Solidity to write our contract, and used the Truffle framework, to ease the development, testing and deployment of our smart contract.
+
+One mechanism built-in in Ethereum blockchain and that we take advantage of, are events.
+Events allow smart contracts to dispatch notifications to applications that are connected to the Ethereum client, and listening to these events.
+When an event is called in a smart contract, the arguments will be stored in the transaction's log, a data structure in the blockchain, that is associated with the address of a contract.
+These logs are incorporated in the Ethereum blockchain and will stay there as long as a block is accessible.
+
+We use events extensively through our smart contract code, mainly to allow us to trigger some functions in the IDChain API.
+In Subsection~\ref{subsection:api} we go in greater detail on how we use events.
+
+In Algorithm~\ref{alg:create-entity}, is detailed how we do the entity initialization in the smart contract.
+In our implementation there is a one-to-one relationship between and entity and an Ethereum account, i.e. each Ethereum account is associated with only one entity.
+Therefore, we first check if an entity associated with the Ethereum account executing the \textit{initEntity} is already created.
+If not, we proceed creating the entity.
+One peculiar aspect of our smart contract, is how we bootstrap the web of trust basis.
+Since we are building an universal web of trust mechanism, in which the trust foundation rests on a predefined number of trusted entities, is necessary to distinguish this "bootstraper entities" from a normal entity.
+The main difference in a bootstraper entity, is that it is always valid by default, i.e it doesn't need to be achieve a minimum number of vouches by other entities.
+
+In our smart contract \textit{initEntity} function, we verify if entity that is being created is one of the first \textit{n} entities being created, where \textit{n} is equal to the \textit{MAXIMUM\_BOOTSTRAPERS} constant value.
+If it is one of the bootstraper entities, then the field \textit{bootstraper} in its entity structure will be set to \textit{true}, else it will be set to \textit{false}.
+This field will be useful when validating entities state, in the \textit{checkValidity} function presented in Algorithm\ref{alg:check-entity-validity}.
 
 \begin{algorithm}
   \caption{Create new entity function pseudo-code.}
@@ -234,7 +260,7 @@ We encode the node identifier, IP address and host name in as entries in the X50
         \State $entities[msg.sender].name \gets name$
         \State $entities[msg.sender].created \gets true$
         \State
-        \If{$!entities(msg.sender).created$}
+        \If{$bootstrapersCount < MAXIMUM_BOOTSTRAPERS$}
           \State $entities[msg.sender].bootstraper \gets  true$
           \State $entities[msg.sender].valid \gets true$
           \State $bootstrapersCount \gets bootstrapersCounts + 1$
@@ -250,6 +276,12 @@ We encode the node identifier, IP address and host name in as entries in the X50
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
+
+
+
+After an entity is created, is now possible to create certificates that will be associated with this entity.
+In Algorithm\ref{alg:new-certificate} we detail the function that is called when an entity wants to associate a new certificate.
+This function instantiates a new Certificate structure and stored the passed arguments in the respective Certificate fields.
 
 \begin{algorithm}
   \caption{New Certificate function pseudo-code.}
@@ -276,6 +308,13 @@ We encode the node identifier, IP address and host name in as entries in the X50
   \end{algorithmic}
 \end{algorithm}
 
+
+
+Is also necessary to allow entities to revoke certificates that have issued.
+The certificate revocation functionality is presented in Algorithm~\ref{alg:revoke-certificate}.
+There is one important detail in this algorithm: only the entity which issued the certificate can revoke it.
+We enforce this rule, by verifying if the entity calling the function is the signer of the certificate which wants to revoke.
+
 \begin{algorithm}
   \caption{Revoke certificate function pseudo-code.}
   \label{alg:revoke-certificate}
@@ -291,6 +330,13 @@ We encode the node identifier, IP address and host name in as entries in the X50
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
+
+
+
+The main aspect of the IDChain smart contract is the possibility to build the trust between the different entities.
+The functions presented in Algorithms~\ref{alg:sign-entity} and~\ref{alg:unsign-entity} allow us to build the necessary web of trust, by vouching and unvouching for entities.
+In order to do this, we store in each Entity structure two arrays: one that have the addresses of the entities that we vouched for (\textit{signed} field), and one containing the address of the entities that vouched for us (\textit{signers} field).
+Then the \textit{signEntity} and \textit{unsignEntity}, only have to add or remove the respective entities address from the the \textit{signed} and \textit{signers} arrays.
 
 \begin{algorithm}
   \caption{Sign entity function pseudo-code.}
@@ -325,9 +371,21 @@ We encode the node identifier, IP address and host name in as entries in the X50
       \EndFor
       \State
       \State $\textbf{ trigger event } UnsignEntity(msg.sender, entity, block.timestamp)$
+      \State
+      \State \Call{checkValidity}{$false$, $entity$}
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
+
+These functions also need to call the \textit{checkValidity} function, shown in Algorithm~\ref{alg:check-entity-validity} in the end of their execution.
+
+
+The \textit{checkValidity} function is what checks if an entity is considered valid after being vouched or unvouched for.
+If there is a change of validity state in the entity, is necessary to check the whole downstream trust connections of the entity.
+
+First, we considered an entity valid if it has at least \textit{m} signers, being \textit{m} the MINIMUM constant in the presented algorithm.
+If an entity has a status change in validity, is therefore necessary to recursively call the \textit{checkValidity} function, for each entity it has signed.
+We pass the argument \textit{previousEntityState}, that represent the current state of the previous entity in the chain, which is necessary to know if the entity we are currently analyzing will have a state change.
 
 \begin{algorithm}
   \caption{Check entity validity function pseudo-code.}
@@ -353,8 +411,9 @@ We encode the node identifier, IP address and host name in as entries in the X50
   \end{algorithmic}
 \end{algorithm}
 
-\subsection{API}\label{subsection:api}
+% TODO: talk about the disadvantages and problems of this smart contract
 
+\subsection{API}\label{subsection:api}
 
 \subsection{Application}\label{subsection:mapp}
 

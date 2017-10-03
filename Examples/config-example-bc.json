@@ -1,0 +1,5 @@
+security: {
+  mechanism: 'blockchain',
+  nodeCert: 'certs/aac2e18af9831fe87da4fc2acb1648c44789ff32.cert.pem',
+  nodeKey: 'certs/aac2e18af9831fe87da4fc2acb1648c44789ff32.key.pem'
+}
