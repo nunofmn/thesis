@@ -74,8 +74,11 @@
 \contentsline {subsection}{\numberline {4.4.3}API}{48}{subsection.4.4.3}
 \contentsline {subsection}{\numberline {4.4.4}Application}{48}{subsection.4.4.4}
 \contentsline {chapter}{\numberline {5}Evaluation}{49}{chapter.5}
-\contentsline {section}{\numberline {5.1}Tests Objectives}{49}{section.5.1}
-\contentsline {section}{\numberline {5.2}Tests Scenarios}{49}{section.5.2}
+\contentsline {section}{\numberline {5.1}Tests Objectives and scenarios}{49}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tests methodology}{49}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Nodes deployment}{49}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Testing tooling and scripts}{49}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Evaluation challenges}{49}{subsection.5.2.3}
 \contentsline {section}{\numberline {5.3}Test Results}{49}{section.5.3}
 \contentsline {chapter}{\numberline {6}Conclusions}{50}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary}{50}{section.6.1}
@@ -83,4 +86,4 @@
 \contentsline {section}{\numberline {6.3}Future Work}{50}{section.6.3}
 \contentsline {chapter}{\numberline {A}Vector calculus}{51}{appendix.A}
 \contentsline {section}{\numberline {A.1}Vector identities}{51}{section.A.1}
-\contentsline {chapter}{Bibliography}{55}{appendix*.55}
+\contentsline {chapter}{Bibliography}{55}{appendix*.54}

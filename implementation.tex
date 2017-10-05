@@ -106,12 +106,12 @@ The \ac{SPA} architecture also enables to take advantage of already existing IDC
 
 \section{Vanilla system}
 
-The vanilla \ac{DHT} we present in this section, is the barebone \ac{client} for the other implementations in the next sections.
+The vanilla \ac{DHT} we present in this section, is the barebone client for the other implementations in the next sections.
 
 As mentioned before, the \ac{DHT} which we implemented is based on the Kad DHT library.
 Kad provides a very thin basis for building DHT-based applications with sane defaults, providing also at the same time an extreme level of extensability and customization.
 
-The nodes communication is done through JSON-RPC using the \ac{HTTP} protocol.
+The DHT will be built using Kad, which have an 160-bit address space, and the nodes communication is done through JSON-RPC using the \ac{HTTP} protocol.
 
 In order to launch every DHT client is necessary to provide a configuration file.
 
@@ -128,11 +128,26 @@ The other possible values are 'ca' and 'blockchain', for the CA-based mechanism 
 
 The \ac{API} our DHT client is the following:
 
-\begin{itemize} \item \textit{start()} - start the DHT node, by connecting to a node in DHT network, which is specified in the seed field of the configuration file;
+\begin{itemize}
+  \item \textit{start()} - start the DHT node, by connecting to a node in DHT network, which is specified in the seed field of the configuration file;
   \item \textit{stop()} - stop the DHT node;
   \item \textit{get(key)} - obtain the value associated with the specified key;
   \item \textit{put(key, value)} - store the specified value with the specified key;
 \end{itemize}
+
+% TODO: read this again
+Is also important to refer the operations that are done underneath in the Kad module, when of these API functions are called.
+When executing the \textit{start} function the given contact is inserted into the routing table, and performs a node lookup for it's node address.
+This lookup will return a set of \textit{K} nodes closest to the given key, where \textit{K} is the number of contacts held in a bucket.
+Then refreshes all buckets further than it's closest neighbor, i.e, will perform node lookup for a random number in any bucket's range, which will be in the occupied bucket with the lowest index.
+
+The \textit{get} function will perform a node lookup for the key that we want to fetch, and therefore build a list of \textit{K} closest nodes.
+When during the search a value is returned by one of the nodes, the search is abandoned and the value returned.
+If no value is found,  the \textit{K} closest contacts are returned.
+The Kad module also requires that when the search is well succeeded, that the value found must be stored at the closest node that during the search didn't return the value.
+
+Finally, the \textit{put} function will perform a node lookup for the given key, therefore collecting the \textit{K} closest nodes to the given key.
+Then it will send a store message to each of them.
 
 Since we are building this DHT system using Node.js, in order to facilitate the access to our DHT client and easily build applications on top of it, is possible to obtain and require our DHT client as a \ac{NPM} module.
 
@@ -159,8 +174,8 @@ The loaded certificate should also contain the X509v3 Extension \textit{X509v3 E
 
 \lstinputlisting[label=lst:config-ca, caption=Example of security field in configuration file, captionpos=b]{Examples/config-example-ca.json}
 
-As it is, this solution already allows to assert that the only authorized nodes can connect to the DHT network.
-But we also want to verify that the nodes are not impersonating a different identity, that the one that are allowed to use.
+As it is, this solution already allows to assert that only authorized nodes can connect to the DHT network.
+But we also want to verify that the nodes are not impersonating a different identity that the one that are allowed to use.
 Therefore, is necessary to encode the node's identifier in the certificate and perform the validation during the TLS handshake.
 We decided to encode this information in the X509v3 Extension \textit{X509v3 Subject Alternative Name} as a DNS entry.
 For sake of completeness, we also encoded in this extension the node host name and IP address.
@@ -237,7 +252,34 @@ When an event is called in a smart contract, the arguments will be stored in the
 These logs are incorporated in the Ethereum blockchain and will stay there as long as a block is accessible.
 
 We use events extensively through our smart contract code, mainly to allow us to trigger some functions in the IDChain API.
+In Algorithm~\ref{alg:contract-events} are declared the events that are triggered in Algorithms~\ref{alg:create-entity}-~\ref{alg:check-entity-validity}.
 In Subsection~\ref{subsection:api} we go in greater detail on how we use events.
+
+\begin{algorithm}
+  \caption{Contract events declaration.}
+  \label{alg:contract-events}
+  \begin{algorithmic}
+    \State $\textbf{ event } SignEntity(signer, target, timestamp)$
+    \State $\textbf{ event } UnsignEntity(signer, target, timestamp)$
+    \State $\textbf{ event } EntityStatusChange(entity, timestamp, valid)$
+    \State $\textbf{ event } CreateCertificate(entity, id, timestamp, ip, peer, fingerprint, revoked?)$
+    \State $\textbf{ event } RevokeCertificate(entity, timestamp, peer)$
+    \State $\textbf{ event } EntityInit(entity, timestamp, name, bootstraper, valid)$
+  \end{algorithmic}
+\end{algorithm}
+
+We present in Algorithm~\ref{alg:contract-state} the initial global state of our smart contract.
+
+\begin{algorithm}
+  \caption{Contract global state initialization.}
+  \label{alg:contract-state}
+  \begin{algorithmic}
+    \State $counterId \gets name$ \Comment{certificate identifier counter}
+    \State $revocations \gets empty list$ \Comment{identifier of revoked certificates}
+    \State $certificates \gets empty map$ \Comment{map associating a peer identifier to a certificate}
+    \State $entities \gets empty map$ \Comment{map associating a Ethereum account address to a entity}
+  \end{algorithmic}
+\end{algorithm}
 
 In Algorithm~\ref{alg:create-entity}, is detailed how we do the entity initialization in the smart contract.
 In our implementation there is a one-to-one relationship between and entity and an Ethereum account, i.e. each Ethereum account is associated with only one entity.
@@ -269,14 +311,14 @@ This field will be useful when validating entities state, in the \textit{checkVa
           \State $entities[msg.sender].valid \gets false$
         \EndIf
           \State
-          \State $\textbf{ trigger event } EntityInit(msg.sender, block.timestamp,\allowbreak name, entities[msg.sender].bootstraper, entities[msg.sender].valid)$
+          \State $\textbf{ trigger event } EntityInit(msg.sender, block.timestamp, name,$
+          \State $entities[msg.sender].bootstraper, entities[msg.sender].valid)$
       \Else
         \State $\textbf{throw}$
       \EndIf
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
-
 
 
 After an entity is created, is now possible to create certificates that will be associated with this entity.
@@ -307,7 +349,6 @@ This function instantiates a new Certificate structure and stored the passed arg
     \EndFunction
   \end{algorithmic}
 \end{algorithm}
-
 
 
 Is also necessary to allow entities to revoke certificates that have issued.
@@ -379,7 +420,6 @@ Then the \textit{signEntity} and \textit{unsignEntity}, only have to add or remo
 
 These functions also need to call the \textit{checkValidity} function, shown in Algorithm~\ref{alg:check-entity-validity} in the end of their execution.
 
-
 The \textit{checkValidity} function is what checks if an entity is considered valid after being vouched or unvouched for.
 If there is a change of validity state in the entity, is necessary to check the whole downstream trust connections of the entity.
 
@@ -392,7 +432,7 @@ We pass the argument \textit{previousEntityState}, that represent the current st
   \label{alg:check-entity-validity}
   \begin{algorithmic}[1]
     \Function{checkValidity}{$previousEntityState$, $entity$}
-    \If{$entities[entity].signers.length <= MINIMUM \textbf{ and } !previousEntityState \textbf{ and } !entities[entity].boostraper $}
+    \If{$entities[entity].signers.length <= MINIMUM \allowbreak \textbf{ and } !previousEntityState \textbf{ and } !entities[entity].boostraper $}
       \State $entities[entity].valid = false$
       \For{$i < entities[entity].signed.length$}
         \State \Call{checkValidity}{$false$, $entities[entity].signed[i]$}
@@ -415,5 +455,12 @@ We pass the argument \textit{previousEntityState}, that represent the current st
 
 \subsection{API}\label{subsection:api}
 
+% TODO: Talk about how we use the Ethereum events architecture
+% TODO: Explain what is triggered in each event
+% TODO: Database UML
+
 \subsection{Application}\label{subsection:mapp}
+
+% TODO: main screen
+% TODO: explain each function that is possible in the system
 
