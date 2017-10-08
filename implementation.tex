@@ -455,15 +455,40 @@ We pass the argument \textit{previousEntityState}, that represent the current st
 
 \subsection{API}\label{subsection:api}
 
-% TODO: Talk about how we use the Ethereum events architecture
-% TODO: Explain what is triggered in each event
+The API we built is structurally simple: listens to the IDChain smart contract events, and process those events by writing the information accordingly to the database.
+Then exposes the stored information using a RESTful HTTP API, which contains several endpoints.
+
+We defined a database schema which contain different tables to each main structure of the smart contract.
+In Figure~\ref{fig:database-schema} we present the entity-relation model of the database, and describe each database table.
+It's important to notice that we defined a \textit{Transaction} table that hasn't any relation with the other tables.
+We did this as a first iteration of the system, where we only want to view all the transactions related with a specific entity.
+We also defined a table \textit{Signatures} where the vouch relations between the entities are stored.
 
 \begin{figure}
   \centering
   \includegraphics[scale=0.4]{Figures/api-database-schema.pdf}
-  \caption{Database schema.}
+  \caption{Database entity-relation model.}
 \label{fig:database-schema}
 \end{figure}
+
+Each event listener will perform a different set of operations in the database, according to the type of event.
+In Table~\ref{table:api-events-database}, we describe the database operations that are done for each type of event.
+
+\begin{table}[]
+  \centering
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|}
+      \hline
+      Event & Data & Database operations \\ \hline
+      CreateCertificate & aaaa & aaaaa \\ \hline
+      Init Entity & aaaaa & aaaa \\ \hline
+      &  &  \\ \hline
+    \end{tabular}%
+  }
+  \caption{My caption}
+\label{table:api-events-database}
+\end{table}
+
 
 \subsection{Application}\label{subsection:mapp}
 
