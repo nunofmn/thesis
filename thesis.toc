@@ -72,18 +72,18 @@
 \contentsline {subsection}{\numberline {4.4.1}DHT mechanism}{43}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Smart contract}{44}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}API}{48}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}Application}{48}{subsection.4.4.4}
-\contentsline {chapter}{\numberline {5}Evaluation}{50}{chapter.5}
-\contentsline {section}{\numberline {5.1}Tests Objectives and scenarios}{50}{section.5.1}
-\contentsline {section}{\numberline {5.2}Tests methodology}{50}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Nodes deployment}{50}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Testing tooling and scripts}{50}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}Evaluation challenges}{50}{subsection.5.2.3}
-\contentsline {section}{\numberline {5.3}Test Results}{50}{section.5.3}
-\contentsline {chapter}{\numberline {6}Conclusions}{51}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary}{51}{section.6.1}
-\contentsline {section}{\numberline {6.2}Achievements}{51}{section.6.2}
-\contentsline {section}{\numberline {6.3}Future Work}{51}{section.6.3}
+\contentsline {subsection}{\numberline {4.4.4}Application}{50}{subsection.4.4.4}
+\contentsline {chapter}{\numberline {5}Evaluation}{51}{chapter.5}
+\contentsline {section}{\numberline {5.1}Tests Objectives and scenarios}{51}{section.5.1}
+\contentsline {section}{\numberline {5.2}Tests methodology}{51}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Nodes deployment}{51}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Testing tooling and scripts}{51}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Evaluation challenges}{51}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}Test Results}{51}{section.5.3}
+\contentsline {chapter}{\numberline {6}Conclusions}{52}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{52}{section.6.1}
+\contentsline {section}{\numberline {6.2}Achievements}{52}{section.6.2}
+\contentsline {section}{\numberline {6.3}Future Work}{52}{section.6.3}
 \contentsline {chapter}{\numberline {A}Vector calculus}{53}{appendix.A}
 \contentsline {section}{\numberline {A.1}Vector identities}{53}{section.A.1}
 \contentsline {chapter}{Bibliography}{57}{appendix*.54}

@@ -477,18 +477,25 @@ In Table~\ref{table:api-events-database}, we describe the database operations th
 \begin{table}[]
   \centering
   \resizebox{\textwidth}{!}{%
-    \begin{tabular}{|l|l|l|}
+    \begin{tabular}{|l|l|}
       \hline
-      Event & Data & Database operations \\ \hline
-      CreateCertificate & aaaa & aaaaa \\ \hline
-      Init Entity & aaaaa & aaaa \\ \hline
-      &  &  \\ \hline
+      \textbf{Event} & \textbf{Database operations} \\ \hline
+      EntityInit & Create new entry in \textit{Entities} table \\ \hline
+      CreateCertificate & Create new entry in \textit{Certificates} table. \\ \hline
+      SignEntity & Create new entry in \textit{Signatures} table with the specified \textit{target} and \textit{source} fields. \\ \hline
+      UnsignEntity & Removed entry in \textit{Signatures} table with the specified \textit{source} and \textit{target} fields. \\ \hline
+      EntityStatusChange & Update \textit{valid} field in specified \textit{entity} row in \textit{Entities} table. \\ \hline
+      RevokeCertificate & Set \textit{revoked} field value to \textit{false} in the specified row in \textit{Certificates} table. \\ \hline
     \end{tabular}%
   }
-  \caption{My caption}
+  \caption{Database operations associated with each event listener.}
 \label{table:api-events-database}
 \end{table}
 
+Each of these event listeners will also create a new entry in the \textit{Transactions} table, which will store the event information and the transaction hash associated with the triggered event.
+
+One particular aspect that is necessary to take into consideration, is the fact that if we remove the event listeners (due to API downtime, for example) and the blockchain client keeps running and processing incoming blocks, there will be discrepancies or information missing in the API database.
+Even thought we didn't implemented it, one possible solution is to loop through all the events created by a smart contract, since events logs are permanently stored in the blockchain, and therefore create in the database the missing transactions.
 
 \subsection{Application}\label{subsection:mapp}
 
