@@ -1,9 +1,34 @@
 \chapter{Evaluation}
 \label{chapter:evaluation}
 
+In order to evaluate the implemented solution, several tests were done to assess protocol correctness and measure system performance.
+In Section~\ref{section:scenarios} we detail our evaluation process and the overall objectives we pretend to achieve in the evaluated scenarios.
+Then, in Section~\ref{section:methodology} we describe the methods, tools and challenges we had to perform the evaluation.
+Lastly, in Section~\ref{section:results} we present and discuss the solutions evaluation results.
+
 \section{Tests Objectives and scenarios}
+\label{section:scenarios}
+
+Our evaluation has an extended focus in the correctness of the implemented protocol.
+But we also perform benchmarking of the all implemented solutions, in order to compare them.
+
+Given the requirements presented in Section~\ref{architecture:requirements}, the following metrics were defined:
+
+\begin{itemize}
+  \item \textit{Response time for writes} – we will evaluate the system response time, as the number of write requests in the DHT increases;
+  \item \textit{Response time for reads} – we will also evaluate the system response time, as the number of read requests in the DHT increases;
+    % only error rate? add number of nodes storing the value as a metric also?
+  \item \textit{Error rate} – this metric has distinct interpretations for read and write requests. In the case of the write requests, we analyze the number of nodes that stored the value, and define different error categories. In read requests, we consider that the request failed when is impossible to obtain a value.
+\end{itemize}
+
+We also defined a metric for the smart contract evaluation:
+
+\begin{itemize}
+  \item \textit{Monetary cost} – we will also measure the cost of executing each smart contract function, with a variable number of entities.
+\end{itemize}
 
 \section{Tests methodology}
+\label{section:methodology}
 
 \subsection{Nodes deployment}
 
@@ -12,3 +37,4 @@
 \subsection{Evaluation challenges}
 
 \section{Test Results}
+\label{section:results}

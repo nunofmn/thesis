@@ -48,7 +48,7 @@ But nevertheless, the main focus of this thesis is building and IDChain mechanis
 In Section~\ref{architecture:vanilla-overview} and Section~\ref{architecture:ca-overview} an overview of the vanilla and \ac{CA} mechanism is given, respectively.
 In Section~\ref{architecture:idchain-overview} a detailed overview of the IDChain architecture is given, including a in-depth description of each sub-component that compose the architecture.
 
-\subsection{Vanilla DHT}\label{architecture:vanilla-overview}
+\section{Vanilla DHT}\label{architecture:vanilla-overview}
 
 The vanilla implementation DHT represents the simpler architectural model of the presented solutions.
 The architecture of this solution is presented in Figure~\ref{fig:architecture-vanilla-overview}.
@@ -69,7 +69,7 @@ The \ac{DHT} nodes will communicate through a insecure channel using TCP or UDP,
 The node bootstrap process is done by knowing at least one of the nodes already in the DHT, and by connecting to it.
 This architecture lays down the basis for the other solutions architectures, which will have the same DHT client with the put/get API but will use secure communication protocol between the DHT nodes.
 
-\subsection{DHT with \ac{CA} mechanism}\label{architecture:ca-overview}
+\section{DHT with \ac{CA} mechanism}\label{architecture:ca-overview}
 
 The previous solution does not provide any kind of secure communication between nodes, opening way to a multitude of different kind of attacks, like \ac{MITM} attacks.
 Also doesn't provide any mechanism to close the participation in the \ac{DHT} (assuming the DHT nodes are Internet facing servers).
