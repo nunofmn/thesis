@@ -62,7 +62,7 @@
 \BOOKMARK [0][-]{chapter.5}{5 Evaluation}{}% 62
 \BOOKMARK [1][-]{section.5.1}{5.1 Tests Objectives and scenarios}{chapter.5}% 63
 \BOOKMARK [1][-]{section.5.2}{5.2 Tests methodology}{chapter.5}% 64
-\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 Nodes deployment}{section.5.2}% 65
+\BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 DHT Nodes deployment}{section.5.2}% 65
 \BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Testing tooling and scripts}{section.5.2}% 66
 \BOOKMARK [2][-]{subsection.5.2.3}{5.2.3 Evaluation challenges}{section.5.2}% 67
 \BOOKMARK [1][-]{section.5.3}{5.3 Test Results}{chapter.5}% 68
@@ -72,4 +72,4 @@
 \BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 72
 \BOOKMARK [0][-]{appendix.A}{A Vector calculus}{}% 73
 \BOOKMARK [1][-]{section.A.1}{A.1 Vector identities}{appendix.A}% 74
-\BOOKMARK [0][-]{appendix*.54}{Bibliography}{}% 75
+\BOOKMARK [0][-]{appendix*.55}{Bibliography}{}% 75

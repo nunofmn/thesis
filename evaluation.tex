@@ -21,16 +21,55 @@ Given the requirements presented in Section~\ref{architecture:requirements}, the
   \item \textit{Error rate} – this metric has distinct interpretations for read and write requests. In the case of the write requests, we analyze the number of nodes that stored the value, and define different error categories. In read requests, we consider that the request failed when is impossible to obtain a value.
 \end{itemize}
 
+Using these metrics, we performed load tests and functional security tests to the \ac{DHT}.
+We performed two different types of load test: \textit{(a)} one client only issuing write requests, (b) one client only issuing read requests.
+As summarized in Table~\ref{table:test-scenarios}, we run the tests for the different scenarios using a DHT network with 10 nodes deployed.
+We conducted tests for mechanism-write/read combination, where we varied the rate from 0.1 requests/s up to 100 requests/s in write tests, and from 1 request/s to 100 requests/s in read tests.
+Only one node was setup to perform the requests, and each test was repeated 5 times.
+The tests were executed over the length of several days, in order to minimize any potential effect related to varying network traffic.
+
+\begin{table}[h!]
+\centering
+\resizebox{\textwidth}{!}{%
+  \begin{tabular}{lllll}
+    \multicolumn{1}{c}{\textbf{Test \#}} & \textbf{Mechanism} & \multicolumn{1}{c}{\textbf{Test Type}} & \multicolumn{1}{c}{\textbf{\# Number of nodes}} & \multicolumn{1}{c}{\textbf{\# Requests/second}} \\ \hline
+    \multicolumn{1}{c}{1} & None (HTTP) & \multicolumn{1}{c}{Write} & \multicolumn{1}{c}{10} & \multicolumn{1}{c}{[ 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40, 100 ]} \\ \hline
+    \multicolumn{1}{c}{2} & CA-based (HTTPS) & \multicolumn{1}{c}{Write} & \multicolumn{1}{c}{10} & \multicolumn{1}{c}{[ 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40, 100 ]} \\ \hline
+    \multicolumn{1}{c}{3} & IDChain (HTTPS) & \multicolumn{1}{c}{Write} & \multicolumn{1}{c}{10} & \multicolumn{1}{c}{[ 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 40, 100 ]} \\ \hline
+    \multicolumn{1}{c}{4} & None (HTTP) & \multicolumn{1}{c}{Read} & \multicolumn{1}{c}{10} & \multicolumn{1}{c}{[ 1, 2, 5, 10, 20, 40, 100 ]} \\ \hline
+    \multicolumn{1}{c}{5} & CA-based (HTTPS) & \multicolumn{1}{c}{Read} & \multicolumn{1}{c}{10} & \multicolumn{1}{c}{[ 1, 2, 5, 10, 20, 40, 100 ]} \\ \hline
+    \multicolumn{1}{c}{6} & IDChain (HTTPS) & \multicolumn{1}{c}{Read} & \multicolumn{1}{c}{10} & \multicolumn{1}{c}{[ 1, 2, 5, 10, 20, 40, 100 ]} \\ \hline
+  \end{tabular}%
+}
+\caption{Test scenarios.}
+\label{table:test-scenarios}
+\end{table}
+
 We also defined a metric for the smart contract evaluation:
 
 \begin{itemize}
   \item \textit{Monetary cost} – we will also measure the cost of executing each smart contract function, with a variable number of entities.
 \end{itemize}
 
+This test was executed in a local machine, by calculating the \textit{gas} cost of executing every smart contract function in the \ac{EVM}.
+
 \section{Tests methodology}
 \label{section:methodology}
 
-\subsection{Nodes deployment}
+% TODO: section summary
+
+\subsection{DHT Nodes deployment}
+
+The DHT nodes were deployed on Digital Ocean\footnote{https://www.digitalocean.com/}, distributed across all several different datacenters offered.
+
+We deployed 9 nodes, one node for each of the following datacenters: New York City 1 (NYC1), New York City 3 (NYC3), San Francisco 1 (SFO1), Toronto 1 (TOR1), London 1 (LON1), Frankfurt 1 (FRA1), Bengalore 1 (BLR1), Amsterdam 2 (AM2) and Amesterdam 2 (AM3).
+The ninth node which correspond to the benchmark client was located in Lisbon.
+
+All the nodes used a \acp{VM} with the same specs: 1vCPU , 512 MB RAMm 20 GB SSD disk space and running Ubuntu 16.04.3 x64.
+The nodes used Node.js v8.2.1, PostgreSQL 9.5.8 and Ethereum testrpc client v4.1.3.
+
+The benchmarking client was run on a server with Dual Intel Xeon E5-2640@2.00GHz CPU with a total of 32 cores, 128GB of RAM and running Debian 8.2.
+The versions of the software used were equal to the Digital Ocean nodes.
 
 \subsection{Testing tooling and scripts}
 
