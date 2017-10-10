@@ -125,6 +125,7 @@ The object we stored under each key in the DHT, was always the same: a 827 bytes
 This JSON file contains a structure similar to values that the Global Registry stores.
 
 The certificates that were used in the test nodes were created using OpenSSL\footnote{https://www.openssl.org/} and cfssl\footnote{https://github.com/cloudflare/cfssl} command-line tools, and respect the certificate requirements that we referred in Sections~\ref{implementation:idchain} and~\ref{implementation:ca-based}.
+In the case of the CA-based mechanism tests, we used a two-tier architecture, with a root CA and a intermediate CA.
 
 \subsection{Evaluation challenges}
 
@@ -143,10 +144,39 @@ This causes an enormous limitation when executing the tests, because the main bo
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.6]{Figures/evaluation/request-rate-writes-linear.pdf}
+  \includegraphics[scale=0.4]{Figures/evaluation/request-rate-writes-linear.pdf}
   \caption{Demanded request rate.}
 \label{fig:demanded-request-rate}
 \end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{Figures/evaluation/average-response-time.pdf}
+  \caption{Average response time.}
+  \label{fig:average-response-time}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}[t]{.48\textwidth}
+\centering
+\includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-http.pdf}
+\caption{Number of nodes storing each value, in vanilla DHT.}
+\end{minipage}\hfill
+\begin{minipage}[t]{.48\textwidth}
+\centering
+\includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-https.pdf}
+\caption{Number of nodes storing each value, in CA-based solution.}
+\end{minipage}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{Figures/evaluation/stored-ratio-https-bc.pdf}
+  \caption{Number of nodes storing each value, in IDChain solution.}
+  \label{fig:stored-ratio-https-bc}
+\end{figure}
+
 
 %\begin{table}[]
 %\centering
