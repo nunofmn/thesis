@@ -137,10 +137,28 @@ This causes an enormous limitation when executing the tests, because the main bo
 
 \section{Test Results}
 \label{section:results}
+In the following sections we discuss the evaluation results.
+The Section~\ref{section:load-tests} focus in read and write load tests, and Section~\ref{section:smart-contract-tests} focus in smart contract execution metrics.
 
 \subsection{Load tests}
+\label{section:load-tests}
 
 \subsubsection{Write requests}
+
+The Figures~\ref{fig:demanded-request-rate}–~\ref{fig:stored-ratio-https-bc} represent the write load test evalution results.
+
+The graph from Figure~\ref{fig:demanded-request-rate} represent the effective request rate in function of the demanded request rate, for each of the implemented solutions.
+Each point in the graph, illustrate the average request rate of the 5 different test executions performed, for the specific demanded request rate.
+In the Figure legend the \textit{http} value represent the vanilla DHT implementation, the \textit{https} value represent the CA-based DHT implementation and \textit{https-bc} represent the IDChain DHT implementation.
+For instance, the point (0.1, 0.1), in any of the solutions, represent the average request obtained (0.1 req/s) for 5 repetitions performed for this test, demanding a request rate of 0.1 req/s.
+In Figure~\ref{fig:demanded-request-rate} is possible to verify that in the [0.1, 10] request/s demanded request rate, all the three solutions have an approximated equal effective request rate, which means that the client is able to keep up with the demanded request rate.
+In the ]10, 100] request/s demand request rate range, thevanilla DHT implementation outperforms the CA-based and IDChain solutions, by being able to keep up more closely with the demanded request rate.
+The vanilla DHT implementation is able to perform~$\approx$ 90 requests/second, where the CA-based and IDChain solutions become saturated at~$\approx$ 17 requests/second.
+This shows us that the HTTP-based solution is capable of outperforming clearly the HTTPS-based solutions, at the cost of didn't provide any security aspects in the nodes communication.
+The message overhead of the HTTPS handshake protocol, limits the request rate capacity of the CA-based and IDChain solutions.
+Is important to notice, that could be possible to increase the request rate capacity of the HTTPS-based solutions, if TLS Session Resumption and Keep-Alive connections are activated in HTTPS.
+We are also able to conclude that the IDChain solution is a viable solution performance-wise to the CA-based solution.
+It seems that increased message header overhead and the requests performed to the IDChain API, doesn't incur in a substantial cost to the effective request rate the client is able to perform, in comparison with the CA-based solution.
 
 \begin{figure}
   \centering
@@ -148,6 +166,14 @@ This causes an enormous limitation when executing the tests, because the main bo
   \caption{Demanded request rate.}
 \label{fig:demanded-request-rate}
 \end{figure}
+
+The graph from Figure~\ref{fig:average-response-time} represent the average request response time in function of the effective request rate, for each of the implemented solutions.
+Each point in the graph, illustrate the average request response of the 5 different test executions performed for each of the demanded request rates, in function of the effective request rate.
+We can draw similar conclusions to those of the previous discussed figure: the HTTP-based implementation clearly outperforms the HTTPS-based implementations, by having, in average,~$\approx$ 2 times faster response times.
+This results of the aforementioned added message overhead of the HTTPS handshake protocol.
+The average response time of the CA and IDChain based DHT implementations remain approximately constant, only increasing when an~$\approx$ 15-17 requests/second effective request rate is achieved, which correspond to a demanded request rate in the ]10, 100] requests/second range.
+In the case of the HTTP-based implementation, the average request response time also remained constant with an increasing load, only increasing drastically to an average response rate of 23552.88 ms when an effective request rate of 90.83 requests/second - which corresponds to a demanded request rate of 100 request/second - is achieved.
+This result is due to the fact that the cli
 
 \begin{figure}
   \centering
@@ -158,12 +184,12 @@ This causes an enormous limitation when executing the tests, because the main bo
 
 \begin{figure}
 \centering
-\begin{minipage}[t]{.48\textwidth}
+\begin{minipage}[t]{.45\textwidth}
 \centering
 \includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-http.pdf}
 \caption{Number of nodes storing each value, in vanilla DHT.}
 \end{minipage}\hfill
-\begin{minipage}[t]{.48\textwidth}
+\begin{minipage}[t]{.45\textwidth}
 \centering
 \includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-https.pdf}
 \caption{Number of nodes storing each value, in CA-based solution.}
@@ -211,6 +237,7 @@ This causes an enormous limitation when executing the tests, because the main bo
 \subsubsection{Read requests}
 
 \subsection{Smart contract tests}
+\label{section:smart-contract-tests}
 
 \subsubsection{Monetary Costs}
 
