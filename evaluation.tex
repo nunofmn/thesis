@@ -60,6 +60,8 @@ This test was executed in a local machine, by calculating the \textit{gas} cost 
 
 \subsection{DHT Nodes deployment}
 
+%TODO: falar do tamanho dos k-buckets e em que medida isso influencia o sistema
+
 The DHT nodes were deployed on Digital Ocean\footnote{https://www.digitalocean.com/}, distributed across several different datacenters.
 
 We deployed 9 nodes, one node for each of the following datacenters: New York City 1 (NYC1), New York City 3 (NYC3), San Francisco 1 (SFO1), Toronto 1 (TOR1), London 1 (LON1), Frankfurt 1 (FRA1), Bengalore 1 (BLR1), Amsterdam 2 (AM2) and Amesterdam 2 (AM3).
@@ -160,12 +162,14 @@ Is important to notice, that could be possible to increase the request rate capa
 We are also able to conclude that the IDChain solution is a viable solution performance-wise to the CA-based solution.
 It seems that increased message header overhead and the requests performed to the IDChain API, doesn't incur in a substantial cost to the effective request rate the client is able to perform, in comparison with the CA-based solution.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/request-rate-writes-linear.pdf}
   \caption{Demanded request rate.}
 \label{fig:demanded-request-rate}
 \end{figure}
+
+
 
 The graph from Figure~\ref{fig:average-response-time} represent the average request response time in function of the effective request rate, for each of the implemented solutions.
 Each point in the graph, illustrate the average request response of the 5 different test executions performed for each of the demanded request rates, in function of the effective request rate.
@@ -173,36 +177,45 @@ We can draw similar conclusions to those of the previous discussed figure: the H
 This results of the aforementioned added message overhead of the HTTPS handshake protocol.
 The average response time of the CA and IDChain based DHT implementations remain approximately constant, only increasing when an~$\approx$ 15-17 requests/second effective request rate is achieved, which correspond to a demanded request rate in the ]10, 100] requests/second range.
 In the case of the HTTP-based implementation, the average request response time also remained constant with an increasing load, only increasing drastically to an average response rate of 23552.88 ms when an effective request rate of 90.83 requests/second - which corresponds to a demanded request rate of 100 request/second - is achieved.
-This result is due to the fact that the cli
+This result is due to the fact that when performing that effective request rate, the test DHT client becomes saturated with inbound and outbound requests, consequently the average response time drastically increases.
+This only occurs in the HTTP-based implementation, because the effective request rate is much higher than in HTTPS-based solutions, which means that the bottleneck is in the client capacity of processing all inbound and outbound requests.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/average-response-time.pdf}
   \caption{Average response time.}
   \label{fig:average-response-time}
 \end{figure}
 
-\begin{figure}
-\centering
-\begin{minipage}[t]{.45\textwidth}
-\centering
-\includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-http.pdf}
-\caption{Number of nodes storing each value, in vanilla DHT.}
-\end{minipage}\hfill
-\begin{minipage}[t]{.45\textwidth}
-\centering
-\includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-https.pdf}
-\caption{Number of nodes storing each value, in CA-based solution.}
-\end{minipage}
+
+The graph from Figures~\ref{fig:stored-ratio-http},~\ref{fig:stored-ratio-https} and~\ref{fig:stored-ratio-https-bc} illustrate the number of nodes that stored the value in each write request, in function of the demanded request rate for each implementation.
+In order to be easier to interpret the data, each plot in the graph represents a range of different number of nodes that stored the information.
+We represent the values in the \textit{y-axis} as the ratio between the number of requests with the defined "stored" variable and the total number of requests performed for the associated demanded request rate.
+
+Is possible verify that in the HTTPS-based implementations that each value written to the DHT is almost always stored in 5 different nodes, intermittently being stored in 4 nodes.
+
+\begin{figure}[htb]
+  \centering
+  \begin{minipage}[t]{.45\textwidth}
+    \centering
+    \includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-http.pdf}
+    \caption{Number of nodes storing each value, in vanilla DHT.}
+\label{fig:stored-ratio-http}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{.45\textwidth}
+    \centering
+    \includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-https.pdf}
+    \caption{Number of nodes storing each value, in CA-based solution.}
+\label{fig:stored-ratio-https}
+  \end{minipage}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/stored-ratio-https-bc.pdf}
   \caption{Number of nodes storing each value, in IDChain solution.}
-  \label{fig:stored-ratio-https-bc}
+\label{fig:stored-ratio-https-bc}
 \end{figure}
-
 
 %\begin{table}[]
 %\centering
