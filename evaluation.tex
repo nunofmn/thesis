@@ -193,6 +193,10 @@ In order to be easier to interpret the data, each plot in the graph represents a
 We represent the values in the \textit{y-axis} as the ratio between the number of requests with the defined "stored" variable and the total number of requests performed for the associated demanded request rate.
 
 Is possible verify that in the HTTPS-based implementations that each value written to the DHT is almost always stored in 5 different nodes, intermittently being stored in 4 nodes.
+In the case of the HTTP-based implementation, in the [0.1, 40] requests/second range of demanded request rate, the obtained results are equal to those of the HTTPS-based solution.
+When the demanded request is increased to 100 requests/second, the number of requests in which the value is stored in 5 nodes decreases to 36.1\%, and the number of failed writes (values that aren't stored in any node) increases to 63.8\%.
+Those results in the HTTP case are closely related with the conclusions that we draw out from Figure~\ref{fig:average-response-time}.
+Since there is a bottleneck in the client capacity of processing inbound and outbound requests, some requests will invariably timeout and the values will not be stored in any node.
 
 \begin{figure}[htb]
   \centering

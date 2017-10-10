@@ -53,7 +53,7 @@ In Section~\ref{architecture:idchain-overview} a detailed overview of the IDChai
 The vanilla implementation DHT represents the simpler architectural model of the presented solutions.
 The architecture of this solution is presented in Figure~\ref{fig:architecture-vanilla-overview}.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/architecture-overview-none.pdf}
   \caption{Overview of vanilla DHT architecture.}
@@ -76,7 +76,7 @@ Also doesn't provide any mechanism to close the participation in the \ac{DHT} (a
 
 The classic approach to provide a secure communication channel between nodes, is by using the \ac{TLS} protocol coupled with a X509 PKI infrastructure, which is summarized in Figure~\ref{fig:architecture-ca-overview}.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/architecture-overview-ca.pdf}
   \caption{Overview of DHT with CA architecture.}
@@ -89,7 +89,7 @@ This strategy is a good fit for a federated model since, usually, there is a con
 
 This solution could be even more robust if we create a two-tier architecture, as shown in Figure~\ref{fig:ca-hierarchy}.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/architecture-ca-hierarchy.pdf}
   \caption{Two-tier \acl{CA} hierarchy}
@@ -135,7 +135,7 @@ The DPKI can be subdivided in three main components:
 	\item \textbf{IDChain Application};
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[htb]
   \includegraphics[width=\linewidth]{Figures/architecture-overview.pdf}
     \caption{Overview of solution architecture.}
 \label{fig:architecture-overview}
@@ -220,7 +220,7 @@ Could be possible to save all the certificate metadata or even the full encoded 
 Not only blockchains have a maximum ammount of data that can be encoded in a block and transaction, also in the case of a blockchain as Ethereum, the cost of storing full certificates in the blockchain would be very high.
 Still, if this functionality was necessary and we wanted to maintain a decentralized system, a better approach would be store the full certificate in a \ac{p2p} filesystem like \ac{IPFS}, and store in the \textit{Certificate} structure the address hash of the certificate.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/certificate-structure.pdf}
   \caption{Smart contract \textit{Certificate} structure fields.}
@@ -236,7 +236,7 @@ This can undermine smaller entities participating in the system, and could even 
 % reformular esta frase %
 A combination of an hard limit, for example, a maximum number of certificates each entity can have, and a soft limit, i.e defining a cost, using the underlying cryptocurrency, for each certificate, could provider a equal and fair system for all the entities involved.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/web-trust-main.pdf}
   \caption{Web of trust mechanism.}
@@ -248,7 +248,7 @@ In Figure~\ref{fig:entity-structure} are defined the necessary fields.
 Is important to note that the entities addresses that an entity vouched for (\textit{signed} field) and the entities addresses that vouched for our own entity (\textit{signers} field) are stored in this entity, because will be necessary to constantly calculate the state of each entity.
 If we considered a graph representation (usual in the web of trust model), this fields encode the inbound arrows and outbound arrows of each entity.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/entity-structure.pdf}
   \caption{Smart contract \textit{Entity} structure fields.}
@@ -287,7 +287,7 @@ If one entity loses one vouch and its number of vouches drops below the minimum 
 This could be verified in Figure~\ref{fig:wot-scenario-b}, \textit{Entity C} unvouches \textit{Entity D} which is rendered invalid (considering a minimum of three vouches), and when verifying its descendants \textit{Entity E} also doesn't have the minimum number of vouches required, and therefore is rendered invalid also.
 Is worth mentioning that the certificates of \textit{Entity D} and \textit{Entity E}, as mentioned before, are also considered invalid.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \subfigure[Scenario A]{\label{fig:wot-scenario-a}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-1.pdf}}
   \subfigure[Scenario B]{\label{fig:wot-scenario-b}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-2.pdf}}
@@ -299,7 +299,7 @@ Is worth mentioning that the certificates of \textit{Entity D} and \textit{Entit
 In order to provide a better and universal interface to interact with the IDChain smart contract and the blockchain, we will build a RESTful \ac{API} to facilitate access to the functionalities.
 This \ac{API} will run on the \ac{SP} network, and can be deployed in two ways: a single API instance for all the nodes controled by the \ac{SP} as shown in Figure~\ref{fig:multi-deploy}, or a multiple API instances, one for each node, running in the same server, shown in Figure~\ref{fig:single-deploy}.
 
-\begin{figure}
+\begin{figure}[htb]
   \centering
   \subfigure[API Multi-deploy]{\label{fig:multi-deploy}\includegraphics[width=0.4\linewidth]{Figures/architecture-multi-api.pdf}}
   \subfigure[API Single-deploy]{\label{fig:single-deploy}\includegraphics[width=0.4\linewidth,trim = 0cm -4cm 0cm 0cm]{Figures/architecture-single-api.pdf}}
@@ -399,7 +399,7 @@ As depicted in Figure~\ref{fig:tls-handshake-plus} is necessary to verify the fo
   \item The node identifier registered in the certificate is equal to the node identifier.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[htb]
   \includegraphics[width=\linewidth]{Figures/tls-handshake-plus.pdf}
   \caption{Additional steps added in TLS handshake verification.}
 \label{fig:tls-handshake-plus}

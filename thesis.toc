@@ -40,20 +40,20 @@
 \contentsline {section}{\numberline {3.3}Vanilla DHT}{23}{section.3.3}
 \contentsline {section}{\numberline {3.4}DHT with \ac {CA} mechanism}{24}{section.3.4}
 \contentsline {section}{\numberline {3.5}DHT with IDChain mechanism}{26}{section.3.5}
-\contentsline {section}{\numberline {3.6}Distributed Hash Table}{26}{section.3.6}
+\contentsline {section}{\numberline {3.6}Distributed Hash Table}{27}{section.3.6}
 \contentsline {section}{\numberline {3.7}Decentralized Public Key Infrastructure}{27}{section.3.7}
 \contentsline {subsection}{\numberline {3.7.1}IDChain Smart Contract}{28}{subsection.3.7.1}
 \contentsline {subsubsection}{Trusted Certification}{28}{section*.45}
 \contentsline {subsubsection}{Smart Contracts and Autonomy}{28}{section*.46}
-\contentsline {subsubsection}{Smart Contract Logic}{29}{section*.47}
+\contentsline {subsubsection}{Smart Contract Logic}{28}{section*.47}
 \contentsline {subsubsection}{Web of trust scenarios}{31}{section*.53}
-\contentsline {subsection}{\numberline {3.7.2}IDChain \ac {API}}{32}{subsection.3.7.2}
-\contentsline {subsection}{\numberline {3.7.3}IDChain Management Application}{33}{subsection.3.7.3}
+\contentsline {subsection}{\numberline {3.7.2}IDChain \ac {API}}{31}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.3}IDChain Management Application}{32}{subsection.3.7.3}
 \contentsline {section}{\numberline {3.8}Overlay network processes}{33}{section.3.8}
 \contentsline {subsection}{\numberline {3.8.1}Node bootstrap and registration}{33}{subsection.3.8.1}
 \contentsline {subsection}{\numberline {3.8.2}Node message routing}{34}{subsection.3.8.2}
 \contentsline {subsection}{\numberline {3.8.3}Eclipse and Sybil attacks defense}{34}{subsection.3.8.3}
-\contentsline {subsection}{\numberline {3.8.4}Data replication}{35}{subsection.3.8.4}
+\contentsline {subsection}{\numberline {3.8.4}Data replication}{34}{subsection.3.8.4}
 \contentsline {section}{\numberline {3.9}Comparison with a CA}{35}{section.3.9}
 \contentsline {chapter}{\numberline {4}Implementation}{36}{chapter.4}
 \contentsline {section}{\numberline {4.1}Adopted Technologies}{36}{section.4.1}
@@ -79,9 +79,9 @@
 \contentsline {section}{\numberline {5.3}Test Results}{53}{section.5.3}
 \contentsline {subsection}{\numberline {5.3.1}Load tests}{53}{subsection.5.3.1}
 \contentsline {subsubsection}{Write requests}{53}{section*.76}
-\contentsline {subsubsection}{Read requests}{55}{section*.81}
-\contentsline {subsection}{\numberline {5.3.2}Smart contract tests}{55}{subsection.5.3.2}
-\contentsline {subsubsection}{Monetary Costs}{55}{section*.82}
+\contentsline {subsubsection}{Read requests}{56}{section*.81}
+\contentsline {subsection}{\numberline {5.3.2}Smart contract tests}{56}{subsection.5.3.2}
+\contentsline {subsubsection}{Monetary Costs}{56}{section*.82}
 \contentsline {chapter}{\numberline {6}Conclusions}{57}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary}{57}{section.6.1}
 \contentsline {section}{\numberline {6.2}Achievements}{57}{section.6.2}
