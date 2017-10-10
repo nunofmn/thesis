@@ -63,13 +63,15 @@
 \BOOKMARK [1][-]{section.5.1}{5.1 Tests Objectives and scenarios}{chapter.5}% 63
 \BOOKMARK [1][-]{section.5.2}{5.2 Tests methodology}{chapter.5}% 64
 \BOOKMARK [2][-]{subsection.5.2.1}{5.2.1 DHT Nodes deployment}{section.5.2}% 65
-\BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Testing tooling and scripts}{section.5.2}% 66
+\BOOKMARK [2][-]{subsection.5.2.2}{5.2.2 Tests configuration and tooling}{section.5.2}% 66
 \BOOKMARK [2][-]{subsection.5.2.3}{5.2.3 Evaluation challenges}{section.5.2}% 67
 \BOOKMARK [1][-]{section.5.3}{5.3 Test Results}{chapter.5}% 68
-\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 69
-\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 70
-\BOOKMARK [1][-]{section.6.2}{6.2 Achievements}{chapter.6}% 71
-\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 72
-\BOOKMARK [0][-]{appendix.A}{A Vector calculus}{}% 73
-\BOOKMARK [1][-]{section.A.1}{A.1 Vector identities}{appendix.A}% 74
-\BOOKMARK [0][-]{appendix*.55}{Bibliography}{}% 75
+\BOOKMARK [2][-]{subsection.5.3.1}{5.3.1 Load tests}{section.5.3}% 69
+\BOOKMARK [2][-]{subsection.5.3.2}{5.3.2 Smart contract tests}{section.5.3}% 70
+\BOOKMARK [0][-]{chapter.6}{6 Conclusions}{}% 71
+\BOOKMARK [1][-]{section.6.1}{6.1 Summary}{chapter.6}% 72
+\BOOKMARK [1][-]{section.6.2}{6.2 Achievements}{chapter.6}% 73
+\BOOKMARK [1][-]{section.6.3}{6.3 Future Work}{chapter.6}% 74
+\BOOKMARK [0][-]{appendix.A}{A Vector calculus}{}% 75
+\BOOKMARK [1][-]{section.A.1}{A.1 Vector identities}{appendix.A}% 76
+\BOOKMARK [0][-]{appendix*.58}{Bibliography}{}% 77
