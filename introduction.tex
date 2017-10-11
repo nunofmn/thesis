@@ -49,11 +49,11 @@ The \textit{Local Registry} component runs in the device runtime, that manages h
 The \textit{Global Registry} is based on a \ac{DHT}, a \ac{P2P} distributed system, that usually is used in public-facing services, and therefore is open to participation, allowing any node to join the network.
 One example, is the Mainline \ac{DHT}, that powers the BitTorrent network.
 
-Several private and enterprise uses of DHT system exist, as the Dynamo\ref{dynamo2007} key-value system from Amazon, or the Cassandra\ref{cassandra2010} database.
+Several private and enterprise uses of DHT system exist, as the Dynamo\cite{dynamo2007} key-value system from Amazon, or the Cassandra\cite{cassandra2010} database.
 These systems use \acp{DHT} as a building-block of their architecture for tasks that require multi-node coordination, as data sharding, for example, therefore not exposing the \ac{DHT} directly.
 These solutions are also closed-source and don't have their source code available publicly.
 
-The reTHINK framework is also inherently a federated solution, therefore isn't open to participation from outside the \acp{SP} organization, but it should also allow easily the entry of new nodes from the \acp{SP}.
+The reTHINK framework is also inherently a federated solution, therefore isn't open to participation from outside the \acp{SP} organization, but it should allow the entry of new nodes from any of \acp{SP} part of the federation.
 This is an important aspect, because contrary to a private solution where we have full control of all the infrastructure, in a federated solution we don't have full control and is necessary to have additional infrastructure to create trust relations and verify identities between the \acp{SP} \ac{DHT} nodes.
 
 \section{Proposed Solution}
@@ -70,12 +70,12 @@ In order to achieve this, a set of objectives need to be achieved:
 	\item \textbf{Deal with nodes compromise}- allow to easily revoke access to compromised nodes or identities;
 	\item \textbf{Minimize trust between participants}- even thought, our system could not tolerate maleficent \ac{SP} nodes, we want to minimize the trust between \ac{SP} nodes, so isn't possible to a couuple of \acp{SP} to monopolize the DHT system;
   \item \textbf{Maintain system decentralized}- solve all the aforementioned problems, maintaining a decentralized architecture, which should also minimize trust between \acp{SP}.
-	\item \textbf{Isolate the DHT system from the Global Registy}- even though, the main use case of the DHT is the Global Registry, we want to decouple the DHT, by providing simple API that allow any application to build on top of.
+	\item \textbf{Isolate the DHT system from the Global Registy}- even though, the main use case of the DHT is the Global Registry, we want to decouple the DHT, by providing simple API that allow any application to be built on top of.
 \end{itemize}
 
 We will build one DHT with two interchangeable mechanism that enable us to achieve the aforementioned objectives.
 
-The first solution is based on more classic approach to establishing secure communications by using a \ac{CA} to issue certificates, enabling us to perform access-control to \ac{DHT} nodes and provide secure communications between nodes.
+The first solution is based on more classic approach to establish secure communications by using a \acl{CA} to issue certificates assigning identities to each used DHT identifier, enabling us to perform access-control to \ac{DHT} nodes and provide secure communications between nodes.
 
 The second solution we will present is a novel approach that uses blockchain technology, which we named IDChain.
 Using the blockchain we will build a \ac{DPKI} that will enable us to issue unique identities and certificates to nodes across all \acp{SP}.

@@ -12,22 +12,22 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Two-tier \acl {CA} hierarchy\relax }}{25}{figure.caption.42}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Overview of solution architecture.\relax }}{26}{figure.caption.43}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Smart contract \textit {Certificate} structure fields.\relax }}{29}{figure.caption.50}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Web of trust mechanism.\relax }}{29}{figure.caption.51}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Web of trust mechanism.\relax }}{30}{figure.caption.51}
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Smart contract \textit {Entity} structure fields.\relax }}{30}{figure.caption.52}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces In Scenario A bootstraper entities \textit {A, B and C} vouch for entity \textit {D}, which vouches for entity \textit {E} in conjunction with entities \textit {A} and \textit {C}. In Scenario B, entity \textit {C} unvouches entity \textit {D} which is considered invalid and therefore also entity \textit {E} is considered invalid.\relax }}{31}{figure.caption.54}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Scenario A}}}{31}{figure.caption.54}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Scenario B}}}{31}{figure.caption.54}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces \relax }}{32}{figure.caption.55}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Entity invalidation scenario, with trust chain verifications.\relax }}{32}{figure.caption.54}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Scenario A}}}{32}{figure.caption.54}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Scenario B}}}{32}{figure.caption.54}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces IDChain API deployment strategies.\relax }}{32}{figure.caption.55}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {API Multi-deploy}}}{32}{figure.caption.55}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {API Single-deploy}}}{32}{figure.caption.55}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Additional steps added in TLS handshake verification.\relax }}{34}{figure.caption.60}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Additional steps added in TLS handshake verification.\relax }}{35}{figure.caption.60}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Database entity-relation model.\relax }}{48}{figure.caption.70}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Database entity-relation model.\relax }}{48}{figure.caption.71}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Demanded request rate.\relax }}{54}{figure.caption.77}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Average response time.\relax }}{55}{figure.caption.78}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Number of nodes storing each value, in vanilla DHT.\relax }}{55}{figure.caption.79}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Number of nodes storing each value, in CA-based solution.\relax }}{55}{figure.caption.79}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Number of nodes storing each value, in IDChain solution.\relax }}{56}{figure.caption.80}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Demanded request rate.\relax }}{54}{figure.caption.78}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Average response time.\relax }}{55}{figure.caption.79}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Number of nodes storing each value, in vanilla DHT.\relax }}{56}{figure.caption.80}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Number of nodes storing each value, in CA-based solution.\relax }}{56}{figure.caption.80}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Number of nodes storing each value, in IDChain solution.\relax }}{56}{figure.caption.81}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
