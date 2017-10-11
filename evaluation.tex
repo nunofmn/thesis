@@ -6,7 +6,7 @@ In Section~\ref{section:scenarios} we detail our evaluation process and the over
 Then, in Section~\ref{section:methodology} we describe the methods, tools and challenges we had to perform the evaluation.
 Lastly, in Section~\ref{section:results} we present and discuss the solutions evaluation results.
 
-\section{Tests Objectives and scenarios}
+\section{Evaluation Objectives and Scenarios}
 \label{section:scenarios}
 
 Our evaluation has an extended focus in the correctness of the implemented protocol.
@@ -53,7 +53,9 @@ We also defined a metric for the smart contract evaluation:
 
 This test was executed in a local machine, by calculating the \textit{gas} cost of executing every smart contract function in the \ac{EVM}.
 
-\section{Tests methodology}
+Finally was also necessary to evaluate the DHT protocol correctness under a number of possible scenarios, from a security analysis perspective.
+In Section~\ref
+\section{Evaluation methodology}
 \label{section:methodology}
 
 % TODO: section summary
@@ -65,7 +67,7 @@ This test was executed in a local machine, by calculating the \textit{gas} cost 
 The DHT nodes were deployed on Digital Ocean\footnote{https://www.digitalocean.com/}, distributed across several different datacenters.
 
 We deployed 9 nodes, one node for each of the following datacenters: New York City 1 (NYC1), New York City 3 (NYC3), San Francisco 1 (SFO1), Toronto 1 (TOR1), London 1 (LON1), Frankfurt 1 (FRA1), Bengalore 1 (BLR1), Amsterdam 2 (AM2) and Amesterdam 2 (AM3).
-The ninth node which correspond to the benchmark client was located in Lisbon.
+The 9th node which corresponds to the benchmark client was located in Lisbon.
 
 The node that was defined as bootstrap node in all nodes configuration was the node located in the NYC1 datacenter.
 
@@ -98,7 +100,7 @@ We choose this approach in read script because it's not necessary to clear the n
 
 In Tables~\ref{table:total-requests-demanded-rate-writes} and~\ref{table:total-requests-demanded-rate-reads} we present the demanded request rate and total number of requests that were done, in write script and read script executions, respectively.
 
-\begin{table}[]
+\begin{table}[htb]
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{ccccccccccc}
@@ -111,7 +113,7 @@ In Tables~\ref{table:total-requests-demanded-rate-writes} and~\ref{table:total-r
 \label{table:total-requests-demanded-rate-writes}
 \end{table}
 
-\begin{table}[]
+\begin{table}[htb]
 \centering
 \begin{tabular}{cccccccc}
   \textbf{Demanded Request Rate (req/s)} & 1 & 2 & 5 & 10 & 20 & 40 & 100 \\ \hline
@@ -123,8 +125,7 @@ In Tables~\ref{table:total-requests-demanded-rate-writes} and~\ref{table:total-r
 \end{table}
 
 In order to write values to the DHT, we pre-generated several keys by hashing an increasing integer counter, using a SHA-1 function.
-The object we stored under each key in the DHT, was always the same: a 827 bytes JSON file.
-This JSON file contains a structure similar to values that the Global Registry stores.
+The object stored under each key in the DHT, was always the same: a JSON file containing a structure similar to values that the Global Registry stores with a filesize of 827 bytes.
 
 The certificates that were used in the test nodes were created using OpenSSL\footnote{https://www.openssl.org/} and cfssl\footnote{https://github.com/cloudflare/cfssl} command-line tools, and respect the certificate requirements that we referred in Sections~\ref{implementation:idchain} and~\ref{implementation:ca-based}.
 In the case of the CA-based mechanism tests, we used a two-tier architecture, with a root CA and a intermediate CA.
@@ -137,7 +138,7 @@ The node running in the Digital Ocean datacenters, had by default a maximum numb
 We tried to increase the value, but the limitations persisted.
 This causes an enormous limitation when executing the tests, because the main bottleneck was the benchmarking client.
 
-\section{Test Results}
+\section{Evaluation Results}
 \label{section:results}
 In the following sections we discuss the evaluation results.
 The Section~\ref{section:load-tests} focus in read and write load tests, and Section~\ref{section:smart-contract-tests} focus in smart contract execution metrics.
@@ -170,7 +171,6 @@ It seems that increased message header overhead and the requests performed to th
 \end{figure}
 
 
-
 The graph from Figure~\ref{fig:average-response-time} represent the average request response time in function of the effective request rate, for each of the implemented solutions.
 Each point in the graph, illustrate the average request response of the 5 different test executions performed for each of the demanded request rates, in function of the effective request rate.
 We can draw similar conclusions to those of the previous discussed figure: the HTTP-based implementation clearly outperforms the HTTPS-based implementations, by having, in average,~$\approx$ 2 times faster response times.
@@ -195,7 +195,7 @@ We represent the values in the \textit{y-axis} as the ratio between the number o
 Is possible verify that in the HTTPS-based implementations that each value written to the DHT is almost always stored in 5 different nodes, intermittently being stored in 4 nodes.
 In the case of the HTTP-based implementation, in the [0.1, 40] requests/second range of demanded request rate, the obtained results are equal to those of the HTTPS-based solution.
 When the demanded request is increased to 100 requests/second, the number of requests in which the value is stored in 5 nodes decreases to 36.1\%, and the number of failed writes (values that aren't stored in any node) increases to 63.8\%.
-Those results in the HTTP case are closely related with the conclusions that we draw out from Figure~\ref{fig:average-response-time}.
+Those results in the HTTP case are closely related with the conclusions that we drawn out from Figure~\ref{fig:average-response-time}.
 Since there is a bottleneck in the client capacity of processing inbound and outbound requests, some requests will invariably timeout and the values will not be stored in any node.
 
 \begin{figure}[htb]
@@ -221,37 +221,56 @@ Since there is a bottleneck in the client capacity of processing inbound and out
 \label{fig:stored-ratio-https-bc}
 \end{figure}
 
-%\begin{table}[]
-%\centering
-%\resizebox{\textwidth}{!}{%
-%\begin{tabular}{cc|c|c|c|c|c|}
-%\cline{3-7}
-%\textbf{} & \multicolumn{1}{l|}{\textbf{}} & \multicolumn{5}{c|}{\textbf{Response Time (ms)}} \\ \hline
-%\multicolumn{1}{|c|}{\textbf{Demanded Request Rate (req/s)}} & \multicolumn{1}{l|}{\textbf{Effective Request Rate (req/s)}} & \textbf{Mean} & \textbf{Max} & \textbf{Min} & \multicolumn{1}{l|}{\textbf{95th percentile}} & \multicolumn{1}{l|}{\textbf{Standard Deviation}} \\ \hline
-%\multicolumn{1}{|c|}{0.1} & 1231 & 3231 & 321312 & 31231 & 321312 & 321321321 \\ \hline
-%\multicolumn{1}{|c|}{0.2} &  &  &  &  &  &  \\ \hline
-%\multicolumn{1}{|c|}{0.5} &  &  &  &  &  &  \\ \hline
-%\multicolumn{1}{|c|}{1} &  &  &  &  &  &  \\ \hline
-%\multicolumn{1}{|c|}{2} &  &  &  &  &  &  \\ \hline
-%\multicolumn{1}{|c|}{5} &  &  &  &  &  &  \\ \hline
-%\multicolumn{1}{|c|}{10} &  &  &  &  &  &  \\ \hline
-%\multicolumn{1}{|c|}{20} &  &  &  &  &  &  \\ \hline
-%\multicolumn{1}{|c|}{40} &  &  &  &  &  &  \\ \hline
-%\multicolumn{1}{|c|}{100} &  &  &  &  &  &  \\ \hline
-%\end{tabular}%
-%}
-%\caption{My caption}
-%\label{my-label}
-%\end{table}
-
-%\begin{figure}
-  %\centering
-  %\includegraphics[scale=0.7]{Figures/evaluation/stored-ratio-http.pdf}
-  %\caption{Vanilla DHT ratio of storing nodes.}
-%\label{fig:stored-ratio-http}
-%\end{figure}
-
 \subsubsection{Read requests}
+
+\subsection{Protocol correctness}
+\label{section:protocol-correcteness}
+
+In order to evaluate the CA-based and IDChain DHT protocol implementations, is necessary to define the threat model.
+Two of the main objectives of the presented solutions are to \textit{close DHT participation} and \textit{ensure communication privacy, integrity and authenticity}.
+
+Taking in consideration that we are dealing with a DHT system, that are some critical DHT processes that could be potential attack vectors.
+We will evaluate if each one of those processes, and analyze how attack vectors are mitigated by our solutions.
+
+A node bootstrap in the DHT, is one of the critical DHT processes which could be targeted.
+Each DHT node entering the network must be sure that is entering it through a trustable node, and is not being tricked into entering a DHT network with malicious nodes.
+Every DHT node must also ensure that every node bootstraping through them, is allowed to enter the network.
+This is also what enable us to provide access control to the DHT network, which take us in the direction of solving the objective of close DHT participation.
+Also, is necessary to ensure privacy, integrity and authenticity in the DHT network message routing, because we want to prevent any external interference in the DHT network - as for example, resorting to MITM attacks - and provide confidentiality in the data exchanged inside the DHT network.
+All of these aspects, are closely related to the node communication establishment.
+
+\subsubsection{CA-based solution evaluation}
+
+The CA-based solution is capable of mitigate each of the aforementioned attack vectors.
+The TLS/HTTPS protocol with mutual authentication is able to enforce the routing messages privacy, integrity and authenticity, in the two-ways of the communication channel.
+Also, using X.509 certificates containing the DHT node identifiers, issued by a root or intermediate CA, we can ensure during the bootstrap process that we are effectively connecting to a DHT composed of trusted nodes.
+
+% falar de traidores?
+This solution is also able to ensure that each trusted node — in case of going rogue — is not able to steal other node identifier.
+
+One possible vulnerability of the mechanism is related with performing the extra verification of node identifier encoded in the certificate.
+As we are only able to perform the verification after the TLS handshake — when the \textit{onSecure} event is called) — there is a small time frame where data could be exchanged with potential malicious nodes.
+
+But still, this attack could only be performed by a trusted node that decides to go rogue, since the verification of the node's certificate against the certification path is performed as part of the TLS handshake process.
+
+\subsubsection{IDChain solution evaluation}
+
+As in the CA-based solution, the IDChain solution is also capable of mitigate the same attack vectors, since the solution also uses TLS/HTTPS protocol for node's communication.
+This solution therefore, also suffers for the same problem as the previous evaluated solution — we are only to perform the certificate peer validation after the TLS handshake process.
+In this case is also necessary to perform a request to the IDChain API, which slightly increases the time frame where data could be exchanged with a potential malicious node.
+In this case, the attack could be also performed by malicious nodes from outside the DHT network, since we are using self-signed certificates and a certification path to verify the certificates against don't exist.
+
+% falar de traidores?
+This solution is not using TLS mutual authentication due to the Node.js TLS restrictions we encountered, and was necessary to add a complementary scheme in order to perform TLS clients authentication.
+This solution is vulnerable to one attack that could performed by a node from the DHT network, that decides to go rogue.
+This attack mechanism is similar to a replay attack:
+
+\begin{enumerate}
+  \item The node that decides to go rogue performs several message exchanges with the target node, and stores the target node certificate and each 'challenge' and 'challenge signature' fields from the messages sent by the target node.
+  \item The rogue node now has a series of timestamps/challenges and challenge-signature fields, that could be used to impersonate the target peer identity, during a limited time frame.
+\end{enumerate}
+
+\subsubsection{Sybil attack resistance}
 
 \subsection{Smart contract tests}
 \label{section:smart-contract-tests}
