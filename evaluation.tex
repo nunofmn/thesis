@@ -270,8 +270,9 @@ This attack mechanism is similar to a replay attack:
   \item The rogue node now has a series of timestamps/challenges and challenge-signature fields, that could be used to impersonate the target peer identity, during a limited time frame.
 \end{enumerate}
 
-\subsubsection{Sybil attack resistance}
+This attack is only possible to be performed by a rogue node inside the DHT network, because the TLS client certificate only sends the certificate when the TLS valid handshake is performed, which means that only a trusted TLS server will receive the specified message header fields and certificate.
 
+%\subsubsection{Sybil attack resistance}
 \subsection{Smart contract tests}
 \label{section:smart-contract-tests}
 
