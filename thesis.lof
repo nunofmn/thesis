@@ -23,13 +23,15 @@
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Additional steps added in TLS handshake verification.\relax }}{35}{figure.caption.60}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Database entity-relation model.\relax }}{48}{figure.caption.71}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Register node certificate form.\relax }}{50}{figure.caption.73}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces List of entity node certificates.\relax }}{50}{figure.caption.74}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Demanded request rate.\relax }}{54}{figure.caption.78}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Average response time.\relax }}{55}{figure.caption.79}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Number of nodes storing each value, in vanilla DHT.\relax }}{56}{figure.caption.80}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Number of nodes storing each value, in CA-based solution.\relax }}{56}{figure.caption.80}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Number of nodes storing each value, in IDChain solution.\relax }}{56}{figure.caption.81}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Demanded request rate.\relax }}{57}{figure.caption.83}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Average response time.\relax }}{57}{figure.caption.84}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Requests error ratio.\relax }}{58}{figure.caption.85}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Demanded request rate.\relax }}{55}{figure.caption.80}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Average response time.\relax }}{56}{figure.caption.81}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Number of nodes storing each value, in vanilla DHT.\relax }}{57}{figure.caption.82}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Number of nodes storing each value, in CA-based solution.\relax }}{57}{figure.caption.82}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Number of nodes storing each value, in IDChain solution.\relax }}{57}{figure.caption.83}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Demanded request rate.\relax }}{58}{figure.caption.85}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Average response time.\relax }}{58}{figure.caption.86}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Requests error ratio.\relax }}{59}{figure.caption.87}
 \addvspace {10\p@ }

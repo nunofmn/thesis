@@ -516,6 +516,27 @@ Even thought we didn't implemented it, one possible solution is to loop through 
 
 \subsection{Application}\label{subsection:mapp}
 
-% TODO: main screen
-% TODO: explain each function that is possible in the system
+The IDChain Management application is built as a \ac{SPA}, which means that when navigating the application the data is fetched as needed and the page updated accordingly, without page refreshes.
+The data is fetched from the IDChain API, using the web browser \textit{fetch API}.
 
+We implemented the following functionalities:
+\begin{itemize}
+  \item \textbf{Register new certificates} — we added a form where a user can register a new node certificate, by drag-an-drop the certificate in delimited area in the page, as shown in Figure~\ref{fig:register-certificate}. The application automatically obtains the necessary fields from the certificate, and on submit performs the request to the IDChain API;
+  \item \textbf{Sign/Unsign new entities} — we also add a option to allow the user to sign/unsign a specific entity in thhe interface;
+  \item \textbf{View certificates registered by the entity} — the node certificates registered by user's entity are also listed in the application, as is shown in Figure~\ref{fig:list-certificates};
+  \item \textbf{View all transactions associated with the entity} — is possible to list all transactions the entity performed in IDChain smart contract;
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{Figures/app-register-certificate.png}
+  \caption{Register node certificate form.}
+\label{fig:register-certificate}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{Figures/app-list-certificates.png}
+  \caption{List of entity node certificates.}
+\label{fig:list-certificates}
+\end{figure}
