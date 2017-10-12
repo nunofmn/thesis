@@ -20,8 +20,8 @@
 \contentsline {subsection}{\numberline {2.2.2}Storage and Retrieval Attacks}{7}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Sybil Attack}{8}{subsection.2.2.3}
 \contentsline {subsubsection}{Centralized certification}{8}{section*.20}
-\contentsline {subsubsection}{Network characteristics}{8}{section*.22}
-\contentsline {subsubsection}{Computational puzzles}{9}{section*.24}
+\contentsline {subsubsection}{Network characteristics}{8}{section*.21}
+\contentsline {subsubsection}{Computational puzzles}{9}{section*.23}
 \contentsline {subsection}{\numberline {2.2.4}Eclipse Attack}{10}{subsection.2.2.4}
 \contentsline {section}{\numberline {2.3}Public Key Infrastructure}{11}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Certificate Authorities}{13}{subsection.2.3.1}
@@ -33,7 +33,7 @@
 \contentsline {subsection}{\numberline {2.4.4}Blockchain applications}{19}{subsection.2.4.4}
 \contentsline {subsection}{\numberline {2.4.5}Smart Contracts}{19}{subsection.2.4.5}
 \contentsline {subsection}{\numberline {2.4.6}Ethereum}{20}{subsection.2.4.6}
-\contentsline {subsubsection}{Contract code}{21}{section*.34}
+\contentsline {subsubsection}{Contract code}{21}{section*.33}
 \contentsline {chapter}{\numberline {3}Architecture}{22}{chapter.3}
 \contentsline {section}{\numberline {3.1}Requirements}{22}{section.3.1}
 \contentsline {section}{\numberline {3.2}Overview}{23}{section.3.2}
@@ -43,10 +43,10 @@
 \contentsline {section}{\numberline {3.6}Distributed Hash Table}{27}{section.3.6}
 \contentsline {section}{\numberline {3.7}Decentralized Public Key Infrastructure}{27}{section.3.7}
 \contentsline {subsection}{\numberline {3.7.1}IDChain Smart Contract}{28}{subsection.3.7.1}
-\contentsline {subsubsection}{Trusted Certification}{28}{section*.45}
-\contentsline {subsubsection}{Smart Contracts and Autonomy}{28}{section*.46}
-\contentsline {subsubsection}{Smart Contract Logic}{29}{section*.47}
-\contentsline {subsubsection}{Web of trust scenarios}{31}{section*.53}
+\contentsline {subsubsection}{Trusted Certification}{28}{section*.44}
+\contentsline {subsubsection}{Smart Contracts and Autonomy}{28}{section*.45}
+\contentsline {subsubsection}{Smart Contract Logic}{29}{section*.46}
+\contentsline {subsubsection}{Web of trust scenarios}{31}{section*.52}
 \contentsline {subsection}{\numberline {3.7.2}IDChain \ac {API}}{31}{subsection.3.7.2}
 \contentsline {subsection}{\numberline {3.7.3}IDChain Management Application}{33}{subsection.3.7.3}
 \contentsline {section}{\numberline {3.8}Overlay network processes}{34}{section.3.8}
@@ -59,8 +59,8 @@
 \contentsline {subsection}{\numberline {4.1.1}DHT}{36}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Blockchain}{37}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}IDChain API}{38}{subsection.4.1.3}
-\contentsline {subsubsection}{Application Server}{38}{section*.65}
-\contentsline {subsubsection}{Database}{38}{section*.67}
+\contentsline {subsubsection}{Application Server}{38}{section*.64}
+\contentsline {subsubsection}{Database}{38}{section*.66}
 \contentsline {subsection}{\numberline {4.1.4}Management Application}{39}{subsection.4.1.4}
 \contentsline {section}{\numberline {4.2}Vanilla system}{39}{section.4.2}
 \contentsline {section}{\numberline {4.3}CA-based system}{40}{section.4.3}
@@ -77,14 +77,14 @@
 \contentsline {subsection}{\numberline {5.2.3}Evaluation challenges}{54}{subsection.5.2.3}
 \contentsline {section}{\numberline {5.3}Evaluation Results}{54}{section.5.3}
 \contentsline {subsection}{\numberline {5.3.1}Load tests}{54}{subsection.5.3.1}
-\contentsline {subsubsection}{Write requests}{54}{section*.79}
-\contentsline {subsubsection}{Read requests}{56}{section*.84}
+\contentsline {subsubsection}{Write requests}{54}{section*.78}
+\contentsline {subsubsection}{Read requests}{56}{section*.83}
 \contentsline {subsection}{\numberline {5.3.2}Protocol correctness}{59}{subsection.5.3.2}
-\contentsline {subsubsection}{CA-based solution evaluation}{60}{section*.88}
-\contentsline {subsubsection}{IDChain solution evaluation}{60}{section*.89}
+\contentsline {subsubsection}{CA-based solution evaluation}{60}{section*.87}
+\contentsline {subsubsection}{IDChain solution evaluation}{60}{section*.88}
 \contentsline {subsection}{\numberline {5.3.3}Smart contract tests}{61}{subsection.5.3.3}
-\contentsline {subsubsection}{Monetary Costs}{61}{section*.90}
+\contentsline {subsubsection}{Monetary Costs}{61}{section*.89}
 \contentsline {chapter}{\numberline {6}Conclusions}{62}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary}{62}{section.6.1}
 \contentsline {section}{\numberline {6.2}Future Work}{63}{section.6.2}
-\contentsline {chapter}{Bibliography}{67}{chapter*.91}
+\contentsline {chapter}{Bibliography}{67}{chapter*.90}
