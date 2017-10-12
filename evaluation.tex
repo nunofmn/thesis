@@ -150,12 +150,15 @@ The Figures~\ref{fig:demanded-request-rate}–~\ref{fig:stored-ratio-https-bc} r
 
 The graph from Figure~\ref{fig:demanded-request-rate} represent the effective request rate in function of the demanded request rate, for each of the implemented solutions.
 Each point in the graph, illustrate the average request rate of the 5 different test executions performed, for the specific demanded request rate.
+
 In the Figure legend the \textit{http} value represent the vanilla DHT implementation, the \textit{https} value represent the CA-based DHT implementation and \textit{https-bc} represent the IDChain DHT implementation.
 For instance, the point (0.1, 0.1), in any of the solutions, represent the average request obtained (0.1 req/s) for 5 repetitions performed for this test, demanding a request rate of 0.1 req/s.
-In Figure~\ref{fig:demanded-request-rate} is possible to verify that in the [0.1, 10] request/s demanded request rate, all the three solutions have an approximated equal effective request rate, which means that the client is able to keep up with the demanded request rate.
-In the ]10, 100] request/s demand request rate range, thevanilla DHT implementation outperforms the CA-based and IDChain solutions, by being able to keep up more closely with the demanded request rate.
+
+In Figure~\ref{fig:demanded-request-rate} is possible to verify that in the [0.1, 10] request/s demanded request rate range, all the three solutions have an approximated equal effective request rate, which means that the client is able to keep up with the demanded request rate.
+In the [20, 100] request/s demand request rate range, the vanilla DHT implementation outperforms the CA-based and IDChain solutions, by being able to keep up more closely with the demanded request rate.
 The vanilla DHT implementation is able to perform~$\approx$ 90 requests/second, where the CA-based and IDChain solutions become saturated at~$\approx$ 17 requests/second.
 This shows us that the HTTP-based solution is capable of outperforming clearly the HTTPS-based solutions, at the cost of didn't provide any security aspects in the nodes communication.
+
 The message overhead of the HTTPS handshake protocol, limits the request rate capacity of the CA-based and IDChain solutions.
 Is important to notice, that could be possible to increase the request rate capacity of the HTTPS-based solutions, if TLS Session Resumption and Keep-Alive connections are activated in HTTPS.
 We are also able to conclude that the IDChain solution is a viable solution performance-wise to the CA-based solution.
@@ -171,8 +174,10 @@ It seems that increased message header overhead and the requests performed to th
 
 The graph from Figure~\ref{fig:average-response-time} represent the average request response time in function of the effective request rate, for each of the implemented solutions.
 Each point in the graph, illustrate the average request response of the 5 different test executions performed for each of the demanded request rates, in function of the effective request rate.
+
 We can draw similar conclusions to those of the previous discussed figure: the HTTP-based implementation clearly outperforms the HTTPS-based implementations, by having, in average,~$\approx$ 2 times faster response times.
 This results of the aforementioned added message overhead of the HTTPS handshake protocol.
+
 The average response time of the CA and IDChain based DHT implementations remain approximately constant, only increasing when an~$\approx$ 15-17 requests/second effective request rate is achieved, which correspond to a demanded request rate in the ]10, 100] requests/second range.
 In the case of the HTTP-based implementation, the average request response time also remained constant with an increasing load, only increasing drastically to an average response rate of 23552.88 ms when an effective request rate of 90.83 requests/second - which corresponds to a demanded request rate of 100 request/second - is achieved.
 This result is due to the fact that when performing that effective request rate, the test DHT client becomes saturated with inbound and outbound requests, consequently the average response time drastically increases.
@@ -221,12 +226,28 @@ Since there is a bottleneck in the client capacity of processing inbound and out
 
 \subsubsection{Read requests}
 
+The Figures~\ref{fig:demanded-request-reads}–~\ref{fig:error-ratio-reads} represent the write load test evalution results.
+
+As in the previous write load tests analysis, in Figure~\ref{fig:demanded-request-rate} is depicted the effective request rate in function of the demanded request rate, for each of the different solutions, where each point in the graph represent the average request rate of the 5 different test executions performed.
+
+In graph from Figure~\ref{fig:demanded-request-reads} we can see that the results similar to the write tests results.
+In the [1, 10] requests/s demanded request rate range, is possible to verify that in all three implementations the client is able to keep up with the demanded request read.
+As in Figure~\ref{fig:demanded-request-rate}, in [20, 100] demanded request rate range, the HTTP-based implementation outperforms the HTTPS-based implementations, being able to keep up with the demanded request rate.
+The vanilla DHT implementation is able to perform an effective request rate of~$\approx$ 91 request/s, and the IDChain and CA-based implementations become saturated at~$\approx$ 20 requests/second — results similar to those in the write requests load test.
+
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/request-rate-reads-linear.pdf}
   \caption{Demanded request rate.}
   \label{fig:demanded-request-rate-reads}
 \end{figure}
+
+From Figure~\ref{fig:average-response-time-reads}, is possible to verify that the HTTP-based solution has, in average~$\approx$ 2 times faster response times that those of the HTTPS-based solutions.
+Also, has stable average response times, only increasing when performing an average effective request of~$\approx$ 91 requests/second (100 requests/second demanded request rate) where the average response time is of 2381.225 ms.
+This is related to the client bottleneck we detected in the write requests load test.
+
+The HTTPS-based solutions also keep stable average response times until achieving~$\approx$ 15-20 requests/seconds effective response rate range, which is when the client starts to saturate with requests and is not possible to keep up with the demanded request rate.
+When the client starts to saturate, the average response time starts to increase to the 700–900 ms range.
 
 \begin{figure}[htb]
   \centering
