@@ -29,5 +29,8 @@
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Number of nodes storing each value, in vanilla DHT.\relax }}{56}{figure.caption.80}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Number of nodes storing each value, in CA-based solution.\relax }}{56}{figure.caption.80}
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Number of nodes storing each value, in IDChain solution.\relax }}{56}{figure.caption.81}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Demanded request rate.\relax }}{57}{figure.caption.83}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Average response time.\relax }}{57}{figure.caption.84}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Requests error ratio.\relax }}{58}{figure.caption.85}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
