@@ -1,24 +1,36 @@
 \chapter{Conclusions}
 \label{chapter:conclusion}
 
+This document describes IDChain, a novel approach to close participation and securing node's communication in DHTs, by leveraging Ethereum blockchain's smart contracts.
+We aimed at providing communication security and DHT access control, by creating an alternative to the classic PKI infrastructure with \acl{CA} entities, with special focus on federated models, as is the case of the reTHINK project.
+This chapter reflects on these contributions and discusses future work.
+
 \section{Summary}
 \label{section:summary}
-Neste secção deve-se fazer o resumo do trabalho efectuado, retomando a ideia, as
-contribuições definidas e a forma como estas se materializaram
+Our approach to improve DHT communications security and access control began with an evaluation of the DHT implementations — with special focus in the Kademlia architecture — and possible attacks, like Sybil and Eclipse attacks.
+Due to a lack of full proof mechanism to prevent these sort of attacks, we decided to analyze the idea presented by Douceur\cite{Douceur2002}, that trusted certification is the only approach that has the potential to eliminate Sybil attacks.
+We then proceeded to analyze approaches to trusted certification, like Certificate Authorities and Web-of-Trust models.
 
-\section{Achievements}
-\label{section:achievements}
-The major achievements of the present work \ldots
-Nesta secção devem ser retiradas conclusões do trabalho realizado, em face dos
-resultados obtidos.
+From our research the two solutions were feasible to apply to a DHT system, but still require some centralized points to store or issue the certificates.
+We pretended to build an approach that allowed us to minimize trust, i.e avoid centralized points of control and trust, and started to analyze blockchain technologies.
+With all the research performed we decided to implement a DHT with a DPKI system using a Web of Trust model, on top of the Ethereum blockchain.
+
+This solution allowed us to provide a decentralized trusted mechanism, which allows us to minimize trust between DHT participants, prevent Sybil attacks and deal with compromised nodes.
+Since the main usage of this solution was to secure and close the Global Registry DHT of the reTHINK project, we also decided to build an additional mechanism, using the traditional CA infrastructure.
+This way, was not only possible to guarantee a fallback mechanism to our IDChain mechanism proof-of-concept, but was also possible to perform a comparison between the two mechanisms.
+
+We implemented the two solutions using TLS connections between the nodes, each one using different mechanisms to perform certificate validation.
+In the case of the CA-based architecture, using a two-tier CA architecture that need to be setup in advance to issue nodes certificates.
+The IDChain mechanism using a smart contract that encoded the necessary functions and rules to recreate a \ac{PKI} infrastructure, as for example, certificate revocation (one of the main objectives of this solutions), certificate fingerprint association and Web of Trust management.
+In order to improve the IDChain system integration and management, we also built a RESTful API and a management web application.
+
+We performed the two solutions evaluation by deploying 10 DHT nodes to DigitalOcean \ac{VM}, spread across several datacenters worldwide.
+We were able to conclude that performance-wise the IDChain mechanism is a viable option to the CA-based solution.
+Security-wise the IDChain mechanism could have some weak spots in terms of the smart contract code, taking into consideration that is designed as a prototype system.
+
+Therefore, we have achieved the goal we set out at the beginning of this dissertation: close participation and provided secure node communication in DHT systems.
 
 \section{Future Work}
 \label{section:future}
-Nesta secção devem identificar o trabalho futuro, sob duas perspectivas:
-\begin{itemize}
-\item o trabalho que resulta directamente dos problemas que a vossa proposta criou, ou não conseguiu resolver
-\item o trabalho que resulta da evolução do sistemas
-\end{itemize}
-
 
 \cleardoublepage

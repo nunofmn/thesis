@@ -68,9 +68,9 @@ In order to achieve this, a set of objectives need to be achieved:
 	\item \textbf{Guarantee communication privacy, integrity and authenticity}- it is necessary to secure the \ac{DHT} nodes communication;
 	\item \textbf{Close DHT participation}- provide mechanisms to allow access-control nodes in the \ac{DHT};
 	\item \textbf{Deal with nodes compromise}- allow to easily revoke access to compromised nodes or identities;
-	\item \textbf{Minimize trust between participants}- even thought, our system could not tolerate maleficent \ac{SP} nodes, we want to minimize the trust between \ac{SP} nodes, so isn't possible to a couuple of \acp{SP} to monopolize the DHT system;
+	\item \textbf{Minimize trust between participants}- even thought, our system could not tolerate maleficent \ac{SP} nodes, we want to minimize the trust between \ac{SP} nodes, so isn't possible to a couple of \acp{SP} to monopolize the DHT system;
   \item \textbf{Maintain system decentralized}- solve all the aforementioned problems, maintaining a decentralized architecture, which should also minimize trust between \acp{SP}.
-	\item \textbf{Isolate the DHT system from the Global Registy}- even though, the main use case of the DHT is the Global Registry, we want to decouple the DHT, by providing simple API that allow any application to be built on top of.
+	\item \textbf{Decouple the DHT system from the Global Registy}- even though, the main use case of the DHT is the Global Registry, we want to decouple the DHT, by providing simple API that allow any application to be built on top of it.
 \end{itemize}
 
 We will build one DHT with two interchangeable mechanism that enable us to achieve the aforementioned objectives.
