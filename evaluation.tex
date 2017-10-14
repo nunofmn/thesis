@@ -334,10 +334,9 @@ This attack mechanism is similar to a replay attack:
 This attack is only possible to be performed by a rogue node inside the DHT network, because the TLS client certificate only sends the certificate when the TLS valid handshake is performed, which means that only a trusted TLS server will receive the specified message header fields and certificate.
 
 %\subsubsection{Sybil attack resistance}
-\subsection{Smart contract tests}
-\label{section:smart-contract-tests}
 
-\subsubsection{Monetary Costs}
+\subsection{Smart Contract Execution Costs}
+\label{section:smart-contract-tests}
 
 We evaluated the costs of executing each smart contract function.
 In order to perform the evaluation we executed each function in \textit{testrpc} and obtained the \textit{gas} cost of its execution.
@@ -352,22 +351,21 @@ It is possible to increase the amount of wei we are able to pay for each gas uni
 In Table~\ref{table:transaction-speed} are defined 3 confirmation tiers which we used to calculate transactions cost in function of confirmation speed.
 The data was retrieved from the ETH Gas Station\footnote{http://ethgasstation.info/} website.
 
-\begin{table}[]
+\begin{table}[htb]
   \centering
-  \resizebox{\textwidth}{!}{%
-    \begin{tabular}{lcc}
-      \multicolumn{1}{c}{\textbf{Tier}} & \textbf{\begin{tabular}[c]{@{}c@{}}Gas Price \\ (Gwei)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Maximum Transaction Confirmation Time\\ (minutes)\end{tabular}} \\ \hline
-      SafeLow (\textless 20 minutes) & 4 & 20 \\ \hline
-      Standard (\textless 5 minutes) & 6 & 5 \\ \hline
-      Fast (\textless 2 minutes) & 25 & 2
-    \end{tabular}%
-  }
+  \begin{tabular}{lcc}
+    \multicolumn{1}{c}{\textbf{Tier}} & \textbf{\begin{tabular}[c]{@{}c@{}}Gas Price \\ (Gwei)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Maximum Transaction Confirmation Time\\ (minutes)\end{tabular}} \\ \hline
+    SafeLow (\textless 20 minutes) & 4 & 20 \\ \hline
+    Standard (\textless 5 minutes) & 6 & 5 \\ \hline
+    Fast (\textless 2 minutes) & 25 & 2
+  \end{tabular}%
   \caption{Transaction confirmation speed tiers.}
 \label{table:transaction-speed}
 \end{table}
 
-We defined two different scenarios with variable web of trust size, mainly to analyze the cost of execute recursively the \textit{checkValidity} function in the context of the \textit{unsignEntity} function.
+We defined two different scenarios with variable web of trust size, mainly to analyze the cost of execute recursively the \textit{checkValidity} function in the context of the \textit{unsignEntity} and \textit{unsignEntity} functions.
 We also initiated entities with different names length, so it is possible to verify the cost difference of increasing the entities' name length.
+In the case of the \textit{newCertificate} function calls we used a standard IPv4 address, a 160 bit node identifier and SHA-1 certificate fingerprint.
 
 In the following scenarios is also considered that the minimum number of vouches necessary to a entity to become valid is equal to 3.
 
@@ -390,7 +388,7 @@ In this scenario we performed the following operations:
   \item Entity 0 unvouches Entity 3 (unsignEntity function).
 \end{enumerate}
 
-The cost of each operation in function of the transaction confirmation speed is depicted in Figure~\ref{fig:scenario1-operation-cost}.
+The cost of each operation in function of the transaction confirmation speed is depicted in Figure~\ref{fig:scenario1-operation-cost}, the web of trust formed by perfoming those operations is represented in Figure~\ref{fig:scenario1-wot-graph}.
 
 \begin{figure}[htb]
   \centering
@@ -406,22 +404,30 @@ The cost of each operation in function of the transaction confirmation speed is 
 \label{fig:scenario1-operation-cost}
 \end{figure}
 
+% TODO falar em valores abaixo ou média de valor de todas as operações?
+As we can see in Figure~\ref{fig:scenario1-operation-cost} – assuming a "Fast" confirmation speed – is possible to verify that almost every operation we performed had a value below 1 euro, with exception of the operations using the \textit{newCertificate} operation which execution cost goes over 3 euros.
+This increase of execution cost is due to the fact that in the \textit{newCertificate} we are storing much more information in the smart contract state incurring in a bigger gas fee.
+The \textit{unsignEntity} function in this scenario incurred in a cost of only 0.28 euros, since the unsigned entity (Entity 3) that becomes invalid doesn't have vouched for any entity, meaning that the \textit{checkValidity} function is only called once.
+
 \subsubsection{Scenario 2}
 
 The following operations were performed:
 
 \begin{enumerate}[label=\alph*.]
-  \item Entity 0 vouches for Entity 3 (signEntity function);
-  \item Entity 1 vouches for Entity 3;
-  \item Entity 2 vouches for Entity 3;
-  \item Entity 0 vouches for Entity 4;
-  \item Entity 2 vouches for Entity 4;
-  \item Entity 3 vouches for Entity 4;
-  \item Entity 3 vouches for Entity 5;
-  \item Entity 0 unvouches Entity 3 (unsignEntity function).
+  \item Entity 0 vouches for Entity 3 (signEntity function); %a
+  \item Entity 1 vouches for Entity 3; %b
+  \item Entity 2 vouches for Entity 3; %c
+  \item Entity 0 vouches for Entity 4; %d
+  \item Entity 2 vouches for Entity 4; %e
+  \item Entity 3 vouches for Entity 4; %f
+  \item Entity 3 vouches for Entity 5; %g
+  \item Entity 0 unvouches Entity 3 (unsignEntity function). %h
 \end{enumerate}
 
 In this scenario we wanted to analyze the cost of performing the \textit{checkValidity} function along the descendants of the invalidated entity.
+We suppressed the entity creation operations from the list of operations being analised.
+
+In Figure~\ref{fig:scenario2-operation-cost} is depicted the cost analysis of operation exection, and in Figure~\ref{fig:scenario2-wot-graph} the graph of the web of trust formed.
 
 \begin{figure}[htb]
   \centering
@@ -436,3 +442,15 @@ In this scenario we wanted to analyze the cost of performing the \textit{checkVa
   \caption{Scenario 2 operations costs.}
 \label{fig:scenario2-operation-cost}
 \end{figure}
+
+In this scenario the cost of the execution of \textit{unsignEntity} function – using the "Fast" transaction confirmation speed as reference – incurred in a cost of 0.35 euros.
+The cost is slightly higher that in the previous scenario since we are performing an extra two executions of the \textit{checkValidity} function to verify the \textit{Entities 4 and 5}.
+
+\subsubsection{Overall results}
+
+The overall costs of operations execution allows to conclude that is doable cost-wise to build a web of trust system on top of the Ethereum blockchain.
+The higher execution in all of the operations was in \textit{newCertificate} function which needs to store a higher ammount of data in the smart contract storage. But in that is case is possible to use the Standard or SafeLow confirmation speeds and reduce the execution costs, since generally is not a time urgent operation – as could be a certificate revocation operation.
+The cost of execute recursively the \textit{checkValidity} in the context of the \textit{unsignEntity} and \textit{signEntity} functions seems to incur in slightly low increments of cost. The cost difference of executing the \textit{unsignEntity} function in Scenario A (calls \textit{checkValidity} once) and Scenario B (calls \textit{checkValidity} three times) is of 0.07 euros. But need to take into consideration that our analized scenarios are relatively simple, if have dozens of nodes with several vouches between each other the cost of executing a simple sign/unsign of a entity could have a considerably higher cost.
+
+The cost analysis in a fiat currency like euro also has the problem of we are analizingthe cost in the context of the main public Ethereum network.
+If this certificate is deployed in a private Ethereum network with fewer nodes, and all nodes are mining and receiving ether for every successful block mined, the costs dinamics could be different since there isn't \textit{real-world value} inherent to the ether in this network.
