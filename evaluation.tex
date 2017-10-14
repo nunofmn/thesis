@@ -319,7 +319,7 @@ But still, this attack could only be performed by a trusted node that decides to
 As in the CA-based solution, the IDChain solution is also capable of mitigate the same attack vectors, since the solution also uses TLS/HTTPS protocol for node's communication.
 This solution therefore, also suffers for the same problem as the previous evaluated solution — we are only to perform the certificate peer validation after the TLS handshake process.
 In this case is also necessary to perform a request to the IDChain API, which slightly increases the time frame where data could be exchanged with a potential malicious node.
-In this case, the attack could be also performed by malicious nodes from outside the DHT network, since we are using self-signed certificates and a certification path to verify the certificates against don't exist.
+The attack could be also performed by malicious nodes from outside the DHT network, since we are using self-signed certificates and a certification path to verify the certificates against don't exist.
 
 % falar de traidores?
 This solution is not using TLS mutual authentication due to the Node.js TLS restrictions we encountered, and was necessary to add a complementary scheme in order to perform TLS clients authentication.
@@ -339,21 +339,100 @@ This attack is only possible to be performed by a rogue node inside the DHT netw
 
 \subsubsection{Monetary Costs}
 
+We evaluated the costs of executing each smart contract function.
+In order to perform the evaluation we executed each function in \textit{testrpc} and obtained the \textit{gas} cost of its execution.
+It is possible to calculate the gas cost in testrpc because it uses the same \ac{EVM} as the real network client, and the total gas cost of the execution of a smart contract function  comes from the sum of each low-level operation in EVM gas cost.
+
+By default, each gas unit has a price defined in \textit{wei} unit which is equal to $1 x 10^{-18}$ \textit{ether} units.
+We then performed a conversion to euro currency using the conversion rate of $1 ether = 286.662 euros$ as of \textit{13 October 2017 at 16 PM} in the main Ethereum network.
+
+We calculated the cost also for different confirmation speeds in the network.
+It is possible to increase the amount of wei we are able to pay for each gas unit, so mining nodes give higher priority to our transactions, which speeds up the inclusion of our transactions in a valid block
+
+In Table~\ref{table:transaction-speed} are defined 3 confirmation tiers which we used to calculate transactions cost in function of confirmation speed.
+The data was retrieved from the ETH Gas Station\footnote{http://ethgasstation.info/} website.
+
+\begin{table}[]
+  \centering
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lcc}
+      \multicolumn{1}{c}{\textbf{Tier}} & \textbf{\begin{tabular}[c]{@{}c@{}}Gas Price \\ (Gwei)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Maximum Transaction Confirmation Time\\ (minutes)\end{tabular}} \\ \hline
+      SafeLow (\textless 20 minutes) & 4 & 20 \\ \hline
+      Standard (\textless 5 minutes) & 6 & 5 \\ \hline
+      Fast (\textless 2 minutes) & 25 & 2
+    \end{tabular}%
+  }
+  \caption{Transaction confirmation speed tiers.}
+\label{table:transaction-speed}
+\end{table}
+
+We defined two different scenarios with variable web of trust size, mainly to analyze the cost of execute recursively the \textit{checkValidity} function in the context of the \textit{unsignEntity} function.
+We also initiated entities with different names length, so it is possible to verify the cost difference of increasing the entities' name length.
+
+In the following scenarios is also considered that the minimum number of vouches necessary to a entity to become valid is equal to 3.
+
 \subsubsection{Scenario 1}
+
+In this scenario we performed the following operations:
+
+\begin{enumerate}[label=\alph*.]
+  \item Initiate entity 0 (initEntity function) with \textit{name} value of \textit{entity1};
+  \item Initiate Entity 1 with \textit{name} value of \textit{entity10};
+  \item Initiate Entity 2 with \textit{name} value of \textit{entity100};
+  \item Initiate Entity 3 with \textit{name} value of \textit{entity1000};
+  \item Entity 0 vouches for Entity 3 (signEntity function);
+  \item Entity 1 vouches for Entity 3;
+  \item Entity 2 vouches for Entity 3;
+  \item Entity 0 registers a new certificate (newCertificate function);
+  \item Entity 1 registers a new certificate;
+  \item Entity 1 revokes the previously registered certificate (revokeCertificate function);
+  \item Entity 0 revokes the previously registered certificate;
+  \item Entity 0 unvouches Entity 3 (unsignEntity function).
+\end{enumerate}
+
+The cost of each operation in function of the transaction confirmation speed is depicted in Figure~\ref{fig:scenario1-operation-cost}.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{Figures/evaluation/wot-scenario1-graph.pdf}
+  \caption{Scenario 1 web-of-trust graph.}
+\label{fig:scenario1-wot-graph}
+\end{figure}
 
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/evaluation/wot-scenario1.pdf}
-  \caption{Scenario 1 web-of-trust graph.}
-  \label{fig:scenario1-wot}
+  \caption{Scenario 1 operations costs.}
+\label{fig:scenario1-operation-cost}
 \end{figure}
 
 \subsubsection{Scenario 2}
 
+The following operations were performed:
+
+\begin{enumerate}[label=\alph*.]
+  \item Entity 0 vouches for Entity 3 (signEntity function);
+  \item Entity 1 vouches for Entity 3;
+  \item Entity 2 vouches for Entity 3;
+  \item Entity 0 vouches for Entity 4;
+  \item Entity 2 vouches for Entity 4;
+  \item Entity 3 vouches for Entity 4;
+  \item Entity 3 vouches for Entity 5;
+  \item Entity 0 unvouches Entity 3 (unsignEntity function).
+\end{enumerate}
+
+In this scenario we wanted to analyze the cost of performing the \textit{checkValidity} function along the descendants of the invalidated entity.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{Figures/evaluation/wot-scenario2-graph.pdf}
+  \caption{Scenario 2 web-of-trust graph.}
+\label{fig:scenario2-wot-graph}
+\end{figure}
+
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/evaluation/wot-scenario2.pdf}
-  \caption{Scenario 2 web-of-trust graph.}
-  \label{fig:scenario2-wot}
+  \caption{Scenario 2 operations costs.}
+\label{fig:scenario2-operation-cost}
 \end{figure}
-

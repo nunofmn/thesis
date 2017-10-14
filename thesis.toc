@@ -2,7 +2,7 @@
 \contentsline {chapter}{Acknowledgments}{iii}{chapter*.1}
 \contentsline {chapter}{Abstract}{v}{chapter*.2}
 \contentsline {chapter}{Resumo}{vii}{chapter*.3}
-\contentsline {chapter}{List of Figures}{xiii}{chapter*.8}
+\contentsline {chapter}{List of Figures}{xiv}{chapter*.8}
 \contentsline {chapter}{List of Tables}{xv}{chapter*.9}
 \contentsline {chapter}{Acronyms}{xvii}{section*.10}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
@@ -84,9 +84,9 @@
 \contentsline {subsubsection}{IDChain solution evaluation}{60}{section*.88}
 \contentsline {subsection}{\numberline {5.3.3}Smart contract tests}{61}{subsection.5.3.3}
 \contentsline {subsubsection}{Monetary Costs}{61}{section*.89}
-\contentsline {subsubsection}{Scenario 1}{61}{section*.90}
-\contentsline {subsubsection}{Scenario 2}{61}{section*.92}
-\contentsline {chapter}{\numberline {6}Conclusions}{63}{chapter.6}
-\contentsline {section}{\numberline {6.1}Summary}{63}{section.6.1}
-\contentsline {section}{\numberline {6.2}Future Work}{64}{section.6.2}
-\contentsline {chapter}{Bibliography}{67}{chapter*.94}
+\contentsline {subsubsection}{Scenario 1}{62}{section*.91}
+\contentsline {subsubsection}{Scenario 2}{62}{section*.94}
+\contentsline {chapter}{\numberline {6}Conclusions}{65}{chapter.6}
+\contentsline {section}{\numberline {6.1}Summary}{65}{section.6.1}
+\contentsline {section}{\numberline {6.2}Future Work}{66}{section.6.2}
+\contentsline {chapter}{Bibliography}{69}{chapter*.97}
