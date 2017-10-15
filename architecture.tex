@@ -2,28 +2,27 @@
 \label{chapter:architecture}
 
 This chapter describes the overall architecture of IDChain and outlines its main functional components.
-The main design goal is to allow to build a fully decentralized DHT-based system that is secure and can be closed to participation in a federated model, while minimizing trust in the intervenients.
-The main design goal is to allow to build a fully decentralized DHT-based system that is secure and can be closed to participation in a federated model, while minimizing trust in the intervenients.
+The main design goal to build a fully decentralized DHT-based system that is secure and can be closed to participation in a federated model, while minimizing trust in the intervenients.
 
 We introduce the main requirements in Section~\ref{architecture:requirements} and give a system architecture overview in Section~\ref{architecture:overview}.
-The remaining sections describe the in more detail the architecture of the solution and discuss the main design choices.
+The remaining sections describe in more detail the architecture of the solution and discuss the main design choices.
 
 \section{Requirements}\label{architecture:requirements}
 
 This thesis addresses the problem of building DHT-based systems in a secure fashion, mainly considering the problematics of close participation in the DHT, Sybil attacks mitigation and secure node communication.
 
-This problem will be tackled by proposing two different solutions, a centralized and a decentralized mechanism, which will allow to control nodes access to the DHT system.
+This problem will be tackled by proposing two different solutions, a centralized and a decentralized mechanism, which will allow to control nodes' access to the DHT system.
 
 Our overall goal is to provide a better decentralized solution and minimize trust between the intervenients.
 
-This thesis is especially focused in building the mechanism to be used in the Global Registry component of the reThink architecture, but we want to be able to abstract the DHT system, in order to be possible to use the DHT independently to enable developers to build other systems.
+This thesis is especially focused in building the mechanism to be used in the Global Registry component of the reThink architecture, but we want to decouple the DHT system, in order for it to be possible to use the DHT independently, enable developers to build other DHT-based systems.
 Therefore, the IDChain system should provide the follow functional requisites:
 
 \begin{itemize}
   \item Close the DHT participation, allowing only authorized nodes to join the system (federated or private system), therefore providing integrity and authentication to the DHT;
   \item Maintain a decentralized system that doesn't rely on a central entity or server;
-  \item Enable to easily add participants to the DHT;
-  \item Deal with key compromise, by allowing to revoke nodes certificates.
+  \item Easily add participants to the DHT;
+  \item Deal with key compromise, by allowing to revoke nodes' certificates.
 \end{itemize}
 
 Moreover, our system must fulfill the following non-functional requirements:
@@ -32,8 +31,8 @@ Moreover, our system must fulfill the following non-functional requirements:
   \item \textit{Scalability}: The system must work well given a large number of nodes and scale easily;
   \item \textit{No single point of failure}: the DHT system should work under a variable churn rate, i.e any node can be shutdown or disconnected from the network, and the system remains operational;
   \item \textit{Portability}: the security mechanism used should be portable and language-agnostic, in order to be possible to integrate the IDChain in other DHT-based systems;
-  \item \textit{Developers usability}: the DHT system should have a simple API (get/put functions) that enables different applications to be build on top;
-  \item \textit{Easy deployment and management}: the system should be fairly easy to deploy and manage. An easy to use \ac{UI} should be provided to management all the aspects of the system.
+  \item \textit{Developer usability}: the DHT system should have a simple API (get/put functions) that enables different applications to be build on top;
+  \item \textit{Easy deployment and management}: the system should be fairly easy to deploy and manage. An easy to use \ac{UI} should be provided to manage all the aspects of the system.
 \end{itemize}
 
 \section{Overview}\label{architecture:overview}
@@ -46,11 +45,11 @@ Our proposal will consist of three different architectures:
   \item DHT with IDChain mechanism - a \ac{DHT} system which also uses TLS for peer connectivity, but uses certificates managed with help of a blockchain smart contract.
 \end{itemize}
 
-This three different architectures will be built not only to provide a classic approach to peer connectivity security (in case of \ac{CA} mechanism), but also for evaluation purposes, mainly in terms of write/read performance of the \ac{DHT}.
+These three different architectures will be built not only to provide a classic approach to peer connectivity security (in case of \ac{CA} mechanism), but also for evaluation purposes, mainly in terms of write/read performance of the \ac{DHT}.
 But nevertheless, the main focus of this thesis is building the IDChain mechanism, which is the most innovative of all the presented architectures.
 
 In Section~\ref{architecture:vanilla-overview} and Section~\ref{architecture:ca-overview} an overview of the vanilla and \ac{CA} mechanism is given, respectively.
-In Section~\ref{architecture:idchain-overview} a detailed overview of the IDChain architecture is given, including a in-depth description of each sub-component that compose the architecture.
+In Section~\ref{architecture:idchain-overview} a detailed overview of the IDChain architecture is given, including an in-depth description of each sub-component that composes the architecture.
 
 \section{Vanilla DHT}\label{architecture:vanilla-overview}
 
@@ -66,19 +65,20 @@ The architecture of this solution is presented in Figure~\ref{fig:architecture-v
 
 The DHT nodes will implement a simple \ac{API} with a \textit{put} and \textit{get} functionality to write and read values, respectively, from the \ac{DHT}.
 
-This \ac{API} is used by developers that wish to build applications on top the DHT system.
-The DHT node can be used and deploy as part of applications, since it will be required as library by the application code, which then call directly the DHT put/get functions.
-The \ac{DHT} nodes will communicate through a insecure channel using TCP or UDP, which are the most common protocols used public facing DHT systems, for example, UDP is used by the Mainline DHT of BitTorrent.
+This \ac{API} is used by developers that wish to build applications on top of the DHT system.
+The DHT node can be used and deployed as part of applications, since it will be required as a library by the application code, which then calls directly the DHT put/get functions.
+The \ac{DHT} nodes will communicate through an insecure channel using TCP or UDP, which are the most commonly used protocols by public facing DHT systems – for instance, UDP is used by the Mainline DHT of BitTorrent.
 
 The node bootstrap process is done by knowing at least one of the nodes already in the DHT, and by connecting to them.
-This architecture lays down the basis for the other solutions architectures, which will have the same DHT client with the put/get API but will use secure communication protocol between the DHT nodes.
+This architecture lays down the basis for the other solutions' architectures, which will have the same DHT client with the put/get API but will use a secure communication protocol between the DHT nodes.
 
 \section{DHT with \ac{CA} mechanism}\label{architecture:ca-overview}
 
 The previous solution does not provide any kind of secure communication between nodes, opening way to a multitude of different kind of attacks, like \ac{MITM} attacks.
-Also doesn't provide any mechanism to close the participation in the \ac{DHT} (assuming the DHT nodes are Internet facing servers).
+Also it doesn't provide any mechanism to close the participation in the \ac{DHT} (assuming the DHT nodes are Internet facing servers).
 
-The classic approach to provide a secure communication channel between nodes, is by using the \ac{TLS} protocol coupled with a X509 PKI infrastructure, which is summarized in Figure~\ref{fig:architecture-ca-overview}.
+The classic approach to providing a secure communication channel between nodes is by using the \ac{TLS} protocol coupled with a X509 PKI infrastructure.
+This approach is summarized in Figure~\ref{fig:architecture-ca-overview}.
 
 \begin{figure}[htb]
   \centering
@@ -87,7 +87,7 @@ The classic approach to provide a secure communication channel between nodes, is
 \label{fig:architecture-ca-overview}
 \end{figure}
 
-This strategy is a good fit for a federated model since, usually, there is a consensus between the enterprises (in the Global Registry case, a \acl{SP}) participating in the system, and therefore is possible to establish a \ac{CA} which will issue the certificates of all the \ac{SP} nodes.
+This strategy is a good fit for a federated model since, usually, there is a consensus between the enterprises (in the Global Registry case, a \acl{SP}) participating in the system, and therefore it is possible to establish a \ac{CA} which will issue the certificates of all the \ac{SP} nodes.
 
 This solution could be even more robust if we create a two-tier architecture, as shown in Figure~\ref{fig:ca-hierarchy}.
 
@@ -98,20 +98,20 @@ This solution could be even more robust if we create a two-tier architecture, as
 \label{fig:ca-hierarchy}
 \end{figure}
 
-In this hierarchy there is a offline Root CA which issuesfor each \ac{SP} a intermediate CA certificate.
-This intermediate CAs are maintained online (for \ac{CRL} access) and issue certificates for each DHT node controlled by the respective \ac{SP} node.
+In this hierarchy there is an offline Root CA which issues for each \ac{SP} an intermediate CA certificate.
+These intermediate CAs are maintained online (for \ac{CRL} access) and issue certificates for each DHT node controlled by the respective \ac{SP} node.
 
-In each node certificate, should be registered the node identifier, IP address and/or domain.
+In each node certificate the node identifier, IP address and/or domain should be registered.
 
-Since we will be using TLS mutual-authentication is necessary that the issued certificates could be used as server certificates and client certificates.
+Since we will be using TLS mutual-authentication it is required that the issued certificates could be used as server certificates and client certificates.
 
-The node bootstrap process is the same as the vanilla solution, but when establishing the TLS connection between the nodes, is necessary to verify during the TLS handshake that the certificates are signed by one of the valid intermediate CA's, and check if the contacting node identifier is equal to the one registered in the received certificate.
+The node bootstrap process is the same as the vanilla solution, but when establishing the TLS connection between the nodes, it is necessary to verify during the TLS handshake that the certificates are signed by one of the valid intermediate CA's, and check if the contacting node identifier is equal to the one registered in the received certificate.
 If any of these two validations fail, the connection is closed.
 This verification is done both ways: the connection server checks if the client certificate is valid according to these specifications, and the connection client verifies if the server certificate is also valid.
 
 This verifications are done every time that a TLS connection is established, i.e when a message is sent between nodes.
-This could incur in a performance decrease, since every time a message is sent this verifications are done when establishing the TLS connections.
-A possible solution to mitigate this performance decreaseis to use TLS Session Resumption\cite{rfc5077} mechanism that allow a TLS connection server to resume sessions, avoiding at the same time keeping session state per-client.
+This could incur in a performance decrease, since every time a message is sent these verifications are done when establishing the TLS connections.
+A possible solution to mitigate this performance decrease is to use TLS Session Resumption\cite{rfc5077} mechanism that allow a TLS connection server to resume sessions, avoiding at the same time, keeping session state per-client.
 
 \section{DHT with IDChain mechanism}\label{architecture:idchain-overview}
 
@@ -141,7 +141,7 @@ The DPKI can be subdivided in three main components:
 \label{fig:architecture-overview}
 \end{figure}
 
-In the scope of the current reTHINK project architecture, these components will be only used in a federated model, i.e the nodes in the \ac{DHT} will all belong to the Service Providers (SP).
+In the scope of the current reTHINK project architecture, these components will only be used in a federated model, i.e the nodes in the \ac{DHT} will all belong to the Service Providers (SP).
 Therefore it is possible to assume some level of trust with the nodes, which opens the possibility to use a more traditional approach for managing the certificates, for example, a Certificate Authority.
 But, in a federated model we might want to minimize trust in other organizations or SP, in order to discourage fradulent activity or over-control of the system by one or several organizations.
 \acp{CA} have also the problem of adding an extra burden in organizations, since it isn't a totally automated system and still need some human intervention, mainly when accepting and signing \acp{CSR}.
@@ -160,8 +160,7 @@ When a node is routing a message through the overlay network, the peer connectiv
 In order to verify the authenticity of the certificate, the peer identifier of the message sender should be equal to the peer identifier in the sender certificate.
 But this verification is not sufficient to guarantee the validity of the certificate, since a peer this way can impersonate several identities.
 
-So is necessary to implement a mechanism similar to certificate pinning.
-Therefore the peer should also check if there is a correspondence between the certificate fingerprint and the peer identifier registered in the blockchain.
+Consequently, the peer should also check if there is a correspondence between the certificate fingerprint and the peer identifier registered in the blockchain.
 
 %CHECK THIS
 %Each new user in the \textit{Registry} system will also need to generate a key pair and send his current SP the public key. The SP will ensure that a user certificate with the user public key is created in the blockchain.
@@ -171,14 +170,14 @@ Therefore the peer should also check if there is a correspondence between the ce
 
 \section{Decentralized Public Key Infrastructure} \label{ssec:blockchain}
 
-Estabilishing \ac{TLS} connections between nodes requires trusting the exchanged peers certificates during the \ac{TLS} connection handshake.
-In a traditional setup the underlying \ac{PKI} and \acp{CA} guarantee that the certificates are trustworthy, since the \acp{CA} sign the certificates.
-If the peer trusts the \ac{CA} that signed off the certificate and have access to the root \ac{CA} certificate, it's able to verify the other peers certificates.
+Establishing \ac{TLS} connections between nodes requires trusting the exchanged peers' certificates during the \ac{TLS} connection handshake.
+In a traditional setup, the underlying \ac{PKI} and \acp{CA} guarantee that the certificates are trustworthy, since the \acp{CA} sign the certificates.
+If the peer trusts the \ac{CA} that signed off the certificate and has access to the root \ac{CA} certificate, it's able to verify the other peers' certificates.
 
 But if we want to minimize trust and build a fully decentralized model, trusting in a centralized entity like a \ac{CA} defeats that purpose.
-Another mechanisms exist that try to decentralize this trust model, for instance, web of trust models, in systems (like \ac{PGP}), where users sign assertions for each other keys or certificates.
+Another mechanisms exist that try to decentralize this trust model, for instance, web of trust models, in systems (like \ac{PGP}), where users sign assertions for each other's keys or certificates.
 
-Still, most of the times \ac{PGP} users still rely in a centralized mechanism — key servers — for distributing certificates or keys.
+Still, most of the times, \ac{PGP} users still rely in a centralized mechanism — key servers — for distributing certificates or keys.
 
 In order to obtain these certificates securely and verify their authenticity, in a totally decentralized manner without needing a CA, we are going to build a Decentralized Public Key Infrastructure (DPKI) using smart contracts in a blockchain.
 
@@ -196,31 +195,31 @@ In the following sub-sections a more detailed overview of each piece of the \ac{
 \subsection{IDChain Smart Contract}
 
 The logic and set of rules that compose the \ac{DPKI} are stored in a blockchain smart contract.
-The smart contract that we gonna to create has the main objective of associate an peer identifier to a valid certificate, in a way that any system can easily query for and verify that association.
+The smart contract that we are going to create has the main objective of associating a peer identifier to a valid certificate, in a way that any system can easily query for and verify that association.
 
 \subsubsection{Trusted Certification}
-Creating this association is a sufficient condition to guarantee the validity and authenticity of a peer certificate, but we also need to be able to restrict and control the participation in the \ac{DHT}, in order to be able to create a mechanism of defense against Sybil attacks.
+Creating this association is a sufficient condition to guaranteeing the validity and authenticity of a peer certificate, but we also need to be able to restrict and control the participation in the \ac{DHT}, in order to create a mechanism of defense against Sybil attacks.
 The starting point are the conclusions drawn by Douceur\cite{Douceur2002} that trusted certification is the only approach that has the potential to eliminate Sybil attacks, however this certification relies on a centralized entity.
 
 \subsubsection{Smart Contracts and Autonomy}
-Although, with the advent of the blockchain technologies and smart contracts, is possible to build entities and organizations like the DAO~\cite{ralphc.merkle2016}, entities that are truly transparent, that can't be stopped or interrupted, and more importantly can't be corrupted or tampered.
-The rules and code that dictate the behavior of this entities, could be defined by a smart contract deployed in a blockchain.
+With the advent of the blockchain technologies and smart contracts, it is possible to build entities and organizations like the DAO~\cite{ralphc.merkle2016}, entities that are truly transparent, that can't be stopped or interrupted, and more importantly can't be corrupted or tampered.
+The rules and code that dictate the behavior of these entities could be defined by a smart contract deployed in a blockchain.
 
-This way, leveraging this technologies, is possible to build a system that decentralizes the trusted certification mechanism.
+This way, leveraging these technologies, it is possible to build a system that decentralizes the trusted certification mechanism.
 
 A good starting point is encoding a hard limit on the number of identifiers or certificates, that an entity can associate with their own blockchain address.
 
 We can also opt by a soft limit or resource-based approach, for example, by imposing the payment of a value for each certificate association created, leveraging the cryptocurrency inherently associated with the blockchain system.
 
 \subsubsection{Smart Contract Logic}
-The main starting point the smart contract is the \textit{Certificate} structure and fields.
-In Figure~\ref{fig:certificate-structure}, is depicted the necessary fields in this structure.
+The main starting point of the smart contract is the \textit{Certificate} structure and fields.
+In Figure~\ref{fig:certificate-structure} are depicted the necessary fields in this structure.
 
-Note that is not necessary to save the full certificate metadata in the blockchain: the certificates are already exchanged in the TLS handshake between the nodes.
+Note that it is not necessary to save the full certificate metadata in the blockchain: the certificates are already exchanged in the TLS handshake between the nodes.
 
-Could be possible to save all the certificate metadata or even the full encoded certificate for searchability and navigability proposes, but blockchains are not appropriated to save large quantities of information.
-Not only blockchains have a maximum ammount of data that can be encoded in a block and transaction, also in the case of a blockchain as Ethereum, the cost of storing full certificates in the blockchain would be very high.
-Still, if this functionality was necessary and we wanted to maintain a decentralized system, a better approach would be store the full certificate in a \ac{p2p} filesystem like \ac{IPFS}, and store in the \textit{Certificate} structure the address hash of the certificate.
+It could be possible to save all the certificate metadata or even the full encoded certificate for searchability and navigability purposes, but blockchains are not appropriate for storing large quantities of data.
+Not only blockchains have a maximum amount of data that can be encoded in a block and transaction, also in the case of a blockchain as Ethereum, the cost of storing full certificates in the blockchain would be very high.
+Still, if this functionality was necessary and we wanted to maintain a decentralized system, a better approach would be storing the full certificate in a \ac{P2P} filesystem like \ac{IPFS}, and saving the address hash of the certificate in the \textit{Certificate} structure.
 
 \begin{figure}[htb]
   \centering
@@ -229,14 +228,14 @@ Still, if this functionality was necessary and we wanted to maintain a decentral
 \label{fig:certificate-structure}
 \end{figure}
 
-Since we are trying to build this \ac{DPKI} under a federated model, is still necessary to define the trust mechanism in this system.
-So we are building the trust mechanism relying on a web of trust model built on top of the blockchain.
+Since we are trying to build this \ac{DPKI} under a federated model, the trust mechanism must be defined for the system.
+Hence we are building the trust mechanism relying on a web of trust model built on top of the blockchain.
 
-As is shown in Figure~\ref{fig:web-of-trust-architecture}, a newly created entity to be accepted should be vouched by a minimum number of entities.
+As is shown in Figure~\ref{fig:web-of-trust-architecture}, a newly created entity to be accepted should be vouched for by a minimum number of entities.
 One peculiar aspect of this architecture, consequence of the federated model, is that each entity in the system is able to create several node certificates.
 This can undermine smaller entities participating in the system, and could even allow one single entity to control the whole \ac{DHT}, by generating unlimited node certificates.
 % reformular esta frase %
-A combination of an hard limit, for example, a maximum number of certificates each entity can have, and a soft limit, i.e defining a cost, using the underlying cryptocurrency, for each certificate, could provider a equal and fair system for all the entities involved.
+A combination of an hard limit, for example, a maximum number of certificates each entity can have, and a soft limit, i.e defining a cost, using the underlying cryptocurrency, for each certificate, could provide an equal and fair system for all the entities involved.
 
 \begin{figure}[htb]
   \centering
@@ -247,8 +246,8 @@ A combination of an hard limit, for example, a maximum number of certificates ea
 
 Defining the web of trust mechanism in the smart contract requires the creation of an \textit{Entity} structure.
 In Figure~\ref{fig:entity-structure} are defined the necessary fields.
-Is important to note that the entities addresses that an entity vouched for (\textit{signed} field) and the entities addresses that vouched for our own entity (\textit{signers} field) are stored in this entity, because will be necessary to constantly calculate the state of each entity.
-If we considered a graph representation (usual in the web of trust model), this fields encode the inbound arrows and outbound arrows of each entity.
+It is important to note that the entities' addresses that an entity vouched for (\textit{signed} field) and the entities' addresses that vouched for our own entity (\textit{signers} field) are stored in this entity, because it will be necessary to constantly calculate the state of each entity.
+If we consider a graph representation (usual in the web of trust model), these fields encode the inbound arrows and outbound connections of each entity.
 
 \begin{figure}[htb]
   \centering
@@ -258,21 +257,21 @@ If we considered a graph representation (usual in the web of trust model), this 
 \end{figure}
 
 Another important aspect to take into account when building this smart contract is the bootstrapping process.
-In order to the web of trust mechanism to work is necessary to define the initial entities which are trusted.
-Since we are in an federated model, the entities that will deploy the smart contract could prearrange the entities that will be trusted from the beginning.
+In order for the web of trust mechanism to work it is necessary to define the initial entities which are trusted.
+As we are in a federated model, the entities that will deploy the smart contract could prearrange the entities that will be trusted from the beginning.
 
-Another possible solution, which we will use, is to give a trust status to the first \textit{n} entities that will register in the smart contract.
+Another possible solution, which we will use, is to give a trust status to the first \textit{n} entities that register in the smart contract.
 The entities that are given this initial trust will have a \textit{true} value in the \textit{bootstraper} field.
 
-The minimum functionalities or functions that the smart contract should provider are:
+The minimum functionalities or functions that the smart contract should provide are:
 
 \begin{itemize}
-  \item \textbf{Register a new entity} - this function should init a new entity associated with the blockchain account that called the function;
+  \item \textbf{Register a new entity} - this function should initialize a new entity associated with the blockchain account that called the function;
   \item \textbf{Create a new certificate} - generate a new certificate with the given fields in the blockchain, creating also the respective associations with the entity generating it;
   \item \textbf{Revoke the certificate} - allow the entity that generated the certificate to revoke it;
   \item \textbf{Vouch for entity} - should add signer address to the \textit{signers} structure in the target entity, and add the target entity address to the \textit{signed} structure in the signer entity;
   \item \textbf{Unvouch for entity} - should remove the source entity address from the \textit{signers} structure in the target entity, and remove the target entity address from the \textit{signed} structure in the signer entity;
-  \item \textbf{Check entity validity} - after vouching or unvouching an entity, is necessary to check the target entity and its dependants. If any of the entities along the chain of trust doesn't have the minimum required vouches, it should be considered invalid;
+  \item \textbf{Check entity validity} - after vouching or unvouching an entity, it is necessary to check the target entity and its dependants. If any of the entities along the chain of trust doesn't have the minimum required vouches, it should be considered invalid;
 \end{itemize}
 
 % TODO: talk about challenges of the ethereum platform development
@@ -282,16 +281,16 @@ The minimum functionalities or functions that the smart contract should provider
 In some aspects the web of trust mechanism that we are going to implement is different from the more well-known web of trust systems.
 
 One of these aspects, as shown in Figure~\ref{fig:wot-scenario-a}, is that a single entity could create several node certificates.
-As said before, this is aligned with the fact that, as we are working in a federated model, we may want that each \ac{SP} can have multiple nodes, in order to the \ac{DHT} to be scalable.
+As said before, this is aligned with the fact that as we are working in a federated model, we may want for each \ac{SP} cto have multiple nodes, in order for the \ac{DHT} to be scalable.
 
-The valid state of each certificate is determined by its entity state, if a entity has the minimum number of vouches required by the system, then the certificate created by the entity is considered valid.
+The valid state of each certificate is determined by its entity state: if an entity has the minimum number of vouches required by the system, then the certificate created by the entity is considered valid.
 This is depicted in Figure~\ref{fig:wot-scenario-a}, where \textit{Entity D} has two certificates: \textit{Node 2 Certificate} and \textit{Node 3 Certificate}.
 These certificates are considered valid because the entity that created them, \textit{Entity D}, has the minimum number of vouches required, and therefore is considered a valid entity.
 
-If one entity loses one vouch and its number of vouches drops below the minimum threshold, then is necessary to verify every descendant of the entity, and invalidate any entity that this way does not have the minimum number of vouches.
+If one entity loses one vouch and its number of vouches drops below the minimum threshold, then it is necessary to verify every descendant of the entity, and invalidate any entity that this way does not have the minimum number of vouches.
 
-This could be verified in Figure~\ref{fig:wot-scenario-b}, \textit{Entity C} unvouches \textit{Entity D} which is rendered invalid (considering a minimum of three vouches), and when verifying its descendants \textit{Entity E} also doesn't have the minimum number of vouches required, and therefore is rendered invalid also.
-Is worth mentioning that the certificates of \textit{Entity D} and \textit{Entity E}, as mentioned before, are also considered invalid.
+This could be verified in Figure~\ref{fig:wot-scenario-b}: \textit{Entity C} unvouches \textit{Entity D} which is rendered invalid (considering a minimum of three vouches) and when verifying its descendants, \textit{Entity E} also doesn't have the minimum number of vouches required and therefore is rendered invalid.
+It is worth mentioning that the certificates of \textit{Entity D} and \textit{Entity E}, as mentioned before, are also considered invalid.
 
 \begin{figure}[htb]
   \centering
@@ -313,11 +312,11 @@ This \ac{API} will run on the \ac{SP} network, and can be deployed in two ways: 
   \caption{IDChain API deployment strategies.}
 \end{figure}
 
-The \ac{API} will have the classic components usually associated with a RESTful service: every endpoint returns JSON documents and is possible to address every stored resource (certificates, entities, transactions, etc) in the system.
+The \ac{API} will have the classic components usually associated with a RESTful service: every endpoint returns JSON documents and it is possible to address every stored resource (certificates, entities, transactions, etc) in the system.
 
 The endpoints that will be available are presented in Table~\ref{table:idchain-api-spec}
 
-An advantage of building this \ac{API} to access the IDChain functionalities, is that allows to build applications and services that easily interact with it through \ac{HTTP} while being language-agnostic, easing the access to the system.
+An advantage of building this \ac{API} for accessing the IDChain functionalities, is that allows to build applications and services that easily interact with it through \ac{HTTP} while being language-agnostic, easing the access to the system.
 
 An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in greater detail in Subsection~\ref{subsection:idchain-app}.
 
@@ -363,39 +362,38 @@ The IDChain API will be backed up by a relational database (using \ac{SQL}) wher
 
 The reasoning behind this mainly due to performance: storing all this information in a local \ac{SQL} database will remove the necessity of constantly querying the blockchain.
 
-Also using a relational database allows to structure all the transactions and data associated with the system, which enables more powerful queries in a simpler way.
+Using a relational database allows for the structuring of all the transactions and data associated with the system, which enables more powerful queries in a simpler way.
 
-For example, obtaining all the certificates associated with an entity, or get the blockchain transaction where a specific revocation was made.
+For instance, obtaining all the certificates associated with an entity or getting the blockchain transaction where a specific revocation was made.
 
-This kind of associations and structure is harder to obtain when using the blockchain client directly, since the client only deals with transactions at a lower level, without attaching a meaning at a smart contract basis to each transaction.
-In order to store the data in the database, we will the blockchain \textit{events}.
-Is possible to trigger events in smart contracts that, when are executed in a transaction context, will notify the blockchain client, i.e. when a client attaches a valid block to the blockchain the client will be notified of this event.
-This allow to mirror the transaction information related with our smart contract to the relational database.
+These kind of associations and structure are harder to obtain when using the blockchain client directly, since the client only deals with transactions at a lower level, without attaching a meaning at a smart contract basis to each transaction.
+In order to store the data in the database, we will use the blockchain's \textit{events}.
+It is possible to trigger events in smart contracts that when executed in a transaction context, will notify the blockchain client, i.e. when a client attaches a valid block to the blockchain the client will be notified of this event.
+Hence we can mirror the transaction information related with our smart contract to the relational database.
 
 \subsection{IDChain Management Application}
 \label{subsection:idchain-app}
 
-We will also build an application that allow to do all the operations related with the IDChain system.
-Will be an web application, that will interact directly with the IDChain API.
+In addiction we will build an application that allows to do all the operations related with the IDChain system.
+It will be a web application that will interact directly with the IDChain API.
 
-The main functionalities will revolve around entity and certificate management: view entities vouches, create new node certificates, view the transactions related with each entity, etc.
+The main functionalities will revolve around entity and certificate management: viewing entities vouches, creating new node certificates, viewing the transactions related with each entity, etc.
 
-The main inspiration for this system are the web-based \textit{blockchain explorers}\footnote{https://blockexplorer.com/} that exist for blockchains like Ethereum and Bitcoin.
+The main inspiration for this system are web-based \textit{blockchain explorers}\footnote{https://blockexplorer.com/} that exist for blockchains like Ethereum and Bitcoin.
 
-The web application will be built using an \ac{SPA} architecture, leveraging browser Javascript frameworks.
-This will enabled us to recreate a desktop application fell, keeping the web application convenience and ease of access.
+The web application will be built using a \ac{SPA} architecture, leveraging browser Javascript frameworks.
+This will enable us to recreate a desktop application feel, keeping at the same time the web application's convenience and ease of access.
 
 \section{Overlay network processes}
 
 \subsection{Node bootstrap and registration}
-In order to participate in the DHT, first the \ac{SP} which wants to deploy the node must create a blockchain account/wallet, and then initialize his entity (one for each account) in the IDChain system.
+In order to participate in the DHT, the \ac{SP} who wishes to deploy the node must first create a blockchain account/wallet, and then initialize his entity (one for each account) in the IDChain system.
 
-The entity then should be validated by the other entities vouches.
+The entity should then be validated by the other entities vouches.
 
-Then should create the node's X509 self-signed certificate, and register the certificate fingerprint in the blockchain through the IDChain smart contract.
+Next it should create the node's X509 self-signed certificate, and register the certificate fingerprint in the blockchain through the IDChain smart contract.
 
 Finally the node will enter the DHT network using a node identifier equal to the one described in the registered certificate.
-
 
 %This process is summarized in Figure~\ref{fig:new-node}.
 
@@ -411,12 +409,12 @@ The node will receive the destination node certificate, and will send his own ce
 
 Each node will fetch the certificate information from the blockchain through the IDChain API by the destination node identifier, by issuing a \textit{GET} request to the \textit{/peer/\{id\}} endpoint.
 
-Will be necessary to add an extra-step to the TLS handshake, to verify the validity of the exchanged certificates.
+It will be necessary to add an extra-step to the TLS handshake to verify the validity of the exchanged certificates.
 As depicted in Figure~\ref{fig:tls-handshake-plus} is necessary to verify the following:
 
 \begin{itemize}
-  \item The fingerprint of the exchanged certificate is equal to the fingerprint registered in the blockchain;
-  \item The node identifier registered in the certificate is equal to the node identifier.
+  \item That the fingerprint of the exchanged certificate is equal to the fingerprint registered in the blockchain;
+  \item That the node identifier registered in the certificate is equal to the node identifier.
 \end{itemize}
 
 \begin{figure}[htb]
@@ -429,13 +427,13 @@ As depicted in Figure~\ref{fig:tls-handshake-plus} is necessary to verify the fo
 %Therefore the nodes will cache the fetched certificates, and regularly (every 5 minutes for example) fetch the CRL from the blockchain, to ensure the freshness of the public keys.
 
 \subsection{Eclipse and Sybil attacks defense}
-The mitigation of possible Sybil and Eclipse attacks leverage the blockchain cryptocurrency.
+The mitigation of possible Sybil and Eclipse attacks leverages the blockchain cryptocurrency.
 
 The execution of the certificate creation process in the blockchain will require the payment of a value in ether, defined by the contract creator, which will be saved in the \textit{contract account} balance.
 If an attacker tries to launch a Sybil attack, he will need to pay an enormous amount of ether, making the attack infeasible.
 
-This solution will also help mitigate possible Eclipse attacks, since preventing Sybil attacks is a constraint to launch Eclipse attacks.
-Coupled with the Kademlia k-bucket replacement policy, where new nodes are only added if a bucket is not full and parallel routing, an efficient defense against Eclipse attacks is achieved.
+This solution will also help mitigate possible Eclipse attacks, since preventing Sybil attacks is a constraint to launching Eclipse attacks.
+Coupled with the Kademlia k-bucket replacement policy, where new nodes are only added if a bucket is not full, and parallel routing, an efficient defense against Eclipse attacks is achieved.
 
 %\subsection{Data replication}
 %When a DHT node receives a request to store user data, is necessary to ensure data replication, in order to achieve data availability.
@@ -443,9 +441,9 @@ Coupled with the Kademlia k-bucket replacement policy, where new nodes are only 
 %In case of node failure, the content may timeout and be removed, but since the DHT node run in a SP, a fast restart of the DHT node is assumed.
 
 \section{Comparison with a CA}
-Using a blockchain to build a PKI, is possible to minimize the trust, relatively to a centralized solution, like a CA.
+Using a blockchain to build a PKI, it is possible to minimize the trust, relatively to a centralized solution, like a CA.
 % time ordered?
-Due to the nature of the blockchain as an immutable transactional database, is possible to guarantee the validity of each transaction, through inspection of the past ones.
+Due to the nature of the blockchain as an immutable transactional database, it is possible to guarantee the validity of each transaction, through inspection of the past ones.
 This immutability property also allows to perform audits to the blockchain, in order to verify the integrity of the data stored.
 
 The biggest disadvantage of the blockchain is the computational resources needed to guarantee its proper operation and security, if we want to deploy a private blockchain network.
