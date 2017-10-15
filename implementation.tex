@@ -5,59 +5,59 @@ This chapter addresses the main decisions adopted regarding the implementation o
 
 \section{Adopted Technologies}
 
-In this section we will present the chosen technologies to implement the proposed work, for each component of the architecture.
+In this section we will present the chosen technologies to implement the proposed work for each component of the architecture.
 
 \subsection{DHT}
 
-In a first instance, the chosen library to implement the DHT node was \textit{TomP2P}\footnote{http://tomp2p.net/} a implementation of Kademlia in Java.
+In a first instance, the chosen library to implement the DHT node was \textit{TomP2P}\footnote{http://tomp2p.net/} an implementation of Kademlia in Java.
 The use of TomP2P was already decided before-hand, since the Global Registry component in the reThink project, was already partially implemented using it.
 This restricted the implementation options from the get-go, since it wasn't possible to compare different \ac{DHT} implementations and check which one could be more easily extended.
 
 We tried to modify the TomP2P source code, and implement TLS connection support.
-This endeavor didn't succeeded, mainly since the TomP2P code is tightly coupled to TCP and UDP connections.
+This endeavor didn't succeed, mainly since the TomP2P code is tightly coupled to TCP and UDP connections.
 
 Since TomP2P uses \textit{Netty}\footnote{https://netty.io/}, a Java NIO client-server \ac{NIO} framework, we tried to to change Netty instance calls to TLS, a try which revealed infeasible.
 
 Therefore we decided to implement the mechanisms using another DHT system.
-Several DHT implementations exist in different languages, but was necessary to pin down an implementation that had a modular architecture and could be easily extended.
+Several DHT implementations exist in different languages, but it was necessary to pin down an implementation that had a modular architecture and could be easily extended.
 
 The implementation that revealed to be the most modular was the one of \textit{Kad}\footnote{https://kadtools.github.io} library, for \textit{Node.js}\footnote{https://nodejs.org/} and based on Kademlia.
 This implementation allows to easily extend the base DHT with custom transports, middleware, storage layers and message processors, which enabled us to build a custom transport with TLS mutual-authentication and custom verification rules.
 
 The same DHT client was used for the three different mechanisms: vanilla, CA-based and IDChain.
-Is possible to switch between the three different mechanisms by declaring in the configuration file which one we want to use.
+It is possible to switch between the three different mechanisms by declaring in the configuration file which one we want to use.
 
 \subsection{Blockchain}
 
-The blockchain that we used is Ethereum.
+The blockchain that we used was Ethereum.
 There are a number of other blockchains currently available that enable developers to build applications on top of it using smart contracts, like Hyperledger Fabric\cite{cachin2016architecture} or R3 Corda\cite{mikehearn2016}, but these implementations have more specific use-cases, enterprise and finances respectively.
 
-A quick analysis between these three platforms show significant architectural differences, in such a way that we can even consider an higher-level classification for these three platforms, since not all of them show the main characteristics of a blockchain (taking in consideration the Bitcoin reference paper).
-A broader definition that encapsulates this three platforms is \ac{DLT}.
+A quick analysis between these three platforms shows significant architectural differences, in such a way that we can even consider an higher-level classification for these three platforms, since not all of them show the main characteristics of a blockchain (taking in consideration the Bitcoin reference paper).
+A broader definition that encapsulates these three platforms is \ac{DLT}.
 
 The Hyperledger Fabric platform has a modular approach to blockchains. It's a private blockchain system  and is permissioned, i.e doesn't allow unknown entities to participate in the system.
 To participate in the system the members of a Hyperledger Fabric system, must enroll through a \ac{MSP}.
-This allows different architectural approaches in the system, because is not strictly necessary to have a \ac{POW} mechanism, like in Ethereum or Bitcoin (which may be considered open networks), and is possible to use different consensus mechanisms in the network.
+This allows different architectural approaches in the system, because it is not strictly necessary to have a \ac{POW} mechanism, like in Ethereum or Bitcoin (which may be considered open networks), and it is possible to use different consensus mechanisms in the network.
 Also, there isn't any built-in currency like in Bitcoin or Ethereum.
 
 The R3 Corda system is considered a \ac{DLT} for financial institutions.
-Is also permissioned and private, and uses a concept of notary nodes to validate uniqueness of transactions. Like Fabric, also allows a more fine-grained control of the consensus mechanism.
+It is also permissioned and private and uses a concept of notary nodes to validate uniqueness of transactions. Like Fabric, it also allows a more fine-grained control of the consensus mechanism.
 Data is shared on a need-to-know basis, there is no global broadcast of all the transactions in the system.
 
 Finally, the Ethereum platform is the more generic blockchain platform of the ones referenced.
-Is permission-less, and can be public or private.
+It is permission-less, and can be public or private.
 All the participants have to achieve consensus over all the transactions of the system, using the \ac{POW} consensus and leveraging the built-in currency (ether).
 
 Our choice was Ethereum due to a number of reasons:
 
 \begin{itemize}
-	\item Permissionless - even thought we want to build our mechanism around a federated/enterprise model, this proof of concept may be easily adapted to be used as a global system.
+  \item Permissionless - even though we want to build our mechanism around a federated/enterprise model, this proof of concept may be easily adapted to be used as a global system.
   Since the Ethereum network is public, and we could also deploy private instances, it is the right fit.
 	\item Developer ecosystem - right now, Ethereum has the biggest developer community, with a increasing number of development tools to aid the development and deploy process of smart contracts.
 \end{itemize}
 
 
-Even thought the Ethereum network is currently the system with the better developer ecosystem, there are still several shortcomings when developing against it.
+Despite the fact that Ethereum network is currently the system with the better developer ecosystem, there are still several shortcomings when developing against it.
 In Section~\ref{implementation:idchain} we detail some of the difficulties and shortcomings of the Ethereum smart contracts we encountered during development.
 
 \subsection{IDChain API}
@@ -77,25 +77,26 @@ At the time of development was the most mature library to interface with the Eth
 The Ruby, Java and .Net implementations were still in early stages of development.
 
 % verificar isto
-The Hapi framework was chosen because allows to build APIs encapsulating APIs endpoints around a plugin system. For example, is possible to create a plugin that encapsulates all the endpoints that are related with the certificates domain.
-This allow to compose the API using tiny modules that contain the business logic of each domain in the application, which later could be decoupled and deployed separately.
-Also Hapi has already a couple of modules built-in for dealing with input and response validation, error handling, session caching, logging, etc.
+The Hapi framework was chosen because allows to build APIs encapsulating endpoints around a plugin system.
+For example, it is possible to create a plugin that encapsulates all the endpoints that are related to the certificates' domain.
+This allow us to compose the API using tiny modules that contain the business logic of each domain in the application, which later could be decoupled and deployed separately.
+Also Hapi already has a couple of modules built-in for dealing with input and response validation, error handling, session caching, logging, etc.
 
 We decided to use an \ac{ORM} to interact with the database due to the following reasons:
 
 \begin{itemize}
   \item Allows to easily declare the database schema of the different API entities;
-  \item Leads to a huge reduction in code, since eliminates the need for repetitive SQL queries;
-  \item Facilitates navigation of entities relationships;
+  \item Leads to a huge reduction in code, since it eliminates the need for repetitive SQL queries;
+  \item Facilitates navigation of entities' relationships;
   \item Transaction management and isolation;
-  \item Independent of the SQL database or dialect used, allowing to use any SQL database or dialect.
+  \item Independent of the SQL database or dialect used, allowing the use of any SQL database or dialect.
 \end{itemize}
 
-We decided to use the Sequelize ORM, since is the most mature and fully-fledge SQL ORM for Node.js.
+We decided to use the Sequelize ORM, since it is the most mature and fully-fledged SQL ORM for Node.js.
 
 \subsubsection{Database}
 
-The database we decide used with the IDChain API was \textit{PostgreSQL}\footnote{https://www.postgresql.org/}.
+The database we decided to use with the IDChain API was \textit{PostgreSQL}\footnote{https://www.postgresql.org/}.
 
 The decision to use SQL comes from the necessity of predefining a schema and normalize the processed data from the blockchain.
 
@@ -106,45 +107,45 @@ The IDChain Management application was built as a web \ac{SPA}.
 We used a common frontend stack to build this application: \textit{React}\footnote{https://facebook.github.io/react/} for building the user interface and \textit{Redux}\footnote{https://http://redux.js.org/} for application state management.
 
 By building the application using a SPA architecture, we are able to provide end-users a much-improved experience, mainly in navigation through the app, since no full page requests are required.
-The \ac{SPA} architecture also enables to take advantage of already existing IDChain API, by directly accessing to obtain the data and control all the aspects of the system.
+The \ac{SPA} architecture also takes advantage of the already existing IDChain API, by directly accessing it to obtain the data and control all the aspects of the system.
 
 \section{Vanilla system}
 
 The vanilla \ac{DHT} we present in this section, is the barebone client for the other implementations in the next sections.
 
 As mentioned before, the \ac{DHT} which we implemented is based on the Kad DHT library.
-Kad provides a very thin basis for building DHT-based applications with sane defaults, providing also at the same time an extreme level of extensability and customization.
+Kad provides a very thin basis for building DHT-based applications with sane defaults, also providing at the same time an extreme level of extensability and customization.
 
-The DHT will be built using Kad, which have an 160-bit address space, and the nodes communication is done through JSON-RPC using the \ac{HTTP} protocol.
+The DHT will be built using Kad, which has an 160-bit address space and the nodes' communication is done through JSON-RPC using the \ac{HTTP} protocol.
 
-In order to launch every DHT client is necessary to provide a configuration file.
+In order to launch every DHT client it is necessary to provide a configuration file.
 
 \lstinputlisting[label=lst:config, caption=Example DHT client configuration file., captionpos=b]{Examples/config-example.json}
 
 A configuration file example is shown in Listing~\ref{lst:config}.
 The fields \textit{nodeID}, \textit{hostname} and \textit{port} correspond to the node contact information in the DHT, and more specifically, in the case of the \textit{nodeID} field, the node identifier in the DHT network.
 The \textit{storage} field is the folder where the DHT client will save the node data (key, values and routing table information). This points to a directory, because the Kad library by default uses LevelDB~\footnote{http://leveldb.org/} - an on-disk key-value store - for persistence.
-In order to enter the DHT network is necessary to have another node contact information, which is defined in the \textit{seed} field.
-We also defined the \textit{security} field, as an extension to the default configuration process of the Kad library.
-This field contain all the options and information to deploy the chosen security mechanism.
+In order to enter the DHT network it is necessary to have another node's contact information, which is defined in the \textit{seed} field.
+We also defined the \textit{security} field as an extension of the default configuration process of the Kad library.
+This field contains all the options and information to deploy the chosen security mechanism.
 In the case of the vanilla DHT, the sub-field \textit{mechanism} should be set to 'none'.
 The other possible values are 'ca' and 'blockchain', for the CA-based mechanism and IDChain mechanism, respectively.
 
 The \ac{API} of our DHT client is the following:
 
 \begin{itemize}
-  \item \textit{start()} - start the DHT node, by connecting to a node in DHT network, which is specified in the seed field of the configuration file;
+  \item \textit{start()} - start the DHT node by connecting to a node in the DHT network, which is specified in the seed field of the configuration file;
   \item \textit{stop()} - stop the DHT node;
   \item \textit{get(key)} - obtain the value associated with the specified key;
   \item \textit{put(key, value)} - store the specified value with the specified key;
 \end{itemize}
 
 % TODO: read this again
-Is also important to refer the operations that are done underneath in the Kad module, when of these API functions are called.
+It is also important to mentions the operations that are performed underneath in the Kad module, when one of those API functions are called.
 
-When executing the \textit{start} function the given contact is inserted into the routing table, and performs a node lookup for it's node address.
+When executing the \textit{start} function the given contact is inserted into the routing table, and performs a node lookup for its node address.
 This lookup will return a set of \textit{K} nodes closest to the given key, where \textit{K} is the number of contacts held in a bucket.
-Then refreshes all buckets further than it's closest neighbor, i.e, will perform node lookup for a random number in any bucket's range, which will be in the occupied bucket with the lowest index.
+Then it refreshes all buckets further than its closest neighbor, i.e, will perform a node lookup for a random number in any bucket's range, which will be in the occupied bucket with the lowest index.
 
 The \textit{get} function will perform a node lookup for the key that we want to fetch, and therefore build a list of \textit{K} closest nodes.
 When during the search a value is returned by one of the nodes, the search is abandoned and the value returned.
@@ -160,54 +161,54 @@ Since we are building this DHT system using Node.js, in order to facilitate the 
 
 The next solution that we implemented uses the HTTPS protocol, for node communication.
 
-This enables us to provide privacy — since the data transmitted is encrypted — authentication to the communicating nodes and ensures integrity of the transmitted messages.
+This enables us to provide privacy — since the data transmitted is encrypted — authentication to the communicating nodes and ensures the integrity of the transmitted messages.
 
 In the typical HTTPS/TLS setup, as in web browsers, only the identity of the server is proved using X.509 certificates.
-Nevertheless, is also possible to provide client-to-server authentication, by requiring that the client provide a valid certificate.
+Nevertheless, it is also possible to provide client-to-server authentication, by requiring that the client provide a valid certificate.
 
-In our implementation, is necessary to provide mutual authentication, because we need to verify if the client trying join and perform operations in the DHT network is in fact authorized to do so.
-Is also necessary to verify the server identity, because we want to be sure that we are bootstraping or exchanging messages with a node belonging to the DHT network.
+In our implementation it is necessary to provide mutual authentication, because we need to verify if the client trying to join and perform operations in the DHT network is in fact authorized to do so.
+It is also necessary to verify the server identity, because we want to be sure that we are bootstraping or exchanging messages with a node belonging to the DHT network.
 
 We implemented a custom transport adapter on the Kad library, based on the HTTPS transport already built-in in Kad.
 This transport is based on the HTTPS module provided by Node.js base libraries, more precisely the \textit{https.Server} and \textit{https.Agent} classes.
 
-When configuring \textit{https.Server} instance we enable by default two options: \textit{requestCert}, which will make the server request a certificate from clients that connect and attempt to verify that certificate, and, \textit{rejectUnauthorized} which will reject any connection which is not authorized when verified against the certification path.
+When configuring a \textit{https.Server} instance we enable by default two options: \textit{requestCert}, which will make the server request a certificate from clients that connect and attempt to verify that certificate, and, \textit{rejectUnauthorized} which will reject any connection which is not authorized when verified against the certification path.
 The \textit{https.Agent} instance also required that we enabled the \textit{rejectUnauthorized} option, in order to verify the server certificate against the certification path.
 
-Is also necessary to pass to \textit{https.Server} and \textit{https.Agent} instances the node certificate, node private key and CA certificate bundle (which include the intermediary and root CAs certificates).
+It is also necessary to pass to \textit{https.Server} and \textit{https.Agent} instances the node certificate, node private key and CA certificate bundle (which includes the intermediary and root CAs certificates).
 
 As can we see in Listing~\ref{lst:config-ca}, the \textit{security} field of the DHT client configuration file should contain the fields \textit{nodeCert}, \textit{nodeKey} and \textit{cacert}, which contains the paths to load the node certificate, node private key and the certificate bundle.
-All this files should be in \ac{PEM}~\cite{rfc1421} format.
+All of these files should be in \ac{PEM}~\cite{rfc1421} format.
 The loaded certificate should also contain the X509v3 Extension \textit{X509v3 Extended Key Usage} with the values \textit{Server authentication} and \textit{Client authentication}.
 
 \lstinputlisting[label=lst:config-ca, caption=Example of security field in configuration file, captionpos=b]{Examples/config-example-ca.json}
 
 As it is, this solution already allows to assert that only authorized nodes can connect to the DHT network.
-But we also want to verify that the nodes are not impersonating a different identity that the one that are allowed to use.
-Therefore, is necessary to encode the node's identifier in the certificate and perform the validation during the TLS handshake.
+But we also want to verify that the nodes are not impersonating a different identity from the one they are allowed to use.
+Therefore, it is necessary to encode the node's identifier in the certificate and perform the validation during the TLS handshake.
 
 We decided to encode this information in the X509v3 Extension \textit{X509v3 Subject Alternative Name} as a DNS entry.
-For sake of completeness, we also encoded in this extension the node host name and IP address.
+For the sake of completeness, we also encoded in this extension the node host name and IP address.
 
-In our custom transport in necessary to add this mechanism when performing a request to a node and when receiving a request from another node.
+In our custom transport it is necessary to add this mechanism when performing a request to a node and when receiving a request from another node.
 
 In the client side, we add a listener to the request socket object for the \textit{secureConnection} event.
 This event is emitted after the TLS handshaking process for a new connection was successfully completed.
-Our listener function checks if the node identifier encoded as a DNS entry in the Subject Alternative Name extension in the certificate is equal to message sender identifier, and if the certificate was authorized when performing the certification path verification.
+Our listener function checks if the node identifier encoded as a DNS entry in the Subject Alternative Name extension in the certificate is equal to the message sender identifier, and if the certificate was authorized when performing the certification path verification.
 
 % TODO: add pseudo code for mechanism
 
 In the server side, we simply access the certificate when handling a new request, through the received request object and do the same verification as in the client side.
 
-Is important to notice, that this verification takes place right after the TLS handshake process.
+It is important to notice, that this verification takes place right after the TLS handshake process.
 In Chapter~\ref{chapter:architecture}, our initial approach was to perform this verification mechanism during the handshake process, but the Node.js implementation does not provide the mechanisms to modify the handshake process.
-Even thought, the benefits of performing this verification, even if after the handshake process, surpasses not doing it.
+Even though the benefits of performing this verification, even if after the handshake process, surpass not doing it.
 
 \section{IDChain system}\label{implementation:idchain}
 
-In this section we will divide the explanation of each component that compose this solution through different sub-sections.
+In this section we will divide the explanation of each component that composes this solution through different sub-sections.
 
-In Section~\ref{subsection:dht-mechanism} we explain how we modified the nodes communication process, in order to be possible to integrate our mechanism in the DHT.
+In Section~\ref{subsection:dht-mechanism} we explain how we modified the nodes' communication process, in order to integrate our mechanism in the DHT.
 
 In Section~\ref{subsection:smart-contract} we present the algorithms we used to create our smart contract and build the web of trust and nodes certification system.
 
@@ -215,12 +216,12 @@ In Sections~\ref{subsection:api} and~\ref{subsection:mapp} we discuss how we imp
 
 \subsection{DHT mechanism}\label{subsection:dht-mechanism}
 
-The implementation of the IDChain mechanism in the DHT, is very similar to the CA-based implementation: is necessary to provide mutual authentication in each node communication.
+The implementation of the IDChain mechanism in the DHT, is very similar to the CA-based implementation: it is necessary to provide mutual authentication in each node communication.
 
-As in the previous solution we also implemented a custom transport adapter, based on the HTTPS module provided by Node.js base libraries.
+As in the previous solution, we also implemented a custom transport adapter, based on the HTTPS module provided by Node.js base libraries.
 
-In this solution we are using self-signed certificates for each node, as isn't a CA backing up the assertions about each node certificate.
-Therefore to verify if the self-signed certificate is indeed valid, is necessary that a valid entity registers the certificate fingerprint in the blockchain, under a node identifier.
+In this solution we are using self-signed certificates for each node, since there isn't a CA backing up the assertions about each node certificate.
+Therefore to verify if the self-signed certificate is indeed valid, it is necessary that a valid entity registers the certificate fingerprint in the blockchain, under a node identifier.
 
 The certificate fingerprint is the hash of a \ac{DER} encoded certificate. The function used to perform the hashing of the certificate could vary.
 At first hand, we tried to perform the certificate hashing by using \textit{SHA-256} hash function, but the Node.js TLS implementation hashes the certificate using \text{SHA-1} hash function, which forced us to use \textit{SHA-1}.
@@ -232,17 +233,17 @@ The configuration file, as can be seen in Listing~\ref{lst:config-bc}, comparing
 \lstinputlisting[label=lst:config-bc, caption=Example of security field in configuration file in blockchain mechanism, captionpos=b]{Examples/config-example-bc.json}
 
 First of all, when configuring the \textit{https.Server} and \textit{https.Agent} instances, we enabled the \textit{requestCert} option in \textit{https.Server} (so the client certificate is requested), and set to \textit{false} the \textit{rejectUnauthorized} option in both instances.
-The \textit{rejectUnauthorized} is set to \textit{false} because in this case we don't have a certification path (bundle of CAs) to verify the nodes certificates against.
+The \textit{rejectUnauthorized} is set to \textit{false} because in this case we don't have a certification path (bundle of CAs) to verify the nodes' certificates against.
 So this allows the self-signed certificates to be accepted in a first phase.
 
 We encountered one problem when trying to disable the \textit{rejectUnauthorized} option in \textit{https.Server} instance.
-Even thought we set its value to \textit{false}, the \textit{https.Server} instance was always rejecting the client certificate and closing the connection.
-Therefore, to overcome this problem, and verify the client certificate, was necessary to implement an additional mechanism, which will detail later.
+Even though we set its value to \textit{false}, the \textit{https.Server} instance was always rejecting the client certificate and closing the connection.
+Therefore, to overcome this problem, and verify the client certificate, it was necessary to implement an additional mechanism, which will detail later.
 
 In the client side, we use a similar strategy as the CA-based mechanism: we add a listener to the request socket object for the \textit{secureConnection} event that will perform our verifications.
-In this case, is necessary to first request the node certificate fingerprint from the IDChain API \textit{/peer/id} endpoint, then verify if the fingerprint of the received certificate is equal to certificate fingerprint registered in the blockchain, and check if the peer identifier of the message sender is equal to the node identifier encoded in the certificate.
+In this case it is necessary to first request the node certificate fingerprint from the IDChain API \textit{/peer/id} endpoint, then verify if the fingerprint of the received certificate is equal to the certificate fingerprint registered in the blockchain, and check if the peer identifier of the message sender is equal to the node identifier encoded in the certificate.
 
-In the server side, as we said before was necessary to add other mechanism to verify the client.
+In the server side, as we said before it was necessary to add another mechanism to verify the client.
 Any request done by the connection client must have the following additional information encoded in the header:
 
 \begin{itemize}
@@ -251,10 +252,10 @@ Any request done by the connection client must have the following additional inf
   \item Timestamp/challenge signature - a client digital signature of the timestamp;
 \end{itemize}
 
-In the server side, when handling a new request, we fetch the client certificate from header, and verify the timestamp signature contained in the header was performed by the same client.
+In the server side, when handling a new request, we fetch the client certificate from the header, and verify the timestamp signature contained in the header was performed by the same client.
 Then we also do the same verification as in the client side — fetch the certificate from the IDChain API, verify the certificate fingerprint against the one stored in the blockchain, and finally check if the message sender node identifier is equal to the node identifier stored in the client certificate.
 
-The nodes certificate we use in this mechanism, even thought are self-signed, encode the same information we need as the previous CA-based mechanism.
+The nodes' certificates we use in this mechanism, even though are self-signed, encode the same information we need as the previous CA-based mechanism.
 We encode the node identifier, IP address and host name as entries in the X509v3 Subject Alternative Name extension.
 
 \subsection{Smart contract}\label{subsection:smart-contract}
@@ -263,7 +264,7 @@ In this Subsection we detail the implementation of the functions that compose ou
 
 We opted to use the language Solidity to write our contract, and used the Truffle framework to ease the development, testing and deployment of our smart contract.
 
-One mechanism built-in in Ethereum blockchain and that we take advantage of, are events.
+One mechanism built-in in the Ethereum blockchain and that we take advantage of, are events.
 Events allow smart contracts to dispatch notifications to applications that are connected to the Ethereum client, and listening to these events.
 When an event is called in a smart contract, the arguments will be stored in the transaction's log, a data structure in the blockchain, that is associated with the address of a contract.
 These logs are incorporated in the Ethereum blockchain and will stay there as long as a block is accessible.
@@ -301,14 +302,15 @@ We present in Algorithm~\ref{alg:contract-state} the initial global state of our
 In Algorithm~\ref{alg:create-entity}, is detailed how we do the entity initialization in the smart contract.
 In our implementation there is a one-to-one relationship between and entity and an Ethereum account, i.e. each Ethereum account is associated with only one entity.
 Therefore, we first check if an entity associated with the Ethereum account executing the \textit{initEntity} is already created.
-If not, we proceed creating the entity.
+If not, we proceed with creating the entity.
+
 One peculiar aspect of our smart contract, is how we bootstrap the web of trust basis.
-Since we are building an universal web of trust mechanism, in which the trust foundation rests on a predefined number of trusted entities, is necessary to distinguish this "bootstraper entities" from a normal entity.
+Since we are building an universal web of trust mechanism, in which the trust foundation rests on a predefined number of trusted entities, it is necessary to distinguish these "bootstraper entities" from a normal entity.
 The main difference in a bootstraper entity, is that it is always valid by default, i.e it doesn't need to be achieve a minimum number of vouches by other entities.
 
-In our smart contract \textit{initEntity} function, we verify if entity that is being created is one of the first \textit{n} entities being created, where \textit{n} is equal to the \textit{MAXIMUM\_BOOTSTRAPERS} constant value.
+In our smart contract \textit{initEntity} function, we verify if the entity that is being created is one of the first \textit{n} entities being created, where \textit{n} is equal to the \textit{MAXIMUM\_BOOTSTRAPERS} constant value.
 If it is one of the bootstraper entities, then the field \textit{bootstraper} in its entity structure will be set to \textit{true}, else it will be set to \textit{false}.
-This field will be useful when validating entities state, in the \textit{checkValidity} function presented in Algorithm\ref{alg:check-entity-validity}.
+This field will be useful when validating an entity's state, in the \textit{checkValidity} function presented in Algorithm\ref{alg:check-entity-validity}.
 
 \begin{algorithm}
   \caption{Create new entity function pseudo-code.}
@@ -338,11 +340,11 @@ This field will be useful when validating entities state, in the \textit{checkVa
 \end{algorithm}
 
 
-After an entity is created, is now possible to create certificates that will be associated with this entity.
+After an entity is created it is now possible to create certificates that will be associated with this entity.
 In Algorithm\ref{alg:new-certificate} we detail the function that is called when an entity wants to associate a new certificate.
-This function instantiates a new Certificate structure and stored the passed arguments in the respective Certificate fields.
+This function instantiates a new Certificate structure and stores the passed arguments in the respective Certificate fields.
 The certificate emitter also needs to send a pre-specified amount of \textit{ether} to the specified smart contract address.
-It is necessary to "pay for the certificate" in order to have a monetary obstacle to create several certificates.
+It is necessary to "pay for the certificate" in order to have a monetary obstacle to creating several certificates.
 
 \begin{algorithm}
   \caption{New Certificate function pseudo-code.}
@@ -371,10 +373,10 @@ It is necessary to "pay for the certificate" in order to have a monetary obstacl
 \end{algorithm}
 
 
-It is also necessary to allow entities to revoke certificates that have issued.
+It is also necessary to allow entities to revoke certificates that they have issued.
 The certificate revocation functionality is presented in Algorithm~\ref{alg:revoke-certificate}.
 There is one important detail in this algorithm: only the entity which issued the certificate can revoke it.
-We enforce this rule, by verifying if the entity calling the function is the signer of the certificate which wants to revoke.
+We enforce this rule, by verifying if the entity calling the function is the signer of the certificate which it wants to revoke.
 
 \begin{algorithm}
   \caption{Revoke certificate function pseudo-code.}
@@ -396,8 +398,8 @@ We enforce this rule, by verifying if the entity calling the function is the sig
 
 The main aspect of the IDChain smart contract is the possibility to build the trust between the different entities.
 The functions presented in Algorithms~\ref{alg:sign-entity} and~\ref{alg:unsign-entity} allow us to build the necessary web of trust, by vouching and unvouching for entities.
-In order to do this, we store in each Entity structure two arrays: one that have the addresses of the entities that we vouched for (\textit{signed} field), and one containing the address of the entities that vouched for us (\textit{signers} field).
-Then the \textit{signEntity} and \textit{unsignEntity}, only have to add or remove the respective entities address from the the \textit{signed} and \textit{signers} arrays.
+In order to do this, we store in each Entity structure two arrays: one that has the addresses of the entities that we vouched for (\textit{signed} field), and one containing the address of the entities that vouched for us (\textit{signers} field).
+Then the \textit{signEntity} and \textit{unsignEntity} only have to add or remove the respective entities address from the the \textit{signed} and \textit{signers} arrays.
 
 \begin{algorithm}
   \caption{Sign entity function pseudo-code.}
@@ -438,14 +440,14 @@ Then the \textit{signEntity} and \textit{unsignEntity}, only have to add or remo
   \end{algorithmic}
 \end{algorithm}
 
-These functions also need to call the \textit{checkValidity} function, shown in Algorithm~\ref{alg:check-entity-validity} in the end of their execution.
+These functions also need to call the \textit{checkValidity} function, shown in Algorithm~\ref{alg:check-entity-validity}, at the end of their execution.
 
 The \textit{checkValidity} function is what checks if an entity is considered valid after being vouched or unvouched for.
-If there is a change of validity state in the entity, is necessary to check the whole downstream trust connections of the entity.
+If there is a change of validity state in the entity, it is necessary to check the whole downstream trust connections of the entity.
 
-First, we considered an entity valid if it has at least \textit{m} signers, being \textit{m} the MINIMUM constant in the presented algorithm.
-If an entity has a status change in validity, is therefore necessary to recursively call the \textit{checkValidity} function, for each entity it has signed.
-We pass the argument \textit{previousEntityState}, that represent the current state of the previous entity in the chain, which is necessary to know if the entity we are currently analyzing will have a state change.
+First, we consider an entity valid if it has at least \textit{m} signers, being \textit{m} the MINIMUM constant in the presented algorithm.
+If an entity has a status change in validity, it is therefore necessary to recursively call the \textit{checkValidity} function for each entity it has signed.
+We pass the argument \textit{previousEntityState}, that represents the current state of the previous entity in the chain, which is needed to know if the entity we are currently analyzing will have a state change.
 
 \begin{algorithm}
   \caption{Check entity validity function pseudo-code.}
@@ -475,14 +477,14 @@ We pass the argument \textit{previousEntityState}, that represent the current st
 
 \subsection{API}\label{subsection:api}
 
-The API we built is structurally simple: listens to the IDChain smart contract events, and process those events by writing the information accordingly to the database.
-Then exposes the stored information using a RESTful HTTP API, which contains several endpoints.
+The API we built is structurally simple: it listens to the IDChain smart contract events, and processes those events by writing the information accordingly to the database.
+Then it exposes the stored information using a RESTful HTTP API, which contains several endpoints.
 
-We defined a database schema which contain different tables to each main structure of the smart contract.
+We defined a database schema which contains different tables to each main structure of the smart contract.
 In Figure~\ref{fig:database-schema} we present the entity-relation model of the database, and describe each database table.
-It's important to notice that we defined a \textit{Transaction} table that hasn't any relation with the other tables.
-We did this as a first iteration of the system, where we only want to view all the transactions related with a specific entity.
-We also defined a table \textit{Signatures} where the vouch relations between the entities are stored.
+It's important to notice that we defined a \textit{Transaction} table that doesn't have any relation with the other tables.
+We did this as a first iteration of the system where we only want to view all the transactions related with a specific entity.
+We also defined the \textit{Signatures} table where the vouch relations between the entities are stored.
 
 \begin{figure}
   \centering
@@ -515,7 +517,7 @@ In Table~\ref{table:api-events-database}, we describe the database operations th
 Each of these event listeners will also create a new entry in the \textit{Transactions} table, which will store the event information and the transaction hash associated with the triggered event.
 
 One particular aspect that is necessary to take into consideration, is the fact that if we remove the event listeners (due to API downtime, for example) and the blockchain client keeps running and processing incoming blocks, there will be discrepancies or information missing in the API database.
-Even thought we didn't implemented it, one possible solution is to loop through all the events created by a smart contract, since events logs are permanently stored in the blockchain, and therefore create in the database the missing transactions.
+Even though we didn't implement it, one possible solution is to loop through all the events created by a smart contract, since event logs are permanently stored in the blockchain, and therefore create in the database the missing transactions.
 
 \subsection{Application}\label{subsection:mapp}
 
@@ -524,10 +526,10 @@ The data is fetched from the IDChain API, using the web browser \textit{fetch AP
 
 We implemented the following functionalities:
 \begin{itemize}
-  \item \textbf{Register new certificates} — we added a form where a user can register a new node certificate, by drag-an-drop the certificate in delimited area in the page, as shown in Figure~\ref{fig:register-certificate}. The application automatically obtains the necessary fields from the certificate, and on submit performs the request to the IDChain API;
-  \item \textbf{Sign/Unsign new entities} — we also add a option to allow the user to sign/unsign a specific entity in thhe interface;
-  \item \textbf{View certificates registered by the entity} — the node certificates registered by user's entity are also listed in the application, as is shown in Figure~\ref{fig:list-certificates};
-  \item \textbf{View all transactions associated with the entity} — is possible to list all transactions the entity performed in IDChain smart contract;
+  \item \textbf{Register new certificates} — we added a form where a user can register a new node certificate, by drag-and-drop the certificate in delimited area in the page, as shown in Figure~\ref{fig:register-certificate}. The application automatically obtains the necessary fields from the certificate, and on submit performs the request to the IDChain API;
+  \item \textbf{Sign/Unsign new entities} — we also add an option to allow the user to sign/unsign a specific entity in the interface;
+  \item \textbf{View certificates registered by the entity} — the node certificates registered by the user's entity are also listed in the application, as is shown in Figure~\ref{fig:list-certificates};
+  \item \textbf{View all transactions associated with the entity} — it is possible to list all transactions the entity performed in IDChain smart contract;
 \end{itemize}
 
 \begin{figure}
