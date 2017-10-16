@@ -3,12 +3,21 @@
 % DO NOT CHANGE THIS - Add entry in the table of contents as chapter
 \addcontentsline{toc}{chapter}{Resumo}
 
-% TODO
+Com um aumento no uso de Distributed Hash Tables (DHT) como uma base para construir sistemas Peer-to-Peer (P2P) escaláveis, as considerações de segurança e o fecho da participação nestes sistemas são ainda preocupações.
+
+Um sistema que foi construído tendo como base uma DHT foi o componente Global Registry, pertencente ao projecto de investigação europeu reTHINK.
+Tendo em conta a necessidade de melhorar a segurança da DHT deste componente, reduzindo o nível de confiança entre os participantes, apresentamos o sistema IDChain.
+O sistema IDChain é uma Infraestrutura de Chaves Públicas Descentralizada, construída sobre o Ethereum, que permite aos Provedores de Serviço (PS) associarem nós da DHT a identificadores e certificados, providenciando controlo de acesso e estabelecimento de comunicações seguras entre os nós, de uma forma descentralizada, utilizando o protocolo Transport Layer Security (TLS).
+A nossa abordagem recorre à criação de um contracto inteligente no Ethereum, que utiliza um modelo Web of Trust, e que pode ser acedido através de uma API e aplicação web.
+
+Este documento avalia o actual estado da arte de sistemas P2P e os mecanismos de segurança das DHTs.
+A nossa proposta, que consiste no sistema IDChain e num outro sistema baseado em Autoridades de Certificação (AC) – para efeitos de comparação – é apresentada em detalhe e validado através de uma avaliação de desempenho, segurança e custo monetário.
+Demonstramos que a prova de conceito do sistema IDChain tem um bom desempenho e é seguro, sendo então uma alternativa válida a uma solução baseada em ACs.
 
 \vspace{1cm}
 
 % TODO - 4 a 6 palavras-chave;
-\textbf{\Large Palavras-chave:} Peer-to-Peer, Tabela de dispersão distribuída, Blockchain, Infraestrutura de Chave Públicas, Rede de Confiança, reTHINK
+\textbf{\Large Palavras-chave:} Peer-to-Peer, Distributed Hash Table, Blockchain, Infraestrutura de Chaves Públicas, Web of Trust, reTHINK
 
 \cleardoublepage
 
