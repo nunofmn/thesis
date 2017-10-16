@@ -10,5 +10,5 @@
     hostname: 'idchain1.com',
     port: 8080
   },
-  storage: 'data/node.db'
+  storage: 'data/node.db/'
 }
