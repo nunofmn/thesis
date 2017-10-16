@@ -10,9 +10,9 @@ Nowadays with the current Internet infrastructure and the provided services buil
 New users will choose to use the services that are used by the majority of their social environment.
 
 \ac{OTT} services, by working in the closed ecosystem don't need to work in interoperability between services and communications standards, allowing them to be more competitive, agile and lead communication and multimedia innovation.
-This could be problematic since it causes vendor lock-in and limits the portability of user identity and data, hinders innovation and block new entrants.
+This could be problematic since it causes vendor lock-in and limits the portability of user identity and data, hinders innovation and blocks new entrants.
 
-On the other hand, we have the worldwide Telco ecosystem that provides an highly reliable service and strong trustful identity.
+On the other hand, we have the worldwide Telco ecosystem that provides a highly reliable service and strong trustful identity.
 Since it is necessary to achieve worldwide service interoperability, the services provided rely on well-defined standards. These standards need to be agreed upon and defined, increasing the time to market of potential new services.
 Telcos are also geographically restricted, which means that the deployment of new worldwide services could not be possible without roaming agreements in-place, which severely restricts Telcos in driving innovation.
 
@@ -32,7 +32,7 @@ The Registry service must have the following requirements:
   \item \textit{Fast query response time}, since it will be accessed when establishing communication;
 	\item \textit{Scalable}, since it will be a worldwide deployed service;
   \item \textit{High availability}, which is necessary for communication establishment;
-  \item \textit{Data consistency}, the hyperties information must be always up up to date in order to start the communication setup.
+  \item \textit{Data consistency}, because the hyperties information must be always up to date in order to start the communication setup.
 \end{itemize}
 
 The Registry service is sub-divided in three components: \textit{Global Registry}, \textit{Domain Registry} and \textit{Local Registry}.
@@ -49,28 +49,28 @@ The \textit{Local Registry} component runs in the device runtime and manages hyp
 The \textit{Global Registry} is based on a \ac{DHT}, a \ac{P2P} distributed system  that usually is used in public-facing services and therefore is open to participation, allowing any node to join the network.
 One example is the Mainline \ac{DHT}, that powers the BitTorrent network.
 
-Several private and enterprise uses of DHT system exists, for instance, the Dynamo\cite{dynamo2007} key-value system from Amazon, or the Cassandra\cite{cassandra2010} database.
+Several private and enterprise uses of DHT system exist, for instance, the Dynamo\cite{dynamo2007} key-value system from Amazon, or the Cassandra\cite{cassandra2010} database.
 These systems use \acp{DHT} as a building-block of their architecture for tasks that require multi-node coordination, as data sharding, for example, therefore not exposing the \ac{DHT} directly.
 These solutions are also closed-source and don't have their source code available publicly.
 
-The reTHINK framework is also inherently a federated solution, consequently isn't open to participation from outside the \acp{SP} organization, but it should allow the entry of new nodes from any of \acp{SP} part of the federation.
+The reTHINK framework is also inherently a federated solution, consequently it isn't open to participation from outside the \acp{SP} organization, but it should allow the entry of new nodes from any of \acp{SP} part of the federation.
 This is an important aspect, because as opposed to a private solution where we have full control of all the infrastructure, in a federated solution we don't have full control and it is necessary to have additional infrastructure to create trust relations and verify identities between the \acp{SP} \ac{DHT} nodes.
 
 \section{Proposed Solution}
 \label{section:proposed}
 
-The major goal of this thesis is to ensure the security of and close participation in the \ac{DHT} necessary to build the Global Registry system.
+The major goal of this thesis is to ensure the security and close participation of the \ac{DHT} necessary to build the Global Registry system.
 
 In order to accomplish this goal, a set of objectives need to be achieved:
 
 \begin{itemize}
-  \item \textbf{Mitigate common \ac{DHT} attacks}- several different type of attacks targetting the \ac{DHT} exist. An in-depth analysis of each one of them and existing solutions is necessary;
+  \item \textbf{Mitigate common \ac{DHT} attacks}- several different types of attacks targetting the \ac{DHT} exist. An in-depth analysis of each one of them and existing solutions is necessary;
 	\item \textbf{Guarantee communication privacy, integrity and authenticity}- it is crucial to secure the \ac{DHT} nodes communication;
 	\item \textbf{Close DHT participation}- provide mechanisms to allow access-control nodes in the \ac{DHT};
 	\item \textbf{Deal with nodes compromise}- allow to easily revoke access to compromised nodes or identities;
-  \item \textbf{Minimize trust between participants}- even though our system can not tolerate maleficent \ac{SP} nodes, we want to minimize the trust between \ac{SP} nodes, so that it isn't possible for a couple of \acp{SP} nodes to monopolize the DHT system;
+  \item \textbf{Minimize trust between participants}- even though our system can not tolerate maleficent \ac{SP} nodes, we want to minimize the trust between \ac{SP} nodes so that it isn't possible for a couple of \acp{SP} nodes to monopolize the DHT system;
   \item \textbf{Maintain system decentralized}- solve all the aforementioned problems, maintaining a decentralized architecture, which should also minimize trust between \acp{SP};
-  \item \textbf{Decouple the DHT system from the Global Registy}- despite the main use case of the DHT is the Global Registry, we want to decouple the DHT by providing a simple \ac{API} that permits any application to be build on top of it.
+  \item \textbf{Decouple the DHT system from the Global Registy}- despite the main use case of the DHT is the Global Registry, we want to decouple the DHT by providing a simple \ac{API} that permits any application to be built on top of it.
 \end{itemize}
 
 We will build one DHT with two interchangeable mechanisms that lets us achieve the aforementioned objectives.
@@ -78,10 +78,10 @@ We will build one DHT with two interchangeable mechanisms that lets us achieve t
 The first solution is based on a more classic approach to establish secure communications by using a \acl{CA} to issue certificates assigning identities to each used DHT identifier, granting us the mechanisms to perform access-control to \ac{DHT} nodes and provide secure communications between nodes.
 
 The second solution we will present is a novel approach that uses blockchain technology, which we named IDChain.
-Using the blockchain we will build a \ac{DPKI} that will permits us to issue unique identities and certificates to nodes across all \acp{SP}.
+Using the blockchain we will build a \ac{DPKI} that will permit us to issue unique identities and certificates to nodes across all \acp{SP}.
 This solution provides the same guarantees of the previous presented solution, while also allowing us to maintain a decentralized system and minimize the trust between participants.
 
-This two solutions will have as basis a \ac{DHT} which doesn't provide secure communications between nodes nor access-control.
+These two solutions will have as basis a \ac{DHT} that doesn't provide secure communications between nodes nor access-control.
 This is presented as a complementary mechanism which we will use to benchmark our two security mechanisms.
 
 \section{Outline}
