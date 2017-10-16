@@ -28,9 +28,28 @@ We performed the two solutions evaluation by deploying 10 DHT nodes to DigitalOc
 We were able to conclude that performance-wise the IDChain mechanism is a viable option to the CA-based solution.
 Security-wise the IDChain mechanism could have some weak spots in terms of the smart contract code, taking into consideration that is designed as a prototype system.
 
-Therefore, we have achieved the goal we set out at the beginning of this dissertation: close participation and provided secure node communication in DHT systems.
+Therefore we have achieved the goal we set out at the beginning of this dissertation: close participation and provide secure node's communication in DHT systems.
 
 \section{Future Work}
 \label{section:future}
+
+Many improvements could be done to improve the presented research.
+In terms of the node's communication in the DHT, one of many improvements is try to fix the inability of disable the verification of client's self-signed certificates with TLS mutual-authenticationin, in Node.js.
+If this could be fixed, the next step would be try to integrate the certificates' verifications we implemented directly into the TLS handshake protocol.
+
+The IDChain smart contract could also have several improvements.
+The present smart contract can have potential software bugs and edge cases that need to be solved.
+We need to take into consideration that has the smart contracts deployed to the Ethereum blockchain are permanent, an extended security audit of the smart contract could be performed in order to detect several potential issues.
+The whole Ethereum developer ecosystem is still in its infancy and better development tools need to be created to improve smart contracts' security.
+A static typed language and formal verification methods come to mind as tools that could greatly improve the smart contracts security.
+
+% New methods of bootstraping the smart contract's web-of-trust mechanism could also be investigated.
+New methods of controlling the number of certificates that a single entity can have could also be investigated.
+For instance, try a dynamic threshold on the maximum number of certificates, that changes accordingly to the total number of certificates in the system, and guarantees an equal distribution of nodes through all the entities participating in the DHT system – for example, each entity could only have 5\% of all certificates registered in the system.
+
+A redistribution of funds stored in the smart contract could also be created.
+Since is necessary to pay for each certificate by sending a monetary transaction to the smart contract address, the smart contract could have a mechanism that could be trigger automatically every \textit{n} blocks, which redistributes the stored funds equally by all the entities.
+
+Finally, a cost evaluation of the IDChain smart contract with a bigger web-of-trust – around 50 or 100 entities – could be performed in the main Ethereum network.
 
 \cleardoublepage
