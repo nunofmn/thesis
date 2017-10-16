@@ -60,7 +60,6 @@ Finally was also necessary to evaluate the DHT protocol correctness under a numb
 
 \subsection{DHT Nodes deployment}
 
-%TODO: falar do tamanho dos k-buckets e em que medida isso influencia o sistema
 
 The DHT nodes were deployed on Digital Ocean\footnote{https://www.digitalocean.com/}, distributed across several different datacenters.
 
@@ -74,6 +73,9 @@ The nodes used Node.js v8.2.1, PostgreSQL 9.5.8 and Ethereum testrpc client v4.1
 
 The benchmarking client was run on a server with Dual Intel Xeon E5-2640@2.00GHz CPU with a total of 32 cores, 128GB of RAM and running Debian 8.2.
 The versions of the software used were equal to the Digital Ocean nodes.
+
+%TODO: em que medida isso influencia o sistema
+We used in the DHT node configuration a k-bucket size of 5.
 
 \subsection{Tests configuration and tooling}
 
@@ -335,7 +337,7 @@ This attack is only possible to be performed by a rogue node inside the DHT netw
 
 %\subsubsection{Sybil attack resistance}
 
-\subsection{Smart Contract Execution Costs}
+\subsection{Smart contract execution costs}
 \label{section:smart-contract-tests}
 
 We evaluated the costs of executing each smart contract function.
@@ -368,6 +370,8 @@ We also initiated entities with different names length, so it is possible to ver
 In the case of the \textit{newCertificate} function calls we used a standard IPv4 address, a 160 bit node identifier and SHA-1 certificate fingerprint.
 
 In the following scenarios is also considered that the minimum number of vouches necessary to a entity to become valid is equal to 3.
+
+For this evaluation the \textit{sendTransaction} was not performed in the context of the \textit{newCertificate} smart contract's function.
 
 \subsubsection{Scenario 1}
 
