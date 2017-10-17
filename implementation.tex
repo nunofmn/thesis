@@ -39,7 +39,7 @@ The blockchain that we used was Ethereum due to the following:
 
 Despite the fact that Ethereum network is currently the system with the better developer ecosystem, there are still several shortcomings when developing against it.
 %TODO: FAZER ISTO
-In Section~\ref{implementation:idchain} we detail some of the difficulties and shortcomings of the Ethereum smart contracts we encountered during development.
+%In Section~\ref{implementation:idchain} we detail some of the difficulties and shortcomings of the Ethereum smart contracts we encountered during development.
 
 \subsection{IDChain API}
 
@@ -230,7 +230,7 @@ Any request done by the connection client must have the following additional inf
   \item Timestamp/challenge signature - a client digital signature of the timestamp;
 \end{itemize}
 
-In the server side, when handling a new request, we fetch the client certificate from the header, and verify the if timestamp signature contained in the header was performed by the same client.
+In the server side, when handling a new request, we fetch the client certificate from the header, verify if the timestamp signature contained in the header was performed by the same client and check if the timestamp within the last minute.
 Then we also do the same verification as in the client side — fetch the certificate fingerprint from the IDChain API, verify the certificate fingerprint against the one stored in the blockchain, and finally check if the message sender node identifier is equal to the node identifier stored in the client certificate.
 
 The nodes' certificates we use in this mechanism, even though are self-signed, encode the same information we need as the previous CA-based mechanism.

@@ -65,7 +65,7 @@
 \contentsline {subsection}{\numberline {4.1.4}Management Application}{39}{subsection.4.1.4}
 \contentsline {section}{\numberline {4.2}Vanilla system}{39}{section.4.2}
 \contentsline {section}{\numberline {4.3}CA-based system}{41}{section.4.3}
-\contentsline {section}{\numberline {4.4}IDChain system}{43}{section.4.4}
+\contentsline {section}{\numberline {4.4}IDChain system}{42}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}DHT mechanism}{43}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Smart contract}{44}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}API}{48}{subsection.4.4.3}
