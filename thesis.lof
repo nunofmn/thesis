@@ -27,14 +27,14 @@
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Register node certificate form\relax }}{50}{figure.caption.72}
 \contentsline {figure}{\numberline {4.4}{\ignorespaces List of entity node certificates\relax }}{50}{figure.caption.73}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Demanded request rate\relax }}{55}{figure.caption.79}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Average response time\relax }}{56}{figure.caption.80}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Writes load test demanded request rate\relax }}{55}{figure.caption.79}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Writes load test average response time\relax }}{56}{figure.caption.80}
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Number of nodes storing each value, in vanilla DHT\relax }}{57}{figure.caption.81}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Number of nodes storing each value, in CA-based solution\relax }}{57}{figure.caption.81}
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Number of nodes storing each value, in IDChain solution\relax }}{57}{figure.caption.82}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Demanded request rate\relax }}{58}{figure.caption.84}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Average response time\relax }}{59}{figure.caption.85}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Requests error ratio\relax }}{59}{figure.caption.86}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Reads demanded request rate\relax }}{58}{figure.caption.84}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Reads average response time\relax }}{59}{figure.caption.85}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Reads requests error ratio\relax }}{59}{figure.caption.86}
 \contentsline {figure}{\numberline {5.9}{\ignorespaces Scenario 1 web-of-trust graph\relax }}{62}{figure.caption.91}
 \contentsline {figure}{\numberline {5.10}{\ignorespaces Scenario 1 operations costs\relax }}{63}{figure.caption.92}
 \contentsline {figure}{\numberline {5.11}{\ignorespaces Scenario 2 web-of-trust graph\relax }}{64}{figure.caption.94}

@@ -2,20 +2,20 @@
 \label{chapter:architecture}
 
 This chapter describes the overall architecture of IDChain and outlines its main functional components.
-The main design goal is to build a fully decentralized DHT-based system that is secure and can be closed to participation in a federated model, while minimizing trust in the intervenients.
+The main design goal is to build a fully decentralized DHT-based system that is secure and can be closed to participation in a federated model, while minimizing the required trust in the intervenients.
 
 We introduce the main requirements in Section~\ref{architecture:requirements} and give a system architecture overview in Section~\ref{architecture:overview}.
 The remaining sections describe in more detail the architecture of the solution and discuss the main design choices.
 
 \section{Requirements}\label{architecture:requirements}
 
-This thesis addresses the problem of building DHT-based systems in a secure fashion, mainly considering the problematics of close participation in the DHT, Sybil attacks mitigation and secure node communication.
+This dissertation addresses the problem of building DHT-based systems in a secure fashion, mainly considering the problematics of close participation in the DHT, Sybil attacks mitigation and secure node communication.
 
 This problem will be tackled by proposing two different solutions, a centralized and a decentralized mechanism, which will allow to control nodes' access to the DHT system.
 
-Our overall goal is to provide a better decentralized solution and minimize trust between the intervenients.
+Our overall goal is to provide a better decentralized solution and minimize the required trust between the intervenients.
 
-This thesis is especially focused in building the mechanism to be used in the Global Registry component of the reThink architecture, but we want to decouple the DHT system in order for it to be possible to use the DHT independently, enable developers to build other DHT-based systems.
+This thesis is especially focused in building the mechanism to be used in the Global Registry component of the reThink architecture, but we want to decouple the DHT system in order for it to be possible to use the DHT independently, enabling developers to build other DHT-based systems.
 Therefore, the IDChain system should provide the follow functional requisites:
 
 \begin{itemize}
@@ -118,8 +118,8 @@ A possible solution to mitigate this performance decrease is to use TLS Session 
 The proposed architecture will consist of two independent, inter-connected systems:
 
 \begin{itemize}
-	\item \textbf{Distributed Hash Table} based on Kademlia;
-	\item \textbf{Decentralized Public Key Infrastructure} (DPKI) built on top of the blockchain.
+  \item \textit{Distributed Hash Table} based on Kademlia;
+  \item \textit{Decentralized Public Key Infrastructure} (DPKI) built on top of the blockchain.
 \end{itemize}
 
 
@@ -130,9 +130,9 @@ As can be seen in Figure~\ref{fig:architecture-overview} the two main components
 
 The DPKI can be subdivided in three main components:
 \begin{itemize}
-	\item \textbf{Blockchain};
-	\item \textbf{IDChain API};
-	\item \textbf{IDChain Application};
+	\item \textit{Blockchain};
+  \item \textit{IDChain API};
+  \item \textit{IDChain Application};
 \end{itemize}
 
 \begin{figure}[htb]
@@ -143,7 +143,7 @@ The DPKI can be subdivided in three main components:
 
 In the scope of the current reTHINK project architecture, these components will only be used in a federated model, i.e the nodes in the \ac{DHT} will all belong to the Service Providers (SP).
 Therefore it is possible to assume some level of trust with the nodes, which opens the possibility to use a more traditional approach for managing the certificates, for example, a Certificate Authority.
-But, in a federated model we might want to minimize trust in other organizations or SP, in order to discourage fradulent activity or over-control of the system by one or several organizations.
+But, in a federated model we might want to minimize the required trust in other organizations or SP, in order to discourage fradulent activity or over-control of the system by one or several organizations.
 \acp{CA} have also the problem of adding an extra burden in organizations, since it isn't a totally automated system and still need some human intervention, mainly when accepting and signing \acp{CSR}.
 
 \section{Distributed Hash Table}\label{ssec:dht}
@@ -174,7 +174,7 @@ Establishing \ac{TLS} connections between nodes requires trusting the exchanged 
 In a traditional setup, the underlying \ac{PKI} and \acp{CA} guarantee that the certificates are trustworthy, since the \acp{CA} sign the certificates.
 If the peer trusts the \ac{CA} that signed off the certificate and has access to the root \ac{CA} certificate, it's able to verify the other peers' certificates.
 
-But if we want to minimize trust and build a fully decentralized model, trusting in a centralized entity like a \ac{CA} defeats that purpose.
+But if we want to minimize the required trust and build a fully decentralized model, trusting in a centralized entity like a \ac{CA} defeats that purpose.
 Another mechanisms exist that try to decentralize this trust model, for instance, web of trust models, in systems (like \ac{PGP}), where users sign assertions for each other's keys or certificates.
 
 Still, most of the times, \ac{PGP} users still rely in a centralized mechanism — key servers — for distributing certificates or keys.
@@ -321,7 +321,7 @@ The endpoints that will be available are presented in Table~\ref{table:idchain-a
 
 An advantage of building this \ac{API} for accessing the IDChain functionalities, is that it allows to build applications and services that easily interact with it through \ac{HTTP} while being language-agnostic, hence easing the access to the system.
 
-An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in greater detail in Subsection~\ref{subsection:idchain-app}.
+An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in greater detail in Section~\ref{subsection:idchain-app}.
 
 {\renewcommand{\arraystretch}{2}%
 \begin{table}[h]
@@ -365,9 +365,7 @@ The IDChain API will be backed up by a relational database (using \ac{SQL}) wher
 
 The reasoning behind this mainly due to performance: storing all this information in a local \ac{SQL} database will remove the necessity of constantly querying the blockchain.
 
-Using a relational database allows for the structuring of all the transactions and data associated with the system, which enables more powerful queries in a simpler way.
-
-For instance, obtaining all the certificates associated with an entity or getting the blockchain transaction where a specific revocation was made.
+Using a relational database allows for the structuring of all the transactions and data associated with the system, which enables more powerful queries in a simpler way. For instance, obtaining all the certificates associated with an entity or getting the blockchain transaction where a specific revocation was made.
 
 These kind of associations and structure are harder to obtain when using the blockchain client directly, since the client only deals with transactions at a lower level, without attaching a meaning at a smart contract basis to each transaction.
 
@@ -446,7 +444,7 @@ Coupled with the Kademlia k-bucket replacement policy, where new nodes are only 
 
 % TODO: faz sentido esta secção?
 \section{Comparison with a CA}
-Using a blockchain to build a PKI, it is possible to minimize the trust, relatively to a centralized solution, like a CA.
+Using a blockchain to build a PKI, it is possible to minimize the required trust, relatively to a centralized solution, like a CA.
 % time ordered?
 Due to the nature of the blockchain as an immutable transactional database, it is possible to guarantee the validity of each transaction, through inspection of the past ones.
 This immutability property also allows to perform audits to the blockchain, in order to verify the integrity of the data stored.

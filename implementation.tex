@@ -230,7 +230,7 @@ Any request done by the connection client must have the following additional inf
   \item Timestamp/challenge signature - a client digital signature of the timestamp;
 \end{itemize}
 
-In the server side, when handling a new request, we fetch the client certificate from the header, verify if the timestamp signature contained in the header was performed by the same client and check if the timestamp within the last minute.
+In the server side, when handling a new request, we fetch the client certificate from the header, verify if the timestamp signature contained in the header was performed by the same client and check if the timestamp is within the last minute.
 Then we also do the same verification as in the client side — fetch the certificate fingerprint from the IDChain API, verify the certificate fingerprint against the one stored in the blockchain, and finally check if the message sender node identifier is equal to the node identifier stored in the client certificate.
 
 The nodes' certificates we use in this mechanism, even though are self-signed, encode the same information we need as the previous CA-based mechanism.
@@ -259,7 +259,7 @@ These structures have a similar structure to those presented in Section~\ref{sub
 
 We use events extensively through our smart contract code, mainly to allow us to trigger some functions in the IDChain API.
 In Algorithm~\ref{alg:contract-events} are declared the events that are triggered in Algorithms~\ref{alg:create-entity}-~\ref{alg:check-entity-validity}.
-In Subsection~\ref{subsection:api} we go in greater detail on how we use events.
+In Section~\ref{subsection:api} we go in greater detail on how we use events.
 
 \begin{algorithm}[h!]
   \caption{Contract events declaration.}
@@ -450,7 +450,7 @@ We pass the argument \textit{previousEntityState}, that represents the current s
       \State $\textbf{ trigger event } EntityStatusChange(entity, block.timestamp, false)$
     \EndIf
     \State
-    \If{$entities[entity].signers.length >= MINIMUM-1 \textbf{ and } previousEntityState \textbf{ and } !entities[entity].valid$}
+    \If{$entities[entity].signers.length >= MINIMUM-1 \textbf{ and } previousEntityState \textbf{ and } \allowbreak !entities[entity].valid$}
       \State $entities[entity].valid = true$
       \For{$j < entities[entity].signed.length$}
         \State \Call{checkValidity}{$true$, $entity$}
