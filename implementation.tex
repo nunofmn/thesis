@@ -29,26 +29,7 @@ It is possible to switch between the three different mechanisms by declaring in 
 
 \subsection{Blockchain}
 
-The blockchain that we used was Ethereum.
-There are a number of other blockchains currently available that enable developers to build applications on top of it using smart contracts, like Hyperledger Fabric\cite{cachin2016architecture} or R3 Corda\cite{mikehearn2016}, but these implementations have more specific use-cases, enterprise and finances respectively.
-
-A quick analysis between these three platforms shows significant architectural differences, in such a way that we can even consider an higher-level classification for these three platforms, since not all of them show the main characteristics of a blockchain (taking in consideration the Bitcoin reference paper).
-A broader definition that encapsulates these three platforms is \ac{DLT}.
-
-The Hyperledger Fabric platform has a modular approach to blockchains. It's a private blockchain system  and is permissioned, i.e doesn't allow unknown entities to participate in the system.
-To participate in the system the members of a Hyperledger Fabric system, must enroll through a \ac{MSP}.
-This allows different architectural approaches in the system, because it is not strictly necessary to have a \ac{POW} mechanism, like in Ethereum or Bitcoin (which may be considered open networks), and it is possible to use different consensus mechanisms in the network.
-Also, there isn't any built-in currency like in Bitcoin or Ethereum.
-
-The R3 Corda system is considered a \ac{DLT} for financial institutions.
-It is also permissioned and private and uses a concept of notary nodes to validate uniqueness of transactions. Like Fabric, it also allows a more fine-grained control of the consensus mechanism.
-Data is shared on a need-to-know basis, there is no global broadcast of all the transactions in the system.
-
-Finally, the Ethereum platform is the more generic blockchain platform of the ones referenced.
-It is permission-less, and can be public or private.
-All the participants have to achieve consensus over all the transactions of the system, using the \ac{POW} consensus and leveraging the built-in currency (ether).
-
-Our choice was Ethereum due to a number of reasons:
+The blockchain that we used was Ethereum due to the following:
 
 \begin{itemize}
   \item Permissionless - even though we want to build our mechanism around a federated/enterprise model, this proof of concept may be easily adapted to be used as a global system.
@@ -56,8 +37,8 @@ Our choice was Ethereum due to a number of reasons:
 	\item Developer ecosystem - right now, Ethereum has the biggest developer community, with a increasing number of development tools to aid the development and deploy process of smart contracts.
 \end{itemize}
 
-
 Despite the fact that Ethereum network is currently the system with the better developer ecosystem, there are still several shortcomings when developing against it.
+%TODO: FAZER ISTO
 In Section~\ref{implementation:idchain} we detail some of the difficulties and shortcomings of the Ethereum smart contracts we encountered during development.
 
 \subsection{IDChain API}
@@ -76,7 +57,6 @@ The decision of using Node.js to develop the HTTP API is mainly related with the
 At the time of development was the most mature library to interface with the Ethereum client.
 The Ruby, Java and .Net implementations were still in early stages of development.
 
-% verificar isto
 The Hapi framework was chosen because allows to build APIs encapsulating endpoints around a plugin system.
 For instance, it is possible to create a plugin that encapsulates all the endpoints that are related to the certificates' domain.
 This allow us to compose the API using tiny modules that contain the business logic of each domain in the application, which later could be decoupled and deployed separately.
@@ -120,8 +100,6 @@ The DHT was built using Kad, which has an 160-bit address space and the nodes' c
 
 In order to launch every DHT client it is necessary to provide a configuration file.
 
-\lstinputlisting[label=lst:config, caption=Example DHT client configuration file., captionpos=b]{Examples/config-example.json}
-
 A configuration file example is shown in Listing~\ref{lst:config}.
 The fields \textit{nodeID}, \textit{hostname} and \textit{port} correspond to the node contact information in the DHT, and more specifically, in the case of the \textit{nodeID} field to the node identifier in the DHT network.
 The \textit{storage} field is the directory where the DHT client will save the node data (key, values and routing table information). This points to a directory because the Kad library by default uses LevelDB~\footnote{http://leveldb.org/} - an on-disk key-value store - for persistence.
@@ -130,6 +108,8 @@ We also defined the \textit{security} field as an extension of the default confi
 This field contains all the options and information to deploy the chosen security mechanism.
 In the case of the vanilla DHT, the sub-field \textit{mechanism} should be set to 'none'.
 The other possible values are 'ca' and 'blockchain', for the CA-based mechanism and IDChain mechanism, respectively.
+
+\lstinputlisting[label=lst:config, basicstyle=\small, frame=single, caption=Example DHT client configuration file, captionpos=b]{Examples/config-example.json}
 
 The \ac{API} of our DHT client is the following:
 
@@ -181,7 +161,7 @@ As can we see in Listing~\ref{lst:config-ca}, the \textit{security} field of the
 All of these files should be in \ac{PEM}~\cite{rfc1421} format.
 The loaded certificate should also contain the X509v3 Extension \textit{X509v3 Extended Key Usage} with the values \textit{Server authentication} and \textit{Client authentication}.
 
-\lstinputlisting[label=lst:config-ca, caption=Example of security field in configuration file, captionpos=b]{Examples/config-example-ca.json}
+\lstinputlisting[label=lst:config-ca, basicstyle=\small, frame=single, caption=Example of security field in configuration file, captionpos=b]{Examples/config-example-ca.json}
 
 As it is, this solution already allows to assert that only authorized nodes can connect to the DHT network.
 But we also want to verify that the nodes are not impersonating a different identity from the one they are allowed to use.
@@ -195,8 +175,6 @@ In our custom transport it is necessary to add this mechanism when performing a 
 In the client side, we add a listener to the request socket object for the \textit{secureConnection} event.
 This event is emitted after the TLS handshaking process for a new connection was successfully completed.
 Our listener function checks if the node identifier encoded as a DNS entry in the Subject Alternative Name extension in the certificate is equal to the message sender identifier, and if the certificate was authorized when performing the certification path verification.
-
-% TODO: add pseudo code for mechanism
 
 In the server side, we simply access the certificate when handling a new request, through the received request object and do the same verification as in the client side.
 
@@ -230,7 +208,7 @@ Our custom transport adapter in this case will be significantly different of the
 We will also be using HTTPS/TLS mutual-authentication, but in this case the verifications will be different.
 The configuration file, as can be seen in Listing~\ref{lst:config-bc}, comparing with the one in CA-based mechanism, has the \textit{mechanism} field set to \textit{blockchain}, and the field \textit{cacert} removed.
 
-\lstinputlisting[label=lst:config-bc, caption=Example of security field in configuration file in blockchain mechanism, captionpos=b]{Examples/config-example-bc.json}
+\lstinputlisting[label=lst:config-bc, basicstyle=\small, frame=single, caption=Example of security field in configuration file in blockchain mechanism, captionpos=b]{Examples/config-example-bc.json}
 
 First of all, when configuring the \textit{https.Server} and \textit{https.Agent} instances, we enabled the \textit{requestCert} option in \textit{https.Server} (so the client certificate is requested), and set to \textit{false} the \textit{rejectUnauthorized} option in both instances.
 The \textit{rejectUnauthorized} is set to \textit{false} because in this case we don't have a certification path (bundle of CAs) to verify the nodes' certificates against.
@@ -269,6 +247,16 @@ Events allow smart contracts to dispatch notifications to applications that are 
 When an event is called in a smart contract, the arguments will be stored in the transaction's log, a data structure in the blockchain, that is associated with the address of a contract.
 These logs are incorporated in the Ethereum blockchain and will stay there as long as a block is accessible.
 
+The \textit{Certificate} and \textit{Entity} structures defined in the smart contract, used through Algorithms~\ref{alg:contract-state}-\ref{alg:check-entity-validity} are represented in Figure~\ref{fig:implemented-structures}.
+These structures have a similar structure to those presented in Section~\ref{subsection:smart-contract-logic}.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{Figures/implementation-structures.pdf}
+  \caption{Smart contracts structures}
+\label{fig:implemented-structures}
+\end{figure}
+
 We use events extensively through our smart contract code, mainly to allow us to trigger some functions in the IDChain API.
 In Algorithm~\ref{alg:contract-events} are declared the events that are triggered in Algorithms~\ref{alg:create-entity}-~\ref{alg:check-entity-validity}.
 In Subsection~\ref{subsection:api} we go in greater detail on how we use events.
@@ -293,9 +281,9 @@ We present in Algorithm~\ref{alg:contract-state} the initial global state of our
   \label{alg:contract-state}
   \begin{algorithmic}
     \State $counterId \gets name$ \Comment{certificate identifier counter}
-    \State $revocations \gets empty list$ \Comment{identifier of revoked certificates}
-    \State $certificates \gets empty map$ \Comment{map associating a peer identifier to a certificate}
-    \State $entities \gets empty map$ \Comment{map associating a Ethereum account address to a entity}
+    \State $revocations \gets empty list$ \Comment{identifiers of revoked certificates}
+    \State $certificates \gets empty map$ \Comment{map associating a peer identifier to a Certificate structure}
+    \State $entities \gets empty map$ \Comment{map associating a Ethereum account address to an Entity structure}
   \end{algorithmic}
 \end{algorithm}
 
@@ -489,7 +477,7 @@ We also defined the \textit{Signatures} table where the vouch relations between 
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Figures/api-database-schema.pdf}
-  \caption{Database entity-relation model.}
+  \caption{Database entity-relation model}
 \label{fig:database-schema}
 \end{figure}
 
@@ -510,7 +498,7 @@ In Table~\ref{table:api-events-database}, we describe the database operations th
       RevokeCertificate & Set \textit{revoked} field value to \textit{false} in the specified row in \textit{Certificates} table. \\ \hline
     \end{tabular}%
   }
-  \caption{Database operations associated with each event listener.}
+  \caption{Database operations associated with each event listener}
 \label{table:api-events-database}
 \end{table}
 
@@ -535,13 +523,13 @@ We implemented the following functionalities:
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Figures/app-register-certificate.png}
-  \caption{Register node certificate form.}
+  \caption{Register node certificate form}
 \label{fig:register-certificate}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Figures/app-list-certificates.png}
-  \caption{List of entity node certificates.}
+  \caption{List of entity node certificates}
 \label{fig:list-certificates}
 \end{figure}

@@ -41,7 +41,7 @@ The tests were executed over the length of several days, in order to minimize an
     \multicolumn{1}{c}{6} & IDChain (HTTPS) & \multicolumn{1}{c}{Read} & \multicolumn{1}{c}{10} & \multicolumn{1}{c}{[ 1, 2, 5, 10, 20, 40, 100 ]} \\ \hline
   \end{tabular}%
 }
-\caption{Test scenarios.}
+\caption{Test scenarios}
 \label{table:test-scenarios}
 \end{table}
 
@@ -114,7 +114,7 @@ In Tables~\ref{table:total-requests-demanded-rate-writes} and~\ref{table:total-r
   \textbf{Total Requests} & 3600 & 7200 & 18000 & 18000 & 18000 & 100000 & 100000 & 100000 & 100000 & 100000 \\ \hline
 \end{tabular}%
 }
-\caption{Number of write requests performed according to demanded request rate.}
+\caption{Number of write requests performed according to demanded request rate}
 \label{table:total-requests-demanded-rate-writes}
 \end{table}
 
@@ -125,7 +125,7 @@ In Tables~\ref{table:total-requests-demanded-rate-writes} and~\ref{table:total-r
   \textbf{\# of Requests per run} & \multicolumn{7}{c}{10000} \\ \hline
   \textbf{Total Requests} & \multicolumn{7}{c}{50000} \\ \hline
 \end{tabular}
-\caption{Number of read requests performed according to demanded request rate.}
+\caption{Number of read requests performed according to demanded request rate}
 \label{table:total-requests-demanded-rate-reads}
 \end{table}
 
@@ -174,7 +174,7 @@ It seems that increased message header overhead and the requests performed to th
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/request-rate-writes-linear.pdf}
-  \caption{Demanded request rate.}
+  \caption{Demanded request rate}
 \label{fig:demanded-request-rate}
 \end{figure}
 
@@ -193,7 +193,7 @@ This only occurs in the HTTP-based implementation, because the effective request
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/average-response-time.pdf}
-  \caption{Average response time.}
+  \caption{Average response time}
   \label{fig:average-response-time}
 \end{figure}
 
@@ -213,13 +213,13 @@ Since there is a bottleneck in the client capacity of processing inbound and out
   \begin{minipage}[t]{.45\textwidth}
     \centering
     \includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-http.pdf}
-    \caption{Number of nodes storing each value, in vanilla DHT.}
+    \caption{Number of nodes storing each value, in vanilla DHT}
 \label{fig:stored-ratio-http}
   \end{minipage}\hfill
   \begin{minipage}[t]{.45\textwidth}
     \centering
     \includegraphics[width=.8\textwidth,scale=0.4]{Figures/evaluation/stored-ratio-https.pdf}
-    \caption{Number of nodes storing each value, in CA-based solution.}
+    \caption{Number of nodes storing each value, in CA-based solution}
 \label{fig:stored-ratio-https}
   \end{minipage}
 \end{figure}
@@ -227,7 +227,7 @@ Since there is a bottleneck in the client capacity of processing inbound and out
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/stored-ratio-https-bc.pdf}
-  \caption{Number of nodes storing each value, in IDChain solution.}
+  \caption{Number of nodes storing each value, in IDChain solution}
 \label{fig:stored-ratio-https-bc}
 \end{figure}
 
@@ -245,7 +245,7 @@ The vanilla DHT implementation is able to perform an effective request rate of~$
 \begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/request-rate-reads-linear-new.pdf}
-  \caption{Demanded request rate.}
+  \caption{Demanded request rate}
   \label{fig:demanded-request-rate-reads}
 \end{figure}
 
@@ -265,7 +265,7 @@ These results are very similar to those obtained in the write request load test 
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/average-response-time-reads-new.pdf}
-  \caption{Average response time.}
+  \caption{Average response time}
   \label{fig:average-response-time-reads}
 \end{figure}
 
@@ -279,7 +279,7 @@ The higher error ratio when achieving the 100 request/second demanded request ra
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/error-ratio-reads-new.pdf}
-  \caption{Requests error ratio.}
+  \caption{Requests error ratio}
   \label{fig:error-ratio-reads}
 \end{figure}
 
@@ -362,7 +362,7 @@ The data was retrieved from the ETH Gas Station\footnote{http://ethgasstation.in
     Standard & 6 & 5 \\ \hline
     Fast & 25 & 2
   \end{tabular}%
-  \caption{Transaction confirmation speed tiers.}
+  \caption{Transaction confirmation speed tiers}
 \label{table:transaction-speed}
 \end{table}
 
@@ -398,14 +398,14 @@ The cost of each operation in function of the transaction confirmation speed is 
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/evaluation/wot-scenario1-graph.pdf}
-  \caption{Scenario 1 web-of-trust graph.}
+  \caption{Scenario 1 web-of-trust graph}
 \label{fig:scenario1-wot-graph}
 \end{figure}
 
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/evaluation/wot-scenario1.pdf}
-  \caption{Scenario 1 operations costs.}
+  \caption{Scenario 1 operations costs}
 \label{fig:scenario1-operation-cost}
 \end{figure}
 
@@ -437,14 +437,14 @@ In Figure~\ref{fig:scenario2-operation-cost} is depicted the cost analysis of op
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/evaluation/wot-scenario2-graph.pdf}
-  \caption{Scenario 2 web-of-trust graph.}
+  \caption{Scenario 2 web-of-trust graph}
 \label{fig:scenario2-wot-graph}
 \end{figure}
 
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/evaluation/wot-scenario2.pdf}
-  \caption{Scenario 2 operations costs.}
+  \caption{Scenario 2 operations costs}
 \label{fig:scenario2-operation-cost}
 \end{figure}
 
@@ -458,4 +458,4 @@ The higher execution in all of the operations was in the \textit{newCertificate}
 The cost of recursively executing the \textit{checkValidity} in the context of the \textit{unsignEntity} and \textit{signEntity} functions seems to incur in slightly lower increments of cost. The cost difference of executing the \textit{unsignEntity} function in Scenario A (calls \textit{checkValidity} once) and Scenario B (calls \textit{checkValidity} three times) is of 0.07 euros. But need to take into consideration that our analyzed scenarios are relatively simple. If we had dozens of nodes with several vouches between each other the cost of executing a simple sign/unsign of an entity could have a considerably higher cost.
 
 The cost analysis in a fiat currency like euro, also has the problem of the analysis be relative to the cost of the ether currency in the main public Ethereum network.
-If this certificate was deployed in a private Ethereum network with fewer nodes, with all nodes mining and receiving ether for every successful block mined, the costs dynamics would be different since there was't \textit{real-world value} inherent to the ether in this network.
+If this certificate was deployed in a private Ethereum network with fewer nodes, and with all nodes mining and receiving ether for every successful block mined, the costs dynamics would be different since there wasn't \textit{real-world value} inherent to the ether in this network.

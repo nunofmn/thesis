@@ -32,40 +32,41 @@
 \contentsline {subsection}{\numberline {2.4.3}Proof of work}{19}{subsection.2.4.3}
 \contentsline {subsection}{\numberline {2.4.4}Blockchain applications}{19}{subsection.2.4.4}
 \contentsline {subsection}{\numberline {2.4.5}Smart Contracts}{19}{subsection.2.4.5}
-\contentsline {subsection}{\numberline {2.4.6}Ethereum}{20}{subsection.2.4.6}
-\contentsline {subsubsection}{Contract code}{21}{section*.33}
-\contentsline {chapter}{\numberline {3}Architecture}{22}{chapter.3}
-\contentsline {section}{\numberline {3.1}Requirements}{22}{section.3.1}
-\contentsline {section}{\numberline {3.2}Overview}{23}{section.3.2}
-\contentsline {section}{\numberline {3.3}Vanilla DHT}{23}{section.3.3}
-\contentsline {section}{\numberline {3.4}DHT with \ac {CA} mechanism}{24}{section.3.4}
-\contentsline {section}{\numberline {3.5}DHT with IDChain mechanism}{26}{section.3.5}
-\contentsline {section}{\numberline {3.6}Distributed Hash Table}{27}{section.3.6}
-\contentsline {section}{\numberline {3.7}Decentralized Public Key Infrastructure}{27}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}IDChain Smart Contract}{28}{subsection.3.7.1}
-\contentsline {subsubsection}{Trusted Certification}{28}{section*.44}
-\contentsline {subsubsection}{Smart Contracts and Autonomy}{28}{section*.45}
-\contentsline {subsubsection}{Smart Contract Logic}{28}{section*.46}
-\contentsline {subsubsection}{Web of trust scenarios}{31}{section*.51}
-\contentsline {subsection}{\numberline {3.7.2}IDChain \ac {API}}{32}{subsection.3.7.2}
-\contentsline {subsection}{\numberline {3.7.3}IDChain Management Application}{33}{subsection.3.7.3}
-\contentsline {section}{\numberline {3.8}Overlay network processes}{34}{section.3.8}
-\contentsline {subsection}{\numberline {3.8.1}Node bootstrap and registration}{34}{subsection.3.8.1}
-\contentsline {subsection}{\numberline {3.8.2}Node message routing}{34}{subsection.3.8.2}
-\contentsline {subsection}{\numberline {3.8.3}Eclipse and Sybil attacks defense}{35}{subsection.3.8.3}
-\contentsline {section}{\numberline {3.9}Comparison with a CA}{35}{section.3.9}
-\contentsline {chapter}{\numberline {4}Implementation}{36}{chapter.4}
-\contentsline {section}{\numberline {4.1}Adopted Technologies}{36}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}DHT}{36}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Blockchain}{37}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {2.4.6}Blockchain implementations}{20}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.7}Ethereum}{20}{subsection.2.4.7}
+\contentsline {subsubsection}{Contract code}{22}{section*.36}
+\contentsline {chapter}{\numberline {3}Architecture}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}Requirements}{23}{section.3.1}
+\contentsline {section}{\numberline {3.2}Overview}{24}{section.3.2}
+\contentsline {section}{\numberline {3.3}Vanilla DHT}{24}{section.3.3}
+\contentsline {section}{\numberline {3.4}DHT with \ac {CA} mechanism}{25}{section.3.4}
+\contentsline {section}{\numberline {3.5}DHT with IDChain mechanism}{27}{section.3.5}
+\contentsline {section}{\numberline {3.6}Distributed Hash Table}{28}{section.3.6}
+\contentsline {section}{\numberline {3.7}Decentralized Public Key Infrastructure}{28}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}IDChain Smart Contract}{29}{subsection.3.7.1}
+\contentsline {subsubsection}{Trusted Certification}{29}{section*.47}
+\contentsline {subsubsection}{Smart Contracts and Autonomy}{29}{section*.48}
+\contentsline {subsubsection}{Smart Contract Logic}{29}{section*.49}
+\contentsline {subsubsection}{Web of trust scenarios}{32}{section*.54}
+\contentsline {subsection}{\numberline {3.7.2}IDChain \ac {API}}{33}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.3}IDChain Management Application}{34}{subsection.3.7.3}
+\contentsline {section}{\numberline {3.8}Overlay network processes}{35}{section.3.8}
+\contentsline {subsection}{\numberline {3.8.1}Node bootstrap and registration}{35}{subsection.3.8.1}
+\contentsline {subsection}{\numberline {3.8.2}Node message routing}{35}{subsection.3.8.2}
+\contentsline {subsection}{\numberline {3.8.3}Eclipse and Sybil attacks defense}{36}{subsection.3.8.3}
+\contentsline {section}{\numberline {3.9}Comparison with a CA}{36}{section.3.9}
+\contentsline {chapter}{\numberline {4}Implementation}{37}{chapter.4}
+\contentsline {section}{\numberline {4.1}Adopted Technologies}{37}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}DHT}{37}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Blockchain}{38}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}IDChain API}{38}{subsection.4.1.3}
 \contentsline {subsubsection}{Application Server}{38}{section*.63}
 \contentsline {subsubsection}{Database}{39}{section*.65}
 \contentsline {subsection}{\numberline {4.1.4}Management Application}{39}{subsection.4.1.4}
 \contentsline {section}{\numberline {4.2}Vanilla system}{39}{section.4.2}
 \contentsline {section}{\numberline {4.3}CA-based system}{41}{section.4.3}
-\contentsline {section}{\numberline {4.4}IDChain system}{42}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}DHT mechanism}{42}{subsection.4.4.1}
+\contentsline {section}{\numberline {4.4}IDChain system}{43}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}DHT mechanism}{43}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Smart contract}{44}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}API}{48}{subsection.4.4.3}
 \contentsline {subsection}{\numberline {4.4.4}Application}{49}{subsection.4.4.4}
@@ -77,16 +78,16 @@
 \contentsline {subsection}{\numberline {5.2.3}Evaluation challenges}{54}{subsection.5.2.3}
 \contentsline {section}{\numberline {5.3}Evaluation Results}{54}{section.5.3}
 \contentsline {subsection}{\numberline {5.3.1}Load tests}{54}{subsection.5.3.1}
-\contentsline {subsubsection}{Write requests}{54}{section*.77}
-\contentsline {subsubsection}{Read requests}{57}{section*.82}
+\contentsline {subsubsection}{Write requests}{54}{section*.78}
+\contentsline {subsubsection}{Read requests}{57}{section*.83}
 \contentsline {subsection}{\numberline {5.3.2}Protocol correctness}{59}{subsection.5.3.2}
-\contentsline {subsubsection}{CA-based solution evaluation}{60}{section*.86}
-\contentsline {subsubsection}{IDChain solution evaluation}{60}{section*.87}
+\contentsline {subsubsection}{CA-based solution evaluation}{60}{section*.87}
+\contentsline {subsubsection}{IDChain solution evaluation}{60}{section*.88}
 \contentsline {subsection}{\numberline {5.3.3}Smart contract execution costs}{61}{subsection.5.3.3}
-\contentsline {subsubsection}{Scenario 1}{62}{section*.89}
-\contentsline {subsubsection}{Scenario 2}{63}{section*.92}
-\contentsline {subsubsection}{Overall results}{64}{section*.95}
+\contentsline {subsubsection}{Scenario 1}{62}{section*.90}
+\contentsline {subsubsection}{Scenario 2}{63}{section*.93}
+\contentsline {subsubsection}{Overall results}{64}{section*.96}
 \contentsline {chapter}{\numberline {6}Conclusions}{66}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary}{66}{section.6.1}
 \contentsline {section}{\numberline {6.2}Future Work}{67}{section.6.2}
-\contentsline {chapter}{Bibliography}{71}{chapter*.96}
+\contentsline {chapter}{Bibliography}{71}{chapter*.97}

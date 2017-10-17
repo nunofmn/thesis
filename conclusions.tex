@@ -24,9 +24,10 @@ In the case of the CA-based architecture, we used a two-tier CA architecture tha
 The IDChain mechanism used a smart contract that encoded the necessary functions and rules to recreate a \ac{PKI} infrastructure, as for example, certificate revocation, certificate fingerprint association and Web of Trust management.
 In order to improve the IDChain system integration and management, we also built a RESTful API and a management web application.
 
-We evaluated the two solutions by deploying 10 DHT nodes to DigitalOcean \acp{VM}, spread across several datacenters worldwide.
+We evaluated the two solution's performance by deploying 10 DHT nodes to DigitalOcean \acp{VM}, spread across several datacenters worldwide.
 We were able to conclude that performance-wise the IDChain mechanism is a viable option to the CA-based solution.
 Security-wise the IDChain mechanism could have some weak spots in terms of the smart contract code, taking into consideration that it is designed as a prototype system.
+The evaluation of the monetary cost of executing the smart contract's functions, showed that total costs of using the IDChain smart contract is relatively low for a small number of entities.
 
 Therefore we have achieved the goal we set out at the beginning of this dissertation: close participation and provide secure node's communication in DHT systems.
 

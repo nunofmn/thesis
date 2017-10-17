@@ -59,7 +59,7 @@ The architecture of this solution is presented in Figure~\ref{fig:architecture-v
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/architecture-overview-none.pdf}
-  \caption{Overview of vanilla DHT architecture.}
+  \caption{Overview of vanilla DHT architecture}
 \label{fig:architecture-vanilla-overview}
 \end{figure}
 
@@ -83,7 +83,7 @@ This approach is summarized in Figure~\ref{fig:architecture-ca-overview}.
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/architecture-overview-ca.pdf}
-  \caption{Overview of DHT with CA architecture.}
+  \caption{Overview of DHT with CA architecture}
 \label{fig:architecture-ca-overview}
 \end{figure}
 
@@ -137,7 +137,7 @@ The DPKI can be subdivided in three main components:
 
 \begin{figure}[htb]
   \includegraphics[width=\linewidth]{Figures/architecture-overview.pdf}
-    \caption{Overview of solution architecture.}
+  \caption{Overview of solution architecture}
 \label{fig:architecture-overview}
 \end{figure}
 
@@ -213,6 +213,8 @@ A good starting point is encoding a hard limit on the number of identifiers or c
 We can also opt by a soft limit or resource-based approach, for instance, by imposing the payment of a value for each certificate association created, leveraging the cryptocurrency inherently associated with the blockchain system.
 
 \subsubsection{Smart Contract Logic}
+\label{subsection:smart-contract-logic}
+
 The main starting point of the smart contract is the \textit{Certificate} structure and fields.
 In Figure~\ref{fig:certificate-structure} are depicted the necessary fields in this structure.
 
@@ -225,7 +227,7 @@ Still, if this functionality was necessary and we wanted to maintain a decentral
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/certificate-structure.pdf}
-  \caption{Smart contract \textit{Certificate} structure fields.}
+  \caption{Smart contract \textit{Certificate} structure fields}
 \label{fig:certificate-structure}
 \end{figure}
 
@@ -241,7 +243,7 @@ A combination of an hard limit, for example, a maximum number of certificates ea
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/web-trust-main.pdf}
-  \caption{Web of trust mechanism.}
+  \caption{Web of trust mechanism}
 \label{fig:web-of-trust-architecture}
 \end{figure}
 
@@ -253,7 +255,7 @@ If we consider a graph representation (usual in the web of trust model), these f
 \begin{figure}[htb]
   \centering
   \includegraphics[scale=0.5]{Figures/entity-structure.pdf}
-  \caption{Smart contract \textit{Entity} structure fields.}
+  \caption{Smart contract \textit{Entity} structure fields}
 \label{fig:entity-structure}
 \end{figure}
 
@@ -297,7 +299,7 @@ It is worth mentioning that the certificates of \textit{Entity D} and \textit{En
   \centering
   \subfigure[Scenario A]{\label{fig:wot-scenario-a}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-1.pdf}}
   \subfigure[Scenario B]{\label{fig:wot-scenario-b}\includegraphics[width=0.4\linewidth]{Figures/web-trust-scenario-2.pdf}}
-  \caption{Entity invalidation scenario, with trust chain verifications.}
+  \caption{Entity invalidation scenario, with trust chain verifications}
 \end{figure}
 
 \subsection{IDChain \ac{API}}
@@ -310,7 +312,7 @@ This \ac{API} will run on the \ac{SP} network, and can be deployed in two ways: 
   \centering
   \subfigure[API Multi-deploy]{\label{fig:multi-deploy}\includegraphics[width=0.4\linewidth]{Figures/architecture-multi-api.pdf}}
   \subfigure[API Single-deploy]{\label{fig:single-deploy}\includegraphics[width=0.4\linewidth,trim = 0cm -4cm 0cm 0cm]{Figures/architecture-single-api.pdf}}
-  \caption{IDChain API deployment strategies.}
+  \caption{IDChain API deployment strategies}
 \end{figure}
 
 The \ac{API} will have the classic components usually associated with a RESTful service: every endpoint returns JSON documents and it is possible to address every stored resource (certificates, entities, transactions, etc) in the system.
@@ -421,7 +423,7 @@ As depicted in Figure~\ref{fig:tls-handshake-plus} is necessary to verify the fo
 
 \begin{figure}[htb]
   \includegraphics[width=\linewidth]{Figures/tls-handshake-plus.pdf}
-  \caption{Additional steps added in TLS handshake verification.}
+  \caption{Additional steps added in TLS handshake verification}
 \label{fig:tls-handshake-plus}
 \end{figure}
 

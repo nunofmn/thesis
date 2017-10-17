@@ -252,12 +252,6 @@ It comprehends the following components:
 	\item \textbf{Repository}: stores and distributes \acp{CRL} and certificates to the end users.
 \end{itemize}
 
-\begin{figure}
-    \includegraphics[width=\linewidth]{Figures/x509-certificate.png}
-    \caption{X.509 version 3 certificate structure}
-    \label{fig:x509-certificate}
-\end{figure}
-
 The \textit{X.509 certificate} contains several fields as depicted in Figure~\ref{fig:x509-certificate}:
 
 \begin{itemize}
@@ -275,6 +269,13 @@ The \textit{X.509 certificate} contains several fields as depicted in Figure~\re
 	\item \textbf{signatureValue}: contains a digital signature of the \textit{tbsCertificate} content;
 \end{itemize}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{Figures/x509-certificate.pdf}
+    \caption{X.509 version 3 certificate structure}
+    \label{fig:x509-certificate}
+\end{figure}
+
 In X.509, the certificate revocation process supports two possible mechanisms:
 
 \begin{itemize}
@@ -284,8 +285,24 @@ In X.509, the certificate revocation process supports two possible mechanisms:
 
 In the \textbf{Periodic Publication Mechanism} the process consists of periodically issuing a \acl{CRL}. A \ac{CRL} is a timestamped list signed by the \ac{CA} or \ac{CRL} issuer that specifies the revoked certificates.
 
-\begin{figure}
-	\begin{verbatim}
+In Figure~\ref{fig:x509-crl} it is possible to view the several fields in the \ac{CRL} definition:
+
+\begin{itemize}
+	\item \textbf{tbsCertList}: contains the certificate list to be signed, which is represented by the following fields:
+		\subitem \textbf{version}: \ac{CRL} version definition;
+		\subitem \textbf{signature}: identifier of the cryptographic algorithm used to sign the \ac{CRL};
+		\subitem \textbf{issuer}: describes the entity that signed and issued the CRL;
+		\subitem \textbf{thisUpdate}: issue date of the \ac{CRL};
+		\subitem \textbf{nextUpdate}: issue date of the next \ac{CRL}. A new \ac{CRL} must be issued before this date;
+		\subitem \textbf{revokedCertificates}: the list of revoked certificates. Each revoked certificate is identified by its serial number in the \textit{userCertificate} field and should also specify the \textit{revocationDate} field;
+		\subitem \textbf{crlExtensions}: optional field, meant to add additional attributes in the \ac{CRL};
+	\item \textbf{signatureAlgorithm}: contains the identifier of the cryptographic algorithm used to sign the \textit{tbsCertList} content;
+	\item \textbf{signatureValue}: contains a digital signature of the \textit{tbsCertList} content;
+\end{itemize}
+
+\begin{figure}[h!]
+  \centering
+	\begin{Verbatim}
 		CertificateList  ::=  SEQUENCE  {
 		  tbsCertList          TBSCertList,
 		  signatureAlgorithm   AlgorithmIdentifier,
@@ -303,29 +320,14 @@ In the \textbf{Periodic Publication Mechanism} the process consists of periodica
 		    revocationDate          Time,
 		    crlEntryExtensions      Extensions OPTIONAL
 		                          -- if present, version MUST be v2
-		  }  OPTIONAL,
+		                            }  OPTIONAL,
 		  crlExtensions           [0]  EXPLICIT Extensions OPTIONAL
 		                          -- if present, version MUST be v2
-	}
-	\end{verbatim}
-    \caption{X.509 v2 CRL structure}
-    \label{fig:x509-crl}
+                                                   }
+	\end{Verbatim}
+  \caption{X.509 v2 CRL structure}
+\label{fig:x509-crl}
 \end{figure}
-
-In Figure~\ref{fig:x509-crl} it is possible to view the several fields in the \ac{CRL} definition:
-
-\begin{itemize}
-	\item \textbf{tbsCertList}: contains the certificate list to be signed, which is represented by the following fields:
-		\subitem \textbf{version}: \ac{CRL} version definition;
-		\subitem \textbf{signature}: identifier of the cryptographic algorithm used to sign the \ac{CRL};
-		\subitem \textbf{issuer}: describes the entity that signed and issued the CRL;
-		\subitem \textbf{thisUpdate}: issue date of the \ac{CRL};
-		\subitem \textbf{nextUpdate}: issue date of the next \ac{CRL}. A new \ac{CRL} must be issued before this date;
-		\subitem \textbf{revokedCertificates}: the list of revoked certificates. Each revoked certificate is identified by its serial number in the \textit{userCertificate} field and should also specify the \textit{revocationDate} field;
-		\subitem \textbf{crlExtensions}: optional field, meant to add additional attributes in the \ac{CRL};
-	\item \textbf{signatureAlgorithm}: contains the identifier of the cryptographic algorithm used to sign the \textit{tbsCertList} content;
-	\item \textbf{signatureValue}: contains a digital signature of the \textit{tbsCertList} content;
-\end{itemize}
 
 In a \textit{periodic publication mechanism}, one of the key aspects is the
 \textit{revocation delay}, that is the delay between the report of a revocation and the publishing of the updated \ac{CRL} in the repository.
@@ -441,10 +443,11 @@ One of the most important fields in the block is the \textit{block header} field
   \item \textbf{Nonce}: counter used by the proof-of-work algorithm.
 \end{itemize}
 
-\begin{figure}
-    \includegraphics[width=\linewidth]{Figures/blockchain-structure.png}
-    \caption{Blockchain structure and blocks content.}
-    \label{fig:blockchain-structure}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{Figures/blockchain-structure.pdf}
+  \caption{Blockchain structure and blocks content}
+\label{fig:blockchain-structure}
 \end{figure}
 
 \subsection{Merkle Trees}
@@ -456,10 +459,11 @@ This allows summarizing the contents of large data sets and provides a secure an
 
 Checking if a data element is included in a tree with N hashed elements takes at most \(2*log_2(N)\) calculations.
 
-\begin{figure}
-    \includegraphics[width=\linewidth]{Figures/merkle-tree.png}
-    \caption{Merkle tree example}
-    \label{fig:merkle-tree}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{Figures/merkle-tree.pdf}
+  \caption{Merkle tree example}
+\label{fig:merkle-tree}
 \end{figure}
 
 This data structure is an essential component in the Bitcoin protocol, since it prevents tampering of the transactions by malicious users. In order to successfully swap in fake transactions into the bottom of the \textit{merkle tree}, it would be necessary to recalculate all the hashes of the nodes that are in the same sub-tree, up to the \textit{merkle root}. Given that each block may contain several hundreds of transactions, this could potentially be a very expensive operation, and by the time it is complete, already new blocks that point to previous real block could have been mined.
@@ -476,7 +480,28 @@ Some systems were built on top of the blockchain by forking the Bitcoin project.
 \subsection{Smart Contracts} The concept of Smart Contracts\footnote{"The Idea of Smart Contracts" - http://szabo.best.vwh.net/idea.html}\cite{40673} is the one of contracts: allowing to establish an agreement between several mutually suspicious parties. But smart contracts have the specificity of being possible to describe via program code and therefore, it is possible to enforce them programmatically and automatically.
 The Bitcoin protocol has a scripting system that is used for transactions and can be used to build a limited implementation of smart contracts.
 
-\subsection{Ethereum} Ethereum\footnote{https://github.com/ethereum/wiki/wiki/White-Paper} is a protocol for building distributed applications on top of a blockchain, with a Turing-complete programming language, using the smart contract concept.
+
+\subsection{Blockchain implementations}
+
+There are a number of different blockchain implementations currently available that enable developers to build applications on top of it using smart contracts, like Ethereum\footnote{https://github.com/ethereum/wiki/wiki/White-Paper}, Hyperledger Fabric\cite{cachin2016architecture} or R3 Corda\cite{mikehearn2016} – with the last two implementations having more specific use-cases: enterprise and finances, respectively.
+
+A quick analysis between these three platforms shows significant architectural differences, in such a way that we can even consider an higher-level classification for these three platforms, since not all of them show the main characteristics of a blockchain (taking in consideration the Bitcoin reference paper).
+A broader definition that encapsulates these three platforms is \ac{DLT}.
+
+The Hyperledger Fabric platform has a modular approach to blockchains. It's a private blockchain system  and is permissioned, i.e doesn't allow unknown entities to participate in the system.
+To participate in the system the members of a Hyperledger Fabric system, must enroll through a \ac{MSP}.
+This allows different architectural approaches in the system, because it is not strictly necessary to have a \ac{POW} mechanism, like in Ethereum or Bitcoin (which may be considered open networks), and it is possible to use different consensus mechanisms in the network.
+Also, there isn't any built-in currency like in Bitcoin or Ethereum.
+
+The R3 Corda system is considered a \ac{DLT} for financial institutions.
+It is also permissioned and private and uses a concept of notary nodes to validate uniqueness of transactions. Like Fabric, it also allows a more fine-grained control of the consensus mechanism.
+Data is shared on a need-to-know basis, there is no global broadcast of all the transactions in the system.
+
+Finally, the Ethereum platform is the more generic blockchain platform of the ones referenced.
+It is permission-less, and can be public or private.
+All the participants have to achieve consensus over all the transactions of the system, using the \ac{POW} consensus and leveraging the built-in currency (ether).
+
+\subsection{Ethereum} Ethereum is a protocol for building distributed applications on top of a blockchain, with a Turing-complete programming language, using the smart contract concept.
 It uses an internal cryptocurrency, \textit{ether} which is similar to bitcoin, and is used to reward the computational resources used to process the smart contracts and securing the network.
 
 In Ethereum there are two types of accounts:
@@ -532,22 +557,23 @@ The contracts code could be written in Solidity\footnote{http://ethereum.github.
 In Figure~\ref{fig:solidity-example} an simple Solidity contract is shown.
 This contract defines two functions that allows anyone to save a value to the contract internal storage and retrieve it after.
 
-\begin{figure}
-	\begin{verbatim}
-		contract DataStorage {
-    	uint dataStore;
+\begin{figure}[h!]
+  \centering
+                    \begin{Verbatim}
+                      contract DataStorage {
+                        uint dataStore;
 
-    	function set(uint a) {
-        dataStore = a;
-    	}
+                        function set(uint a) {
+                          dataStore = a;
+                        }
 
-    	function get() constant returns (uint val) {
-        return dataStore;
-    	}
-	 }
-	\end{verbatim}
-    \caption{Simple data storage contract in Solidity language.}
-    \label{fig:solidity-example}
+                        function get() constant returns (uint val) {
+                          return dataStore;
+                        }
+                      }
+                    \end{Verbatim}
+  \caption{Simple data storage contract in Solidity language}
+\label{fig:solidity-example}
 \end{figure}
 
 The Ethereum protocol, therefore allows to build several secure distributed applications by applying the abstract smart contract model: voting systems, decentralized file storage, \ac{DAO}, identity and reputation systems, etc
