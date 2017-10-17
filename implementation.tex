@@ -29,26 +29,7 @@ It is possible to switch between the three different mechanisms by declaring in 
 
 \subsection{Blockchain}
 
-The blockchain that we used was Ethereum.
-There are a number of other blockchains currently available that enable developers to build applications on top of it using smart contracts, like Hyperledger Fabric\cite{cachin2016architecture} or R3 Corda\cite{mikehearn2016}, but these implementations have more specific use-cases, enterprise and finances respectively.
-
-A quick analysis between these three platforms shows significant architectural differences, in such a way that we can even consider an higher-level classification for these three platforms, since not all of them show the main characteristics of a blockchain (taking in consideration the Bitcoin reference paper).
-A broader definition that encapsulates these three platforms is \ac{DLT}.
-
-The Hyperledger Fabric platform has a modular approach to blockchains. It's a private blockchain system  and is permissioned, i.e doesn't allow unknown entities to participate in the system.
-To participate in the system the members of a Hyperledger Fabric system, must enroll through a \ac{MSP}.
-This allows different architectural approaches in the system, because it is not strictly necessary to have a \ac{POW} mechanism, like in Ethereum or Bitcoin (which may be considered open networks), and it is possible to use different consensus mechanisms in the network.
-Also, there isn't any built-in currency like in Bitcoin or Ethereum.
-
-The R3 Corda system is considered a \ac{DLT} for financial institutions.
-It is also permissioned and private and uses a concept of notary nodes to validate uniqueness of transactions. Like Fabric, it also allows a more fine-grained control of the consensus mechanism.
-Data is shared on a need-to-know basis, there is no global broadcast of all the transactions in the system.
-
-Finally, the Ethereum platform is the more generic blockchain platform of the ones referenced.
-It is permission-less, and can be public or private.
-All the participants have to achieve consensus over all the transactions of the system, using the \ac{POW} consensus and leveraging the built-in currency (ether).
-
-Our choice was Ethereum due to a number of reasons:
+The blockchain that we used was Ethereum due to the following:
 
 \begin{itemize}
   \item Permissionless - even though we want to build our mechanism around a federated/enterprise model, this proof of concept may be easily adapted to be used as a global system.
@@ -56,8 +37,8 @@ Our choice was Ethereum due to a number of reasons:
 	\item Developer ecosystem - right now, Ethereum has the biggest developer community, with a increasing number of development tools to aid the development and deploy process of smart contracts.
 \end{itemize}
 
-
 Despite the fact that Ethereum network is currently the system with the better developer ecosystem, there are still several shortcomings when developing against it.
+%TODO: FAZER ISTO
 In Section~\ref{implementation:idchain} we detail some of the difficulties and shortcomings of the Ethereum smart contracts we encountered during development.
 
 \subsection{IDChain API}

@@ -5,25 +5,25 @@
 \contentsline {figure}{\numberline {2.2}{\ignorespaces X.509 v2 CRL structure\relax }}{15}{figure.caption.27}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Blockchain structure and blocks content\relax }}{18}{figure.caption.30}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Merkle tree example\relax }}{19}{figure.caption.31}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Simple data storage contract in Solidity language\relax }}{21}{figure.caption.34}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Simple data storage contract in Solidity language\relax }}{22}{figure.caption.37}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Overview of vanilla DHT architecture\relax }}{24}{figure.caption.37}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Overview of DHT with CA architecture\relax }}{25}{figure.caption.40}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Two-tier \acl {CA} hierarchy\relax }}{25}{figure.caption.41}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Overview of solution architecture\relax }}{26}{figure.caption.42}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Smart contract \textit {Certificate} structure fields\relax }}{29}{figure.caption.48}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Web of trust mechanism\relax }}{30}{figure.caption.49}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Smart contract \textit {Entity} structure fields\relax }}{30}{figure.caption.50}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Entity invalidation scenario, with trust chain verifications\relax }}{31}{figure.caption.52}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Scenario A}}}{31}{figure.caption.52}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Scenario B}}}{31}{figure.caption.52}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces IDChain API deployment strategies\relax }}{32}{figure.caption.53}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {API Multi-deploy}}}{32}{figure.caption.53}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {API Single-deploy}}}{32}{figure.caption.53}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Additional steps added in TLS handshake verification\relax }}{34}{figure.caption.58}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Overview of vanilla DHT architecture\relax }}{25}{figure.caption.40}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Overview of DHT with CA architecture\relax }}{26}{figure.caption.43}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Two-tier \acl {CA} hierarchy\relax }}{26}{figure.caption.44}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Overview of solution architecture\relax }}{27}{figure.caption.45}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Smart contract \textit {Certificate} structure fields\relax }}{30}{figure.caption.51}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Web of trust mechanism\relax }}{31}{figure.caption.52}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Smart contract \textit {Entity} structure fields\relax }}{31}{figure.caption.53}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Entity invalidation scenario, with trust chain verifications\relax }}{32}{figure.caption.55}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Scenario A}}}{32}{figure.caption.55}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Scenario B}}}{32}{figure.caption.55}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces IDChain API deployment strategies\relax }}{33}{figure.caption.56}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {API Multi-deploy}}}{33}{figure.caption.56}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {API Single-deploy}}}{33}{figure.caption.56}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Additional steps added in TLS handshake verification\relax }}{35}{figure.caption.61}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Database entity-relation model\relax }}{48}{figure.caption.69}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Register node certificate form\relax }}{49}{figure.caption.71}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Register node certificate form\relax }}{50}{figure.caption.71}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces List of entity node certificates\relax }}{50}{figure.caption.72}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Demanded request rate\relax }}{55}{figure.caption.78}
