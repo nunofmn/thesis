@@ -313,7 +313,7 @@ Also, using X.509 certificates containing the DHT node identifiers, issued by a 
 This solution is also able to ensure that each trusted node — in case of going rogue — is not able to steal other node's identifier.
 
 One possible vulnerability of the mechanism is related with performing the extra verification of node identifier encoded in the certificate.
-As we are only able to perform the verification after the TLS handshake — when the \textit{onSecure} event is called) — there is a small time frame where data could be exchanged with potential malicious nodes.
+As we are only able to perform the verification after the TLS handshake — when the \textit{onSecure} event is called — there is a small time frame where data could be exchanged with potential malicious nodes.
 
 But still, this attack could only be performed by a trusted node that decides to go rogue, since the verification of the node's certificate against the certification path is performed as part of the TLS handshake process.
 
@@ -321,8 +321,8 @@ But still, this attack could only be performed by a trusted node that decides to
 
 As in the CA-based solution, the IDChain solution is also capable of mitigating the same attack vectors, since the solution also uses TLS/HTTPS protocol for node's communication.
 This solution, therefore, also suffers from the same problem as the previously evaluated solution — we are only to perform the certificate peer validation after the TLS handshake process.
-In this case it is also necessary to perform a request to the IDChain API, which slightly increases the time frame where data could be exchanged with a potential malicious node.
-The attack could also be performed by malicious nodes from outside the DHT network, since we are using self-signed certificates and a certification path to verify the certificates against don't exist.
+In this case it is also necessary to perform a request to the IDChain API, which slightly increases the time frame when data could be exchanged with a potential malicious node.
+The attack could also be performed by malicious nodes from outside the DHT network, since we are using self-signed certificates and a certification path to verify the certificates against doesn't exist.
 
 % falar de traidores?
 This solution does not use TLS mutual authentication due to the Node.js TLS restrictions we encountered, and it was necessary to add a complementary scheme in order to perform TLS clients' authentication.
@@ -349,9 +349,9 @@ By default, each gas unit has a price defined in \textit{wei} unit which is equa
 We then perform a conversion to euro currency using the conversion rate of $1 ether = 286.662 euros$ as of \textit{13 October 2017 at 16 PM} in the main Ethereum network.
 
 We also calculated the cost for different confirmation speeds in the network.
-It is possible to increase the amount of wei we are able to pay for each gas unit, so mining nodes give higher priority to our transactions, which speeds up the inclusion of our transactions in a valid block
+It is possible to increase the amount of wei we are willing to pay for each gas unit, so mining nodes give higher priority to our transactions, which speeds up the inclusion of our transactions in a valid block
 
-In Table~\ref{table:transaction-speed} are defined 3 confirmation tiers which we used to calculate transactions cost in function of confirmation speed.
+In Table~\ref{table:transaction-speed}  3 confirmation tiers are defined, which we used to calculate transactions cost in function of confirmation speed.
 The data was retrieved from the ETH Gas Station\footnote{http://ethgasstation.info/} website.
 
 \begin{table}[htb]
