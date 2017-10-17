@@ -64,18 +64,23 @@ Finally it was also necessary to evaluate the DHT protocol correctness under a n
 The DHT nodes were deployed on Digital Ocean\footnote{https://www.digitalocean.com/}, distributed across several different datacenters.
 
 We deployed 9 nodes, one node for each of the following datacenters: New York City 1 (NYC1), New York City 3 (NYC3), San Francisco 1 (SFO1), Toronto 1 (TOR1), London 1 (LON1), Frankfurt 1 (FRA1), Bengalore 1 (BLR1), Amsterdam 2 (AM2) and Amesterdam 2 (AM3).
-The 9th node which corresponds to the benchmark client was located in Lisbon.
+The 10th node which corresponds to the benchmark client was located in Lisbon.
 
 The node that was defined as bootstrap node in all nodes' configuration was the node located in the NYC1 datacenter.
 
 All the nodes used a \acp{VM} with the same specs: 1vCPU, 512 MB RAM, 20 GB SSD disk space, running Ubuntu 16.04.3 x64.
 The nodes used Node.js v8.2.1, PostgreSQL 9.5.8 and Ethereum testrpc client v4.1.3.
 
-The benchmarking client was run on a server with Dual Intel Xeon E5-2640@2.00GHz CPU with a total of 32 cores, 128GB of RAM and running Debian 8.2.
+The benchmarking client was ran on a server with Dual Intel Xeon E5-2640@2.00GHz CPU with a total of 32 cores, 128GB of RAM and running Debian 8.2.
 The versions of the software used were equal to the Digital Ocean nodes.
 
 %TODO: em que medida isso influencia o sistema
 We used in the DHT node configuration a k-bucket size of 5.
+
+For the evaluation we took a multi-deploy approach to the IDChain API, meaning that each node has his own IDChain API instance.
+
+We simulated a blockchain network by using the \textit{testrpc} client to simulate full Ethereum client behaviour.
+The smart contract was deployed in every nodes' \textit{testrpc} client instance, and the same entities and certificates were created in all of the instances.
 
 \subsection{Tests configuration and tooling}
 
@@ -353,9 +358,9 @@ The data was retrieved from the ETH Gas Station\footnote{http://ethgasstation.in
   \centering
   \begin{tabular}{lcc}
     \multicolumn{1}{c}{\textbf{Tier}} & \textbf{\begin{tabular}[c]{@{}c@{}}Gas Price \\ (Gwei)\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}Maximum Transaction Confirmation Time\\ (minutes)\end{tabular}} \\ \hline
-    SafeLow (\textless 20 minutes) & 4 & 20 \\ \hline
-    Standard (\textless 5 minutes) & 6 & 5 \\ \hline
-    Fast (\textless 2 minutes) & 25 & 2
+    SafeLow  & 4 & 20 \\ \hline
+    Standard & 6 & 5 \\ \hline
+    Fast & 25 & 2
   \end{tabular}%
   \caption{Transaction confirmation speed tiers.}
 \label{table:transaction-speed}
