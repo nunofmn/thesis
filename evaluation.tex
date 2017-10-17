@@ -3,13 +3,13 @@
 
 In order to evaluate the implemented solution, several tests were done to assess protocol correctness and measure system performance.
 In Section~\ref{section:scenarios} we detail our evaluation process and the overall objectives we pretend to achieve in the evaluated scenarios.
-Then, in Section~\ref{section:methodology} we describe the methods, tools and challenges we had to perform the evaluation.
+Then, in Section~\ref{section:methodology} we describe the methods and tools used, and challenges we had when performing the evaluation.
 Lastly, in Section~\ref{section:results} we present and discuss the solutions evaluation results.
 
 \section{Evaluation Objectives and Scenarios}
 \label{section:scenarios}
 
-Our evaluation has an extended focus in the correctness of the implemented protocol.
+Our evaluation has an extended focus on the correctness of the implemented protocol.
 But we also perform benchmarking of the all implemented solutions, in order to compare them.
 
 Given the requirements presented in Section~\ref{architecture:requirements}, the following metrics were defined:
@@ -18,12 +18,12 @@ Given the requirements presented in Section~\ref{architecture:requirements}, the
   \item \textit{Response time for writes} – we will evaluate the system response time, as the number of write requests in the DHT increases;
   \item \textit{Response time for reads} – we will also evaluate the system response time, as the number of read requests in the DHT increases;
     % only error rate? add number of nodes storing the value as a metric also?
-  \item \textit{Error rate} – this metric has distinct interpretations for read and write requests. In the case of the write requests, we analyze the number of nodes that stored the value, and define different error categories. In read requests, we consider that the request failed when is impossible to obtain a value.
+  \item \textit{Error rate} – this metric has distinct interpretations for read and write requests. In the case of the write requests, we analyze the number of nodes that stored the value, and define different error categories. In read requests, we consider that the request failed when it is impossible to obtain a value.
 \end{itemize}
 
 Using these metrics, we performed load tests and functional security tests to the \ac{DHT}.
 We performed two different types of load test: \textit{(a)} one client only issuing write requests, (b) one client only issuing read requests.
-As summarized in Table~\ref{table:test-scenarios}, we run the tests for the different scenarios using a DHT network with 10 nodes deployed.
+As summarized in Table~\ref{table:test-scenarios}, we ran the tests for the different scenarios using a DHT network with 10 nodes deployed.
 We conducted tests for each mechanism and write/read combination, where we varied the rate from 0.1 requests/s up to 100 requests/s in write tests, and from 1 request/s to 100 requests/s in read tests.
 Only one node was setup to perform the requests, and each test was repeated 5 times.
 The tests were executed over the length of several days, in order to minimize any potential effect related to varying network traffic.
@@ -53,7 +53,7 @@ We also defined a metric for the smart contract evaluation:
 
 This test was executed in a local machine, by calculating the \textit{gas} cost of executing every smart contract function in the \ac{EVM}.
 
-Finally was also necessary to evaluate the DHT protocol correctness under a number of possible scenarios, from a security analysis perspective, which is done in Section~\ref{section:protocol-correcteness}.
+Finally it was also necessary to evaluate the DHT protocol correctness under a number of possible scenarios, from a security analysis perspective, which is done in Section~\ref{section:protocol-correcteness}.
 
 \section{Evaluation methodology}
 \label{section:methodology}
@@ -66,7 +66,7 @@ The DHT nodes were deployed on Digital Ocean\footnote{https://www.digitalocean.c
 We deployed 9 nodes, one node for each of the following datacenters: New York City 1 (NYC1), New York City 3 (NYC3), San Francisco 1 (SFO1), Toronto 1 (TOR1), London 1 (LON1), Frankfurt 1 (FRA1), Bengalore 1 (BLR1), Amsterdam 2 (AM2) and Amesterdam 2 (AM3).
 The 9th node which corresponds to the benchmark client was located in Lisbon.
 
-The node that was defined as bootstrap node in all nodes configuration was the node located in the NYC1 datacenter.
+The node that was defined as bootstrap node in all nodes' configuration was the node located in the NYC1 datacenter.
 
 All the nodes used a \acp{VM} with the same specs: 1vCPU, 512 MB RAM, 20 GB SSD disk space, running Ubuntu 16.04.3 x64.
 The nodes used Node.js v8.2.1, PostgreSQL 9.5.8 and Ethereum testrpc client v4.1.3.
@@ -79,24 +79,24 @@ We used in the DHT node configuration a k-bucket size of 5.
 
 \subsection{Tests configuration and tooling}
 
-In order to perform the load test evaluation of systems, was necessary to build a set of scripts.
+In order to perform the load test evaluation of systems, it was necessary to build a set of scripts.
 We built two different scripts for write and read requests.
 The write request script receives three parameters: DHT mechanism to use, total number of requests and demanded request rate per second.
 This script was ran using the following process:
 
 \begin{enumerate}
   \item Deploy all 9 nodes;
-  \item Run the script in benchmarking node with the given parameters.
-  \item When the script finishes, delete the all nodes cached data;
+  \item Run the script in the benchmarking node with the given parameters.
+  \item When the script finishes, delete all the nodes' cached data;
   \item Repeat the process.
 \end{enumerate}
 
-Is necessary to delete the node cached data between runs, in order to the tests to run in a clean state DHT, withou any data written to.
-The script outputs each request start/completion time and number of nodes that stored the written value in a CSV file.
+It was necessary to delete the node cached data between runs, in order for the tests to run in a clean state DHT, without any data written to.
+The script outputs each request's start/completion time and number of nodes that stored the written value in a CSV file.
 
 The read request script receives three parameters: DHT mechanism to use, total number of requests and a list of demanded request rates per second.
-This script - on contrary to the write script - in each execution will perform several test iterations, increasing the demanded request rate, according to the received list of demanded requests.
-We choose this approach in read script because it's not necessary to clear the node data between executions, and allow us to perceive the system performance with an increasing number of requests.
+This script - on the contrary to the write script - in each execution will perform several test iterations, increasing the demanded request rate, according to the received list of demanded requests.
+We chose this approach for the read script because it's not necessary to clear the node's data between executions, and it allow us to perceive the system's performance with an increasing number of requests.
 
 In Tables~\ref{table:total-requests-demanded-rate-writes} and~\ref{table:total-requests-demanded-rate-reads} we present the demanded request rate and total number of requests that were done, in write script and read script executions, respectively.
 
@@ -106,7 +106,7 @@ In Tables~\ref{table:total-requests-demanded-rate-writes} and~\ref{table:total-r
 \begin{tabular}{ccccccccccc}
   \textbf{Demanded Request Rate (req/s)} & 0.1 & 0.2 & 0.5 & 1 & 2 & 5 & 10 & 20 & 40 & 100 \\ \hline
   \textbf{\# of Requests per run} & 720 & 1440 & 3600 & 3600 & 3600 & 20000 & 20000 & 20000 & 20000 & 20000 \\ \hline
-  \textbf{Total Requests} & 3600 & 7200 & \multicolumn{3}{c}{18000} & \multicolumn{5}{c}{100000} \\ \hline
+  \textbf{Total Requests} & 3600 & 7200 & 18000 & 18000 & 18000 & 100000 & 100000 & 100000 & 100000 & 100000 \\ \hline
 \end{tabular}%
 }
 \caption{Number of write requests performed according to demanded request rate.}
@@ -132,8 +132,8 @@ In the case of the CA-based mechanism tests, we used a two-tier architecture, wi
 
 \subsection{Evaluation challenges}
 
-Our benchmarking client presented performance limitations when executing our test scripts, that taken into consideration when analyzing the results obtained.
-Since, our DHT is based in Node.js runtime, there is limitation in the number of concurrent connections that can be done.
+Our benchmarking client presented performance limitations when executing our test scripts, that were taken into consideration when analyzing the results obtained.
+Since our DHT is based in Node.js runtime, there is a limitation in the number of concurrent connections that can be established.
 The node running in the Digital Ocean datacenters, had by default a maximum number of open file descriptors equal to 1024.
 We tried to increase the value, but the limitations persisted.
 This causes an enormous limitation when executing the tests, because the main bottleneck was the benchmarking client.
@@ -141,30 +141,30 @@ This causes an enormous limitation when executing the tests, because the main bo
 \section{Evaluation Results}
 \label{section:results}
 In the following sections we discuss the evaluation results.
-The Section~\ref{section:load-tests} focus in read and write load tests, and Section~\ref{section:smart-contract-tests} focus in smart contract execution metrics.
+The Section~\ref{section:load-tests} focuses in read and write load tests, and Section~\ref{section:smart-contract-tests} focuses in smart contract execution metrics.
 
 \subsection{Load tests}
 \label{section:load-tests}
 
 \subsubsection{Write requests}
 
-The Figures~\ref{fig:demanded-request-rate}–~\ref{fig:stored-ratio-https-bc} represent the write load test evalution results.
+The Figures~\ref{fig:demanded-request-rate}–~\ref{fig:stored-ratio-https-bc} represents the write load test evaluation results.
 
-The graph from Figure~\ref{fig:demanded-request-rate} represent the effective request rate in function of the demanded request rate, for each of the implemented solutions.
-Each point in the graph, illustrate the average request rate of the 5 different test executions performed, for the specific demanded request rate.
+The graph from Figure~\ref{fig:demanded-request-rate} represents the effective request rate in function of the demanded request rate, for each of the implemented solutions.
+Each point in the graph illustrates the average request rate of the 5 different test executions performed, for the specific demanded request rate.
 
-In the Figure legend the \textit{http} value represent the vanilla DHT implementation, the \textit{https} value represent the CA-based DHT implementation and \textit{https-bc} represent the IDChain DHT implementation.
-For instance, the point (0.1, 0.1), in any of the solutions, represent the average request obtained (0.1 req/s) for 5 repetitions performed for this test, demanding a request rate of 0.1 req/s.
+In the figure's legend the \textit{http} value represents the vanilla DHT implementation, the \textit{https} value represents the CA-based DHT implementation and \textit{https-bc} represents the IDChain DHT implementation.
+For instance, the point (0.1, 0.1), in any of the solutions, represents the average request obtained (0.1 req/s) for 5 repetitions performed for this test, demanding a request rate of 0.1 req/s.
 
-In Figure~\ref{fig:demanded-request-rate} is possible to verify that in the [0.1, 10] request/s demanded request rate range, all the three solutions have an approximated equal effective request rate, which means that the client is able to keep up with the demanded request rate.
+In Figure~\ref{fig:demanded-request-rate} it is possible to verify that in the [0.1, 10] request/s demanded request rate range, all the three solutions have an approximated equal effective request rate, which means that the client is able to keep up with the demanded request rate.
 In the [20, 100] request/s demand request rate range, the vanilla DHT implementation outperforms the CA-based and IDChain solutions, by being able to keep up more closely with the demanded request rate.
 The vanilla DHT implementation is able to perform~$\approx$ 90 requests/second, where the CA-based and IDChain solutions become saturated at~$\approx$ 17 requests/second.
-This shows us that the HTTP-based solution is capable of outperforming clearly the HTTPS-based solutions, at the cost of didn't provide any security aspects in the nodes communication.
+This shows us that the HTTP-based solution is capable of outperforming clearly the HTTPS-based solutions, at the cost of not providing any security aspects in the nodes' communication.
 
 The message overhead of the HTTPS handshake protocol, limits the request rate capacity of the CA-based and IDChain solutions.
-Is important to notice, that could be possible to increase the request rate capacity of the HTTPS-based solutions, if TLS Session Resumption and Keep-Alive connections are activated in HTTPS.
+It is important to note, that it could be possible to increase the request rate capacity of the HTTPS-based solutions, if TLS Session Resumption and Keep-Alive connections are activated in HTTPS.
 We are also able to conclude that the IDChain solution is a viable solution performance-wise to the CA-based solution.
-It seems that increased message header overhead and the requests performed to the IDChain API, doesn't incur in a substantial cost to the effective request rate the client is able to perform, in comparison with the CA-based solution.
+It seems that increased message header overhead and the requests performed to the IDChain API, don't incur in a substantial cost to the effective request rate the client is able to perform, in comparison with the CA-based solution.
 
 \begin{figure}[h!]
   \centering
@@ -180,9 +180,9 @@ Each point in the graph, illustrate the average request response of the 5 differ
 We can draw similar conclusions to those of the previous discussed figure: the HTTP-based implementation clearly outperforms the HTTPS-based implementations, by having, in average,~$\approx$ 2 times faster response times.
 This results of the aforementioned added message overhead of the HTTPS handshake protocol.
 
-The average response time of the CA and IDChain based DHT implementations remain approximately constant, only increasing when an~$\approx$ 15-17 requests/second effective request rate is achieved, which correspond to a demanded request rate in the ]10, 100] requests/second range.
+The average response time of the CA and IDChain based DHT implementations remain approximately constant, only increasing when an~$\approx$ 15-17 requests/second effective request rate is achieved, which correspond to a demanded request rate in the [10, 100] requests/second range.
 In the case of the HTTP-based implementation, the average request response time also remained constant with an increasing load, only increasing drastically to an average response rate of 23552.88 ms when an effective request rate of 90.83 requests/second - which corresponds to a demanded request rate of 100 request/second - is achieved.
-This result is due to the fact that when performing that effective request rate, the test DHT client becomes saturated with inbound and outbound requests, consequently the average response time drastically increases.
+This result is due to the fact that when performing that effective request rate, the test DHT client becomes saturated with inbound and outbound requests. Consequently, the average response time drastically increases.
 This only occurs in the HTTP-based implementation, because the effective request rate is much higher than in HTTPS-based solutions, which means that the bottleneck is in the client capacity of processing all inbound and outbound requests.
 
 \begin{figure}[h!]
@@ -197,10 +197,10 @@ The graph from Figures~\ref{fig:stored-ratio-http},~\ref{fig:stored-ratio-https}
 In order to be easier to interpret the data, each plot in the graph represents a range of different number of nodes that stored the information.
 We represent the values in the \textit{y-axis} as the ratio between the number of requests with the defined "stored" variable and the total number of requests performed for the associated demanded request rate.
 
-Is possible verify that in the HTTPS-based implementations that each value written to the DHT is almost always stored in 5 different nodes, intermittently being stored in 4 nodes.
+It is possible to verify that in the HTTPS-based implementations, each value written to the DHT is almost always stored in 5 different nodes, intermittently being stored in 4 nodes.
 In the case of the HTTP-based implementation, in the [0.1, 40] requests/second range of demanded request rate, the obtained results are equal to those of the HTTPS-based solution.
 When the demanded request is increased to 100 requests/second, the number of requests in which the value is stored in 5 nodes decreases to 36.1\%, and the number of failed writes (values that aren't stored in any node) increases to 63.8\%.
-Those results in the HTTP case are closely related with the conclusions that we drawn out from Figure~\ref{fig:average-response-time}.
+Those results in the HTTP case are closely related with the conclusions that were drawn out from Figure~\ref{fig:average-response-time}.
 Since there is a bottleneck in the client capacity of processing inbound and outbound requests, some requests will invariably timeout and the values will not be stored in any node.
 
 \begin{figure}[H]
@@ -230,10 +230,10 @@ Since there is a bottleneck in the client capacity of processing inbound and out
 
 The Figures~\ref{fig:demanded-request-rate-reads}–~\ref{fig:error-ratio-reads} represent the write load test evalution results.
 
-As in the previous write load tests analysis, in Figure~\ref{fig:demanded-request-rate} is depicted the effective request rate in function of the demanded request rate, for each of the different solutions, where each point in the graph represent the average request rate of the 5 different test executions performed.
+As in the previous write load tests analysis, in Figure~\ref{fig:demanded-request-rate} is depicted the effective request rate in function of the demanded request rate, for each of the different solutions, where each point in the graph represents the average request rate of the 5 different test executions performed.
 
-In graph from Figure~\ref{fig:demanded-request-rate-reads} we can see that the results similar to the write tests results.
-In the [1, 10] requests/s demanded request rate range, is possible to verify that in all three implementations the client is able to keep up with the demanded request read.
+In the graph from Figure~\ref{fig:demanded-request-rate-reads} we can see that the results are similar to the write tests results.
+In the [1, 10] requests/s demanded request rate range, it is possible to verify that in all three implementations the client is able to keep up with the demanded request read.
 As in Figure~\ref{fig:demanded-request-rate}, in [20, 100] demanded request rate range, the HTTP-based implementation outperforms the HTTPS-based implementations, being able to keep up with the demanded request rate.
 The vanilla DHT implementation is able to perform an effective request rate of~$\approx$ 91 request/s, and the IDChain and CA-based implementations become saturated at~$\approx$ 20 requests/second — results similar to those in the write requests load test.
 
@@ -244,20 +244,18 @@ The vanilla DHT implementation is able to perform an effective request rate of~$
   \label{fig:demanded-request-rate-reads}
 \end{figure}
 
-From Figure~\ref{fig:average-response-time-reads}, is possible to verify that the HTTP-based solution has, in average~$\approx$ 2 times faster response times that those of the HTTPS-based solutions.
-Also, has stable average response times, only increasing when performing an average effective request of~$\approx$ 91 requests/second (100 requests/second demanded request rate) where the average response time is of 3302.602 ms.
-This drastic increase — as referred in the write requests load test also — is due to the fact that since HTTP is able to perform a much higher effective request rate, the system ins unable to keep up with the processing of all inbound and outbound requests, and therefore, some requests will take longer to complete.
+From Figure~\ref{fig:average-response-time-reads}, it is possible to verify that the HTTP-based solution has, in average~$\approx$ 2 times faster response times that those of the HTTPS-based solutions.
+Also, it has stable average response times, only increasing when performing an average effective request of~$\approx$ 91 requests/second (100 requests/second demanded request rate) where the average response time is of 3302.602 ms.
+This drastic increase — also referred in the write requests load test — is due to the fact that since HTTP is able to perform a much higher effective request rate, the system is unable to keep up with the processing of all inbound and outbound requests, and therefore, some requests will take longer to complete.
 
-The HTTPS-based solutions also keep stable average response times until achieving~$\approx$ 15-20 requests/seconds effective response rate range, which is when the client starts to saturate with requests and is not possible to keep up with the demanded request rate.
+The HTTPS-based solutions also keep stable average response times until achieving a~$\approx$ 15-20 requests/seconds effective response rate range, which is when the client starts being saturated with requests and is not possible to keep up with the demanded request rate.
 When the client starts to saturate, the average response time starts to increase to the 600–800 ms range.
 
 If we compare the Figures~\ref{fig:average-response-time-reads} and~\ref{fig:average-response-time}, the average response times of the read requests are much lower than the write requests.
-This is related with the DHT protocol, which use parallel queries for searches and returns the value as soon as one node replies.
+This is related to the DHT protocol, which use parallel queries for searches and returns the value as soon as one node replies.
 In the case of write requests as is necessary to store the value in several nodes and wait for confirmation, the average response time is higher.
 
-These results are very similar to those obtained in the write request load test also, and enable us to conclude that performance-wise the IDChain solution is a valid alternative to the CA-based solution.
-
-% TODO: efectuar mais umas runs e verificar se taxa de erros persiste
+These results are very similar to those obtained in the write request load test also, and enable us to conclude that performance-wise, the IDChain solution is a valid alternative to the CA-based solution.
 
 \begin{figure}[htb]
   \centering
@@ -266,13 +264,12 @@ These results are very similar to those obtained in the write request load test 
   \label{fig:average-response-time-reads}
 \end{figure}
 
-% TODO: CORRIGIR ISTO
 In Figure~\ref{fig:error-ratio-reads} is illustrated the request error ratio in function of the demanded request rate, for each of the presented solutions.
 We consider that a request returned an error when it's not possible to obtain the value associated with the key we are searching for.
 
 The three implementations maintain stable error ratio of 0\%, with the error ratio of the HTTP-based implementation rising to 12.9\% with a demanded request rate of 100 requests/second.
 
-The higher error ratio when achieving 100 request/second demanded request rate, in the case of HTTP was already expectable, since it is related with the aforementioned benchmark client bottleneck, and the inability to process all the inbound/outbound requests.
+The higher error ratio when achieving the 100 request/second demanded request rate, in the case of HTTP was already expectable, since it is related with the aforementioned benchmark client bottleneck, and the inability to process all the inbound/outbound requests.
 
 \begin{figure}[htb]
   \centering
@@ -284,31 +281,31 @@ The higher error ratio when achieving 100 request/second demanded request rate, 
 \subsection{Protocol correctness}
 \label{section:protocol-correcteness}
 
-In order to evaluate the CA-based and IDChain DHT protocol implementations, is necessary to define the threat model.
+In order to evaluate the CA-based and IDChain DHT protocol implementations, it is necessary to define the threat model.
 Two of the main objectives of the presented solutions are to \textit{close DHT participation} and \textit{ensure communication privacy, integrity and authenticity}.
 
-Taking in consideration that we are dealing with a DHT system, that are some critical DHT processes that could be potential attack vectors.
-We will evaluate if each one of those processes, and analyze how attack vectors are mitigated by our solutions.
+Taking in consideration that we are dealing with a DHT system, there are some critical DHT processes that could be potential attack vectors.
+We will evaluate each one of those processes, and analyze how attack vectors are mitigated by our solutions.
 
 A node bootstrap in the DHT, is one of the critical DHT processes which could be targeted.
-Each DHT node entering the network must be sure that is entering it through a trustable node, and is not being tricked into entering a DHT network with malicious nodes.
+Each DHT node entering the network must be sure that it is entering it through a trustable node, and is not being tricked into entering a DHT network with malicious nodes.
 Every DHT node must also ensure that every node bootstraping through them, is allowed to enter the network.
-This is also what enable us to provide access control to the DHT network, which take us in the direction of solving the objective of close DHT participation.
-Also, is necessary to ensure privacy, integrity and authenticity in the DHT network message routing, because we want to prevent any external interference in the DHT network - as for example, resorting to MITM attacks - and provide confidentiality in the data exchanged inside the DHT network.
+This is also what enables us to provide access control to the DHT network, which takes us in the direction of achieving the objective of close DHT participation.
+Also, it is necessary to ensure privacy, integrity and authenticity in the DHT network message routing, because we want to prevent any external interference in the DHT network - such as, resorting to MITM attacks - and provide confidentiality in the data exchanged inside the DHT network.
 All of these aspects, are closely related to the node's communication establishment.
 
-Is important to notice that our solutions don't pretend to deal with rogue nodes belonging to malicious organizations from the federation/consorcium using the DHT.
+It is important to notice that our solutions don't pretend to deal with rogue nodes belonging to malicious organizations from the federation/consorcium using the DHT.
 
-But since one of the objectives is \textit{minimize trust} within the federation, we also analyze how our solutions hold up in case of a malicious organization tries to subvert the DHT protocol.
+But since one of the objectives is to \textit{minimize trust} within the federation, we also analyze how our solutions hold up in case a malicious organization tries to subvert the DHT protocol.
 
 \subsubsection{CA-based solution evaluation}
 
-The CA-based solution is capable of mitigate each of the aforementioned attack vectors.
-The TLS/HTTPS protocol with mutual authentication is able to enforce the routing messages privacy, integrity and authenticity, in the two-ways of the communication channel.
-Also, using X.509 certificates containing the DHT node identifiers, issued by a root or intermediate CA, we can ensure during the bootstrap process that we are effectively connecting to a DHT composed of trusted nodes.
+The CA-based solution is capable of mitigating each of the aforementioned attack vectors.
+The TLS/HTTPS protocol with mutual authentication is able to enforce the routing messages' privacy, integrity and authenticity, in the two-ways of the communication channel.
+Also, using X.509 certificates containing the DHT node identifiers, issued by a root or intermediate CA, we can ensure that during the bootstrap process we are effectively connecting to a DHT composed of trusted nodes.
 
 % falar de traidores?
-This solution is also able to ensure that each trusted node — in case of going rogue — is not able to steal other node identifier.
+This solution is also able to ensure that each trusted node — in case of going rogue — is not able to steal other node's identifier.
 
 One possible vulnerability of the mechanism is related with performing the extra verification of node identifier encoded in the certificate.
 As we are only able to perform the verification after the TLS handshake — when the \textit{onSecure} event is called) — there is a small time frame where data could be exchanged with potential malicious nodes.
@@ -317,22 +314,22 @@ But still, this attack could only be performed by a trusted node that decides to
 
 \subsubsection{IDChain solution evaluation}
 
-As in the CA-based solution, the IDChain solution is also capable of mitigate the same attack vectors, since the solution also uses TLS/HTTPS protocol for node's communication.
-This solution therefore, also suffers for the same problem as the previous evaluated solution — we are only to perform the certificate peer validation after the TLS handshake process.
-In this case is also necessary to perform a request to the IDChain API, which slightly increases the time frame where data could be exchanged with a potential malicious node.
-The attack could be also performed by malicious nodes from outside the DHT network, since we are using self-signed certificates and a certification path to verify the certificates against don't exist.
+As in the CA-based solution, the IDChain solution is also capable of mitigating the same attack vectors, since the solution also uses TLS/HTTPS protocol for node's communication.
+This solution, therefore, also suffers from the same problem as the previously evaluated solution — we are only to perform the certificate peer validation after the TLS handshake process.
+In this case it is also necessary to perform a request to the IDChain API, which slightly increases the time frame where data could be exchanged with a potential malicious node.
+The attack could also be performed by malicious nodes from outside the DHT network, since we are using self-signed certificates and a certification path to verify the certificates against don't exist.
 
 % falar de traidores?
-This solution is not using TLS mutual authentication due to the Node.js TLS restrictions we encountered, and was necessary to add a complementary scheme in order to perform TLS clients authentication.
+This solution does not use TLS mutual authentication due to the Node.js TLS restrictions we encountered, and it was necessary to add a complementary scheme in order to perform TLS clients' authentication.
 This solution is vulnerable to one attack that could performed by a node from the DHT network, that decides to go rogue.
 This attack mechanism is similar to a replay attack:
 
 \begin{enumerate}
-  \item The node that decides to go rogue performs several message exchanges with the target node, and stores the target node certificate and each 'challenge' and 'challenge signature' fields from the messages sent by the target node.
-  \item The rogue node now has a series of timestamps/challenges and challenge-signature fields, that could be used to impersonate the target peer identity, during a limited time frame.
+  \item The node that decides to go rogue performs several message exchanges with the target node, and stores the target node's certificate and each 'challenge' and 'challenge signature' fields from the messages sent by the target node.
+  \item The rogue node now has a series of timestamps/challenges and challenge-signature fields, that could be used to impersonate the target peer identity, for a limited time frame.
 \end{enumerate}
 
-This attack is only possible to be performed by a rogue node inside the DHT network, because the TLS client certificate only sends the certificate when the TLS valid handshake is performed, which means that only a trusted TLS server will receive the specified message header fields and certificate.
+This attack can only be performed by a rogue node inside the DHT network, because the TLS client certificate only sends the certificate when a TLS valid handshake is performed, which means that only a trusted TLS server will receive the specified message header fields and certificate.
 
 %\subsubsection{Sybil attack resistance}
 
@@ -341,12 +338,12 @@ This attack is only possible to be performed by a rogue node inside the DHT netw
 
 We evaluated the costs of executing each smart contract function.
 In order to perform the evaluation we executed each function in \textit{testrpc} and obtained the \textit{gas} cost of its execution.
-It is possible to calculate the gas cost in testrpc because it uses the same \ac{EVM} as the real network client, and the total gas cost of the execution of a smart contract function  comes from the sum of each low-level operation in EVM gas cost.
+It is possible to calculate the gas cost in testrpc because it uses the same \ac{EVM} as the real network client, and the total gas cost of the execution of a smart contract function  comes from the sum of each low-level operation's gas cost in EVM.
 
 By default, each gas unit has a price defined in \textit{wei} unit which is equal to $1 x 10^{-18}$ \textit{ether} units.
-We then performed a conversion to euro currency using the conversion rate of $1 ether = 286.662 euros$ as of \textit{13 October 2017 at 16 PM} in the main Ethereum network.
+We then perform a conversion to euro currency using the conversion rate of $1 ether = 286.662 euros$ as of \textit{13 October 2017 at 16 PM} in the main Ethereum network.
 
-We calculated the cost also for different confirmation speeds in the network.
+We also calculated the cost for different confirmation speeds in the network.
 It is possible to increase the amount of wei we are able to pay for each gas unit, so mining nodes give higher priority to our transactions, which speeds up the inclusion of our transactions in a valid block
 
 In Table~\ref{table:transaction-speed} are defined 3 confirmation tiers which we used to calculate transactions cost in function of confirmation speed.
@@ -364,11 +361,11 @@ The data was retrieved from the ETH Gas Station\footnote{http://ethgasstation.in
 \label{table:transaction-speed}
 \end{table}
 
-We defined two different scenarios with variable web of trust size, mainly to analyze the cost of execute recursively the \textit{checkValidity} function in the context of the \textit{unsignEntity} and \textit{unsignEntity} functions.
-We also initiated entities with different names length, so it is possible to verify the cost difference of increasing the entities' name length.
+We defined two different scenarios with variable web of trust size, mainly to analyze the cost of recursively executing the \textit{checkValidity} function in the context of the \textit{unsignEntity} and \textit{unsignEntity} functions.
+We also initiated entities with different names lengths, so it is possible to verify the cost difference of increasing the entities' name length.
 In the case of the \textit{newCertificate} function calls we used a standard IPv4 address, a 160 bit node identifier and SHA-1 certificate fingerprint.
 
-In the following scenarios is also considered that the minimum number of vouches necessary to a entity to become valid is equal to 3.
+In the following scenarios it is also considered that the minimum number of vouches necessary for an entity to become valid is equal to 3.
 
 For this evaluation the \textit{sendTransaction} was not performed in the context of the \textit{newCertificate} smart contract's function.
 
@@ -408,9 +405,9 @@ The cost of each operation in function of the transaction confirmation speed is 
 \end{figure}
 
 % TODO falar em valores abaixo ou média de valor de todas as operações?
-As we can see in Figure~\ref{fig:scenario1-operation-cost} – assuming a "Fast" confirmation speed – is possible to verify that almost every operation we performed had a value below 1 euro, with exception of the operations using the \textit{newCertificate} operation which execution cost goes over 3 euros.
+As we can see in Figure~\ref{fig:scenario1-operation-cost} – assuming a "Fast" confirmation speed – it is possible to verify that almost every operation we performed had a value below 1 euro, with exception of the operations using the \textit{newCertificate} operation whose execution cost goes over 3 euros.
 This increase of execution cost is due to the fact that in the \textit{newCertificate} we are storing much more information in the smart contract state incurring in a bigger gas fee.
-The \textit{unsignEntity} function in this scenario incurred in a cost of only 0.28 euros, since the unsigned entity (Entity 3) that becomes invalid doesn't have vouched for any entity, meaning that the \textit{checkValidity} function is only called once.
+The \textit{unsignEntity} function in this scenario incurred in a cost of only 0.28 euros, since the unsigned entity (Entity 3) that became invalid hadn't vouched for any entity, meaning that the \textit{checkValidity} function was only called once.
 
 \subsubsection{Scenario 2}
 
@@ -428,9 +425,9 @@ The following operations were performed:
 \end{enumerate}
 
 In this scenario we wanted to analyze the cost of performing the \textit{checkValidity} function along the descendants of the invalidated entity.
-We suppressed the entity creation operations from the list of operations being analised.
+We suppressed the entity creation operations from the list of operations being analyzed.
 
-In Figure~\ref{fig:scenario2-operation-cost} is depicted the cost analysis of operation exection, and in Figure~\ref{fig:scenario2-wot-graph} the graph of the web of trust formed.
+In Figure~\ref{fig:scenario2-operation-cost} is depicted the cost analysis of operation execution, and in Figure~\ref{fig:scenario2-wot-graph} the graph of the web of trust built.
 
 \begin{figure}[htb]
   \centering
@@ -446,14 +443,14 @@ In Figure~\ref{fig:scenario2-operation-cost} is depicted the cost analysis of op
 \label{fig:scenario2-operation-cost}
 \end{figure}
 
-In this scenario the cost of the execution of \textit{unsignEntity} function – using the "Fast" transaction confirmation speed as reference – incurred in a cost of 0.35 euros.
-The cost is slightly higher that in the previous scenario since we are performing an extra two executions of the \textit{checkValidity} function to verify the \textit{Entities 4 and 5}.
+In this scenario, the cost of the execution of \textit{unsignEntity} function – using the "Fast" transaction confirmation speed as reference – incurred in a cost of 0.35 euros.
+The cost is slightly higher than in the previous scenario since we are performing an extra two executions of the \textit{checkValidity} function to verify the \textit{Entities 4 and 5}.
 
 \subsubsection{Overall results}
 
-The overall costs of operations execution allows to conclude that is doable cost-wise to build a web of trust system on top of the Ethereum blockchain.
-The higher execution in all of the operations was in \textit{newCertificate} function which needs to store a higher ammount of data in the smart contract storage. But in that is case is possible to use the Standard or SafeLow confirmation speeds and reduce the execution costs, since generally is not a time urgent operation – as could be a certificate revocation operation.
-The cost of execute recursively the \textit{checkValidity} in the context of the \textit{unsignEntity} and \textit{signEntity} functions seems to incur in slightly low increments of cost. The cost difference of executing the \textit{unsignEntity} function in Scenario A (calls \textit{checkValidity} once) and Scenario B (calls \textit{checkValidity} three times) is of 0.07 euros. But need to take into consideration that our analized scenarios are relatively simple, if have dozens of nodes with several vouches between each other the cost of executing a simple sign/unsign of a entity could have a considerably higher cost.
+The overall costs of the operations' execution allows to conclude that building a web of trust system on top of the Ethereum blockchain is a doable thing cost-wise.
+The higher execution in all of the operations was in the \textit{newCertificate} function which needs to store a higher amount of data in the smart contract storage. But for that case it is possible to use the Standard or SafeLow confirmation speeds and reduce the execution costs, since generally it is not a time urgent operation – as a certificate revocation operation would be.
+The cost of recursively executing the \textit{checkValidity} in the context of the \textit{unsignEntity} and \textit{signEntity} functions seems to incur in slightly lower increments of cost. The cost difference of executing the \textit{unsignEntity} function in Scenario A (calls \textit{checkValidity} once) and Scenario B (calls \textit{checkValidity} three times) is of 0.07 euros. But need to take into consideration that our analyzed scenarios are relatively simple. If we had dozens of nodes with several vouches between each other the cost of executing a simple sign/unsign of an entity could have a considerably higher cost.
 
-The cost analysis in a fiat currency like euro also has the problem of we are analizingthe cost in the context of the main public Ethereum network.
-If this certificate is deployed in a private Ethereum network with fewer nodes, and all nodes are mining and receiving ether for every successful block mined, the costs dinamics could be different since there isn't \textit{real-world value} inherent to the ether in this network.
+The cost analysis in a fiat currency like euro, also has the problem of the analysis be relative to the cost of the ether currency in the main public Ethereum network.
+If this certificate was deployed in a private Ethereum network with fewer nodes, with all nodes mining and receiving ether for every successful block mined, the costs dynamics would be different since there was't \textit{real-world value} inherent to the ether in this network.
