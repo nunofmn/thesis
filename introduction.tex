@@ -6,7 +6,7 @@
 
 Nowadays with the current Internet infrastructure and the provided services built on top of it, the old telecommunications operators based services, like voice telephony, are losing importance.
 
-\ac{OTT} players, like Google and Skype, are dominating the communications market with no additional cost and closed ecosystem solutions.
+\ac{OTT} players, like Google and Skype, are dominating the communications market with free but closed ecosystem solutions.
 New users will choose to use the services that are used by the majority of their social environment.
 
 \ac{OTT} services, by working in the closed ecosystem don't need to work in interoperability between services and communications standards, allowing them to be more competitive, agile and lead communication and multimedia innovation.
@@ -19,15 +19,16 @@ Telcos are also geographically restricted, which means that the deployment of ne
 The reThink~\footnote{https://rethink-project.eu/} project goal is to design a new peer-to-peer network infrastructure for communications based on Web technologies, that allow dynamic trusted relationships between distributed apps and a portable identity model, leveraging the advantages of the federated Telco and \ac{OTT} model.
 The main goal is to achieve a framework that enables developers to create communication-based applications, allowing users from different reThink-based applications.
 
-This dynamic trusted relationship is created by using \ac{Hyperties}, a web microservice paradigm, that enables the execution of trustful services in a web environment on user devices or network servers.
+This dynamic trusted relationship is created by using \ac{Hyperties}, a web microservice paradigm, that enables the execution of trustful services in a web environment on users' devices or network servers.
 In order to achieve interoperability, the communication between hyperties is based on the \textit{Protocol-On-The-Fly}~\cite{protofly} concept that allows using standard network protocols through a common API, enabling communication between different hyperties from different service providers.
+%RP standard network protocols? ou network protocols apenas, sem o standard.
 The hyperty concept permits to extend the communications beyond normal telephony and messaging, where even services using \ac{M2M} and \ac{IoT} systems could be built.
-The hyperties are maintained by \acp{SP} and are loaded to the users device.
+The hyperties are maintained by \acp{SP} and are loaded to the user's device.
 
 One of the main components in the reTHINK architecture is the Registry service.
 The Registry service is a key-value based directory service that facilitates the management and lookup of hyperty instances running in users devices.
 
-The Registry service must have the following requirements:
+The Registry service has the following requirements:
 \begin{itemize}
   \item \textit{Fast query response time}, since it will be accessed when establishing communication;
 	\item \textit{Scalable}, since it will be a worldwide deployed service;
@@ -39,36 +40,37 @@ The Registry service is sub-divided in three components: \textit{Global Registry
 The \textit{Global Registry} is a key-value store based on \ac{DHT} technology that stores user identifiers in hyperty services, indexed by a \ac{GUID}.
 It lists domain-dependent identities owned by a user in the reTHINK system.
 By resolving a \ac{GUID}, it is possible to obtain these domain-dependent identities of each user.
-The \textit{Domain Registry} is run by \acp{SP} and allows to lookup users hyperty instances information using the domain-dependent identities mentioned above.
+The \textit{Domain Registry} is run by \acp{SP} and allows to lookup users' hyperty instances information using the domain-dependent identities mentioned above.
 It uses a client-server model, which can handle a high data update rate.
 The \textit{Local Registry} component runs in the device runtime and manages hyperty instances running in the runtime and contacts the Global and Domain Registries.
 
 \section{Problem Statement}
 \label{section:problem-statement}
 
-The \textit{Global Registry} is based on a \ac{DHT}, a \ac{P2P} distributed system  that is usually used in public-facing services and therefore being open to participation, allowing any node to join the network.
+The \textit{Global Registry} is based on a \ac{DHT}, a \ac{P2P} distributed system  that is usually used in public-facing services, therefore being open to participation, allowing any node to join the network.
 One example is the Mainline \ac{DHT}, that powers the BitTorrent network.
 
 Several private and enterprise uses of DHT system exist, for instance, the Dynamo\cite{dynamo2007} key-value system from Amazon or the Cassandra\cite{cassandra2010} database.
 These systems use \acp{DHT} as a building-block of their architecture for tasks that require multi-node coordination, as data sharding, for instance, not exposing the \ac{DHT} directly.
 
-The reTHINK framework is also inherently a federated solution, consequently it isn't open to participation from outside the \acp{SP} organization, but it should allow the entry of new nodes from any of \acp{SP} part of the federation.
-This is an important aspect, because as opposed to a private solution where we have full control of all the infrastructure, in a federated solution we don't have full control and it is necessary to have additional infrastructure to create trust relations and verify identities between the \acp{SP} \ac{DHT} nodes.
+The reTHINK framework is also inherently a federated solution, consequently it isn't open to participation from outside the \acp{SP} organizations, but it should allow the entry of new nodes from any of the \acp{SP} part of the federation.
+This is an important aspect, because as opposed to a private solution where we have full control of all the infrastructure, in a federated solution we don't have full control and it is necessary to have additional infrastructure to create trust relations and verify identities between the several \acp{SP}' \ac{DHT} nodes.
+%RP não falas em closed participation. devias.
 
 \section{Proposed Solution}
 \label{section:proposed}
 
-The major goal of this thesis is to ensure the security and close participation of the \ac{DHT} necessary to build the Global Registry system.
+The major goal of this thesis is to ensure the security and closed participation of the \ac{DHT} necessary to build the Global Registry system.
 
 In order to accomplish this goal, a set of objectives need to be achieved:
 
 \begin{itemize}
   \item \textbf{Mitigate common \ac{DHT} attacks}- several different types of attacks targetting the \ac{DHT} exist. An in-depth analysis of each one of them and existing solutions is necessary;
 	\item \textbf{Guarantee communication privacy, integrity and authenticity}- it is crucial to secure the \ac{DHT} nodes communication;
-	\item \textbf{Close DHT participation}- provide mechanisms to allow access-control nodes in the \ac{DHT};
+	\item \textbf{Closed DHT participation}- provide mechanisms to allow access-control to nodes entering the \ac{DHT};
 	\item \textbf{Deal with nodes compromise}- allow to easily revoke access to compromised nodes or identities;
-  \item \textbf{Minimize trust between participants}- even though our system can not tolerate maleficent \ac{SP} nodes, we want to minimize the trust between \ac{SP} nodes so it isn't possible for a couple of \acp{SP} nodes to monopolize the DHT system;
-  \item \textbf{Maintain system decentralized}- solve all the aforementioned problems, maintaining a decentralized architecture, which should also minimize trust between \acp{SP};
+  \item \textbf{Minimize trust requirements between participants}- even though our system can not tolerate maleficent \ac{SP} nodes, we want to minimize the trust requirements between \ac{SP} nodes so it isn't possible for a couple of \acp{SP} nodes to monopolize the DHT system;
+  \item \textbf{Maintain system decentralized}- solve all the aforementioned problems, maintaining a decentralized architecture, which should also minimize trust requirements between \acp{SP};
   \item \textbf{Decouple the DHT system from the Global Registy}- despite the main use case of the DHT is the Global Registry, we want to decouple the DHT by providing a simple \ac{API} that permits any application to be built on top of it.
 \end{itemize}
 
@@ -78,10 +80,10 @@ The first solution is based on a more classic approach to establish secure commu
 
 The second solution we will present is a novel approach that uses blockchain technology, which we named IDChain.
 Using the blockchain we will build a \ac{DPKI} that will permit us to issue unique identities and certificates to nodes across all \acp{SP}.
-This solution provides the same guarantees of the previous presented solution, while also allowing us to maintain a decentralized system and minimize the trust between participants.
+This solution provides the same guarantees of the previous presented solution, while also allowing us to maintain a decentralized system and minimize the trust requirements between participants.
 
 These two solutions will have as basis a \ac{DHT} that doesn't provide secure communications between nodes nor access-control.
-This is presented as a complementary mechanism which we will use to benchmark our two security mechanisms.
+This is presented as a complementary mechanism that we will use to benchmark our two security mechanisms.
 
 \section{Outline}
 This document describes the research and work developed and it is organized as follows:
@@ -91,7 +93,7 @@ This document describes the research and work developed and it is organized as f
   \item \textbf{Chapter~\ref{chapter:relatedwork}} describes the state of the art of the technologies used in the solution architecture.
   \item \textbf{Chapter~\ref{chapter:architecture}} describes the system requirements and the architecture of the solution.
   \item \textbf{Chapter~\ref{chapter:implementation}} describes the implementation of the solution and the technologies chosen.
-  \item \textbf{Chapter~\ref{chapter:evaluation}} describes the evaluation tests performed and the corresponding results.
+  \item \textbf{Chapter~\ref{chapter:evaluation}} describes the evaluation tests performed and presents the corresponding results.
   \item \textbf{Chapter~\ref{chapter:conclusion}} summarizes the work developed and future work.
 \end{itemize}
 
