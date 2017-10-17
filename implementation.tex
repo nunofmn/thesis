@@ -57,7 +57,6 @@ The decision of using Node.js to develop the HTTP API is mainly related with the
 At the time of development was the most mature library to interface with the Ethereum client.
 The Ruby, Java and .Net implementations were still in early stages of development.
 
-% verificar isto
 The Hapi framework was chosen because allows to build APIs encapsulating endpoints around a plugin system.
 For instance, it is possible to create a plugin that encapsulates all the endpoints that are related to the certificates' domain.
 This allow us to compose the API using tiny modules that contain the business logic of each domain in the application, which later could be decoupled and deployed separately.
@@ -177,8 +176,6 @@ In the client side, we add a listener to the request socket object for the \text
 This event is emitted after the TLS handshaking process for a new connection was successfully completed.
 Our listener function checks if the node identifier encoded as a DNS entry in the Subject Alternative Name extension in the certificate is equal to the message sender identifier, and if the certificate was authorized when performing the certification path verification.
 
-% TODO: add pseudo code for mechanism
-
 In the server side, we simply access the certificate when handling a new request, through the received request object and do the same verification as in the client side.
 
 It is important to notice, that this verification takes place right after the TLS handshake process.
@@ -250,6 +247,16 @@ Events allow smart contracts to dispatch notifications to applications that are 
 When an event is called in a smart contract, the arguments will be stored in the transaction's log, a data structure in the blockchain, that is associated with the address of a contract.
 These logs are incorporated in the Ethereum blockchain and will stay there as long as a block is accessible.
 
+The \textit{Certificate} and \textit{Entity} structures defined in the smart contract, used through Algorithms~\ref{alg:contract-state}-\ref{alg:check-entity-validity} are represented in Figure~\ref{fig:implemented-structures}.
+These structures have a similar structure to those presented in Section~\ref{subsection:smart-contract-logic}.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{Figures/implementation-structures.pdf}
+  \caption{Smart contracts structures}
+\label{fig:implemented-structures}
+\end{figure}
+
 We use events extensively through our smart contract code, mainly to allow us to trigger some functions in the IDChain API.
 In Algorithm~\ref{alg:contract-events} are declared the events that are triggered in Algorithms~\ref{alg:create-entity}-~\ref{alg:check-entity-validity}.
 In Subsection~\ref{subsection:api} we go in greater detail on how we use events.
@@ -274,9 +281,9 @@ We present in Algorithm~\ref{alg:contract-state} the initial global state of our
   \label{alg:contract-state}
   \begin{algorithmic}
     \State $counterId \gets name$ \Comment{certificate identifier counter}
-    \State $revocations \gets empty list$ \Comment{identifier of revoked certificates}
-    \State $certificates \gets empty map$ \Comment{map associating a peer identifier to a certificate}
-    \State $entities \gets empty map$ \Comment{map associating a Ethereum account address to a entity}
+    \State $revocations \gets empty list$ \Comment{identifiers of revoked certificates}
+    \State $certificates \gets empty map$ \Comment{map associating a peer identifier to a Certificate structure}
+    \State $entities \gets empty map$ \Comment{map associating a Ethereum account address to an Entity structure}
   \end{algorithmic}
 \end{algorithm}
 

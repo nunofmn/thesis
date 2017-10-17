@@ -78,16 +78,16 @@
 \contentsline {subsection}{\numberline {5.2.3}Evaluation challenges}{54}{subsection.5.2.3}
 \contentsline {section}{\numberline {5.3}Evaluation Results}{54}{section.5.3}
 \contentsline {subsection}{\numberline {5.3.1}Load tests}{54}{subsection.5.3.1}
-\contentsline {subsubsection}{Write requests}{54}{section*.77}
-\contentsline {subsubsection}{Read requests}{57}{section*.82}
+\contentsline {subsubsection}{Write requests}{54}{section*.78}
+\contentsline {subsubsection}{Read requests}{57}{section*.83}
 \contentsline {subsection}{\numberline {5.3.2}Protocol correctness}{59}{subsection.5.3.2}
-\contentsline {subsubsection}{CA-based solution evaluation}{60}{section*.86}
-\contentsline {subsubsection}{IDChain solution evaluation}{60}{section*.87}
+\contentsline {subsubsection}{CA-based solution evaluation}{60}{section*.87}
+\contentsline {subsubsection}{IDChain solution evaluation}{60}{section*.88}
 \contentsline {subsection}{\numberline {5.3.3}Smart contract execution costs}{61}{subsection.5.3.3}
-\contentsline {subsubsection}{Scenario 1}{62}{section*.89}
-\contentsline {subsubsection}{Scenario 2}{63}{section*.92}
-\contentsline {subsubsection}{Overall results}{64}{section*.95}
+\contentsline {subsubsection}{Scenario 1}{62}{section*.90}
+\contentsline {subsubsection}{Scenario 2}{63}{section*.93}
+\contentsline {subsubsection}{Overall results}{64}{section*.96}
 \contentsline {chapter}{\numberline {6}Conclusions}{66}{chapter.6}
 \contentsline {section}{\numberline {6.1}Summary}{66}{section.6.1}
 \contentsline {section}{\numberline {6.2}Future Work}{67}{section.6.2}
-\contentsline {chapter}{Bibliography}{71}{chapter*.96}
+\contentsline {chapter}{Bibliography}{71}{chapter*.97}
