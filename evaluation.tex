@@ -166,7 +166,7 @@ Is important to notice, that could be possible to increase the request rate capa
 We are also able to conclude that the IDChain solution is a viable solution performance-wise to the CA-based solution.
 It seems that increased message header overhead and the requests performed to the IDChain API, doesn't incur in a substantial cost to the effective request rate the client is able to perform, in comparison with the CA-based solution.
 
-\begin{figure}[htb]
+\begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/request-rate-writes-linear.pdf}
   \caption{Demanded request rate.}
@@ -185,7 +185,7 @@ In the case of the HTTP-based implementation, the average request response time 
 This result is due to the fact that when performing that effective request rate, the test DHT client becomes saturated with inbound and outbound requests, consequently the average response time drastically increases.
 This only occurs in the HTTP-based implementation, because the effective request rate is much higher than in HTTPS-based solutions, which means that the bottleneck is in the client capacity of processing all inbound and outbound requests.
 
-\begin{figure}[htb]
+\begin{figure}[h!]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/average-response-time.pdf}
   \caption{Average response time.}
@@ -203,7 +203,7 @@ When the demanded request is increased to 100 requests/second, the number of req
 Those results in the HTTP case are closely related with the conclusions that we drawn out from Figure~\ref{fig:average-response-time}.
 Since there is a bottleneck in the client capacity of processing inbound and outbound requests, some requests will invariably timeout and the values will not be stored in any node.
 
-\begin{figure}[htb]
+\begin{figure}[H]
   \centering
   \begin{minipage}[t]{.45\textwidth}
     \centering
@@ -219,7 +219,7 @@ Since there is a bottleneck in the client capacity of processing inbound and out
   \end{minipage}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[H]
   \centering
   \includegraphics[scale=0.4]{Figures/evaluation/stored-ratio-https-bc.pdf}
   \caption{Number of nodes storing each value, in IDChain solution.}
@@ -237,19 +237,19 @@ In the [1, 10] requests/s demanded request rate range, is possible to verify tha
 As in Figure~\ref{fig:demanded-request-rate}, in [20, 100] demanded request rate range, the HTTP-based implementation outperforms the HTTPS-based implementations, being able to keep up with the demanded request rate.
 The vanilla DHT implementation is able to perform an effective request rate of~$\approx$ 91 request/s, and the IDChain and CA-based implementations become saturated at~$\approx$ 20 requests/second — results similar to those in the write requests load test.
 
-\begin{figure}[htb]
+\begin{figure}[h!]
   \centering
-  \includegraphics[scale=0.4]{Figures/evaluation/request-rate-reads-linear.pdf}
+  \includegraphics[scale=0.4]{Figures/evaluation/request-rate-reads-linear-new.pdf}
   \caption{Demanded request rate.}
   \label{fig:demanded-request-rate-reads}
 \end{figure}
 
 From Figure~\ref{fig:average-response-time-reads}, is possible to verify that the HTTP-based solution has, in average~$\approx$ 2 times faster response times that those of the HTTPS-based solutions.
-Also, has stable average response times, only increasing when performing an average effective request of~$\approx$ 91 requests/second (100 requests/second demanded request rate) where the average response time is of 2381.225 ms.
+Also, has stable average response times, only increasing when performing an average effective request of~$\approx$ 91 requests/second (100 requests/second demanded request rate) where the average response time is of 3302.602 ms.
 This drastic increase — as referred in the write requests load test also — is due to the fact that since HTTP is able to perform a much higher effective request rate, the system ins unable to keep up with the processing of all inbound and outbound requests, and therefore, some requests will take longer to complete.
 
 The HTTPS-based solutions also keep stable average response times until achieving~$\approx$ 15-20 requests/seconds effective response rate range, which is when the client starts to saturate with requests and is not possible to keep up with the demanded request rate.
-When the client starts to saturate, the average response time starts to increase to the 700–900 ms range.
+When the client starts to saturate, the average response time starts to increase to the 600–800 ms range.
 
 If we compare the Figures~\ref{fig:average-response-time-reads} and~\ref{fig:average-response-time}, the average response times of the read requests are much lower than the write requests.
 This is related with the DHT protocol, which use parallel queries for searches and returns the value as soon as one node replies.
@@ -261,23 +261,22 @@ These results are very similar to those obtained in the write request load test 
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[scale=0.4]{Figures/evaluation/average-response-time-reads.pdf}
+  \includegraphics[scale=0.4]{Figures/evaluation/average-response-time-reads-new.pdf}
   \caption{Average response time.}
   \label{fig:average-response-time-reads}
 \end{figure}
 
+% TODO: CORRIGIR ISTO
 In Figure~\ref{fig:error-ratio-reads} is illustrated the request error ratio in function of the demanded request rate, for each of the presented solutions.
 We consider that a request returned an error when it's not possible to obtain the value associated with the key we are searching for.
 
-The three implementations maintain stable error ratio between 1—2.5\%, with the error ratio of the HTTP-based implementation rising to 10.4\% with a demanded request rate of 100 requests/second.
+The three implementations maintain stable error ratio of 0\%, with the error ratio of the HTTP-based implementation rising to 12.9\% with a demanded request rate of 100 requests/second.
 
 The higher error ratio when achieving 100 request/second demanded request rate, in the case of HTTP was already expectable, since it is related with the aforementioned benchmark client bottleneck, and the inability to process all the inbound/outbound requests.
 
-We were expecting the error ratio to be closer 0\% in all the other cases, as an average of 1—2.5\% of request errors could be considered high for designing some systems which rely on a DHT.
-
 \begin{figure}[htb]
   \centering
-  \includegraphics[scale=0.4]{Figures/evaluation/error-ratio-reads.pdf}
+  \includegraphics[scale=0.4]{Figures/evaluation/error-ratio-reads-new.pdf}
   \caption{Requests error ratio.}
   \label{fig:error-ratio-reads}
 \end{figure}
