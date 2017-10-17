@@ -77,7 +77,7 @@ This architecture lays down the basis for the other solutions' architectures, wh
 The previous solution does not provide any kind of secure communication between nodes, opening way to a multitude of different kind of attacks, like \ac{MITM} attacks.
 Also it doesn't provide any mechanism to close the participation in the \ac{DHT} (assuming the DHT nodes are Internet facing servers).
 
-The classic approach to providing a secure communication channel between nodes is by using the \ac{TLS} protocol coupled with a X509 PKI infrastructure.
+The classic approach to providing a secure communication channel between nodes is by using the \ac{TLS}~\cite{rfc5246} protocol coupled with a X509 PKI infrastructure.
 This approach is summarized in Figure~\ref{fig:architecture-ca-overview}.
 
 \begin{figure}[htb]
