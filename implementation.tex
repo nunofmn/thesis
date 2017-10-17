@@ -120,8 +120,6 @@ The DHT was built using Kad, which has an 160-bit address space and the nodes' c
 
 In order to launch every DHT client it is necessary to provide a configuration file.
 
-\lstinputlisting[label=lst:config, caption=Example DHT client configuration file., captionpos=b]{Examples/config-example.json}
-
 A configuration file example is shown in Listing~\ref{lst:config}.
 The fields \textit{nodeID}, \textit{hostname} and \textit{port} correspond to the node contact information in the DHT, and more specifically, in the case of the \textit{nodeID} field to the node identifier in the DHT network.
 The \textit{storage} field is the directory where the DHT client will save the node data (key, values and routing table information). This points to a directory because the Kad library by default uses LevelDB~\footnote{http://leveldb.org/} - an on-disk key-value store - for persistence.
@@ -130,6 +128,8 @@ We also defined the \textit{security} field as an extension of the default confi
 This field contains all the options and information to deploy the chosen security mechanism.
 In the case of the vanilla DHT, the sub-field \textit{mechanism} should be set to 'none'.
 The other possible values are 'ca' and 'blockchain', for the CA-based mechanism and IDChain mechanism, respectively.
+
+\lstinputlisting[label=lst:config, basicstyle=\small, frame=single, caption=Example DHT client configuration file, captionpos=b]{Examples/config-example.json}
 
 The \ac{API} of our DHT client is the following:
 
@@ -181,7 +181,7 @@ As can we see in Listing~\ref{lst:config-ca}, the \textit{security} field of the
 All of these files should be in \ac{PEM}~\cite{rfc1421} format.
 The loaded certificate should also contain the X509v3 Extension \textit{X509v3 Extended Key Usage} with the values \textit{Server authentication} and \textit{Client authentication}.
 
-\lstinputlisting[label=lst:config-ca, caption=Example of security field in configuration file, captionpos=b]{Examples/config-example-ca.json}
+\lstinputlisting[label=lst:config-ca, basicstyle=\small, frame=single, caption=Example of security field in configuration file, captionpos=b]{Examples/config-example-ca.json}
 
 As it is, this solution already allows to assert that only authorized nodes can connect to the DHT network.
 But we also want to verify that the nodes are not impersonating a different identity from the one they are allowed to use.
@@ -230,7 +230,7 @@ Our custom transport adapter in this case will be significantly different of the
 We will also be using HTTPS/TLS mutual-authentication, but in this case the verifications will be different.
 The configuration file, as can be seen in Listing~\ref{lst:config-bc}, comparing with the one in CA-based mechanism, has the \textit{mechanism} field set to \textit{blockchain}, and the field \textit{cacert} removed.
 
-\lstinputlisting[label=lst:config-bc, caption=Example of security field in configuration file in blockchain mechanism, captionpos=b]{Examples/config-example-bc.json}
+\lstinputlisting[label=lst:config-bc, basicstyle=\small, frame=single, caption=Example of security field in configuration file in blockchain mechanism, captionpos=b]{Examples/config-example-bc.json}
 
 First of all, when configuring the \textit{https.Server} and \textit{https.Agent} instances, we enabled the \textit{requestCert} option in \textit{https.Server} (so the client certificate is requested), and set to \textit{false} the \textit{rejectUnauthorized} option in both instances.
 The \textit{rejectUnauthorized} is set to \textit{false} because in this case we don't have a certification path (bundle of CAs) to verify the nodes' certificates against.
