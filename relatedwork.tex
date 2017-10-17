@@ -252,12 +252,6 @@ It comprehends the following components:
 	\item \textbf{Repository}: stores and distributes \acp{CRL} and certificates to the end users.
 \end{itemize}
 
-\begin{figure}
-    \includegraphics[width=\linewidth]{Figures/x509-certificate.png}
-    \caption{X.509 version 3 certificate structure}
-    \label{fig:x509-certificate}
-\end{figure}
-
 The \textit{X.509 certificate} contains several fields as depicted in Figure~\ref{fig:x509-certificate}:
 
 \begin{itemize}
@@ -275,6 +269,13 @@ The \textit{X.509 certificate} contains several fields as depicted in Figure~\re
 	\item \textbf{signatureValue}: contains a digital signature of the \textit{tbsCertificate} content;
 \end{itemize}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{Figures/x509-certificate.pdf}
+    \caption{X.509 version 3 certificate structure}
+    \label{fig:x509-certificate}
+\end{figure}
+
 In X.509, the certificate revocation process supports two possible mechanisms:
 
 \begin{itemize}
@@ -284,8 +285,24 @@ In X.509, the certificate revocation process supports two possible mechanisms:
 
 In the \textbf{Periodic Publication Mechanism} the process consists of periodically issuing a \acl{CRL}. A \ac{CRL} is a timestamped list signed by the \ac{CA} or \ac{CRL} issuer that specifies the revoked certificates.
 
-\begin{figure}
-	\begin{verbatim}
+In Figure~\ref{fig:x509-crl} it is possible to view the several fields in the \ac{CRL} definition:
+
+\begin{itemize}
+	\item \textbf{tbsCertList}: contains the certificate list to be signed, which is represented by the following fields:
+		\subitem \textbf{version}: \ac{CRL} version definition;
+		\subitem \textbf{signature}: identifier of the cryptographic algorithm used to sign the \ac{CRL};
+		\subitem \textbf{issuer}: describes the entity that signed and issued the CRL;
+		\subitem \textbf{thisUpdate}: issue date of the \ac{CRL};
+		\subitem \textbf{nextUpdate}: issue date of the next \ac{CRL}. A new \ac{CRL} must be issued before this date;
+		\subitem \textbf{revokedCertificates}: the list of revoked certificates. Each revoked certificate is identified by its serial number in the \textit{userCertificate} field and should also specify the \textit{revocationDate} field;
+		\subitem \textbf{crlExtensions}: optional field, meant to add additional attributes in the \ac{CRL};
+	\item \textbf{signatureAlgorithm}: contains the identifier of the cryptographic algorithm used to sign the \textit{tbsCertList} content;
+	\item \textbf{signatureValue}: contains a digital signature of the \textit{tbsCertList} content;
+\end{itemize}
+
+\begin{figure}[h!]
+  \centering
+	\begin{Verbatim}
 		CertificateList  ::=  SEQUENCE  {
 		  tbsCertList          TBSCertList,
 		  signatureAlgorithm   AlgorithmIdentifier,
@@ -303,29 +320,14 @@ In the \textbf{Periodic Publication Mechanism} the process consists of periodica
 		    revocationDate          Time,
 		    crlEntryExtensions      Extensions OPTIONAL
 		                          -- if present, version MUST be v2
-		  }  OPTIONAL,
+		                            }  OPTIONAL,
 		  crlExtensions           [0]  EXPLICIT Extensions OPTIONAL
 		                          -- if present, version MUST be v2
-	}
-	\end{verbatim}
-    \caption{X.509 v2 CRL structure}
-    \label{fig:x509-crl}
+                                                   }
+	\end{Verbatim}
+  \caption{X.509 v2 CRL structure}
+\label{fig:x509-crl}
 \end{figure}
-
-In Figure~\ref{fig:x509-crl} it is possible to view the several fields in the \ac{CRL} definition:
-
-\begin{itemize}
-	\item \textbf{tbsCertList}: contains the certificate list to be signed, which is represented by the following fields:
-		\subitem \textbf{version}: \ac{CRL} version definition;
-		\subitem \textbf{signature}: identifier of the cryptographic algorithm used to sign the \ac{CRL};
-		\subitem \textbf{issuer}: describes the entity that signed and issued the CRL;
-		\subitem \textbf{thisUpdate}: issue date of the \ac{CRL};
-		\subitem \textbf{nextUpdate}: issue date of the next \ac{CRL}. A new \ac{CRL} must be issued before this date;
-		\subitem \textbf{revokedCertificates}: the list of revoked certificates. Each revoked certificate is identified by its serial number in the \textit{userCertificate} field and should also specify the \textit{revocationDate} field;
-		\subitem \textbf{crlExtensions}: optional field, meant to add additional attributes in the \ac{CRL};
-	\item \textbf{signatureAlgorithm}: contains the identifier of the cryptographic algorithm used to sign the \textit{tbsCertList} content;
-	\item \textbf{signatureValue}: contains a digital signature of the \textit{tbsCertList} content;
-\end{itemize}
 
 In a \textit{periodic publication mechanism}, one of the key aspects is the
 \textit{revocation delay}, that is the delay between the report of a revocation and the publishing of the updated \ac{CRL} in the repository.
@@ -441,10 +443,11 @@ One of the most important fields in the block is the \textit{block header} field
   \item \textbf{Nonce}: counter used by the proof-of-work algorithm.
 \end{itemize}
 
-\begin{figure}
-    \includegraphics[width=\linewidth]{Figures/blockchain-structure.png}
-    \caption{Blockchain structure and blocks content.}
-    \label{fig:blockchain-structure}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{Figures/blockchain-structure.pdf}
+  \caption{Blockchain structure and blocks content}
+\label{fig:blockchain-structure}
 \end{figure}
 
 \subsection{Merkle Trees}
@@ -456,10 +459,11 @@ This allows summarizing the contents of large data sets and provides a secure an
 
 Checking if a data element is included in a tree with N hashed elements takes at most \(2*log_2(N)\) calculations.
 
-\begin{figure}
-    \includegraphics[width=\linewidth]{Figures/merkle-tree.png}
-    \caption{Merkle tree example}
-    \label{fig:merkle-tree}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[scale=0.5]{Figures/merkle-tree.pdf}
+  \caption{Merkle tree example}
+\label{fig:merkle-tree}
 \end{figure}
 
 This data structure is an essential component in the Bitcoin protocol, since it prevents tampering of the transactions by malicious users. In order to successfully swap in fake transactions into the bottom of the \textit{merkle tree}, it would be necessary to recalculate all the hashes of the nodes that are in the same sub-tree, up to the \textit{merkle root}. Given that each block may contain several hundreds of transactions, this could potentially be a very expensive operation, and by the time it is complete, already new blocks that point to previous real block could have been mined.
@@ -532,22 +536,23 @@ The contracts code could be written in Solidity\footnote{http://ethereum.github.
 In Figure~\ref{fig:solidity-example} an simple Solidity contract is shown.
 This contract defines two functions that allows anyone to save a value to the contract internal storage and retrieve it after.
 
-\begin{figure}
-	\begin{verbatim}
-		contract DataStorage {
-    	uint dataStore;
+\begin{figure}[h!]
+  \centering
+                    \begin{Verbatim}
+                      contract DataStorage {
+                        uint dataStore;
 
-    	function set(uint a) {
-        dataStore = a;
-    	}
+                        function set(uint a) {
+                          dataStore = a;
+                        }
 
-    	function get() constant returns (uint val) {
-        return dataStore;
-    	}
-	 }
-	\end{verbatim}
-    \caption{Simple data storage contract in Solidity language.}
-    \label{fig:solidity-example}
+                        function get() constant returns (uint val) {
+                          return dataStore;
+                        }
+                      }
+                    \end{Verbatim}
+  \caption{Simple data storage contract in Solidity language}
+\label{fig:solidity-example}
 \end{figure}
 
 The Ethereum protocol, therefore allows to build several secure distributed applications by applying the abstract smart contract model: voting systems, decentralized file storage, \ac{DAO}, identity and reputation systems, etc

@@ -3,9 +3,9 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces X.509 version 3 certificate structure\relax }}{14}{figure.caption.26}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces X.509 v2 CRL structure\relax }}{15}{figure.caption.27}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Blockchain structure and blocks content.\relax }}{18}{figure.caption.30}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Blockchain structure and blocks content\relax }}{18}{figure.caption.30}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Merkle tree example\relax }}{19}{figure.caption.31}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Simple data storage contract in Solidity language.\relax }}{21}{figure.caption.34}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Simple data storage contract in Solidity language\relax }}{21}{figure.caption.34}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Overview of vanilla DHT architecture.\relax }}{24}{figure.caption.37}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Overview of DHT with CA architecture.\relax }}{25}{figure.caption.40}
