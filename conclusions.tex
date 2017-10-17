@@ -1,21 +1,21 @@
 \chapter{Conclusions}
 \label{chapter:conclusion}
 
-This document describes IDChain, a novel approach to close participation and securing node's communication in DHTs by leveraging Ethereum blockchain's smart contracts.
+This document describes IDChain, a novel approach to closed participation and securing node's communication in DHTs by leveraging Ethereum blockchain's smart contracts.
 We aimed at providing communication security and DHT access control, by creating an alternative to the classic PKI infrastructure with \acl{CA} entities, with special focus on federated models, as is the case of the reTHINK project.
 This chapter reflects on these contributions and discusses future work.
 
 \section{Summary}
 \label{section:summary}
-Our approach to improve DHT communications security and access control began with an evaluation of the DHT implementations — with special focus of the Kademlia architecture — and possible attacks, like Sybil and Eclipse attacks.
+Our approach to improve DHT communications security and access control began with an evaluation of the DHT implementations — with special focus on the Kademlia architecture — and possible attacks, like Sybil and Eclipse attacks.
 Due to a lack of a full proof mechanism to prevent these sort of attacks, we decided to analyze the idea presented by Douceur\cite{Douceur2002}, which states that trusted certification is the only approach that has the potential to eliminate Sybil attacks.
 We then proceeded to analyze approaches to trusted certification, like Certificate Authorities and Web-of-Trust models.
 
-From our research the two solutions were feasible to apply to a DHT system, but still required some centralized points to store or issue the certificates.
-We set out to build an approach that allowed us to minimize trust, i.e to avoid centralized points of control and trust, and started to analyze blockchain technologies.
+From our research, the two solutions were feasible to apply to a DHT system, but still required some centralized points to store or issue the certificates.
+We set out to build an approach that allowed us to minimize trust requirements, i.e to avoid centralized points of control and trust, and started to analyze blockchain technologies.
 With all the research performed, we decided to implement a DHT with a DPKI system using a Web of Trust model, on top of the Ethereum blockchain.
 
-This solution allowed us to provide a decentralized trusted mechanism, which permitted us to minimize trust between DHT participants, prevent Sybil attacks and deal with compromised nodes.
+This solution allowed us to provide a decentralized trusted mechanism, which permitted us to minimize trust requirements between DHT participants, prevent Sybil attacks and deal with compromised nodes.
 Since the main usage of this solution was to secure and close the Global Registry DHT of the reTHINK project, we also decided to build an additional mechanism using the traditional CA infrastructure.
 This way, it was not only possible to guarantee a fallback mechanism to our IDChain mechanism proof-of-concept, but it was also possible to perform a comparison between the two mechanisms.
 
@@ -25,31 +25,33 @@ The IDChain mechanism used a smart contract that encoded the necessary functions
 In order to improve the IDChain system integration and management, we also built a RESTful API and a management web application.
 
 We evaluated the two solution's performance by deploying 10 DHT nodes to DigitalOcean \acp{VM}, spread across several datacenters worldwide.
-We were able to conclude that performance-wise the IDChain mechanism is a viable option to the CA-based solution.
-Security-wise the IDChain mechanism could have some weak spots in terms of the smart contract code, taking into consideration that it is designed as a prototype system.
-The evaluation of the monetary cost of executing the smart contract's functions, showed that total costs of using the IDChain smart contract is relatively low for a small number of entities.
+We were able to conclude that performance-wise, the IDChain mechanism is a viable option to the CA-based solution.
+Security-wise the IDChain mechanism could have some weak spots in terms of the smart contract code, but it must bet taken into consideration that it is designed as a prototype system.
+The evaluation of the monetary cost of executing the smart contract's functions, showed that the total costs of using the IDChain smart contract is relatively low for a small number of entities.
 
-Therefore we have achieved the goal we set out at the beginning of this dissertation: close participation and provide secure node's communication in DHT systems.
+Therefore we have achieved the goal we set out at the beginning of this dissertation: close the participation and provide secure node's communication in DHT systems.
 
 \section{Future Work}
 \label{section:future}
 
 Many improvements could be done to enhance the presented research.
-In terms of the node's communication in the DHT, one of many improvements is trying to disable the verification of client's self-signed certificates with TLS mutual-authentication in Node.js.
+In terms of the node's communication in the DHT, one of many improvements is trying to disable the verification of the client's self-signed certificates with TLS mutual-authentication in Node.js.
 If this could be fixed, the next step would be to try and integrate the certificates' verifications we implemented directly into the TLS handshake protocol.
 
 The IDChain smart contract could also have several improvements.
-The present smart contract can have potential software bugs and edge cases that need to be solved.
-We need to take into consideration that as the smart contracts deployed to the Ethereum blockchain are permanent, an extended security audit of the smart contract could be performed in order to detect several potential issues.
+The present smart contract may have potential software bugs and edge cases that need to be solved.
+We need to take into consideration that, as the smart contracts deployed to the Ethereum blockchain are permanent, an extended security audit of the smart contract could be performed in order to detect several potential issues.
 The whole Ethereum developer ecosystem is still in its infancy and better development tools need to be created to improve smart contracts' security.
 A static typed language and formal verification methods come to mind as tools that could greatly improve the smart contracts' security.
 
 % New methods of bootstraping the smart contract's web-of-trust mechanism could also be investigated.
 New methods of controlling the number of certificates that a single entity can have could also be investigated.
 For instance, implementing a dynamic threshold on the maximum number of certificatesm that changes accordingly to the total number of certificates in the system, guaranteeing an equal distribution of nodes through all the entities participating in the DHT system – for example, each entity could only have 5\% of all certificates registered in the system.
+%RP explicar que isto é para limitar sybil atack?
 
 A redistribution of funds stored in the smart contract could also be created.
 Since it is necessary to pay for each certificate by sending a monetary transaction to the smart contract address, the smart contract could have a mechanism that could be triggered automatically for every \textit{n} blocks, which redistributes the stored funds equally by all the entities.
+%RP os fundos não ficam com os nós que executam o contrato?
 
 Finally, a cost evaluation of the IDChain smart contract with a bigger web-of-trust – around 50 or 100 entities – could be performed in the main Ethereum network.
 
