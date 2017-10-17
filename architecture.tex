@@ -443,6 +443,7 @@ Coupled with the Kademlia k-bucket replacement policy, where new nodes are only 
 %In case of node failure, the content may timeout and be removed, but since the DHT node run in a SP, a fast restart of the DHT node is assumed.
 
 % TODO: faz sentido esta secção?
+
 \section{Comparison with a CA}
 Using a blockchain to build a PKI, it is possible to minimize the required trust, relatively to a centralized solution, like a CA.
 % time ordered?
@@ -450,3 +451,12 @@ Due to the nature of the blockchain as an immutable transactional database, it i
 This immutability property also allows to perform audits to the blockchain, in order to verify the integrity of the data stored.
 
 The biggest disadvantage of the blockchain is the computational resources needed to guarantee its proper operation and security, if we want to deploy a private blockchain network.
+
+\section{Chapter summary}
+In this Chapter we gave an in-depth description of IDChain's architecture.
+
+We proposed a mechanism to close DHT participation and maintain a decentralized system, through the use of a blockchain smart contract that mimics a Web of Trust model.
+
+We detailed every smart contract function necessary to recreate the Web of Trust model, and presented a complementary API and web application to ease the system's integration and management.
+
+We also proposed an additional solution using a \ac{CA} for issuing nodes' certificates and identifiers.

@@ -53,7 +53,7 @@ We also defined a metric for the smart contract evaluation:
 
 This test was executed in a local machine, by calculating the \textit{gas} cost of executing every smart contract function in the \ac{EVM}.
 
-Finally it was also necessary to evaluate the DHT protocol correctness under a number of possible scenarios, from a security analysis perspective, which is done in Section~\ref{section:protocol-correcteness}.
+Finally it was also necessary to evaluate the DHT protocol from a security analysis perspective, which is done in Section~\ref{section:protocol-correcteness}.
 
 \section{Evaluation methodology}
 \label{section:methodology}
@@ -185,7 +185,7 @@ Each point in the graph, illustrate the average request response of the 5 differ
 We can draw similar conclusions to those of the previous discussed figure: the HTTP-based implementation clearly outperforms the HTTPS-based implementations, by having, in average,~$\approx$ 2 times faster response times.
 This results of the aforementioned added message overhead of the HTTPS handshake protocol.
 
-The average response time of the CA and IDChain based DHT implementations remain approximately constant, only increasing when an~$\approx$ 15-17 requests/second effective request rate is achieved, which correspond to a demanded request rate in the [10, 100] requests/second range.
+The average response time of the CA and IDChain based DHT implementations remain approximately constant at~$\approx$ 2500-2700 ms, only increasing when an~$\approx$ 15-17 requests/second effective request rate is achieved (to around 4000-4500 ms), which corresponds to a demanded request rate in the [10, 100] requests/second range.
 In the case of the HTTP-based implementation, the average request response time also remained constant with an increasing load, only increasing drastically to an average response rate of 23552.88 ms when an effective request rate of 90.83 requests/second - which corresponds to a demanded request rate of 100 request/second - is achieved.
 This result is due to the fact that when performing that effective request rate, the test DHT client becomes saturated with inbound and outbound requests. Consequently, the average response time drastically increases.
 This only occurs in the HTTP-based implementation, because the effective request rate is much higher than in HTTPS-based solutions, which means that the bottleneck is in the client capacity of processing all inbound and outbound requests.
@@ -459,3 +459,13 @@ The cost of recursively executing the \textit{checkValidity} in the context of t
 
 The cost analysis in a fiat currency like euro, also has the problem of the analysis be relative to the cost of the ether currency in the main public Ethereum network.
 If this certificate was deployed in a private Ethereum network with fewer nodes, and with all nodes mining and receiving ether for every successful block mined, the costs dynamics would be different since there wasn't \textit{real-world value} inherent to the ether in this network.
+
+\section{Chapter summary}
+
+From the presented evaluation in this chapter we can conclude:
+
+\begin{itemize}
+  \item The IDChain system perfomance-wise is a valid alternative to the CA-based system. The increased message header overhead and extra request to the IDChain API, for performing certificate fingerprint validation doesn't incur in a performance decrease to the system;
+  \item Security-wise the IDChain system could have some  possible flaws if we consider an adversarial model in which could exist rogue nodes in the federated organization;
+  \item The monetary cost evaluation performed allowed us to conclude that cost-wise, building a web of trust model on top of the Ethereum blockchain is doable.
+\end{itemize}

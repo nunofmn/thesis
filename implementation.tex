@@ -533,3 +533,16 @@ We implemented the following functionalities:
   \caption{List of entity node certificates}
 \label{fig:list-certificates}
 \end{figure}
+
+\section{Chapter summary}
+
+In this Chapter we presented the main implementations' details of the vanilla, CA-based and IDChain DHTs prototypes.
+
+We performed an in-depth analysis of which technologies to adopt, in order to implement the different systems.
+
+We implemented the base DHT client using the Kad library for Node.js.
+We created a module with a simple programmatic API with the basic DHT node's functionalities, which allows any developer to build applications on top of our DHT.
+
+We then built the IDChain and CA-based mechanisms by adding custom transport implementations using TLS mutual-authentication to the Kad library. In the case of the IDChain prototype it was necessary to create another mechanism to provide client authentication in the system.
+
+We also detailed the IDChain's API and Management web application implementations.
