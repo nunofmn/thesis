@@ -1,7 +1,7 @@
 \chapter{Evaluation}
 \label{chapter:evaluation}
 
-In order to evaluate the implemented solution, several tests were done to assess protocol correctness and measure system performance.
+In order to evaluate the implemented solution, several tests were done to assess protocol security and measure system performance.
 In Section~\ref{section:scenarios} we detail our evaluation process and the overall objectives we pretend to achieve in the evaluated scenarios.
 Then, in Section~\ref{section:methodology} we describe the methods and tools used, and challenges we had when performing the evaluation.
 Lastly, in Section~\ref{section:results} we present and discuss the solutions evaluation results.
@@ -283,7 +283,7 @@ The higher error ratio when achieving the 100 request/second demanded request ra
   \label{fig:error-ratio-reads}
 \end{figure}
 
-\subsection{Protocol correctness}
+\subsection{Protocol evaluation}
 \label{section:protocol-correcteness}
 
 In order to evaluate the CA-based and IDChain DHT protocol implementations, it is necessary to define the threat model.
@@ -295,7 +295,7 @@ We will evaluate each one of those processes, and analyze how attack vectors are
 A node bootstrap in the DHT, is one of the critical DHT processes which could be targeted.
 Each DHT node entering the network must be sure that it is entering it through a trustable node, and is not being tricked into entering a DHT network with malicious nodes.
 Every DHT node must also ensure that every node bootstraping through them, is allowed to enter the network.
-This is also what enables us to provide access control to the DHT network, which takes us in the direction of achieving the objective of close DHT participation.
+This is also what enables us to provide access control to the DHT network, which takes us in the direction of achieving the objective of closed DHT participation.
 Also, it is necessary to ensure privacy, integrity and authenticity in the DHT network message routing, because we want to prevent any external interference in the DHT network - such as, resorting to MITM attacks - and provide confidentiality in the data exchanged inside the DHT network.
 All of these aspects, are closely related to the node's communication establishment.
 
