@@ -111,7 +111,7 @@ This verification is done both ways: the connection server checks if the client 
 
 This verifications are done every time that a TLS connection is established, i.e when a message is sent between nodes.
 This could incur in a performance decrease, since every time a message is sent these verifications are done when establishing the TLS connections.
-A possible solution to mitigate this performance decrease is to use TLS Session Resumption\cite{rfc5077} mechanism that allow a TLS connection server to resume sessions, avoiding at the same time, keeping session state per-client.
+A possible solution to mitigate this performance decrease is to use TLS Session Resumption~\cite{rfc5077} mechanism that allow a TLS connection server to resume sessions, avoiding at the same time, keeping session state per-client.
 
 \section{DHT with IDChain mechanism}\label{architecture:idchain-overview}
 
@@ -199,7 +199,7 @@ The smart contract that we are going to create has the main objective of associa
 
 \subsubsection{Trusted Certification}
 Creating this association is a sufficient condition to guaranteeing the validity and authenticity of a peer certificate, but we also need to be able to restrict and control the participation in the \ac{DHT}, in order to create a mechanism of defense against Sybil attacks.
-The starting point are the conclusions drawn by Douceur\cite{Douceur2002} that stated that trusted certification is the only approach that has the potential to eliminate Sybil attacks, however this certification relies on a centralized entity.
+The starting point are the conclusions drawn by Douceur~\cite{Douceur2002} that stated that trusted certification is the only approach that has the potential to eliminate Sybil attacks, however this certification relies on a centralized entity.
 By using a decentralized mechanism as a blockchain, it is possible to build a smart contract that mimics the functionalities of a \ac{CA}.
 
 \subsubsection{Smart Contracts and Autonomy}
