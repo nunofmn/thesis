@@ -16,7 +16,7 @@ This problem will be tackled by proposing two different solutions, a centralized
 Our overall goal is to provide a better decentralized solution and minimize the required trust between the intervenients.
 
 This thesis is especially focused in building the mechanism to be used in the Global Registry component of the reThink architecture, but we want to decouple the DHT system in order for it to be possible to use the DHT independently, enabling developers to build other DHT-based systems.
-Therefore, the IDChain system should provide the follow functional requisites:
+Therefore, the IDChain system should provide the following functional requirements:
 
 \begin{itemize}
   \item Close the DHT participation, allowing only authorized nodes to join the system (federated or private system), consequently providing integrity and authentication to the DHT;
@@ -321,7 +321,7 @@ The endpoints that will be available are presented in Table~\ref{table:idchain-a
 
 An advantage of building this \ac{API} for accessing the IDChain functionalities, is that it allows to build applications and services that easily interact with it through \ac{HTTP} while being language-agnostic, hence easing the access to the system.
 
-An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in greater detail in Section~\ref{subsection:idchain-app}.
+An example of such an application that uses the IDChain API is the IDChain Management App, that we will describe in Section~\ref{subsection:idchain-app}.
 
 {\renewcommand{\arraystretch}{2}%
 \begin{table}[h]
@@ -361,7 +361,7 @@ An example of such an application that uses the IDChain API is the IDChain Manag
 \label{table:idchain-api-spec}
 \end{table}
 
-The IDChain API will be backed up by a relational database (using \ac{SQL}) where all the transactions related with the system will be stored.
+The IDChain API will be backed up by a relational database (using \ac{SQL}) where all the transactions and data related with the system will be stored.
 
 The reasoning behind this mainly due to performance: storing all this information in a local \ac{SQL} database will remove the necessity of constantly querying the blockchain.
 

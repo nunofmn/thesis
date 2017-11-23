@@ -309,7 +309,7 @@ This field will be useful when validating an entity's state, in the \textit{chec
         \State $entities[msg.sender].name \gets name$
         \State $entities[msg.sender].created \gets true$
         \State
-        \If{$bootstrapersCount < MAXIMUM_BOOTSTRAPERS$}
+        \If{$bootstrapersCount < MAXIMUMBOOTSTRAPERS$}
           \State $entities[msg.sender].bootstraper \gets  true$
           \State $entities[msg.sender].valid \gets true$
           \State $bootstrapersCount \gets bootstrapersCounts + 1$
