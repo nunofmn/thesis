@@ -477,7 +477,7 @@ Using this proof-of-work system, the problem of majority decision making is solv
 Some systems were built on top of the blockchain by forking the Bitcoin project.
 \textit{Namecoin}\footnote{https://namecoin.info/} is one of them, and is a decentralized name and information register. It can be used as a decentralized DNS or to save identity information like GPG keys, email information, etc.
 
-\subsection{Smart Contracts} The concept of Smart Contracts\footnote{"The Idea of Smart Contracts" - http://szabo.best.vwh.net/idea.html}~\cite{40673} is the one of contracts: allowing to establish an agreement between several mutually suspicious parties. But smart contracts have the specificity of being possible to describe via program code and therefore, it is possible to enforce them programmatically and automatically.
+\subsection{Smart Contracts} A Smart Contract\footnote{"The Idea of Smart Contracts" - http://szabo.best.vwh.net/idea.html}~\cite{40673} is a computerized transaction protocol intended to enforce and verify the set of arbitrary rules or terms of a contract, therefore allowing to establish an agreement between several mutually suspicious parties. But smart contracts have the specificity of being possible to describe via program code and therefore, it is possible to enforce them programmatically and automatically.
 The Bitcoin protocol has a scripting system that is used for transactions and can be used to build a limited implementation of smart contracts.
 
 
@@ -551,8 +551,6 @@ An important detail is that the assigned gas to the execution of the contract,
 must also take into account the gas consumed by execution of the other contracts required by the top contract.
 
 \subsubsection{Contract code} The contract code is written in a stack-based bytecode language called \textit{\ac{EVM} code}.
-The code execution is done in an infinite loop that repeatedly runs the operation in the current program counter position, until the end of the code, an error or return statement is reached.
-
 The contracts code can be written in Solidity\footnote{http://ethereum.github.io/solidity/} a high-level contract language that can be compiled to \ac{EVM} code.
 In Figure~\ref{fig:solidity-example} an simple Solidity contract is shown.
 This contract defines two functions that allows anyone to save a value to the contract internal storage and retrieve it after.

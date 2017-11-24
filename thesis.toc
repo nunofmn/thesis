@@ -54,7 +54,7 @@
 \contentsline {section}{\numberline {3.8}Overlay network processes}{35}{section.3.8}
 \contentsline {subsection}{\numberline {3.8.1}Node bootstrap and registration}{35}{subsection.3.8.1}
 \contentsline {subsection}{\numberline {3.8.2}Node message routing}{35}{subsection.3.8.2}
-\contentsline {subsection}{\numberline {3.8.3}Eclipse and Sybil attacks defense}{36}{subsection.3.8.3}
+\contentsline {subsection}{\numberline {3.8.3}Eclipse and Sybil attacks defense}{35}{subsection.3.8.3}
 \contentsline {section}{\numberline {3.9}Comparison with a CA}{36}{section.3.9}
 \contentsline {section}{\numberline {3.10}Chapter summary}{36}{section.3.10}
 \contentsline {chapter}{\numberline {4}Implementation}{37}{chapter.4}
