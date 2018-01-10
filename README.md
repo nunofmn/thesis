@@ -8,11 +8,13 @@ Secure DHT with Blockchain Technology
 ### Abstract
 
 >With an increased usage of Distributed Hash Tables (DHT) as a basis for building scalable Peer-to-Peer (P2P) systems, the security considerations and closed participation in DHTs systems are still major concerns.
+
 >One system that was built using a DHT system is the Global Registry component of the European funded research project reTHINK.
 With the necessity of securing the DHT system of this component, while also reducing the required trust between participants in the DHT, we present IDChain.
 The IDChain system is a Decentralized Public Key Infrastructure (DPKI) built on top of the Ethereum blockchain, which allows Service Providers (SP) to associate nodes with an identity, therefore providing access control and secure communications between nodes, in a decentralized fashion.
 Our approach comprises the creation of a smart contract in the Ethereum blockchain, which mimics a Web of Trust model, allowing entities (SP) to register their unique nodes' identifiers and certificates, hence enabling authenticated connection establishment between nodes through Transport Layer Security (TLS).
 We also built a RESTful API and a web application to ease the integration and management of the system.
+
 >This document surveys the current state of the art of P2P systems and DHTs security mechanisms.
 Our proposal, consisting of the IDChain system is presented in detail and validated through performance, security and monetary cost evaluation.
 We compare our proposal against a Certificate Authority (CA) based system, which we also propose.
